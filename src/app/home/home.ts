@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { RecipeCardComponent } from '../components/recipe-card/recipe-card';
 import { SearchBarComponent } from '../components/search-bar/search-bar';
@@ -47,7 +47,10 @@ export class HomeComponent {
   searchTerm: string = '';
   private subscription: Subscription;
 
-  constructor(private searchService: SearchService) {
+  constructor(
+    private searchService: SearchService,
+    private router: Router,
+  ) {
     // Suscribirse a cambios de búsqueda
     this.subscription = this.searchService.searchTerm$.subscribe((term) => {
       this.searchTerm = term;
@@ -70,7 +73,12 @@ export class HomeComponent {
   }
 
   chooseRandomRecipe() {
+    if (this.recipes.length === 0) return;
+
     const randomIndex = Math.floor(Math.random() * this.recipes.length);
-    alert(`Tu receta aleatoria: ${this.recipes[randomIndex].title}`);
+    const recipe = this.recipes[randomIndex];
+
+    // Redirige a la página de detalle de la receta
+    this.router.navigate(['/recipe', recipe.id]);
   }
 }

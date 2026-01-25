@@ -160,3 +160,10 @@ app-search-bar {
     display: none;
   }
 }
+
+/* Ajustes para móviles */
+@media (max-width: 767px) {
+  .content-container {
+    padding-bottom: 30vh;
+  }
+}
