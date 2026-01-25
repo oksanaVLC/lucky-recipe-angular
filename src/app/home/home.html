@@ -1,0 +1,48 @@
+<div class="wrapper">
+  <!-- Barra de búsqueda reutilizable -->
+  <app-search-bar (search)="searchTerm = $event"></app-search-bar>
+
+  <!-- Scrollable bar de categorías -->
+  <div class="scrollmenu">
+    <a href="#">Destacados</a>
+    <a href="#">Fáciles</a>
+    <a href="#">Repostería</a>
+    <a href="#">Últimas</a>
+    <a href="#">Más populares</a>
+    <a href="#">Veganos</a>
+    <a href="#">Para niños</a>
+  </div>
+
+  <!-- Hero image -->
+  <div class="hero-image">
+    <img
+      src="assets/images/hero-image.webp"
+      alt="Hero image"
+      class="hero-picture responsive-image"
+    />
+    <div class="content-container">
+      <div class="hero-text">
+        <h1>
+          Elige tu receta <br />
+          del día:
+        </h1>
+        <button class="arrow-button" (click)="chooseRandomRecipe()">
+          <span
+            >¡Suerte!
+            <img
+              src="../../assets/images/dice.png"
+              alt="Dado"
+              class="dice-img animate__animated animate__jello"
+            />
+          </span>
+          <span class="arrow">→</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grid de recetas -->
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 cards-grid">
+    <app-recipe-card *ngFor="let recipe of filteredRecipes" [recipe]="recipe"></app-recipe-card>
+  </div>
+</div>
