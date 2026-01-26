@@ -10,7 +10,6 @@ import { RegisterComponent } from './register/register';
 import { Restaurants } from './restaurants/restaurants';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: 'inicio', component: HomeComponent },
   { path: 'recipe/:id', component: RecipeDetailComponent },
   { path: 'categorias', component: Categories },
@@ -19,6 +18,6 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'crear-receta', component: CreateRecipe, canActivate: [AuthGuard] },
-
+  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: '**', redirectTo: '' },
 ];
