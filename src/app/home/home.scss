@@ -414,9 +414,9 @@ Otra interesante
     transform: translateY(-10px);
   }
 }
-
+/* spinner dice.png
 .loader-overlay {
-  position: fixed; /* ocupa toda la pantalla */
+  position: fixed; 
   top: 0;
   left: 0;
   width: 100%;
@@ -424,6 +424,26 @@ Otra interesante
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.6); // capa semitransparente
-  z-index: 9999; /* encima de todo */
+  background-color: rgba(255, 255, 255, 0.6); 
+  z-index: 9999; 
+}
+*/
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  .loader-video {
+    width: 150px; // ajusta al tamaño deseado
+    height: 150px;
+    border-radius: 10px; // opcional
+    object-fit: contain;
+  }
 }

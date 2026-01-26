@@ -72,17 +72,22 @@ export class HomeComponent {
   }
 
   chooseRandomRecipe() {
-    if (!this.recipes.length) return;
-
     this.isLoading = true;
 
-    const randomIndex = Math.floor(Math.random() * this.recipes.length);
-    const recipe = this.recipes[randomIndex];
-
     setTimeout(() => {
+      const source = this.filteredRecipes;
+
+      if (!source.length) {
+        this.isLoading = false;
+        return;
+      }
+
+      const randomIndex = Math.floor(Math.random() * source.length);
+      const recipe = source[randomIndex];
+
       this.router.navigate(['/recipe', recipe.id]);
       this.isLoading = false;
-    }, 1500); // simula carga
+    }, 1500);
   }
 
   trackByRecipeId(_: number, recipe: Recipe) {

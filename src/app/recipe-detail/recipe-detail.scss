@@ -138,12 +138,42 @@ ul {
   text-align: left;
 }
 
+.recipe-not-found {
+  // Evitar que quede debajo del navbar fijo
+  margin-top: 120px; // un poco más que el navbar
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  color: #111;
+  font-size: 1.4rem;
+  font-style: italic;
+  min-height: calc(100vh - 120px); // ocupa lo que queda debajo del navbar
+
+  p {
+    margin-bottom: 20px;
+  }
+}
+
 /* VOLVER */
 .back-button {
   margin-top: 1.2rem;
-  background: none;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border-radius: 25px;
   border: none;
-
-  font-size: 1rem;
+  background-color: var(--verde);
+  color: var(--blanco);
   cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    background-color: var(--verde-oscuro);
+    transform: scale(1.05);
+  }
 }

@@ -50,10 +50,16 @@
     </div>
   </div>
 
-  <!-- Overlay Loader -->
+  <!-- Overlay Loader 
   <div *ngIf="isLoading" class="loader-overlay">
-    <div class="dice-loader"></div>
-    <!-- tu loader animado -->
+    <div #lottieContainer class="lottie-animation"></div>
+  </div>-->
+
+  <div *ngIf="isLoading" class="loader-overlay">
+    <video class="loader-video" autoplay loop muted playsinline>
+      <source src="assets/images/dice-roll-purple.webm" type="video/webm" />
+      Tu navegador no soporta videos.
+    </video>
   </div>
 
   <!-- Grid de recetas -->

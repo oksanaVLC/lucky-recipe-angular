@@ -1,4 +1,4 @@
-<div class="recipe-detail" *ngIf="recipe as r">
+<div *ngIf="recipe as r; else notFound" class="recipe-detail">
   <div class="celebration">🌱 Tu receta saludable del día</div>
 
   <!-- CARD -->
@@ -56,3 +56,10 @@
 
   <button class="back-button" routerLink="/inicio">← Volver</button>
 </div>
+
+<ng-template #notFound>
+  <div class="recipe-not-found">
+    <p>Esta receta no existe o ya no está disponible.</p>
+    <button class="back-button" routerLink="/inicio">← Volver al inicio</button>
+  </div>
+</ng-template>
