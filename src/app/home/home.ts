@@ -82,4 +82,8 @@ export class HomeComponent {
     // Redirigir a la página de detalle de la receta
     this.router.navigate(['/recipe', recipe.id]);
   }
+
+  trackByRecipeId(_: number, recipe: Recipe) {
+    return recipe.id;
+  }
 }

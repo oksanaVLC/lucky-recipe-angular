@@ -52,6 +52,10 @@
 
   <!-- Grid de recetas -->
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 cards-grid">
-    <app-recipe-card *ngFor="let recipe of filteredRecipes" [recipe]="recipe"></app-recipe-card>
+    <app-recipe-card
+      *ngFor="let recipe of filteredRecipes; trackBy: trackByRecipeId"
+      [recipe]="recipe"
+    >
+    </app-recipe-card>
   </div>
 </div>

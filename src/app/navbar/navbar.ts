@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { SearchBarComponent } from '../components/search-bar/search-bar';
 import { AuthService } from '../services/auth';
 import { SearchService } from '../services/search.service';
@@ -20,6 +20,7 @@ export class Navbar {
   constructor(
     public authService: AuthService,
     private searchService: SearchService,
+    private router: Router,
   ) {}
 
   toggleMenu() {
@@ -43,6 +44,7 @@ export class Navbar {
   logout() {
     this.authService.logout();
     this.closeMenu();
+    this.router.navigate(['/inicio']);
   }
 
   onSearch(term: string) {

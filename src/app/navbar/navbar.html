@@ -27,18 +27,21 @@
     <li><a routerLink="/restaurantes" (click)="closeMenu()">Restaurantes</a></li>
     <li><a routerLink="/eventos" (click)="closeMenu()">Eventos</a></li>
 
+    <!-- NO logueado -->
     <li *ngIf="!authService.isLoggedIn()">
       <a routerLink="/login" (click)="closeMenu()">Login</a>
     </li>
     <li *ngIf="!authService.isLoggedIn()">
       <a routerLink="/register" (click)="closeMenu()">Register</a>
     </li>
+
+    <!-- LOGUEADO -->
     <li *ngIf="authService.isLoggedIn()">
-      <a routerLink="/crear-receta" (click)="closeMenu()">Crear receta</a>
+      <a routerLink="/mi-cuenta" (click)="closeMenu()">Mi cuenta</a>
     </li>
 
     <li *ngIf="authService.isLoggedIn()">
-      <button (click)="logout()">Logout</button>
+      <button class="logout-btn" (click)="logout()">Logout</button>
     </li>
 
     <!-- Barra de búsqueda para móvil (sidebar) -->
