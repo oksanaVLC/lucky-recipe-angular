@@ -1,40 +1,47 @@
 <footer class="footer">
-  <div class="footer-container">
-    <!-- Logo -->
-    <div class="footer-logo">
-      <a routerLink="/inicio">Lucky Recipy</a>
-    </div>
-
-    <!-- Links rápidos -->
-    <div class="footer-links">
-      <h4>Enlaces</h4>
-      <ul>
-        <li><a routerLink="/inicio">Inicio</a></li>
+  <div class="footer-main">
+    <!-- Columna 1 -->
+    <div class="footer-col">
+      <div class="footer-logo">
+        <a routerLink="/inicio">
+          <img src="assets/images/dice.png" alt="Lucky Recipe" class="footer-dice" />
+          <span>Lucky Recipe</span>
+        </a>
+      </div>
+      <ul class="footer-links">
         <li><a routerLink="/categorias">Categorías</a></li>
-        <li><a routerLink="/restaurantes">Restaurantes</a></li>
-        <li><a routerLink="/eventos">Eventos</a></li>
+        <li><a routerLink="/filtros">Filtros</a></li>
+        <li><a routerLink="/menus">Menús</a></li>
+        <li><a routerLink="/destacados">Destacados</a></li>
       </ul>
     </div>
 
-    <!-- Contacto -->
-    <div class="footer-contact">
+    <!-- Columna 2 -->
+    <div class="footer-col">
+      <h4>Información</h4>
+      <ul class="footer-links">
+        <li><a routerLink="/aviso-legal">Aviso Legal</a></li>
+        <li><a routerLink="/privacidad">Privacidad</a></li>
+        <li><a routerLink="/cookies">Cookies</a></li>
+      </ul>
+    </div>
+
+    <!-- Columna 3 -->
+    <div class="footer-col">
       <h4>Contacto</h4>
       <p>Email: info@luckyrecipy.com</p>
       <p>Tel: +34 123 456 789</p>
-    </div>
-
-    <!-- Redes sociales -->
-    <div class="footer-social">
-      <h4>Síguenos</h4>
-      <div class="social-icons">
-        <a href="#" aria-label="Facebook">📘</a>
-        <a href="#" aria-label="Instagram">📸</a>
-        <a href="#" aria-label="Twitter">🐦</a>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"
+          ><img src="assets/images/instagram.png" alt="Instagram"
+        /></a>
+        <a href="#" aria-label="YouTube"><img src="assets/images/youtube.png" alt="YouTube" /></a>
       </div>
     </div>
   </div>
 
-  <div class="footer-copy">
-    &copy; {{ currentYear }} Lucky Recipy. Todos los derechos reservados.
+  <!-- Copyright centrado abajo -->
+  <div class="footer-bottom">
+    &copy; {{ currentYear }} Lucky Recipe. Todos los derechos reservados.
   </div>
 </footer>
