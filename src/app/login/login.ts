@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../services/auth';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +13,18 @@ import { RouterModule } from '@angular/router';
 export class LoginComponent {
   email = '';
   password = '';
+  errorMessage = '';
+
+  constructor(private authService: AuthService) {}
 
   login() {
-    console.log({ email: this.email, password: this.password });
+    this.errorMessage = '';
+
+    const success = this.authService.login(this.email, this.password);
+
+    if (!success) {
+      this.errorMessage = 'Email o contraseña incorrectos';
+    }
+    // Si es exitoso, AuthService ya redirige a /inicio
   }
 }

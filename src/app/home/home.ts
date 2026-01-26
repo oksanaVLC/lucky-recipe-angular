@@ -23,7 +23,7 @@ export class HomeComponent {
       image: 'assets/images/cheesecake.webp',
       ingredients: ['cheese', 'eggs', 'sugar'],
       category: 'Destacados',
-      description: 'La paella es un plato tradicional valenciano con arroz y sabor intenso.',
+      description: '',
     },
     {
       id: 2,
@@ -31,7 +31,7 @@ export class HomeComponent {
       image: 'assets/images/mediterranean-salad.webp',
       ingredients: ['lettuce', 'tomato', 'avocado'],
       category: 'Veganos',
-      description: 'La paella es un plato tradicional valenciano con arroz y sabor intenso.',
+      description: '',
     },
     {
       id: 3,
@@ -39,22 +39,21 @@ export class HomeComponent {
       image: 'assets/images/tiramisu.webp',
       ingredients: ['chocolate', 'flour', 'eggs'],
       category: 'Más Populares',
-      description: 'La paella es un plato tradicional valenciano con arroz y sabor intenso.',
+      description: '',
     },
-    // ... resto de recetas
   ];
 
   searchTerm: string = '';
   private subscription: Subscription;
+  isLoading = false; // loader
 
   constructor(
     private searchService: SearchService,
     private router: Router,
   ) {
-    // Suscribirse a cambios de búsqueda
-    this.subscription = this.searchService.searchTerm$.subscribe((term) => {
-      this.searchTerm = term;
-    });
+    this.subscription = this.searchService.searchTerm$.subscribe(
+      (term) => (this.searchTerm = term),
+    );
   }
 
   ngOnDestroy() {
@@ -73,14 +72,17 @@ export class HomeComponent {
   }
 
   chooseRandomRecipe() {
-    if (this.recipes.length === 0) return;
+    if (!this.recipes.length) return;
 
-    // Elegir receta aleatoria
+    this.isLoading = true;
+
     const randomIndex = Math.floor(Math.random() * this.recipes.length);
     const recipe = this.recipes[randomIndex];
 
-    // Redirigir a la página de detalle de la receta
-    this.router.navigate(['/recipe', recipe.id]);
+    setTimeout(() => {
+      this.router.navigate(['/recipe', recipe.id]);
+      this.isLoading = false;
+    }, 1500); // simula carga
   }
 
   trackByRecipeId(_: number, recipe: Recipe) {

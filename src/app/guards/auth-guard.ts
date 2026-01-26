@@ -17,18 +17,18 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
+  canActivate(_route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
     return this.checkLogin(state.url);
   }
 
   canActivateChild(
-    childRoute: ActivatedRouteSnapshot,
+    _childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ): boolean | UrlTree {
     return this.checkLogin(state.url);
   }
 
-  private checkLogin(url: string): boolean | UrlTree {
+  private checkLogin(_url: string): boolean | UrlTree {
     if (this.authService.isLoggedIn()) {
       return true; // usuario logueado, puede entrar
     } else {

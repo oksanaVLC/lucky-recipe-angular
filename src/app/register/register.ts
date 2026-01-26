@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService, User } from '../services/auth';
 
 @Component({
   selector: 'app-register',
@@ -15,8 +16,34 @@ export class RegisterComponent {
   email = '';
   password = '';
   repeatPassword = '';
+  errorMessage = '';
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) {}
 
   register() {
-    console.log({ name: this.name, lastName: this.lastName, email: this.email });
+    this.errorMessage = '';
+
+    if (this.password !== this.repeatPassword) {
+      this.errorMessage = 'Las contraseñas no coinciden';
+      return;
+    }
+
+    const user: User = {
+      name: this.name + ' ' + this.lastName,
+      email: this.email,
+      password: this.password,
+    };
+
+    const success = this.authService.register(user);
+
+    if (success) {
+      // Registro exitoso, redirige a inicio
+      this.router.navigate(['/inicio']);
+    } else {
+      this.errorMessage = 'El usuario ya existe';
+    }
   }
 }
