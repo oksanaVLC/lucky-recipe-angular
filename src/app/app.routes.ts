@@ -20,5 +20,5 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'crear-receta', component: CreateRecipe, canActivate: [AuthGuard] },
 
-  { path: '**', redirectTo: 'inicio' },
+  { path: '**', redirectTo: '' },
 ];

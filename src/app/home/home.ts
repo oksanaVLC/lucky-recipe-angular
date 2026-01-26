@@ -75,10 +75,11 @@ export class HomeComponent {
   chooseRandomRecipe() {
     if (this.recipes.length === 0) return;
 
+    // Elegir receta aleatoria
     const randomIndex = Math.floor(Math.random() * this.recipes.length);
     const recipe = this.recipes[randomIndex];
 
-    // Redirige a la página de detalle de la receta
+    // Redirigir a la página de detalle de la receta
     this.router.navigate(['/recipe', recipe.id]);
   }
 }

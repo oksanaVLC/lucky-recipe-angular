@@ -1,82 +1,149 @@
-/* Contenedor principal */
 .recipe-detail {
-  max-width: 800px;
-  margin: 2rem auto;
+  max-width: 720px;
+  margin: 100px auto 2rem;
   padding: 0 1rem;
-  text-align: center;
   font-family: 'Playfair Display', serif;
-  color: var(--negro);
-  margin-top: 100px;
-
-  h1 {
-    font-size: 2.5rem;
-    font-weight: 400;
-    font-style: italic;
-    margin-bottom: 1rem;
-  }
-
-  img {
-    width: 100%;
-    max-width: 500px;
-    height: auto;
-    border-radius: 15px;
-    margin-bottom: 1rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  }
-
-  p {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-  }
-
-  h3 {
-    font-size: 1.5rem;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  ul {
-    list-style-type: disc;
-    padding-left: 1.5rem;
-    text-align: left;
-    margin-bottom: 2rem;
-
-    li {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-    }
-  }
+  color: #2e2e2e;
+  text-align: center;
 }
 
-/* Opcional: animación de entrada */
-.recipe-detail {
-  animation: fadeIn 0.6s ease-in-out;
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+.celebration {
+  font-size: 1.1rem;
+  color: green;
+  margin-bottom: 1rem;
 }
 
-/* Botón de volver (si quieres añadir) */
-.back-button {
-  display: inline-block;
-  margin-top: 2rem;
-  padding: 10px 25px;
-  background-color: var(--verde);
-  color: var(--blanco);
+/* CARD */
+.recipe-card {
+  background: #ffffff;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* IMAGEN */
+.image-container {
+  position: relative;
+}
+
+.main-image {
+  width: 100%;
+  display: block;
+}
+
+/* ⭐ RATING */
+.rating {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: flex;
+  gap: 2px;
+}
+
+.star {
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.star.filled {
+  color: #ffd369;
+}
+
+/* 🔗 SHARE */
+.share-icon {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
   font-size: 1.2rem;
-  border-radius: 25px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+}
 
-  &:hover {
-    background-color: var(--verde-oscuro);
-  }
+/* ❤️ LIKE */
+.like-fab {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  background: #ffffff;
+  border: none;
+  border-radius: 22px;
+  padding: 8px 14px;
+  font-size: 1rem;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.like-fab.active {
+  background: #ffecec;
+}
+
+.likes-count {
+  font-size: 0.9rem;
+}
+
+/* CONTENIDO */
+.card-content {
+  padding: 22px;
+}
+
+h1 {
+  font-size: 2.2rem;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  font-size: 1.05rem;
+  margin-bottom: 1.2rem;
+}
+
+/* AUTOR */
+.author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.author-name {
+  font-weight: 600;
+}
+
+.author-link {
+  font-size: 0.9rem;
+  color: green;
+  text-decoration: none;
+}
+
+/* INGREDIENTES */
+ul {
+  max-width: 360px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* VOLVER */
+.back-button {
+  margin-top: 1.2rem;
+  background: none;
+  border: none;
+
+  font-size: 1rem;
+  cursor: pointer;
 }

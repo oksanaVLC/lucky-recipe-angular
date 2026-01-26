@@ -1,10 +1,58 @@
-<div class="recipe-detail" *ngIf="recipe">
-  <h1>{{ recipe.title }}</h1>
-  <img [src]="recipe.image" [alt]="recipe.title" />
-  <p>{{ recipe.description }}</p>
+<div class="recipe-detail" *ngIf="recipe as r">
+  <div class="celebration">🌱 Tu receta saludable del día</div>
 
-  <h3>Ingredientes:</h3>
-  <ul>
-    <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient }}</li>
-  </ul>
+  <!-- CARD -->
+  <article class="recipe-card">
+    <!-- IMAGEN -->
+    <div class="image-container">
+      <img [src]="r.image" [alt]="r.title" class="main-image" />
+
+      <!-- Rating -->
+      <div class="rating">
+        <span
+          class="star"
+          *ngFor="let star of stars; let i = index"
+          [class.filled]="i < (r.rating ?? 0)"
+        >
+          ★
+        </span>
+      </div>
+
+      <!-- Compartir -->
+      <button class="share-icon" (click)="shareRecipe()" aria-label="Compartir">🔗</button>
+
+      <!-- Like -->
+      <button
+        class="like-fab"
+        [class.active]="isFavorite"
+        (click)="toggleFavorite()"
+        aria-label="Me gusta"
+      >
+        ❤️ <span class="likes-count">{{ r.likes ?? 0 }}</span>
+      </button>
+    </div>
+
+    <!-- CONTENIDO -->
+    <div class="card-content">
+      <h1>{{ r.title }}</h1>
+      <p class="description">{{ r.description }}</p>
+
+      <!-- Autor -->
+      <div class="author">
+        <img src="assets/images/profile.jpg" alt="Autor" class="avatar" />
+        <div class="author-info">
+          <span class="author-name">{{ r.author?.name }}</span>
+          <a class="author-link" [routerLink]="['/perfil', r.author?.id]"> Ver sus recetas </a>
+        </div>
+      </div>
+
+      <!-- Ingredientes -->
+      <h3>Ingredientes</h3>
+      <ul>
+        <li *ngFor="let ingredient of r.ingredients">{{ ingredient }}</li>
+      </ul>
+    </div>
+  </article>
+
+  <button class="back-button" routerLink="/inicio">← Volver</button>
 </div>
