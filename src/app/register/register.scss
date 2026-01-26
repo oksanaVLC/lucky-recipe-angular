@@ -89,3 +89,31 @@
     }
   }
 }
+
+.gold-gradient {
+  font-weight: bold;
+  font-size: 2rem;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #3d3d3d,
+    #3d3d3d 40%,
+    /* #f1b05c 50%,*/ #fff9e4 50%,
+    #3d3d3d 60%,
+    #3d3d3d
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: slidingGradient 3s linear infinite;
+}
+
+@keyframes slidingGradient {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
