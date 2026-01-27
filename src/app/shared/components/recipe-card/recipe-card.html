@@ -1,0 +1,17 @@
+<div class="col">
+  <div class="card h-100 shadow-sm">
+    <img [src]="recipe.image" class="card-img-top" [alt]="recipe.title" />
+
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title">{{ recipe.title }}</h5>
+
+      <p class="card-text" *ngIf="recipe.description">
+        {{ recipe.description }}
+      </p>
+
+      <a class="btn btn-outline-success mt-auto" [routerLink]="['/recipe', recipe.id]">
+        Ver receta
+      </a>
+    </div>
+  </div>
+</div>

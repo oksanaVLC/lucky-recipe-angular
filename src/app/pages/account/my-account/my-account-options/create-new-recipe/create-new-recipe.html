@@ -1,0 +1,91 @@
+<div class="create-recipe-container">
+  <h1 class="gold-gradient">Crear Nueva Receta</h1>
+
+  <div class="form-layout">
+    <!-- TÍTULO -->
+    <div class="field">
+      <label for="title">Título</label>
+      <input id="title" type="text" [(ngModel)]="recipe.title" placeholder="Ej: Tarta de manzana" />
+    </div>
+
+    <!-- DESCRIPCIÓN -->
+    <div class="field">
+      <label for="description">Descripción</label>
+      <textarea
+        id="description"
+        rows="4"
+        [(ngModel)]="recipe.description"
+        placeholder="Describe brevemente la receta"
+      ></textarea>
+    </div>
+
+    <!-- CATEGORÍA -->
+    <div class="field">
+      <label for="category">Categoría</label>
+      <select id="category" [(ngModel)]="recipe.category">
+        <option value="" disabled selected>Selecciona una categoría</option>
+        <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+      </select>
+    </div>
+
+    <!-- INGREDIENTES -->
+    <section class="ingredients-section">
+      <h2>Ingredientes</h2>
+      <div class="ingredients-list">
+        <div class="ingredient-row" *ngFor="let ing of recipe.ingredients; let i = index">
+          <input type="text" [(ngModel)]="ing.quantity" placeholder="Ej: 2" />
+          <input type="text" [(ngModel)]="ing.name" placeholder="Ej: huevos" />
+          <div class="actions">
+            <button type="button" class="add-btn" (click)="addIngredient(i)">+</button>
+            <button type="button" class="remove-btn" (click)="removeIngredient(i)">×</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMÁGENES -->
+    <section class="image-upload" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
+      <label>Subir imágenes ({{ imageCount }})</label>
+      <div class="upload-row">
+        <button type="button" class="custom-file-btn" (click)="fileInput.click()">
+          Elegir archivos
+        </button>
+        <input
+          #fileInput
+          type="file"
+          multiple
+          accept="image/png, image/jpeg, image/webp"
+          (change)="onImagesSelected($event)"
+        />
+        <span class="placeholder">PNG, JPG, WEBP · máx. 2MB · hasta 10 imágenes</span>
+      </div>
+
+      <div class="image-preview">
+        <div class="image-card" *ngFor="let img of images; let i = index">
+          <button class="remove-image" (click)="removeImage(i)">×</button>
+          <img [src]="img" alt="Imagen de receta" />
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTONES -->
+    <div class="form-actions">
+      <button (click)="showDraftModal = true" class="btn-back">Volver</button>
+
+      <button type="button" class="submit-button" (click)="createRecipe()">Crear Receta</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de confirmación de salida -->
+<div class="draft-modal" *ngIf="showDraftModal">
+  <div class="modal-content">
+    <h3>¿Tienes cambios sin guardar?</h3>
+    <p>¿Quieres guardar en borrador o salir sin guardar?</p>
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="cancelDraft()">Cancelar</button>
+      <button class="btn-confirm" (click)="saveDraft()">Guardar</button>
+      <button class="btn-discard" (click)="discardDraft()">Salir</button>
+    </div>
+  </div>
+</div>

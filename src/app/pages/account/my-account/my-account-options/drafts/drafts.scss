@@ -1,0 +1,160 @@
+.wrapper {
+  margin-top: 87px;
+  text-align: center;
+}
+.drafts-list {
+  margin-top: 2rem;
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  ol {
+    list-style: decimal;
+    padding-left: 1.5rem;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      margin-bottom: 6px;
+      border-radius: 8px;
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+
+      .draft-title {
+        font-weight: 500;
+      }
+
+      .draft-date {
+        font-size: 0.85rem;
+        color: #555;
+      }
+    }
+  }
+}
+.drafts-container {
+  max-width: 720px;
+  margin: 80px auto 2rem;
+  padding: 0 1rem;
+  font-family: 'Playfair Display', serif;
+  color: #2e2e2e;
+
+  h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .draft-list {
+    list-style: none;
+    counter-reset: draft-counter;
+    padding: 0;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 10px 12px;
+      border-bottom: 1px solid #ccc;
+      position: relative;
+
+      .draft-number {
+        font-weight: bold;
+        min-width: 25px;
+      }
+
+      .draft-title {
+        font-weight: 500;
+        flex: 1;
+      }
+
+      .draft-date {
+        font-size: 0.85rem;
+        color: #777;
+      }
+
+      .btn-delete {
+        background: transparent;
+        border: none;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover {
+          color: #d9534f;
+        }
+      }
+    }
+  }
+}
+
+/* Modal borrar */
+.delete-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  .modal-content {
+    background-color: #fff9e4;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 360px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+
+    h3 {
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: space-around;
+      gap: 10px;
+
+      .btn-cancel {
+        padding: 8px 20px;
+        border-radius: 25px;
+        border: none;
+        background: #ccc;
+        color: #000;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover {
+          background-color: #999;
+        }
+      }
+
+      .btn-confirm {
+        padding: 8px 20px;
+        border-radius: 25px;
+        border: none;
+        background: #d9534f;
+        color: #fff;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover {
+          background-color: #b52b2b;
+        }
+      }
+    }
+  }
+}

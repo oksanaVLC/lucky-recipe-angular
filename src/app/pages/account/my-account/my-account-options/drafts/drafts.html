@@ -1,0 +1,25 @@
+<div class="drafts-container">
+  <h1>Borradores guardados</h1>
+
+  <ol class="draft-list">
+    <li *ngFor="let draft of drafts; let i = index" class="draft-item">
+      <span class="draft-number">{{ i + 1 }}.</span>
+      <span class="draft-title" role="button" (click)="editDraft(draft)">
+        {{ draft.title || 'Sin título' }}
+      </span>
+      <span class="draft-date">{{ draft.updatedAt | date: 'short' }}</span>
+      <button class="btn-delete" (click)="confirmDelete(draft)">🗑️</button>
+    </li>
+  </ol>
+</div>
+
+<div class="delete-modal" *ngIf="showDeleteModal">
+  <div class="modal-content">
+    <h3>Confirmar eliminación</h3>
+    <p>¿Quieres eliminar este borrador?</p>
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="cancelDelete()">Cancelar</button>
+      <button class="btn-confirm" (click)="deleteDraft()">Eliminar</button>
+    </div>
+  </div>
+</div>

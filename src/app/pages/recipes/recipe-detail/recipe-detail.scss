@@ -1,0 +1,179 @@
+.recipe-detail {
+  max-width: 720px;
+  margin: 100px auto 2rem;
+  padding: 0 1rem;
+  font-family: 'Playfair Display', serif;
+  color: #2e2e2e;
+  text-align: center;
+}
+
+.celebration {
+  font-size: 1.1rem;
+  color: green;
+  margin-bottom: 1rem;
+}
+
+/* CARD */
+.recipe-card {
+  background: #ffffff;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* IMAGEN */
+.image-container {
+  position: relative;
+}
+
+.main-image {
+  width: 100%;
+  display: block;
+}
+
+/* ⭐ RATING */
+.rating {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: flex;
+  gap: 2px;
+}
+
+.star {
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.star.filled {
+  color: #ffd369;
+}
+
+/* 🔗 SHARE */
+.share-icon {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* ❤️ LIKE */
+.like-fab {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  background: #ffffff;
+  border: none;
+  border-radius: 22px;
+  padding: 8px 14px;
+  font-size: 1rem;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.like-fab.active {
+  background: #ffecec;
+}
+
+.likes-count {
+  font-size: 0.9rem;
+}
+
+/* CONTENIDO */
+.card-content {
+  padding: 22px;
+}
+
+h1 {
+  font-size: 2.2rem;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  font-size: 1.05rem;
+  margin-bottom: 1.2rem;
+}
+
+/* AUTOR */
+.author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.author-name {
+  font-weight: 600;
+}
+
+.author-link {
+  font-size: 0.9rem;
+  color: green;
+  text-decoration: none;
+}
+
+/* INGREDIENTES */
+ul {
+  max-width: 360px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.recipe-not-found {
+  // Evitar que quede debajo del navbar fijo
+  margin-top: 120px; // un poco más que el navbar
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  color: #111;
+  font-size: 1.4rem;
+  font-style: italic;
+  min-height: calc(100vh - 120px); // ocupa lo que queda debajo del navbar
+
+  p {
+    margin-bottom: 20px;
+  }
+}
+
+/* VOLVER */
+.back-button {
+  margin-top: 1.2rem;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border-radius: 25px;
+  border: none;
+  background-color: var(--verde);
+  color: var(--blanco);
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    background-color: var(--verde-oscuro);
+    transform: scale(1.05);
+  }
+}

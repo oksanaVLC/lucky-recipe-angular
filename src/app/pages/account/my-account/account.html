@@ -1,0 +1,79 @@
+<div class="my-account">
+  <h1 class="gold-gradient">Mi cuenta</h1>
+
+  <div class="account-grid">
+    <a
+      class="account-card"
+      routerLink="edit-profile"
+      [style.backgroundImage]="'url(assets/images/profile.jpg)'"
+    >
+      <div class="overlay"></div>
+      <span>Editar mi perfil</span>
+    </a>
+
+    <a
+      class="account-card"
+      routerLink="crear-receta"
+      [style.backgroundImage]="'url(assets/images/new-recipe.png)'"
+    >
+      <div class="overlay"></div>
+      <span>Crear nueva receta</span>
+    </a>
+
+    <a
+      class="account-card"
+      routerLink="mis-recetas"
+      [style.backgroundImage]="'url(assets/images/cookbook.png)'"
+    >
+      <div class="overlay"></div>
+      <span>Mis recetas creadas (0)</span>
+    </a>
+
+    <a
+      class="account-card"
+      routerLink="favoritas"
+      [style.backgroundImage]="'url(assets/images/heart.png)'"
+    >
+      <div class="overlay"></div>
+      <span>Mis recetas favoritas (0)</span>
+    </a>
+
+    <a
+      class="account-card"
+      routerLink="borradores"
+      [style.backgroundImage]="'url(assets/images/plan.jpg)'"
+    >
+      <div class="overlay"></div>
+      <span>Borradores de mis recetas ({{ draftService.getDrafts().length }})</span>
+    </a>
+
+    <a
+      class="account-card"
+      routerLink="lista-compra"
+      [style.backgroundImage]="'url(assets/images/notepad.png)'"
+    >
+      <div class="overlay"></div>
+      <span>Lista de la compra (0)</span>
+    </a>
+
+    <a
+      class="account-card"
+      routerLink="dietas"
+      [style.backgroundImage]="'url(assets/images/diet.png)'"
+    >
+      <div class="overlay"></div>
+      <span>Calorías / Dietas (0)</span>
+    </a>
+
+    <a
+      class="account-card"
+      routerLink="menu-semanal"
+      [style.backgroundImage]="'url(assets/images/weeklymenu.jpg)'"
+    >
+      <div class="overlay"></div>
+      <span>Menú de la semana</span>
+    </a>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>

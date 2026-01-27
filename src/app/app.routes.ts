@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from './guards/auth-guard';
+import { AuthGuard } from './core/guards/auth-guard';
 
 export const routes: Routes = [
   {
@@ -9,43 +9,41 @@ export const routes: Routes = [
   },
   {
     path: 'inicio',
-    loadComponent: () => import('./home/home').then((m) => m.HomeComponent),
+    loadComponent: () => import('./pages/home/home').then((m) => m.HomeComponent),
   },
   {
     path: 'recipe/:id',
     loadComponent: () =>
-      import('./recipe-detail/recipe-detail').then((m) => m.RecipeDetailComponent),
+      import('./pages/recipes/recipe-detail/recipe-detail').then((m) => m.RecipeDetailComponent),
   },
   {
     path: 'categorias',
-    loadComponent: () => import('./categories/categories').then((m) => m.Categories),
+    loadComponent: () => import('./pages/recipes/categories/categories').then((m) => m.Categories),
   },
   {
     path: 'restaurantes',
-    loadComponent: () => import('./restaurants/restaurants').then((m) => m.Restaurants),
+    loadComponent: () => import('./pages/restaurants/restaurants').then((m) => m.Restaurants),
   },
   {
     path: 'eventos',
-    loadComponent: () => import('./events/events').then((m) => m.Events),
+    loadComponent: () => import('./pages/events/events').then((m) => m.Events),
   },
   {
     path: 'login',
-    loadComponent: () => import('./login/login').then((m) => m.LoginComponent),
+    loadComponent: () => import('./pages/auth/login/login').then((m) => m.LoginComponent),
   },
   {
     path: 'register',
-    loadComponent: () => import('./register/register').then((m) => m.RegisterComponent),
+    loadComponent: () => import('./pages/auth/register/register').then((m) => m.RegisterComponent),
   },
-  {
-    path: 'crear-receta',
-    loadComponent: () => import('./create-recipe/create-recipe').then((m) => m.CreateRecipe),
-    canActivate: [AuthGuard],
-  },
+
   {
     path: 'mi-cuenta',
-    loadComponent: () => import('./account/account').then((m) => m.AccountComponent),
+    loadChildren: () =>
+      import('./pages/account/my-account/account.routes').then((m) => m.ACCOUNT_ROUTES),
     canActivate: [AuthGuard],
   },
+
   {
     path: '**',
     redirectTo: 'inicio',
