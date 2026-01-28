@@ -1,0 +1,56 @@
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.4); /* blanco transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+.dice-loader {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  transform-origin: center;
+
+  /* Dos animaciones independientes */
+  animation:
+    dice-bounce 2s cubic-bezier(0.5, 0, 0.2, 1) forwards,
+    dice-rotate 2s linear forwards;
+}
+
+/* Rebote vertical natural */
+@keyframes dice-bounce {
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-200px);
+  } /* subida rápida */
+  40% {
+    transform: translateY(-180px);
+  } /* pequeño rebote arriba */
+  60% {
+    transform: translateY(-60px);
+  } /* rebote medio */
+  80% {
+    transform: translateY(-20px);
+  } /* rebote final */
+  100% {
+    transform: translateY(0);
+  } /* cae al suelo */
+}
+
+/* Giro lineal completo, varias vueltas */
+@keyframes dice-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(1080deg);
+  } /* 3 vueltas completas */
+}

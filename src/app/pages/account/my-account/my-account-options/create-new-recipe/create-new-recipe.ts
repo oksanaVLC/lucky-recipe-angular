@@ -3,17 +3,24 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DraftService } from '../../../../../core/services/draft.service';
+import { BackButtonComponent } from '../../../../../shared/components/back-button/back-button';
 import { Recipe, RecipeForm } from '../../../../../shared/models/recipe.model';
 import { RecipeService } from '../../../../../shared/services/recipe.service';
 
 @Component({
   selector: 'app-create-recipe',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, BackButtonComponent],
   templateUrl: './create-new-recipe.html',
   styleUrls: ['./create-new-recipe.scss'],
 })
 export class CreateNewRecipeComponent implements OnInit {
+  currentUser = {
+    id: 1,
+    name: 'Oksana',
+    avatar: 'assets/images/profile.jpg',
+  };
+
   categories = [
     'Destacados',
     'Fáciles',
@@ -39,6 +46,11 @@ export class CreateNewRecipeComponent implements OnInit {
 
   showDraftModal = false;
   private _resolveDeactivate!: (value: boolean) => void; // Para CanDeactivate
+
+  private _isSaving = false;
+
+  showSavedMessage = false; // controla si se muestra el aviso
+  savedMessage = ''; // texto del mensaje
 
   constructor(
     private router: Router,
@@ -103,19 +115,31 @@ export class CreateNewRecipeComponent implements OnInit {
 
   /** Crear receta final */
   createRecipe() {
+    this._isSaving = true;
+
     const newRecipe: Recipe = {
-      id: this.recipe.id,
+      id: Date.now(),
       title: this.recipe.title,
       description: this.recipe.description,
       category: this.recipe.category,
       ingredients: this.recipe.ingredients.map((ing) => `${ing.quantity} ${ing.name}`.trim()),
-      image: this.images[0] || '',
+      image: this.images[0] || 'assets/images/logo.webp', // <-- placeholder
       rating: 0,
       likes: 0,
-      author: undefined,
+      author: this.currentUser, // <-- tu usuario actual
     };
+
     this.recipeService.addRecipe(newRecipe);
-    this.router.navigate(['/inicio']);
+
+    // Mostrar aviso bonito
+    this.savedMessage = 'Receta guardada con éxito!';
+    this.showSavedMessage = true;
+
+    setTimeout(() => {
+      this.showSavedMessage = false;
+      this.router.navigate(['/recipe', newRecipe.id]);
+      // <-- debe ir a detalle
+    }, 2000);
   }
 
   /** Archivos subidos */
@@ -140,12 +164,18 @@ export class CreateNewRecipeComponent implements OnInit {
   }
 
   canDeactivate(): Promise<boolean> {
+    // si estamos guardando con createRecipe(), permitimos salir sin preguntar
+    if (this._isSaving) {
+      return Promise.resolve(true);
+    }
+
     if (this.hasUnsavedChanges()) {
       this.showDraftModal = true;
       return new Promise((resolve) => {
         this._resolveDeactivate = resolve;
       });
     }
+
     return Promise.resolve(true);
   }
 

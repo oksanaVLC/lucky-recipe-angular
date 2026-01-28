@@ -277,3 +277,10 @@
     }
   }
 }
+
+.form-actions {
+  display: flex;
+  gap: 10px; // espacio entre los botones
+  justify-content: center; // los pone a la izquierda
+  margin-top: 1rem;
+}

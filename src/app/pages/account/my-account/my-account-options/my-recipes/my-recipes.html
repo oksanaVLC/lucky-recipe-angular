@@ -1,1 +1,23 @@
-<p>my-recipes works!</p>
+<div class="wrapper">
+  <div class="my-recipes">
+    <h1 class="gold-gradient">Mis recetas creadas ({{ recipes.length }})</h1>
+
+    <div *ngIf="recipes.length; else emptyList">
+      <div *ngFor="let r of recipes" class="recipe-card">
+        <img [src]="r.image || 'assets/images/logo.webp'" [alt]="r.title" />
+        <div class="recipe-info">
+          <h3>{{ r.title }}</h3>
+          <p>{{ r.category }} • {{ r.ingredients.length }} ingredientes</p>
+          <p>Creada: {{ r.id | date: 'short' }}</p>
+          <!-- id como fecha aproximada -->
+          <button (click)="viewRecipe(r.id)" class="see-btn">Ver</button>
+          <button (click)="deleteRecipe(r.id)" class="delete-btn">Borrar</button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #emptyList>
+      <p>No has creado ninguna receta todavía.</p>
+    </ng-template>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-<div class="my-account">
+<div class="my-account" @pageEnter>
   <h1 class="gold-gradient">Mi cuenta</h1>
 
   <div class="account-grid">
@@ -26,7 +26,7 @@
       [style.backgroundImage]="'url(assets/images/cookbook.png)'"
     >
       <div class="overlay"></div>
-      <span>Mis recetas creadas (0)</span>
+      <span>Mis recetas creadas ({{ recipeCount }})</span>
     </a>
 
     <a

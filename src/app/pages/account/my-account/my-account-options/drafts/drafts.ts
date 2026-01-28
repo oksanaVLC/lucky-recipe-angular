@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Draft, DraftService } from '../../../../../core/services/draft.service';
+import { BackButtonComponent } from '../../../../../shared/components/back-button/back-button';
 
 @Component({
   selector: 'app-drafts',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, BackButtonComponent],
   templateUrl: './drafts.html',
   styleUrls: ['./drafts.scss'],
 })
