@@ -18,9 +18,6 @@
         </span>
       </div>
 
-      <!-- Compartir -->
-      <button class="share-icon" (click)="shareRecipe()" aria-label="Compartir">🔗</button>
-
       <!-- Like -->
       <button
         class="like-fab"
@@ -30,6 +27,9 @@
       >
         ❤️ <span class="likes-count">{{ r.likes ?? 0 }}</span>
       </button>
+
+      <!-- Compartir -->
+      <button class="share-icon" (click)="shareRecipe()" aria-label="Compartir">🔗</button>
     </div>
 
     <!-- CONTENIDO -->
@@ -54,7 +54,9 @@
     </div>
   </article>
 
-  <button class="back-button" routerLink="/inicio">← Volver</button>
+  <div *ngIf="recipe as r; else notFound" class="recipe-detail">
+    <app-back-button></app-back-button>
+  </div>
 </div>
 
 <ng-template #notFound>

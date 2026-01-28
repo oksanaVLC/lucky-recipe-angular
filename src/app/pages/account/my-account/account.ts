@@ -21,19 +21,27 @@ import { RecipeService } from '../../../shared/services/recipe.service';
   templateUrl: './account.html',
   styleUrls: ['./account.scss'],
   animations: [
-    // Trigger de entrada usando la API moderna
     trigger('pageEnter', [
       transition(':enter', [
         useAnimation(
           animation([
-            // Query sobre cada card para aplicar stagger
             query(
               '.account-card',
               [
-                style({ opacity: 0, transform: 'translateY(10px)', display: 'flex' }), // 10px en vez de 20px
+                style({
+                  opacity: 0,
+                  transform: 'translateY(10px)',
+                  display: 'flex',
+                }),
                 stagger(
                   80,
-                  animate('400ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
+                  animate(
+                    '400ms ease-out',
+                    style({
+                      opacity: 1,
+                      transform: 'translateY(0)',
+                    }),
+                  ),
                 ),
               ],
               { optional: true },
@@ -46,13 +54,20 @@ import { RecipeService } from '../../../shared/services/recipe.service';
 })
 export class AccountComponent {
   recipeCount = signal(0);
+  favoriteCount = signal(0); // ✅ favoritos
 
   constructor(
     public draftService: DraftService,
     public recipeService: RecipeService,
   ) {
+    // Recetas creadas
     this.recipeService.getAll().subscribe((recipes) => {
       this.recipeCount.set(recipes.length);
+    });
+
+    // Recetas favoritas
+    this.recipeService.getFavorites().subscribe((favs: number[]) => {
+      this.favoriteCount.set(favs.length);
     });
   }
 }

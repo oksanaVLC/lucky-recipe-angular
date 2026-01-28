@@ -50,24 +50,10 @@
   color: #ffd369;
 }
 
-/* 🔗 SHARE */
-.share-icon {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.95);
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-/* ❤️ LIKE */
+/* ❤️ LIKE - arriba derecha */
 .like-fab {
   position: absolute;
-  bottom: 14px;
+  top: 14px;
   right: 14px;
   background: #ffffff;
   border: none;
@@ -79,14 +65,33 @@
   align-items: center;
   cursor: pointer;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  transition:
+    color 0.3s,
+    box-shadow 0.3s,
+    transform 0.3s;
 }
 
 .like-fab.active {
   background: #ffecec;
+  box-shadow: 0px 6px 8px rgba(255, 0, 0, 0.3);
+  transform: scale(1.2);
 }
-
 .likes-count {
   font-size: 0.9rem;
+}
+
+/* 🔗 SHARE - abajo derecha */
+.share-icon {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 
 /* CONTENIDO */
@@ -155,25 +160,5 @@ ul {
 
   p {
     margin-bottom: 20px;
-  }
-}
-
-/* VOLVER */
-.back-button {
-  margin-top: 1.2rem;
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  border-radius: 25px;
-  border: none;
-  background-color: var(--verde);
-  color: var(--blanco);
-  cursor: pointer;
-  transition:
-    background-color 0.3s ease,
-    transform 0.2s ease;
-
-  &:hover {
-    background-color: var(--verde-oscuro);
-    transform: scale(1.05);
   }
 }

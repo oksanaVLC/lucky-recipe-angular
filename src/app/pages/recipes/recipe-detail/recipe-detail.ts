@@ -1,13 +1,14 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { BackButtonComponent } from '../../../shared/components/back-button/back-button';
 import { Recipe } from '../../../shared/models/recipe.model';
 import { RecipeService } from '../../../shared/services/recipe.service';
 
 @Component({
   selector: 'app-recipe-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, BackButtonComponent],
   templateUrl: './recipe-detail.html',
   styleUrls: ['./recipe-detail.scss'],
 })
@@ -19,6 +20,7 @@ export class RecipeDetailComponent {
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
+    private location: Location,
   ) {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.recipe = this.recipeService.getRecipeById(id);
@@ -31,12 +33,20 @@ export class RecipeDetailComponent {
         name: 'Oksana',
         avatar: 'assets/images/profile.jpg',
       };
+      this.isFavorite = this.recipeService.isFavorite(this.recipe.id);
     }
   }
 
   toggleFavorite() {
     if (!this.recipe) return;
-    this.isFavorite = !this.isFavorite;
+
+    // delegar en el servicio
+    this.recipeService.toggleFavorite(this.recipe.id);
+
+    // actualizar estado local para la UI
+    this.isFavorite = this.recipeService.isFavorite(this.recipe.id);
+
+    // likes solo visuales (opcional)
     this.recipe.likes = (this.recipe.likes ?? 0) + (this.isFavorite ? 1 : -1);
   }
 
@@ -45,5 +55,8 @@ export class RecipeDetailComponent {
     const url = window.location.href;
     navigator.clipboard.writeText(`${this.recipe.title} - Mira esta receta saludable: ${url}`);
     alert('¡Enlace copiado para compartir!');
+  }
+  goBack() {
+    this.location.back();
   }
 }

@@ -26,7 +26,7 @@
       [style.backgroundImage]="'url(assets/images/cookbook.png)'"
     >
       <div class="overlay"></div>
-      <span>Mis recetas creadas ({{ recipeCount }})</span>
+      <span>Mis recetas creadas ({{ recipeCount() }})</span>
     </a>
 
     <a
@@ -35,7 +35,7 @@
       [style.backgroundImage]="'url(assets/images/heart.png)'"
     >
       <div class="overlay"></div>
-      <span>Mis recetas favoritas (0)</span>
+      <span>Mis recetas favoritas ({{ favoriteCount() }})</span>
     </a>
 
     <a
