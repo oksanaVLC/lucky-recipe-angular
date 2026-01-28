@@ -284,3 +284,21 @@
   justify-content: center; // los pone a la izquierda
   margin-top: 1rem;
 }
+
+@media (max-width: 480px) {
+  .ingredient-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    input {
+      width: 100%;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end; // botones alineados a la derecha
+      gap: 8px;
+    }
+  }
+}

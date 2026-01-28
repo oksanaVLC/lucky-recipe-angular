@@ -98,9 +98,15 @@ export class CreateNewRecipeComponent implements OnInit {
 
   private handleFiles(selectedFiles: File[]) {
     const remainingSlots = 10 - this.files.length;
-    const allowed = selectedFiles.filter((f) => f.size <= 2 * 1024 * 1024).slice(0, remainingSlots);
 
-    allowed.forEach((file) => {
+    const validFiles = selectedFiles.filter((f) => f.size <= 5 * 1024 * 1024);
+    const rejectedFiles = selectedFiles.filter((f) => f.size > 5 * 1024 * 1024);
+
+    if (rejectedFiles.length) {
+      alert('Algunas imágenes superan los 2MB y no se han añadido');
+    }
+
+    validFiles.slice(0, remainingSlots).forEach((file) => {
       this.files.push(file);
       const reader = new FileReader();
       reader.onload = () => this.images.push(reader.result as string);
