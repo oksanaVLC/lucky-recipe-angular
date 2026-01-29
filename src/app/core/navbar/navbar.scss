@@ -10,7 +10,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 2000;
 
   /* Logo */
   .navbar-logo {
@@ -51,7 +51,7 @@
     background: none;
     border: none;
     cursor: pointer;
-    z-index: 1100;
+    z-index: 2100;
 
     .hamburger {
       width: 26px;
@@ -222,4 +222,8 @@
   100% {
     transform: scale3d(1, 1, 1);
   } /* resto del tiempo pausa */
+}
+
+.smoke-container {
+  pointer-events: none;
 }
