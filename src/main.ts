@@ -18,7 +18,7 @@ bootstrapApplication(AppComponent, {
     ...(appConfig.providers || []),
     provideRouter(
       routes,
-      withInMemoryScrolling({ scrollPositionRestoration: 'top', anchorScrolling: 'enabled' }),
+      withInMemoryScrolling({ scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' }),
     ),
   ],
 }).catch((err) => console.error(err));

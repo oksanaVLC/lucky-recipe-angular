@@ -8,17 +8,6 @@
       <input id="title" type="text" [(ngModel)]="recipe.title" placeholder="Ej: Tarta de manzana" />
     </div>
 
-    <!-- DESCRIPCIÓN -->
-    <div class="field">
-      <label for="description">Descripción</label>
-      <textarea
-        id="description"
-        rows="4"
-        [(ngModel)]="recipe.description"
-        placeholder="Describe brevemente la receta"
-      ></textarea>
-    </div>
-
     <!-- CATEGORÍA -->
     <div class="field">
       <label for="category">Categoría</label>
@@ -26,6 +15,16 @@
         <option value="" disabled selected>Selecciona una categoría</option>
         <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
       </select>
+    </div>
+    <!-- DESCRIPCIÓN -->
+    <div class="field">
+      <label for="description">Descripción breve para destacar tu receta</label>
+      <textarea
+        id="description"
+        rows="4"
+        [(ngModel)]="recipe.shortDescription"
+        placeholder="Describe brevemente la receta"
+      ></textarea>
     </div>
 
     <!-- INGREDIENTES -->
@@ -42,6 +41,17 @@
         </div>
       </div>
     </section>
+
+    <!-- DESCRIPCIÓN LARGA -->
+    <div class="field">
+      <label for="description">Descripción paso a paso</label>
+      <textarea
+        id="description"
+        rows="4"
+        [(ngModel)]="recipe.longDescription"
+        placeholder="Describe los pasos"
+      ></textarea>
+    </div>
 
     <!-- IMÁGENES -->
     <section class="image-upload" (drop)="onDrop($event)" (dragover)="onDragOver($event)">

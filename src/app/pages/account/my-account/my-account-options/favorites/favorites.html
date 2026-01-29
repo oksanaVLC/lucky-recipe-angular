@@ -4,19 +4,21 @@
 
     <div *ngIf="favoriteRecipes.length; else emptyList" class="recipes-grid">
       <div *ngFor="let r of favoriteRecipes" class="recipe-card">
-        <a class="card-image" [routerLink]="['/recetas', r.id]" aria-label="Ver receta">
-          <img [src]="r.image || 'assets/images/logo.webp'" [alt]="r.title" />
-        </a>
+        <!-- Imagen clicable -->
+        <div class="card-image" (click)="viewRecipe(r.id)">
+          <img [src]="r.images[0] || 'assets/images/logo.webp'" [alt]="r.title" />
+        </div>
 
+        <!-- Info -->
         <div class="recipe-info">
           <h3 class="recipe-title">{{ r.title }}</h3>
           <p class="recipe-category">{{ r.category || 'Sin categoría' }}</p>
           <p class="recipe-ingredients">{{ r.ingredients.length }} ingredientes</p>
-          <p class="recipe-date">Creada: {{ r.id | date: 'short' }}</p>
         </div>
 
+        <!-- Botón quitar -->
         <div class="recipe-actions">
-          <button type="button" class="remove-btn" (click)="confirmRemove(r)">
+          <button type="button" (click)="confirmRemove(r)" class="remove-btn">
             ❌ Quitar de favoritos
           </button>
         </div>
@@ -24,7 +26,7 @@
     </div>
 
     <ng-template #emptyList>
-      <p class="empty-text">No tienes recetas favoritas todavía.</p>
+      <p>No tienes recetas favoritas todavía.</p>
     </ng-template>
   </div>
 </div>
@@ -37,7 +39,6 @@
 
     <div class="modal-actions">
       <button class="btn-cancel" (click)="cancelRemove()">Cancelar</button>
-
       <button class="btn-confirm" (click)="removeConfirmed()">Quitar</button>
     </div>
   </div>

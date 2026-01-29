@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -8,6 +8,8 @@ import { LoaderComponent } from '../../shared/components/loader/loader';
 import { RecipeCardComponent } from '../../shared/components/recipe-card/recipe-card';
 import { SearchBarComponent } from '../../shared/components/search-bar/search-bar';
 import { Recipe } from '../../shared/models/recipe.model';
+import { NavigationService } from '../../shared/services/navigation';
+import { RecipeService } from '../../shared/services/recipe.service';
 
 @Component({
   selector: 'app-home',
@@ -23,49 +25,45 @@ import { Recipe } from '../../shared/models/recipe.model';
   templateUrl: './home.html',
   styleUrls: ['./home.scss'],
 })
-export class HomeComponent {
-  recipes: Recipe[] = [
-    {
-      id: 1,
-      title: 'Cheesecake',
-      image: 'assets/images/cheesecake.webp',
-      ingredients: ['cheese', 'eggs', 'sugar'],
-      category: 'Destacados',
-      description: '',
-    },
-    {
-      id: 2,
-      title: 'Vegan Salad',
-      image: 'assets/images/mediterranean-salad.webp',
-      ingredients: ['lettuce', 'tomato', 'avocado'],
-      category: 'Veganos',
-      description: '',
-    },
-    {
-      id: 3,
-      title: 'Chocolate Cake',
-      image: 'assets/images/tiramisu.webp',
-      ingredients: ['chocolate', 'flour', 'eggs'],
-      category: 'Más Populares',
-      description: '',
-    },
-  ];
-
+export class HomeComponent implements OnInit, OnDestroy {
+  recipes: Recipe[] = [];
   searchTerm: string = '';
-  private subscription: Subscription;
-  isLoading = false; // loader
+  private searchSub: Subscription | null = null;
+  private recipesSub: Subscription | null = null;
+
+  isLoading = true; // true mientras cargan las recetas
+  categories: string[] = [
+    'Destacados',
+    'Fáciles',
+    'Desayuno',
+    'Repostería',
+    'Últimas',
+    'Más populares',
+    'Veganos',
+    'Para niños',
+  ];
 
   constructor(
     private searchService: SearchService,
+    private recipeService: RecipeService,
     private router: Router,
-  ) {
-    this.subscription = this.searchService.searchTerm$.subscribe(
-      (term) => (this.searchTerm = term),
-    );
+    private navService: NavigationService,
+  ) {}
+
+  ngOnInit() {
+    // Suscribirse al search term
+    this.searchSub = this.searchService.searchTerm$.subscribe((term) => (this.searchTerm = term));
+
+    // Obtener últimas 6 recetas
+    this.recipesSub = this.recipeService.getAll().subscribe((allRecipes) => {
+      this.recipes = [...allRecipes].sort((a, b) => b.id - a.id).slice(0, 6);
+      this.isLoading = false; // ya cargó
+    });
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.searchSub?.unsubscribe();
+    this.recipesSub?.unsubscribe();
   }
 
   get filteredRecipes() {
@@ -84,7 +82,6 @@ export class HomeComponent {
 
     setTimeout(() => {
       const source = this.filteredRecipes;
-
       if (!source.length) {
         this.isLoading = false;
         return;
@@ -100,5 +97,9 @@ export class HomeComponent {
 
   trackByRecipeId(_: number, recipe: Recipe) {
     return recipe.id;
+  }
+  goToRecipe(recipeId: number) {
+    this.navService.setLastUrl(this.router.url, window.scrollY);
+    this.router.navigate(['/recipe', recipeId]);
   }
 }

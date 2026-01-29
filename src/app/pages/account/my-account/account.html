@@ -13,6 +13,15 @@
 
     <a
       class="account-card"
+      routerLink="favoritas"
+      [style.backgroundImage]="'url(assets/images/heart.png)'"
+    >
+      <div class="overlay"></div>
+      <span>Mis recetas favoritas ({{ favoriteCount() }})</span>
+    </a>
+
+    <a
+      class="account-card"
       routerLink="crear-receta"
       [style.backgroundImage]="'url(assets/images/new-recipe.png)'"
     >
@@ -27,15 +36,6 @@
     >
       <div class="overlay"></div>
       <span>Mis recetas creadas ({{ recipeCount() }})</span>
-    </a>
-
-    <a
-      class="account-card"
-      routerLink="favoritas"
-      [style.backgroundImage]="'url(assets/images/heart.png)'"
-    >
-      <div class="overlay"></div>
-      <span>Mis recetas favoritas ({{ favoriteCount() }})</span>
     </a>
 
     <a

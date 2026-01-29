@@ -1,17 +1,81 @@
-<div class="col">
-  <div class="card h-100 shadow-sm">
-    <img [src]="recipe.image" class="card-img-top" [alt]="recipe.title" />
+<article class="recipe-card" *ngIf="recipe">
+  <!-- IMAGEN / SLIDER -->
+  <div class="image-slider">
+    <!-- Botón anterior -->
+    <button *ngIf="images.length > 1" class="prev-btn" (click)="prevImage()">◀</button>
 
-    <div class="card-body d-flex flex-column">
-      <h5 class="card-title">{{ recipe.title }}</h5>
+    <!-- Imagen principal -->
+    <a
+      class="image-link"
+      [routerLink]="['/recipe', recipe.id]"
+      aria-label="Ver detalle de la receta"
+    >
+      <img [src]="displayImage" [alt]="recipe.title" class="slider-image" />
+    </a>
 
-      <p class="card-text" *ngIf="recipe.description">
-        {{ recipe.description }}
-      </p>
+    <!-- Botón siguiente -->
+    <button *ngIf="images.length > 1" class="next-btn" (click)="nextImage()">▶</button>
 
-      <a class="btn btn-outline-success mt-auto" [routerLink]="['/recipe', recipe.id]">
-        Ver receta
-      </a>
+    <!-- Rating -->
+    <div class="rating">
+      <span
+        class="star"
+        *ngFor="let star of stars; let i = index"
+        [class.filled]="i < (recipe.rating ?? 0)"
+      >
+        ★
+      </span>
+    </div>
+
+    <!-- Top buttons: Like -->
+    <div class="top-buttons">
+      <button
+        *ngIf="showLikeButton"
+        class="like-fab"
+        [class.active]="isFavorite"
+        (click)="toggleFavorite()"
+        aria-label="Me gusta"
+      >
+        ❤️<span class="likes-count">{{ likesCount }}</span>
+      </button>
+
+      <button
+        *ngIf="showRemoveFavorite"
+        class="remove-btn"
+        (click)="toggleFavorite()"
+        aria-label="Quitar favorito"
+      >
+        ❌
+      </button>
+    </div>
+
+    <!-- Bottom buttons: Share -->
+    <div class="bottom-buttons">
+      <button *ngIf="showShareButton" class="share-icon" aria-label="Compartir">🔗</button>
     </div>
   </div>
-</div>
+
+  <!-- CONTENIDO -->
+  <div class="card-content">
+    <h2 class="title">{{ recipe.title }}</h2>
+
+    <!-- Descripción breve limitada -->
+    <p class="card-text">
+      {{ recipe.shortDescription || '' | slice: 0 : 100 }}
+      {{ recipe.shortDescription.length > 100 ? '...' : '' }}
+    </p>
+
+    <!-- Autor -->
+    <div class="author">
+      <img
+        [src]="recipe.author?.avatar || 'assets/images/profile.jpg'"
+        alt="Autor"
+        class="avatar"
+      />
+      <div class="author-info">
+        <span class="author-name">{{ recipe.author?.name }}</span>
+        <a class="author-link" [routerLink]="['/perfil', recipe.author?.id]">Ver sus recetas</a>
+      </div>
+    </div>
+  </div>
+</article>

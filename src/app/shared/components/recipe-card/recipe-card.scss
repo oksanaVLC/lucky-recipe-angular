@@ -1,28 +1,245 @@
-.card {
-  background-color: var(--blanco);
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.recipe-card {
+  background: #fff;
+  border-radius: 18px;
   overflow: hidden;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+
+  .image-slider {
+    position: relative;
+
+    img.slider-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      cursor: pointer;
+      display: block;
+    }
+
+    /* Botones slider */
+    .prev-btn,
+    .next-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      padding: 0.3rem 0.6rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 2;
+      transition: all 0.2s;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+
+    .prev-btn {
+      left: 8px;
+    }
+    .next-btn {
+      right: 8px;
+    }
+
+    /* Rating */
+    .rating {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      color: gold;
+      font-size: 1rem;
+      z-index: 2;
+
+      .filled {
+        color: gold;
+      }
+    }
+
+    /* Top buttons: like y remove */
+    .top-buttons {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      display: flex;
+      gap: 5px;
+      z-index: 3;
+
+      .like-fab,
+      .remove-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+
+        border: none;
+        padding: 0.3rem 0.6rem;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: all 0.2s;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+
+        &.active {
+          background: #ffffff;
+          color: #111;
+          border: 2px solid #ff4d4d;
+        }
+
+        .likes-count {
+          font-weight: bold;
+          font-size: 0.9rem;
+        }
+      }
+    }
+
+    /* Bottom buttons: share */
+    .bottom-buttons {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      z-index: 3;
+
+      .share-icon {
+        background: #fff;
+
+        border: none;
+        padding: 0.3rem 0.6rem;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: all 0.2s;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+
+  /* Contenido debajo de la imagen */
+  .card-content {
+    padding: 12px 10px;
+
+    h2.title {
+      font-size: 1.2rem;
+      margin: 0.3rem 0;
+    }
+
+    p.card-text {
+      font-size: 0.95rem;
+      color: #555;
+      margin: 0.3rem 0 0.5rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+
+    .author {
+      display: flex;
+      align-items: center;
+      margin-top: 0.5rem;
+
+      .avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        margin-right: 0.5rem;
+      }
+
+      .author-info {
+        display: flex;
+        flex-direction: column;
+
+        .author-name {
+          font-weight: bold;
+          font-size: 0.9rem;
+        }
+
+        .author-link {
+          font-size: 0.8rem;
+          color: var(--verde);
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    /* Botón quitar favorito debajo del contenido */
+    .recipe-actions {
+      margin-top: 8px;
+      text-align: center;
+
+      .remove-btn {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 20px;
+        background-color: #ff4d4d;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover {
+          background-color: #e60000;
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
+/* =======================
+   📱 MÓVIL
+======================= */
+@media (max-width: 600px) {
+  .recipe-card {
+    border-radius: 14px;
 
-.card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
+    .image-slider img.slider-image {
+      height: 120px;
+    }
 
-.card h3 {
-  font-size: 2rem;
-  padding: 10px;
-  text-align: center;
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
+    .card-content {
+      h2.title {
+        font-size: 1rem;
+      }
+      p.card-text {
+        font-size: 0.75rem;
+      }
+      .author .author-info .author-name,
+      .author .author-info .author-link {
+        font-size: 0.7rem;
+      }
+    }
+
+    .image-slider .top-buttons,
+    .image-slider .bottom-buttons {
+      gap: 3px;
+
+      .like-fab,
+      .share-icon,
+      .remove-btn {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.8rem;
+      }
+    }
+  }
 }

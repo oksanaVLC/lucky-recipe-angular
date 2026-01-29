@@ -1,62 +1,77 @@
 <div *ngIf="recipe as r; else notFound" class="recipe-detail">
-  <div class="celebration">🌱 Tu receta saludable del día</div>
+  <div class="gold-gradient">Tu desafío del día</div>
 
   <!-- CARD -->
   <article class="recipe-card">
-    <!-- IMAGEN -->
-    <div class="image-container">
-      <img [src]="r.image" [alt]="r.title" class="main-image" />
-
-      <!-- Rating -->
-      <div class="rating">
-        <span
-          class="star"
-          *ngFor="let star of stars; let i = index"
-          [class.filled]="i < (r.rating ?? 0)"
-        >
-          ★
-        </span>
-      </div>
-
-      <!-- Like -->
-      <button
-        class="like-fab"
-        [class.active]="isFavorite"
-        (click)="toggleFavorite()"
-        aria-label="Me gusta"
-      >
-        ❤️ <span class="likes-count">{{ r.likes ?? 0 }}</span>
-      </button>
-
-      <!-- Compartir -->
-      <button class="share-icon" (click)="shareRecipe()" aria-label="Compartir">🔗</button>
+    <!-- SLIDER DE IMÁGENES -->
+    <div class="image-slider" *ngIf="r.images && r.images.length; else placeholderImage">
+      <button (click)="prevImage()">◀</button>
+      <img [src]="r.images[currentImageIndex]" [alt]="r.title" class="slider-image" />
+      <button (click)="nextImage()">▶</button>
     </div>
+
+    <ng-template #placeholderImage>
+      <img src="assets/images/logo.webp" [alt]="r.title" class="slider-image" />
+    </ng-template>
+
+    <!-- RATING -->
+    <div class="rating">
+      <span
+        class="star"
+        *ngFor="let star of stars; let i = index"
+        [class.filled]="i < (r.rating ?? 0)"
+      >
+        ★
+      </span>
+    </div>
+
+    <!-- LIKE -->
+    <button
+      class="like-fab"
+      [class.active]="isFavorite"
+      (click)="toggleFavorite()"
+      aria-label="Me gusta"
+    >
+      ❤️<span class="likes-count">{{ likesCount }}</span>
+    </button>
+
+    <!-- COMPARTIR -->
+    <button class="share-icon" (click)="shareRecipe()" aria-label="Compartir">🔗</button>
 
     <!-- CONTENIDO -->
     <div class="card-content">
       <h1>{{ r.title }}</h1>
-      <p class="description">{{ r.description }}</p>
+
+      <!-- Descripción breve -->
+      <p class="short-description">{{ r.shortDescription }}</p>
+
+      <!-- Descripción paso a paso -->
+      <section class="long-description">
+        <h3>Preparación</h3>
+        <p>{{ r.longDescription }}</p>
+      </section>
+
+      <!-- Ingredientes -->
+      <section class="ingredients">
+        <h3>Ingredientes</h3>
+        <ul>
+          <li *ngFor="let ingredient of r.ingredients">{{ ingredient }}</li>
+        </ul>
+      </section>
 
       <!-- Autor -->
       <div class="author">
-        <img src="assets/images/profile.jpg" alt="Autor" class="avatar" />
+        <img [src]="r.author?.avatar || 'assets/images/profile.jpg'" alt="Autor" class="avatar" />
         <div class="author-info">
           <span class="author-name">{{ r.author?.name }}</span>
-          <a class="author-link" [routerLink]="['/perfil', r.author?.id]"> Ver sus recetas </a>
+          <a class="author-link" [routerLink]="['/perfil', r.author?.id]">Ver sus recetas</a>
         </div>
       </div>
-
-      <!-- Ingredientes -->
-      <h3>Ingredientes</h3>
-      <ul>
-        <li *ngFor="let ingredient of r.ingredients">{{ ingredient }}</li>
-      </ul>
     </div>
   </article>
 
-  <div *ngIf="recipe as r; else notFound" class="recipe-detail">
-    <app-back-button></app-back-button>
-  </div>
+  <!-- BACK BUTTON -->
+  <app-back-button [fallbackRoute]="'/inicio'"></app-back-button>
 </div>
 
 <ng-template #notFound>

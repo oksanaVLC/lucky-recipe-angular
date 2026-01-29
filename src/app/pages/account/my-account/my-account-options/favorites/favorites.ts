@@ -1,6 +1,6 @@
-import { CommonModule, ViewportScroller } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Recipe } from '../../../../../shared/models/recipe.model';
 import { RecipeService } from '../../../../../shared/services/recipe.service';
 
@@ -14,32 +14,32 @@ import { RecipeService } from '../../../../../shared/services/recipe.service';
 export class FavoritesComponent implements OnInit {
   favoriteRecipes: Recipe[] = [];
 
-  // ===== Modal confirmación =====
   showConfirm = false;
   confirmMessage = '';
   recipeToRemove?: Recipe;
 
   constructor(
     private recipeService: RecipeService,
-    private viewportScroller: ViewportScroller,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
     this.recipeService.getFavorites().subscribe((favIds: number[]) => {
-      this.favoriteRecipes = this.recipeService
-        .getAllValue()
-        .filter((r: Recipe) => favIds.includes(r.id));
+      this.favoriteRecipes = this.recipeService.getAllValue().filter((r) => favIds.includes(r.id));
     });
   }
 
-  // Abrir modal
+  viewRecipe(id: number) {
+    // Ruta absoluta para salir del módulo 'mi-cuenta'
+    this.router.navigateByUrl(`/recipe/${id}`);
+  }
+
   confirmRemove(recipe: Recipe) {
     this.recipeToRemove = recipe;
     this.confirmMessage = `¿Quieres quitar "${recipe.title}" de tus favoritos?`;
     this.showConfirm = true;
   }
 
-  // Confirmar eliminación
   removeConfirmed() {
     if (!this.recipeToRemove) return;
 
@@ -47,11 +47,8 @@ export class FavoritesComponent implements OnInit {
     this.favoriteRecipes = this.favoriteRecipes.filter((r) => r.id !== this.recipeToRemove!.id);
 
     this.closeModal();
-    // volver al inicio de la página
-    this.viewportScroller.scrollToPosition([0, 0]);
   }
 
-  // Cancelar
   cancelRemove() {
     this.closeModal();
   }

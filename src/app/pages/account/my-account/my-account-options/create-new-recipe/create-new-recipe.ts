@@ -35,7 +35,8 @@ export class CreateNewRecipeComponent implements OnInit {
   recipe: RecipeForm = {
     id: Date.now(),
     title: '',
-    description: '',
+    shortDescription: '',
+    longDescription: '',
     category: '',
     ingredients: [{ quantity: '', name: '' }],
     images: [],
@@ -126,10 +127,11 @@ export class CreateNewRecipeComponent implements OnInit {
     const newRecipe: Recipe = {
       id: Date.now(),
       title: this.recipe.title,
-      description: this.recipe.description,
+      shortDescription: this.recipe.shortDescription,
+      longDescription: this.recipe.longDescription,
       category: this.recipe.category,
       ingredients: this.recipe.ingredients.map((ing) => `${ing.quantity} ${ing.name}`.trim()),
-      image: this.images[0] || 'assets/images/logo.webp', // <-- placeholder
+      images: this.images.length ? [...this.images] : ['assets/images/logo.webp'], // <-- aquí
       rating: 0,
       likes: 0,
       author: this.currentUser, // <-- tu usuario actual
@@ -163,7 +165,8 @@ export class CreateNewRecipeComponent implements OnInit {
   hasUnsavedChanges(): boolean {
     return !!(
       this.recipe.title ||
-      this.recipe.description ||
+      this.recipe.shortDescription ||
+      this.recipe.longDescription ||
       this.recipe.ingredients.length > 1 ||
       this.images.length
     );

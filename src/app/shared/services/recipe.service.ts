@@ -37,6 +37,7 @@ export class RecipeService {
   }
 
   addRecipe(recipe: Recipe) {
+    recipe.id = this.recipes.length ? Math.max(...this.recipes.map((r) => r.id)) + 1 : 1;
     this.recipes.push(recipe);
     localStorage.setItem('recipes', JSON.stringify(this.recipes));
     this.recipes$.next(this.recipes);

@@ -1,24 +1,3 @@
-/*export interface Author {
-  id: number;
-  name: string;
-  avatar: string;
-}
-
-export interface Recipe {
-  id: number;
-  title: string;
-  image: string;
-  description?: string;
-  ingredients: string[];
-  category: string;
-
-
-  rating?: number; 
-  likes?: number; 
-  author?: Author; 
-}
-*/
-
 export interface Author {
   id: number;
   name: string;
@@ -28,8 +7,9 @@ export interface Author {
 export interface Recipe {
   id: number;
   title: string;
-  image: string; // solo una imagen principal
-  description?: string;
+  images: string[];
+  shortDescription: string; // descripción breve para destacar
+  longDescription: string; // descripción paso a paso
   ingredients: string[]; // lista simple de ingredientes
   category: string;
   rating?: number;
@@ -37,8 +17,13 @@ export interface Recipe {
   author?: Author;
 }
 
-// NUEVO: para creación de recetas con varios campos
-export interface RecipeForm extends Omit<Recipe, 'ingredients' | 'image'> {
+// Para creación y edición de recetas en el formulario
+export interface RecipeForm {
+  id: number;
+  title: string;
+  shortDescription: string;
+  longDescription: string;
+  category: string;
   ingredients: { quantity: string; name: string }[];
   images: string[]; // permite hasta 10 imágenes
 }

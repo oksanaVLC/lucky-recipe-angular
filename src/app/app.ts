@@ -12,9 +12,7 @@ import { Navbar } from './core/navbar/navbar';
   templateUrl: './app.html',
 })
 export class AppComponent {
-  // Este método se llamará cuando la barra de búsqueda o el micrófono emitan un término
   onSearch(term: string) {
     console.log('Buscar:', term);
-    // Aquí luego puedes añadir lógica de búsqueda, navegación, filtrado, etc.
   }
 }

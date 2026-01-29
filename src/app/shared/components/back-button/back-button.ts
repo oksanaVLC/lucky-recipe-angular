@@ -18,11 +18,11 @@ export class BackButtonComponent {
 
   goBack() {
     if (window.history.length > 1) {
-      this.location.back(); // vuelve a la página anterior
+      this.location.back(); // vuelve a la página anterior y mantiene scroll
     } else if (this.fallbackRoute) {
       this.router.navigate([this.fallbackRoute]); // si no, va al fallback
     } else {
-      this.router.navigate(['/']); // fallback por defecto
+      this.router.navigate(['/inicio']); // fallback por defecto
     }
   }
 }
