@@ -16,40 +16,21 @@
     <!-- Botón siguiente -->
     <button *ngIf="images.length > 1" class="next-btn" (click)="nextImage()">▶</button>
 
-    <!-- Rating -->
-    <div class="rating">
-      <span
-        class="star"
-        *ngFor="let star of stars; let i = index"
-        [class.filled]="i < (recipe.rating ?? 0)"
-      >
-        ★
-      </span>
-    </div>
+    <!-- Corazón top-right -->
+    <button
+      *ngIf="showLikeButton"
+      class="like-btn"
+      [class.active]="isFavorite"
+      (click)="toggleFavorite()"
+      aria-label="Me gusta"
+    >
+      <img
+        [src]="isFavorite ? 'assets/images/red-heart.png' : 'assets/images/grey-heart.png'"
+        alt="like"
+      />
+    </button>
 
-    <!-- Top buttons: Like -->
-    <div class="top-buttons">
-      <button
-        *ngIf="showLikeButton"
-        class="like-fab"
-        [class.active]="isFavorite"
-        (click)="toggleFavorite()"
-        aria-label="Me gusta"
-      >
-        ❤️<span class="likes-count">{{ likesCount }}</span>
-      </button>
-
-      <button
-        *ngIf="showRemoveFavorite"
-        class="remove-btn"
-        (click)="toggleFavorite()"
-        aria-label="Quitar favorito"
-      >
-        ❌
-      </button>
-    </div>
-
-    <!-- Bottom buttons: Share -->
+    <!-- Share bottom-right -->
     <div class="bottom-buttons">
       <button *ngIf="showShareButton" class="share-icon" aria-label="Compartir">🔗</button>
     </div>
@@ -57,21 +38,18 @@
 
   <!-- CONTENIDO -->
   <div class="card-content">
-    <h2 class="title">{{ recipe.title }}</h2>
+    <h2 class="title">
+      {{ recipe.title }}
+      <!-- Estrella dorada -->
+      <span class="star gold-gradient">★★★★★</span>
+    </h2>
 
-    <!-- Descripción breve limitada -->
-    <p class="card-text">
-      {{ recipe.shortDescription || '' | slice: 0 : 100 }}
-      {{ recipe.shortDescription.length > 100 ? '...' : '' }}
-    </p>
+    <p class="card-text">{{ shortText }}<span *ngIf="showEllipsis">...</span></p>
 
     <!-- Autor -->
     <div class="author">
-      <img
-        [src]="recipe.author?.avatar || 'assets/images/profile.jpg'"
-        alt="Autor"
-        class="avatar"
-      />
+      <!-- <img [src]="recipe.author?.avatar || 'assets/images/4p.webp'" alt="Autor" class="avatar" /> -->
+      <img [src]="'assets/images/yo.jpg'" alt="Autor" class="avatar" />
       <div class="author-info">
         <span class="author-name">{{ recipe.author?.name }}</span>
         <a class="author-link" [routerLink]="['/perfil', recipe.author?.id]">Ver sus recetas</a>

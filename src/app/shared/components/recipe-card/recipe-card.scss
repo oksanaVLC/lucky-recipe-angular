@@ -1,248 +1,158 @@
+/* ===================== Recipe Card ===================== */
 .recipe-card {
-  background: #fff;
-  border-radius: 18px;
+  background: #ffffff;
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease;
+  height: 100%;
+}
+
+/* ===================== Image ===================== */
+.image-slider {
+  position: relative;
+  width: 100%;
+
+  .slider-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+/* ===================== Slider Buttons ===================== */
+.prev-btn,
+.next-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  padding: 0.35rem 0.55rem;
+  cursor: pointer;
+  font-size: 1rem;
+  z-index: 2;
 
   &:hover {
-    transform: translateY(-4px);
+    background: rgba(0, 0, 0, 0.55);
+  }
+}
+
+.prev-btn {
+  left: 6px;
+}
+
+.next-btn {
+  right: 6px;
+}
+
+/* ===================== Like Button ===================== */
+.like-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 43px;
+  height: 43px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 3;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
   }
 
-  .image-slider {
-    position: relative;
-
-    img.slider-image {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      cursor: pointer;
-      display: block;
-    }
-
-    /* Botones slider */
-    .prev-btn,
-    .next-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.4);
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      padding: 0.3rem 0.6rem;
-      font-size: 1.1rem;
-      cursor: pointer;
-      z-index: 2;
-      transition: all 0.2s;
-
-      &:hover {
-        transform: scale(1.1);
-      }
-    }
-
-    .prev-btn {
-      left: 8px;
-    }
-    .next-btn {
-      right: 8px;
-    }
-
-    /* Rating */
-    .rating {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      color: gold;
-      font-size: 1rem;
-      z-index: 2;
-
-      .filled {
-        color: gold;
-      }
-    }
-
-    /* Top buttons: like y remove */
-    .top-buttons {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      display: flex;
-      gap: 5px;
-      z-index: 3;
-
-      .like-fab,
-      .remove-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 4px;
-
-        border: none;
-        padding: 0.3rem 0.6rem;
-        border-radius: 20px;
-        cursor: pointer;
-        font-size: 0.9rem;
-        font-weight: 600;
-        transition: all 0.2s;
-
-        &:hover {
-          transform: scale(1.1);
-        }
-
-        &.active {
-          background: #ffffff;
-          color: #111;
-          border: 2px solid #ff4d4d;
-        }
-
-        .likes-count {
-          font-weight: bold;
-          font-size: 0.9rem;
-        }
-      }
-    }
-
-    /* Bottom buttons: share */
-    .bottom-buttons {
-      position: absolute;
-      bottom: 8px;
-      right: 8px;
-      z-index: 3;
-
-      .share-icon {
-        background: #fff;
-
-        border: none;
-        padding: 0.3rem 0.6rem;
-        border-radius: 20px;
-        cursor: pointer;
-        font-size: 0.9rem;
-        transition: all 0.2s;
-
-        &:hover {
-          transform: scale(1.1);
-        }
-      }
-    }
+  &.active img {
+    transform: scale(1.2);
   }
+}
 
-  /* Contenido debajo de la imagen */
-  .card-content {
-    padding: 12px 10px;
+/* ===================== Share ===================== */
+.bottom-buttons {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
 
-    h2.title {
-      font-size: 1.2rem;
-      margin: 0.3rem 0;
-    }
+  .share-icon {
+    width: 36px;
+    height: 36px;
+    background: #ffffff;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
 
-    p.card-text {
-      font-size: 0.95rem;
-      color: #555;
-      margin: 0.3rem 0 0.5rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box; /* WebKit */
-      -webkit-line-clamp: 3; /* WebKit */
-      -webkit-box-orient: vertical;
-
-      display: box; /* Fallback antiguo */
-      line-clamp: 3; /* Estándar futuro */
-      box-orient: vertical; /* Estándar futuro */
-    }
-
-    .author {
-      display: flex;
-      align-items: center;
-      margin-top: 0.5rem;
-
-      .avatar {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        margin-right: 0.5rem;
-      }
-
-      .author-info {
-        display: flex;
-        flex-direction: column;
-
-        .author-name {
-          font-weight: bold;
-          font-size: 0.9rem;
-        }
-
-        .author-link {
-          font-size: 0.8rem;
-          color: var(--verde);
-          text-decoration: none;
-
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
-    }
-
-    /* Botón quitar favorito debajo del contenido */
-    .recipe-actions {
-      margin-top: 8px;
-      text-align: center;
-
-      .remove-btn {
-        padding: 6px 12px;
-        border: none;
-        border-radius: 20px;
-        background-color: #ff4d4d;
-        color: #fff;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s;
-
-        &:hover {
-          background-color: #e60000;
-          transform: scale(1.05);
-        }
-      }
+    &:hover {
+      background: #f2f2f2;
     }
   }
 }
 
-/* =======================
-   📱 MÓVIL
-======================= */
-@media (max-width: 600px) {
-  .recipe-card {
-    border-radius: 14px;
+/* ===================== Content ===================== */
+.card-content {
+  padding: 0.75rem;
 
-    .image-slider img.slider-image {
-      height: 120px;
+  .title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.35rem;
+    line-height: 1.2;
+
+    .star {
+      font-size: 0.75rem;
+      margin-left: 4px;
+    }
+  }
+
+  .card-text {
+    font-size: 0.8rem;
+    color: #555;
+    margin-bottom: 0.6rem;
+  }
+}
+
+/* ===================== Author ===================== */
+.author {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 0.5rem;
+  align-items: center;
+
+  .avatar {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .author-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 48px;
+
+    .author-name {
+      font-size: 0.8rem;
+      font-weight: 600;
     }
 
-    .card-content {
-      h2.title {
-        font-size: 1rem;
-      }
-      p.card-text {
-        font-size: 0.75rem;
-      }
-      .author .author-info .author-name,
-      .author .author-info .author-link {
-        font-size: 0.7rem;
-      }
-    }
+    .author-link {
+      font-size: 0.7rem;
+      color: green;
+      text-decoration: none;
 
-    .image-slider .top-buttons,
-    .image-slider .bottom-buttons {
-      gap: 3px;
-
-      .like-fab,
-      .share-icon,
-      .remove-btn {
-        padding: 0.2rem 0.4rem;
-        font-size: 0.8rem;
+      &:hover {
+        text-decoration: underline;
       }
     }
   }

@@ -46,25 +46,23 @@ export class RecipeCardComponent {
   toggleFavorite() {
     if (!this.recipe?.id) return;
     this.recipeService.toggleFavorite(this.recipe.id);
-    // no hace falta asignar nada aquí: los getters leen el estado real
   }
 
   get isFavorite(): boolean {
     return this.recipe?.id ? this.recipeService.isFavorite(this.recipe.id) : false;
   }
 
-  // ===== LIKES =====
-  get likesCount(): number {
-    return this.isFavorite ? 1 : 0;
-  }
-
-  // ===== STARS =====
-  get stars(): number[] {
-    return Array(5).fill(0);
-  }
-
   // ===== ABRIR DETALLE =====
   openRecipe() {
     this.open.emit(this.recipe.id);
+  }
+
+  // ===== DESCRIPCIÓN BREVE =====
+  get shortText(): string {
+    return this.recipe?.shortDescription?.slice(0, 100) || '';
+  }
+
+  get showEllipsis(): boolean {
+    return !!this.recipe?.shortDescription && this.recipe.shortDescription.length > 100;
   }
 }

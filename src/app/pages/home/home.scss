@@ -413,3 +413,41 @@ Otra interesante
     transform: translateY(-10px);
   }
 }
+
+/* ===================== Recipe Grid ===================== */
+.recipe-grid {
+  display: grid;
+  width: 100%;
+  gap: 1rem;
+  padding: 0.5rem;
+
+  /* BASE: móviles → 2 por fila */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* 🔑 MUY IMPORTANTE */
+.recipe-grid app-recipe-card {
+  display: block;
+  width: 100%;
+}
+
+/* Tablets */
+@media (min-width: 600px) {
+  .recipe-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Desktop medio */
+@media (min-width: 900px) {
+  .recipe-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Desktop grande */
+@media (min-width: 1200px) {
+  .recipe-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
