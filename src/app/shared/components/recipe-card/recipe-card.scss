@@ -144,9 +144,13 @@
       margin: 0.3rem 0 0.5rem;
       overflow: hidden;
       text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
+      display: -webkit-box; /* WebKit */
+      -webkit-line-clamp: 3; /* WebKit */
       -webkit-box-orient: vertical;
+
+      display: box; /* Fallback antiguo */
+      line-clamp: 3; /* Estándar futuro */
+      box-orient: vertical; /* Estándar futuro */
     }
 
     .author {
