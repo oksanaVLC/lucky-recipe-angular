@@ -15,8 +15,16 @@ export class RecipeService {
     // Cargar recetas del localStorage
     const stored = localStorage.getItem('recipes');
     if (stored) {
-      this.recipes = JSON.parse(stored);
-      this.recipes$.next(this.recipes);
+      try {
+        const parsed: Recipe[] = JSON.parse(stored);
+        // Filtrar solo recetas válidas
+        this.recipes = parsed.filter((r) => r && r.id && r.title);
+        this.recipes$.next(this.recipes);
+      } catch {
+        // Si hay error al parsear, limpiamos localStorage y usamos array vacío
+        this.recipes = [];
+        localStorage.removeItem('recipes');
+      }
     }
 
     // ===== NUEVO: cargar favoritos del localStorage =====
