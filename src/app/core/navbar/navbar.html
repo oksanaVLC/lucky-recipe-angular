@@ -20,13 +20,13 @@
   <button
     class="menu-toggle"
     (click)="toggleMenu()"
-    [class.open]="isMenuOpen"
+    [class.open]="isMenuOpen()"
     aria-label="Abrir/Cerrar menú"
   >
     <div class="hamburger"><span></span></div>
   </button>
 
-  <ul class="navbar-links" [class.open]="isMenuOpen">
+  <ul class="navbar-links" [class.open]="isMenuOpen()">
     <li><a routerLink="/inicio" (click)="closeMenu()">Inicio</a></li>
     <li><a routerLink="/categorias" (click)="closeMenu()">Categorías</a></li>
     <li><a routerLink="/restaurantes" (click)="closeMenu()">Restaurantes</a></li>
@@ -51,5 +51,5 @@
     </li>
   </ul>
 
-  <div class="overlay" *ngIf="isMenuOpen" (click)="closeMenu()"></div>
+  <div class="overlay" *ngIf="isMenuOpen()" (click)="closeMenu()"></div>
 </nav>

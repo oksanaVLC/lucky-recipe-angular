@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { SearchBarComponent } from '../../shared/components/search-bar/search-bar';
@@ -14,7 +14,8 @@ import { SearchService } from '../services/search.service';
   styleUrls: ['./navbar.scss'],
 })
 export class Navbar {
-  isMenuOpen = false;
+  // ✅ Usamos signal en vez de boolean normal
+  isMenuOpen = signal(false);
 
   constructor(
     public authService: AuthService,
@@ -23,11 +24,12 @@ export class Navbar {
   ) {}
 
   toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
+    this.isMenuOpen.set(!this.isMenuOpen());
+    console.log('Menu toggled:', this.isMenuOpen());
   }
 
   closeMenu() {
-    this.isMenuOpen = false;
+    this.isMenuOpen.set(false);
   }
 
   logout() {
