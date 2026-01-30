@@ -15,7 +15,6 @@ import { SearchService } from '../services/search.service';
 })
 export class Navbar {
   isMenuOpen = false;
-  isLanguageMenuOpen = false;
 
   constructor(
     public authService: AuthService,
@@ -29,16 +28,6 @@ export class Navbar {
 
   closeMenu() {
     this.isMenuOpen = false;
-    this.isLanguageMenuOpen = false;
-  }
-
-  toggleLanguageMenu() {
-    this.isLanguageMenuOpen = !this.isLanguageMenuOpen;
-  }
-
-  setLanguage(lang: string) {
-    console.log('Idioma seleccionado:', lang);
-    this.isLanguageMenuOpen = false;
   }
 
   logout() {
@@ -50,6 +39,5 @@ export class Navbar {
   onSearch(term: string) {
     this.searchService.setSearchTerm(term);
     this.closeMenu();
-    console.log('Buscar desde navbar:', term);
   }
 }

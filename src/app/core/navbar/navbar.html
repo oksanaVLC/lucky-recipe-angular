@@ -8,6 +8,7 @@
         class="dice-img animate__animated animate__jello"
       />
     </a>
+
     <!-- Botón Favoritos -->
     <a class="favorites-btn" routerLink="/mi-cuenta/favoritas" aria-label="Mis favoritos">
       <img class="gold-gridient" src="../../assets/images/heart-cherry.png" alt="Favoritos" />
@@ -31,7 +32,6 @@
     <li><a routerLink="/restaurantes" (click)="closeMenu()">Restaurantes</a></li>
     <li><a routerLink="/eventos" (click)="closeMenu()">Eventos</a></li>
 
-    <!-- NO logueado -->
     <li *ngIf="!authService.isLoggedIn()">
       <a routerLink="/login" (click)="closeMenu()">Login</a>
     </li>
@@ -39,16 +39,13 @@
       <a routerLink="/register" (click)="closeMenu()">Register</a>
     </li>
 
-    <!-- LOGUEADO -->
     <li *ngIf="authService.isLoggedIn()">
       <a routerLink="/mi-cuenta" (click)="closeMenu()">Mi cuenta</a>
     </li>
-
     <li *ngIf="authService.isLoggedIn()">
       <button class="logout-btn" (click)="logout()">Logout</button>
     </li>
 
-    <!-- Barra de búsqueda para móvil (sidebar) -->
     <li class="mobile-search">
       <app-search-bar (search)="onSearch($event)"></app-search-bar>
     </li>
