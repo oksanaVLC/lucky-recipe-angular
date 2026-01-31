@@ -15,6 +15,8 @@ export interface Recipe {
   rating?: number;
   likes?: number;
   author?: Author;
+
+  createdAt?: string | Date; // <-- nuevo campo para la fecha de creación
 }
 
 // Para creación y edición de recetas en el formulario
@@ -26,4 +28,6 @@ export interface RecipeForm {
   category: string;
   ingredients: { quantity: string; name: string }[];
   images: string[]; // permite hasta 10 imágenes
+
+  createdAt?: string | Date; // opcional si se asigna automáticamente al crear
 }

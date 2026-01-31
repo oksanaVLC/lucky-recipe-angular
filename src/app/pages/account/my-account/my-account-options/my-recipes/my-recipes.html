@@ -1,41 +1,67 @@
 <div class="wrapper">
   <div class="my-recipes">
-    <h1 class="gold-gradient">Mis recetas creadas ({{ recipes.length }})</h1>
+    <div class="title-row">
+      <app-back-button-small></app-back-button-small>
 
-    <div *ngIf="recipes.length; else emptyList">
-      <div class="recipe-grid">
-        <div *ngFor="let r of recipes" class="recipe-card">
-          <!-- Fila 1: Imagen clicable -->
-          <div class="card-image" (click)="viewRecipe(r.id)">
-            <img [src]="r.images[0] || 'assets/images/logo.webp'" />
-          </div>
-
-          <!-- Fila 2: Info -->
-          <div class="recipe-info">
-            <!-- Título -->
-            <h3 class="recipe-title">{{ r.title }}</h3>
-
-            <!-- Categoría -->
-            <p class="recipe-category">
-              {{ r.category && r.category.trim() ? r.category : 'Sin categoría' }}
-            </p>
-
-            <!-- Ingredientes -->
-            <p class="recipe-ingredients">{{ r.ingredients.length }} ingredientes</p>
-
-            <!-- Fecha -->
-            <p class="recipe-date">Creada: {{ r.id | date: 'short' }}</p>
-          </div>
-
-          <!-- Fila 3: botones -->
-          <div class="card-buttons">
-            <button (click)="viewRecipe(r.id)" class="see-btn">Ver</button>
-            <button (click)="editRecipe(r.id)" class="edit-btn">Editar</button>
-            <button (click)="deleteRecipe(r.id)" class="delete-btn">Borrar</button>
-          </div>
-        </div>
-      </div>
+      <h1 class="gold-gradient">Mis recetas creadas ({{ recipes.length }})</h1>
     </div>
+
+    <!-- Botones de vista -->
+    <div class="botones-vista">
+      <svg
+        (click)="viewMode = 'grid'"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <rect x="3" y="3" width="7" height="7" />
+        <rect x="14" y="3" width="7" height="7" />
+        <rect x="3" y="14" width="7" height="7" />
+        <rect x="14" y="14" width="7" height="7" />
+      </svg>
+
+      <svg
+        (click)="viewMode = 'list'"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="16"
+        viewBox="0 0 24 16"
+        fill="currentColor"
+      >
+        <!-- Primer bullet -->
+        <circle cx="2" cy="2" r="2" />
+        <rect x="6" y="0.5" width="18" height="3" rx="1" />
+        <!-- Segundo bullet -->
+        <circle cx="2" cy="8" r="2" />
+        <rect x="6" y="6.5" width="18" height="3" rx="1" />
+        <!-- Tercer bullet -->
+        <circle cx="2" cy="14" r="2" />
+        <rect x="6" y="12.5" width="18" height="3" rx="1" />
+      </svg>
+    </div>
+
+    <!-- Mostrar componente hijo según vista -->
+    <ng-container *ngIf="recipes.length; else emptyList">
+      <app-my-recipes-grid
+        *ngIf="viewMode === 'grid'"
+        [recipes]="recipes"
+        (view)="viewRecipe($event)"
+        (edit)="editRecipe($event)"
+        (delete)="deleteRecipe($event)"
+      ></app-my-recipes-grid>
+
+      <app-my-recipes-list
+        *ngIf="viewMode === 'list'"
+        [recipes]="recipes"
+        (view)="viewRecipe($event)"
+        (edit)="editRecipe($event)"
+        (delete)="deleteRecipe($event)"
+      ></app-my-recipes-list>
+    </ng-container>
 
     <ng-template #emptyList>
       <p>No has creado ninguna receta todavía.</p>

@@ -1,0 +1,31 @@
+<div *ngIf="recipes.length; else emptyList">
+  <div class="recipe-grid">
+    <div *ngFor="let r of recipes" class="recipe-card">
+      <!-- Fila 1: Imagen clicable -->
+      <div class="card-image" (click)="view.emit(r.id)">
+        <img [src]="r.images[0] || 'assets/images/logo.webp'" />
+      </div>
+
+      <!-- Fila 2: Info -->
+      <div class="recipe-info">
+        <h3 class="recipe-title">{{ r.title }}</h3>
+        <p class="recipe-category">
+          {{ r.category && r.category.trim() ? r.category : 'Sin categoría' }}
+        </p>
+        <p class="recipe-ingredients">{{ r.ingredients.length }} ingredientes</p>
+        <p class="recipe-date">Creada: {{ r.id | date: 'short' }}</p>
+      </div>
+
+      <!-- Fila 3: botones -->
+      <div class="card-buttons">
+        <button (click)="view.emit(r.id)" class="see-btn">Ver</button>
+        <button (click)="edit.emit(r.id)" class="edit-btn">Editar</button>
+        <button (click)="delete.emit(r.id)" class="delete-btn">Borrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #emptyList>
+  <p>No has creado ninguna receta todavía.</p>
+</ng-template>

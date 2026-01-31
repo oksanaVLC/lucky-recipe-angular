@@ -1,56 +1,16 @@
-import {
-  animate,
-  animation,
-  query,
-  stagger,
-  style,
-  transition,
-  trigger,
-  useAnimation,
-} from '@angular/animations';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DraftService } from '../../../core/services/draft.service';
+import { BackButtonSmallComponent } from '../../../shared/components/back-button-small/back-button-small';
 import { RecipeService } from '../../../shared/services/recipe.service';
 
 @Component({
   selector: 'app-account',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, BackButtonSmallComponent],
   templateUrl: './account.html',
   styleUrls: ['./account.scss'],
-  animations: [
-    trigger('pageEnter', [
-      transition(':enter', [
-        useAnimation(
-          animation([
-            query(
-              '.account-card',
-              [
-                style({
-                  opacity: 0,
-                  transform: 'translateY(10px)',
-                  display: 'flex',
-                }),
-                stagger(
-                  80,
-                  animate(
-                    '400ms ease-out',
-                    style({
-                      opacity: 1,
-                      transform: 'translateY(0)',
-                    }),
-                  ),
-                ),
-              ],
-              { optional: true },
-            ),
-          ]),
-        ),
-      ]),
-    ]),
-  ],
 })
 export class AccountComponent {
   recipeCount = signal(0);
@@ -59,6 +19,7 @@ export class AccountComponent {
   constructor(
     public draftService: DraftService,
     public recipeService: RecipeService,
+    private location: Location,
   ) {
     // Recetas creadas
     this.recipeService.getAll().subscribe((recipes) => {
@@ -69,5 +30,8 @@ export class AccountComponent {
     this.recipeService.getFavorites().subscribe((favs: number[]) => {
       this.favoriteCount.set(favs.length);
     });
+  }
+  goBack() {
+    this.location.back();
   }
 }

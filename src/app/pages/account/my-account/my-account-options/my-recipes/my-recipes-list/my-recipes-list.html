@@ -1,0 +1,81 @@
+<div *ngIf="recipes.length; else emptyList">
+  <table class="recipe-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Título</th>
+        <th class="category-col">Categoría</th>
+        <th class="date-col">Fecha</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of recipes; let i = index" (click)="view.emit(r.id)" class="clickable-row">
+        <td>{{ r.id }}</td>
+        <!-- O usar {{ i + 1 }} si prefieres índice -->
+        <td>
+          <strong>{{ r.title.length > 20 ? (r.title | slice: 0 : 20) + '…' : r.title }}</strong>
+        </td>
+
+        <td class="category-col">
+          {{ r.category && r.category.trim() ? r.category : 'Sin categoría' }}
+        </td>
+        <td class="date-col">{{ r.createdAt | date: 'dd/MM/yyyy' }}</td>
+
+        <td class="actions">
+          <!-- Abrir / Lupa -->
+          <button title="Abrir">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M11 6a5 5 0 1 1-10 0 5 5 0 0 1 10 0zM11.707 10.707l3 3a1 1 0 0 1-1.414 1.414l-3-3A6.978 6.978 0 0 1 11 10z"
+              />
+            </svg>
+          </button>
+
+          <!-- Editar -->
+          <button (click)="edit.emit(r.id); $event.stopPropagation()" title="Editar">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M12.146.854a.5.5 0 0 1 .708 0l2.292 2.292a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 3L13 4.793 12.207 5.586 10.414 3.793 11.207 3zM10.5 4.5 3 12v1h1l7.5-7.5L10.5 4.5z"
+              />
+            </svg>
+          </button>
+
+          <!-- Borrar -->
+          <button (click)="delete.emit(r.id); $event.stopPropagation()" title="Borrar">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M5.5 5.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm1 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"
+              />
+              <path
+                d="M14 3a1 1 0 0 1-1 1h-1v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4H3a1 1 0 0 1 0-2h3.5l1-1h3l1 1H14a1 1 0 0 1 1 1zM5 4v9a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1V4H5z"
+              />
+            </svg>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #emptyList>
+  <p>No has creado ninguna receta todavía.</p>
+</ng-template>

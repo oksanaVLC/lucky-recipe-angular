@@ -1,13 +1,14 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { BackButtonSmallComponent } from '../../../../../shared/components/back-button-small/back-button-small';
 import { Recipe } from '../../../../../shared/models/recipe.model';
 import { RecipeService } from '../../../../../shared/services/recipe.service';
 
 @Component({
   selector: 'app-favorites',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, BackButtonSmallComponent],
   templateUrl: './favorites.html',
   styleUrls: ['./favorites.scss'],
 })
@@ -21,6 +22,7 @@ export class FavoritesComponent implements OnInit {
   constructor(
     private recipeService: RecipeService,
     private router: Router,
+    private location: Location,
   ) {}
 
   ngOnInit(): void {
@@ -57,5 +59,8 @@ export class FavoritesComponent implements OnInit {
     this.showConfirm = false;
     this.recipeToRemove = undefined;
     this.confirmMessage = '';
+  }
+  goBack() {
+    this.location.back();
   }
 }

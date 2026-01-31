@@ -1,5 +1,8 @@
 <div class="create-recipe-container">
-  <h1 class="gold-gradient">Crear Nueva Receta</h1>
+  <div class="title-row">
+    <app-back-button-small></app-back-button-small>
+    <h1 class="gold-gradient">Crear Nueva Receta</h1>
+  </div>
 
   <div class="form-layout">
     <!-- TÍTULO -->
@@ -97,5 +100,13 @@
       <button class="btn-confirm" (click)="saveDraft()">Guardar</button>
       <button class="btn-discard" (click)="discardDraft()">Salir</button>
     </div>
+  </div>
+</div>
+
+<!-- Mensaje de guardado -->
+<div class="saved-overlay" *ngIf="showSavedMessage">
+  <div class="saved-toast">
+    <h3>¡Listo!</h3>
+    <p>{{ savedMessage }}</p>
   </div>
 </div>

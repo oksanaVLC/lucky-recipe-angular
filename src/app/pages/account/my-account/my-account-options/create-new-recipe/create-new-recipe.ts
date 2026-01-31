@@ -1,8 +1,9 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DraftService } from '../../../../../core/services/draft.service';
+import { BackButtonSmallComponent } from '../../../../../shared/components/back-button-small/back-button-small';
 import { BackButtonComponent } from '../../../../../shared/components/back-button/back-button';
 import { Recipe, RecipeForm } from '../../../../../shared/models/recipe.model';
 import { RecipeService } from '../../../../../shared/services/recipe.service';
@@ -10,7 +11,7 @@ import { RecipeService } from '../../../../../shared/services/recipe.service';
 @Component({
   selector: 'app-create-recipe',
   standalone: true,
-  imports: [CommonModule, FormsModule, BackButtonComponent],
+  imports: [CommonModule, FormsModule, BackButtonComponent, BackButtonSmallComponent],
   templateUrl: './create-new-recipe.html',
   styleUrls: ['./create-new-recipe.scss'],
 })
@@ -57,6 +58,7 @@ export class CreateNewRecipeComponent implements OnInit {
     private route: ActivatedRoute,
     private recipeService: RecipeService,
     private draftService: DraftService,
+    private location: Location,
   ) {}
 
   ngOnInit() {
@@ -148,7 +150,7 @@ export class CreateNewRecipeComponent implements OnInit {
 
   /** Crear o actualizar receta */
   createRecipe() {
-    // 1️⃣ Cerrar modal de borrador si estaba abierto
+    // Cerrar modal de borrador si estaba abierto
     if (this.showDraftModal && this._resolveDeactivate) {
       this._resolveDeactivate(true);
       this._resolveDeactivate = undefined!;
@@ -156,6 +158,9 @@ export class CreateNewRecipeComponent implements OnInit {
     }
 
     this._isSaving = true;
+
+    //  Mover existing aquí
+    const existing = this.recipeService.getRecipeById(this.recipe.id);
 
     const recipeData: Recipe = {
       id: this.recipe.id,
@@ -168,9 +173,9 @@ export class CreateNewRecipeComponent implements OnInit {
       rating: 0,
       likes: 0,
       author: this.currentUser,
+      createdAt: existing ? existing.createdAt : new Date(), // <-- usar existing aquí
     };
 
-    const existing = this.recipeService.getRecipeById(this.recipe.id);
     if (existing) {
       this.recipeService.updateRecipe(recipeData);
       this.savedMessage = 'Receta actualizada con éxito!';
@@ -254,5 +259,8 @@ export class CreateNewRecipeComponent implements OnInit {
       this._resolveDeactivate(false);
       this._resolveDeactivate = undefined!;
     }
+  }
+  goBack() {
+    this.location.back();
   }
 }

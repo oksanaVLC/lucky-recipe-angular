@@ -1,6 +1,10 @@
 <div class="wrapper">
   <div class="favorites-wrapper">
-    <h1 class="gold-gradient">Mis recetas favoritas ({{ favoriteRecipes.length }})</h1>
+    <div class="title-row">
+      <app-back-button-small></app-back-button-small>
+
+      <h1 class="gold-gradient">Mis recetas favoritas ({{ favoriteRecipes.length }})</h1>
+    </div>
 
     <div *ngIf="favoriteRecipes.length; else emptyList" class="recipes-grid">
       <div *ngFor="let r of favoriteRecipes" class="recipe-card">

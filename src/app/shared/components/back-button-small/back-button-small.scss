@@ -1,0 +1,27 @@
+.back-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    background: rgba(191, 161, 74, 0.15);
+    opacity: 0.85;
+  }
+
+  &:active {
+    transform: translateX(-1px);
+  }
+}
