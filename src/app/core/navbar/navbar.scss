@@ -224,3 +224,12 @@
     transform: scale3d(1, 1, 1);
   } /* resto del tiempo pausa */
 }
+
+.heart-icon {
+  width: 30px;
+  height: 30px;
+
+  path {
+    fill: #ff3b3b;
+  }
+}

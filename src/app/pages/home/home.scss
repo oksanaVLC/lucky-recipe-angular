@@ -1,5 +1,10 @@
 .wrapper {
   margin-top: 87px;
+
+  h1 {
+    text-align: center;
+    margin: 1rem 0;
+  }
 }
 /* =========================
    HERO IMAGE
@@ -450,4 +455,43 @@ Otra interesante
   .recipe-grid {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
+}
+
+/* Imagen decorativa bottom-left */
+.hero-bottom-left {
+  position: absolute;
+  bottom: 0; // esquina inferior
+  left: 0; // esquina izquierda
+  width: 120px; // ajusta tamaño según necesites
+  height: auto;
+  z-index: 2; // encima de la hero image pero debajo del contenido si quieres
+  pointer-events: none; // para que no bloquee clicks
+}
+
+/* Imagen decorativa bottom-left */
+.hero-bottom-left {
+  position: absolute;
+  bottom: 0; // esquina inferior
+  left: 0; // esquina izquierda
+  width: 120px; // ajusta tamaño según necesites
+  height: auto;
+  z-index: 2; // encima de la hero image pero debajo del contenido si quieres
+  pointer-events: none; // para que no bloquee clicks
+}
+
+.gold-gradient-suerte {
+  background-image: repeating-linear-gradient(
+    90deg,
+    #fff,
+    #fff 40%,
+    /* #f1b05c 50%,*/ #746738 50%,
+    #fff 60%,
+    #fff
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: slidingGradient 3s linear infinite;
 }

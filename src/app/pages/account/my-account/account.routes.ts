@@ -51,4 +51,12 @@ export const ACCOUNT_ROUTES: Routes = [
     loadComponent: () =>
       import('./my-account-options/weekly-menu/weekly-menu').then((m) => m.WeeklyMenuComponent),
   },
+  {
+    path: 'crear-receta/:id', // crear o editar dependiendo si hay id
+    loadComponent: () =>
+      import('./my-account-options/create-new-recipe/create-new-recipe').then(
+        (m) => m.CreateNewRecipeComponent,
+      ),
+    canDeactivate: [CanDeactivateGuard],
+  },
 ];

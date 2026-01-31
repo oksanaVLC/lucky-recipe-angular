@@ -82,7 +82,6 @@
     }
   }
 
-  /* --- NUEVO: AREA DE IMÁGENES CON DASHES --- */
   .image-upload {
     display: flex;
     flex-direction: column;
@@ -92,7 +91,6 @@
     border-radius: 12px;
     position: relative;
     transition: border-color 0.2s;
-
     &:hover {
       border-color: var(--verde);
     }
@@ -159,7 +157,6 @@
           object-fit: cover;
         }
 
-        /* Botón negro centrado con X */
         .remove-image {
           position: absolute;
           top: 4px;
@@ -178,7 +175,7 @@
           cursor: pointer;
           transition: all 0.2s;
           &:hover {
-            background: #d9534f; /* rojo al hover */
+            background: #d9534f;
           }
         }
       }
@@ -201,7 +198,6 @@
   }
 }
 
-/* MODAL BORRADOR */
 /* MODAL BORRADOR */
 .draft-modal {
   position: fixed;
@@ -252,7 +248,7 @@
           background-color: #ddd;
           color: #000;
           &:hover {
-            background-color: #fefefe; /* casi blanco */
+            background-color: #fefefe;
           }
         }
 
@@ -260,7 +256,7 @@
           background-color: var(--verde);
           color: #fff;
           &:hover {
-            background-color: #b7e3b0; /* verde claro hover */
+            background-color: #b7e3b0;
             color: #000;
           }
         }
@@ -269,7 +265,7 @@
           background-color: #fce065;
           color: #111;
           &:hover {
-            background-color: #fefefe; /* casi blanco */
+            background-color: #fefefe;
             color: #000;
           }
         }
@@ -280,8 +276,8 @@
 
 .form-actions {
   display: flex;
-  gap: 10px; // espacio entre los botones
-  justify-content: center; // los pone a la izquierda
+  gap: 10px;
+  justify-content: center;
   margin-top: 1rem;
 }
 
@@ -297,7 +293,7 @@
 
     .actions {
       display: flex;
-      justify-content: flex-end; // botones alineados a la derecha
+      justify-content: flex-end;
       gap: 8px;
     }
   }

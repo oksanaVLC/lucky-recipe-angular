@@ -16,23 +16,31 @@
     <!-- Botón siguiente -->
     <button *ngIf="images.length > 1" class="next-btn" (click)="nextImage()">▶</button>
 
-    <!-- Corazón top-right -->
+    <!-- LIKE -->
     <button
       *ngIf="showLikeButton"
-      class="like-btn"
+      class="like-btn like-counter"
       [class.active]="isFavorite"
-      (click)="toggleFavorite()"
+      (click)="toggleLike($event)"
       aria-label="Me gusta"
     >
-      <img
-        [src]="isFavorite ? 'assets/images/red-heart.png' : 'assets/images/grey-heart.png'"
-        alt="like"
-      />
+      <span class="heart">♥</span>
+      <span class="count">{{ likesCount }}</span>
     </button>
 
-    <!-- Share bottom-right -->
+    <!-- Share -->
     <div class="bottom-buttons">
-      <button *ngIf="showShareButton" class="share-icon" aria-label="Compartir">🔗</button>
+      <button
+        *ngIf="showShareButton"
+        class="share-icon"
+        aria-label="Compartir"
+        (click)="copyLink()"
+      >
+        <img src="assets/images/share.png" alt="Compartir" />
+      </button>
+
+      <!-- Mensaje de copia -->
+      <span class="copy-msg" *ngIf="copied">¡Link copiado!</span>
     </div>
   </div>
 
@@ -40,7 +48,6 @@
   <div class="card-content">
     <h2 class="title">
       {{ recipe.title }}
-      <!-- Estrella dorada -->
       <span class="star gold-gradient">★★★★★</span>
     </h2>
 
@@ -48,11 +55,10 @@
 
     <!-- Autor -->
     <div class="author">
-      <!-- <img [src]="recipe.author?.avatar || 'assets/images/4p.webp'" alt="Autor" class="avatar" /> -->
       <img [src]="'assets/images/yo.jpg'" alt="Autor" class="avatar" />
       <div class="author-info">
         <span class="author-name">{{ recipe.author?.name }}</span>
-        <a class="author-link" [routerLink]="['/perfil', recipe.author?.id]">Ver sus recetas</a>
+        <a class="author-link" [routerLink]="['/perfil', recipe.author?.id]"> Ver sus recetas </a>
       </div>
     </div>
   </div>

@@ -16,6 +16,7 @@
         <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
       </select>
     </div>
+
     <!-- DESCRIPCIÓN -->
     <div class="field">
       <label for="description">Descripción breve para destacar tu receta</label>
@@ -80,9 +81,7 @@
 
     <!-- BOTONES -->
     <div class="form-actions">
-      <!-- Volver al lado del botón Crear Receta -->
       <app-back-button fallbackRoute="/mi-cuenta"></app-back-button>
-
       <button type="button" class="submit-button" (click)="createRecipe()">Crear Receta</button>
     </div>
   </div>

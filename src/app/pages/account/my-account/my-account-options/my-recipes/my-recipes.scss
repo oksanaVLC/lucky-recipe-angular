@@ -101,3 +101,20 @@
 .delete-btn:hover {
   background-color: darkred;
 }
+
+.edit-btn {
+  flex: 1;
+  padding: 6px 10px;
+  border-radius: 18px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  background-color: orange; // color distintivo
+  color: white;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: darkorange;
+  }
+}

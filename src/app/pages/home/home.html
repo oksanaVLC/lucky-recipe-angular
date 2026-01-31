@@ -43,11 +43,18 @@
           del día:
         </h1>
         <button class="arrow-button" (click)="chooseRandomRecipe()">
-          <span>¡Suerte!</span>
+          <span class="gold-gradient-suerte">¡Suerte!</span>
           <span class="arrow">→</span>
         </button>
       </div>
     </div>
+
+    <!-- NUEVA IMAGEN DECORATIVA -->
+    <img
+      src="assets/images/6969copia.png"
+      alt="Decoración esquina inferior izquierda"
+      class="hero-bottom-left"
+    />
   </div>
 
   <!-- Overlay Loader 
@@ -62,7 +69,7 @@ Otro:
     </video>
   </div>-->
   <app-loader *ngIf="isLoading"></app-loader>
-
+  <h1>Recetas destacadas</h1>
   <!-- Grid de recetas -->
   <!-- Grid de recetas -->
   <div *ngIf="!isLoading" class="recipe-grid">

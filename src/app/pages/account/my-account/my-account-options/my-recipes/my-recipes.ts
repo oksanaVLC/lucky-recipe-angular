@@ -34,4 +34,8 @@ export class MyRecipesComponent implements OnInit {
       this.recipeService.deleteRecipe(id);
     }
   }
+  editRecipe(id: number) {
+    // Navega a la ruta de edición con el id
+    this.router.navigate(['/mi-cuenta/crear-receta', id]);
+  }
 }

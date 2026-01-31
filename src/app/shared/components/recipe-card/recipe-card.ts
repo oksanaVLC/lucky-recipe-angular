@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Recipe } from '../../models/recipe.model';
 import { RecipeService } from '../../services/recipe.service';
@@ -11,7 +11,7 @@ import { RecipeService } from '../../services/recipe.service';
   templateUrl: './recipe-card.html',
   styleUrls: ['./recipe-card.scss'],
 })
-export class RecipeCardComponent {
+export class RecipeCardComponent implements OnInit {
   @Input({ required: true }) recipe!: Recipe;
   @Input() showLikeButton: boolean = true;
   @Input() showShareButton: boolean = true;
@@ -20,8 +20,13 @@ export class RecipeCardComponent {
   @Output() open = new EventEmitter<number>();
 
   currentImageIndex = 0;
+  likesCount = 0;
 
   constructor(private recipeService: RecipeService) {}
+
+  ngOnInit() {
+    this.likesCount = this.isFavorite ? 1 : 0;
+  }
 
   // ===== IMÁGENES =====
   get images(): string[] {
@@ -42,10 +47,16 @@ export class RecipeCardComponent {
     this.currentImageIndex = (this.currentImageIndex - 1 + this.images.length) % this.images.length;
   }
 
-  // ===== FAVORITOS =====
-  toggleFavorite() {
+  // ===== FAVORITOS + LIKES =====
+  toggleLike(event: Event) {
+    event.stopPropagation();
+
     if (!this.recipe?.id) return;
+
     this.recipeService.toggleFavorite(this.recipe.id);
+
+    // sincroniza el contador con el estado FINAL
+    this.likesCount = this.isFavorite ? 1 : 0;
   }
 
   get isFavorite(): boolean {
@@ -64,5 +75,17 @@ export class RecipeCardComponent {
 
   get showEllipsis(): boolean {
     return !!this.recipe?.shortDescription && this.recipe.shortDescription.length > 100;
+  }
+  copied = false;
+
+  copyLink() {
+    const url = `${window.location.origin}/recipe/${this.recipe.id}`;
+    navigator.clipboard.writeText(url).then(() => {
+      this.copied = true;
+
+      setTimeout(() => {
+        this.copied = false;
+      }, 1500); // desaparece después de 1.5s
+    });
   }
 }

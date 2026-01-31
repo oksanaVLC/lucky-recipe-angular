@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DraftService } from '../../../../../core/services/draft.service';
 import { BackButtonComponent } from '../../../../../shared/components/back-button/back-button';
 import { Recipe, RecipeForm } from '../../../../../shared/models/recipe.model';
@@ -46,25 +46,51 @@ export class CreateNewRecipeComponent implements OnInit {
   images: string[] = [];
 
   showDraftModal = false;
-  private _resolveDeactivate!: (value: boolean) => void; // Para CanDeactivate
-
+  private _resolveDeactivate!: (value: boolean) => void;
   private _isSaving = false;
 
-  showSavedMessage = false; // controla si se muestra el aviso
-  savedMessage = ''; // texto del mensaje
+  showSavedMessage = false;
+  savedMessage = '';
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private recipeService: RecipeService,
     private draftService: DraftService,
   ) {}
 
   ngOnInit() {
+    // 1️⃣ Cargar borrador si existe
     const draft = this.draftService.getCurrentDraft();
     if (draft) {
       this.recipe = { ...draft.recipe };
       this.images = [...draft.recipe.images];
       this.draftService.clearCurrentDraft();
+      return;
+    }
+
+    // 2️⃣ Cargar receta existente si hay id en ruta
+    const recipeId = this.route.snapshot.paramMap.get('id');
+    if (recipeId) {
+      const existingRecipe = this.recipeService.getRecipeById(+recipeId);
+      if (existingRecipe) {
+        this.recipe = {
+          id: existingRecipe.id,
+          title: existingRecipe.title,
+          shortDescription: existingRecipe.shortDescription,
+          longDescription: existingRecipe.longDescription,
+          category: existingRecipe.category,
+          ingredients: existingRecipe.ingredients.map((i) => {
+            const [quantity, ...nameParts] = i.split(' ');
+            return { quantity, name: nameParts.join(' ') };
+          }),
+          images: existingRecipe.images || [],
+        };
+        this.images = [...existingRecipe.images];
+      } else {
+        // Si el id no existe, volvemos a la lista de recetas
+        this.router.navigate(['/mi-cuenta/mis-recetas']);
+      }
     }
   }
 
@@ -104,7 +130,7 @@ export class CreateNewRecipeComponent implements OnInit {
     const rejectedFiles = selectedFiles.filter((f) => f.size > 5 * 1024 * 1024);
 
     if (rejectedFiles.length) {
-      alert('Algunas imágenes superan los 2MB y no se han añadido');
+      alert('Algunas imágenes superan los 5MB y no se han añadido');
     }
 
     validFiles.slice(0, remainingSlots).forEach((file) => {
@@ -120,33 +146,44 @@ export class CreateNewRecipeComponent implements OnInit {
     this.images.splice(index, 1);
   }
 
-  /** Crear receta final */
+  /** Crear o actualizar receta */
   createRecipe() {
+    // 1️⃣ Cerrar modal de borrador si estaba abierto
+    if (this.showDraftModal && this._resolveDeactivate) {
+      this._resolveDeactivate(true);
+      this._resolveDeactivate = undefined!;
+      this.showDraftModal = false;
+    }
+
     this._isSaving = true;
 
-    const newRecipe: Recipe = {
-      id: Date.now(),
+    const recipeData: Recipe = {
+      id: this.recipe.id,
       title: this.recipe.title,
       shortDescription: this.recipe.shortDescription,
       longDescription: this.recipe.longDescription,
       category: this.recipe.category,
       ingredients: this.recipe.ingredients.map((ing) => `${ing.quantity} ${ing.name}`.trim()),
-      images: this.images.length ? [...this.images] : ['assets/images/logo.webp'], // <-- aquí
+      images: this.images.length ? [...this.images] : ['assets/images/logo.webp'],
       rating: 0,
       likes: 0,
-      author: this.currentUser, // <-- tu usuario actual
+      author: this.currentUser,
     };
 
-    this.recipeService.addRecipe(newRecipe);
+    const existing = this.recipeService.getRecipeById(this.recipe.id);
+    if (existing) {
+      this.recipeService.updateRecipe(recipeData);
+      this.savedMessage = 'Receta actualizada con éxito!';
+    } else {
+      this.recipeService.addRecipe(recipeData);
+      this.savedMessage = 'Receta creada con éxito!';
+    }
 
-    // Mostrar aviso bonito
-    this.savedMessage = 'Receta guardada con éxito!';
     this.showSavedMessage = true;
 
     setTimeout(() => {
       this.showSavedMessage = false;
-      this.router.navigate(['/recipe', newRecipe.id]);
-      // <-- debe ir a detalle
+      this.router.navigate(['/recipe', recipeData.id]);
     }, 2000);
   }
 
@@ -161,7 +198,7 @@ export class CreateNewRecipeComponent implements OnInit {
     return `${this.files.length} / 10`;
   }
 
-  /** CanDeactivate guard: verifica cambios sin guardar */
+  /** CanDeactivate */
   hasUnsavedChanges(): boolean {
     return !!(
       this.recipe.title ||
@@ -173,10 +210,7 @@ export class CreateNewRecipeComponent implements OnInit {
   }
 
   canDeactivate(): Promise<boolean> {
-    // si estamos guardando con createRecipe(), permitimos salir sin preguntar
-    if (this._isSaving) {
-      return Promise.resolve(true);
-    }
+    if (this._isSaving) return Promise.resolve(true);
 
     if (this.hasUnsavedChanges()) {
       this.showDraftModal = true;
@@ -188,7 +222,7 @@ export class CreateNewRecipeComponent implements OnInit {
     return Promise.resolve(true);
   }
 
-  /** Modal de borrador / confirmación */
+  /** Modal borrador */
   saveDraft() {
     const now = new Date();
     const draft = {
@@ -197,21 +231,17 @@ export class CreateNewRecipeComponent implements OnInit {
       updatedAt: now.toISOString(),
       recipe: { ...this.recipe },
     };
-
     this.draftService.saveDraft(draft);
     this.showDraftModal = false;
 
     if (this._resolveDeactivate) {
-      // Resolvemos la promesa indicando que la navegación puede continuar
       this._resolveDeactivate(true);
       this._resolveDeactivate = undefined!;
     }
   }
 
-  // Y en discardDraft
   discardDraft() {
     this.showDraftModal = false;
-
     if (this._resolveDeactivate) {
       this._resolveDeactivate(true);
       this._resolveDeactivate = undefined!;
@@ -220,7 +250,6 @@ export class CreateNewRecipeComponent implements OnInit {
 
   cancelDraft() {
     this.showDraftModal = false;
-
     if (this._resolveDeactivate) {
       this._resolveDeactivate(false);
       this._resolveDeactivate = undefined!;
