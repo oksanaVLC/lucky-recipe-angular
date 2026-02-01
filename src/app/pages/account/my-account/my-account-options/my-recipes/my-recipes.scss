@@ -1,14 +1,15 @@
 .wrapper {
-  max-width: 900px;
-  margin: 100px auto 2rem;
   padding: 0 1rem;
+  @media (min-width: 1655px) {
+    max-width: 80%;
+  }
 }
-
-/* Título */
-.my-recipes h1 {
-  text-align: center;
-  margin: 1.5rem 0;
-  font-size: 2rem;
+.title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 1.5rem;
+  position: relative;
 }
 
 /* Contenedor de los botones de vista */
@@ -40,20 +41,3 @@ p {
   margin-top: 2rem;
 }
 /* Para la flechita atrás*/
-
-.title-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  position: relative;
-}
-/* Ajustes para móviles */
-@media (max-width: 480px) {
-  .title-row {
-    gap: 0.2rem; /* reduce el espacio entre texto y flecha */
-    h1 {
-      font-size: 1.7rem;
-    }
-  }
-}

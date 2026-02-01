@@ -48,13 +48,6 @@
         </button>
       </div>
     </div>
-
-    <!-- NUEVA IMAGEN DECORATIVA -->
-    <img
-      src="assets/images/6969copia.png"
-      alt="Decoración esquina inferior izquierda"
-      class="hero-bottom-left"
-    />
   </div>
 
   <!-- Overlay Loader 
@@ -76,6 +69,8 @@ Otro:
     <app-recipe-card
       *ngFor="let recipe of filteredRecipes; trackBy: trackByRecipeId"
       [recipe]="recipe"
+      [truncateShortDescription]="true"
+      [shortDescriptionLength]="20"
     >
     </app-recipe-card>
   </div>

@@ -1,4 +1,3 @@
-/* ===================== Recipe Card ===================== */
 .recipe-card {
   background: #ffffff;
   border-radius: 14px;
@@ -6,18 +5,20 @@
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
   display: flex;
   flex-direction: column;
-  height: 100%;
+  width: 100%;
 }
 
-/* ===================== Image ===================== */
+/* ===================== Imagen ===================== */
 .image-slider {
   position: relative;
   width: 100%;
+  aspect-ratio: 1 / 1; /* fuerza proporción cuadrada */
+  overflow: hidden;
 
   .slider-image {
     width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
+    height: 100%;
+    object-fit: cover; /* recorta sin deformar */
     display: block;
   }
 }
@@ -60,21 +61,16 @@
   cursor: pointer;
 }
 
-/* Like con contador */
 .like-btn.like-counter {
   display: flex;
   align-items: center;
   gap: 6px;
-
   padding: 6px 10px;
   border-radius: 14px;
-
   background: #e0e0e0;
   color: #666;
-
   font-size: 0.75rem;
   font-weight: 600;
-
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   transition: all 0.25s ease;
 
@@ -117,17 +113,19 @@
 
   .share-icon {
     border: none;
-    padding: 0;
-    background: transparent;
+    padding: 0.5rem; // espacio interno
+    background: #fff; // fondo blanco
+    border-radius: 50%; // redondo
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); // opcional, da profundidad
 
     img {
       display: block;
-      width: 23px;
-      height: 23px;
+      width: 20px; // ajustar tamaño del icono
+      height: 20px;
       object-fit: contain;
     }
 
@@ -138,7 +136,7 @@
 
   .copy-msg {
     position: absolute;
-    bottom: 100%; /* justo encima del botón */
+    bottom: 100%; // justo encima del botón
     right: 0;
     background: rgba(0, 0, 0, 0.8);
     color: #fff;
@@ -170,7 +168,7 @@
   }
 }
 
-/* ===================== Content ===================== */
+/* ===================== Contenido ===================== */
 .card-content {
   padding: 0.75rem;
 
@@ -180,10 +178,13 @@
     text-align: center;
     margin-bottom: 0.35rem;
     line-height: 1.2;
+    white-space: nowrap; // evita que el texto haga wrap
+    overflow: hidden; // recorta el exceso
+    text-overflow: ellipsis; // añade "…"
 
-    .star {
-      font-size: 0.75rem;
-      margin-left: 4px;
+    &.large-title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      text-transform: uppercase;
     }
   }
 
@@ -192,27 +193,55 @@
     color: #555;
     margin-bottom: 0.6rem;
   }
+
+  .long-description {
+    text-align: left;
+    margin-bottom: 1rem;
+
+    h3 {
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    p {
+      margin: 0 0 0.8rem;
+    }
+  }
+
+  .ingredients {
+    text-align: left;
+    margin-bottom: 1rem;
+
+    h3 {
+      text-align: center;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    ul {
+      padding-left: 1rem;
+      margin: 0;
+    }
+  }
 }
 
-/* ===================== Author ===================== */
+/* ===================== Autor ===================== */
 .author {
   display: grid;
   grid-template-columns: 48px 1fr;
   gap: 0.5rem;
   align-items: center;
+  margin-top: 1rem;
 
   .avatar {
     width: 48px;
     height: 48px;
+    border-radius: 50%;
     object-fit: cover;
-    border-radius: 8px;
   }
 
   .author-info {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 48px;
+    justify-content: center;
 
     .author-name {
       font-size: 0.8rem;
@@ -223,10 +252,13 @@
       font-size: 0.7rem;
       color: green;
       text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
     }
   }
+}
+.card-text {
+  font-size: 0.8rem;
+  color: #555;
+  margin-bottom: 0.6rem;
+  min-height: 1.2em; /* reserva altura para 1 línea */
+  line-height: 1.2em;
 }

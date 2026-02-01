@@ -1,38 +1,36 @@
-<div class="wrapper">
-  <div class="favorites-wrapper">
-    <div class="title-row">
-      <app-back-button-small></app-back-button-small>
+<div class="favorites-wrapper">
+  <div class="title-row">
+    <app-back-button-small></app-back-button-small>
 
-      <h1 class="gold-gradient">Mis recetas favoritas ({{ favoriteRecipes.length }})</h1>
-    </div>
+    <h1 class="gold-gradient">Mis recetas favoritas ({{ favoriteRecipes.length }})</h1>
+  </div>
 
-    <div *ngIf="favoriteRecipes.length; else emptyList" class="recipes-grid">
-      <div *ngFor="let r of favoriteRecipes" class="recipe-card">
-        <!-- Imagen clicable -->
-        <div class="card-image" (click)="viewRecipe(r.id)">
-          <img [src]="r.images[0] || 'assets/images/logo.webp'" [alt]="r.title" />
-        </div>
+  <div *ngIf="favoriteRecipes.length; else emptyList" class="recipes-grid">
+    <div *ngFor="let r of favoriteRecipes" class="recipe-card">
+      <!-- Imagen clicable -->
+      <div class="card-image" (click)="viewRecipe(r.id)">
+        <img [src]="r.images[0] || 'assets/images/logo.webp'" [alt]="r.title" />
+      </div>
 
-        <!-- Info -->
-        <div class="recipe-info">
-          <h3 class="recipe-title">{{ r.title }}</h3>
-          <p class="recipe-category">{{ r.category || 'Sin categoría' }}</p>
-          <p class="recipe-ingredients">{{ r.ingredients.length }} ingredientes</p>
-        </div>
+      <!-- Info -->
+      <div class="recipe-info">
+        <h3 class="recipe-title">{{ r.title }}</h3>
+        <p class="recipe-category">{{ r.category || 'Sin categoría' }}</p>
+        <p class="recipe-ingredients">{{ r.ingredients.length }} ingredientes</p>
+      </div>
 
-        <!-- Botón quitar -->
-        <div class="recipe-actions">
-          <button type="button" (click)="confirmRemove(r)" class="remove-btn">
-            ❌ Quitar de favoritos
-          </button>
-        </div>
+      <!-- Botón quitar -->
+      <div class="recipe-actions">
+        <button type="button" (click)="confirmRemove(r)" class="remove-btn">
+          ❌ Quitar de favoritos
+        </button>
       </div>
     </div>
-
-    <ng-template #emptyList>
-      <p>No tienes recetas favoritas todavía.</p>
-    </ng-template>
   </div>
+
+  <ng-template #emptyList>
+    <p>No tienes recetas favoritas todavía.</p>
+  </ng-template>
 </div>
 
 <!-- Modal confirmar quitar favorito -->

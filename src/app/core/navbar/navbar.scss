@@ -12,6 +12,12 @@
   width: 100%;
   z-index: 1000;
 
+  @media (min-width: 1655px) {
+    max-width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
   /* Logo */
   .navbar-logo {
     display: flex;
@@ -231,5 +237,19 @@
 
   path {
     fill: #ff3b3b;
+  }
+}
+
+/* Imagen decorativa bottom-left */
+/* Por defecto visible en escritorio */
+.hero-bottom-left {
+  display: none;
+}
+
+/* Ocultar en móvil */
+@media (max-width: 600px) {
+  .hero-bottom-left {
+    width: 120px;
+    display: block;
   }
 }

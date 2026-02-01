@@ -171,7 +171,7 @@ export class CreateNewRecipeComponent implements OnInit {
       ingredients: this.recipe.ingredients.map((ing) => `${ing.quantity} ${ing.name}`.trim()),
       images: this.images.length ? [...this.images] : ['assets/images/logo.webp'],
       rating: 0,
-      likes: 0,
+      likesCount: 0,
       author: this.currentUser,
       createdAt: existing ? existing.createdAt : new Date(), // <-- usar existing aquí
     };

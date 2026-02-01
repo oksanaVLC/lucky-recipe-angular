@@ -77,3 +77,19 @@ a {
     background-position: -200% 0;
   }
 }
+
+.app-page {
+  margin-top: 87px; /* deja espacio mínimo para la navbar */
+  margin-bottom: 2rem;
+  h1 {
+    margin: 0 0 2rem;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  @media (min-width: 1655px) {
+    max-width: 80%;
+    margin: 87px auto 2rem auto; /* top, horizontal, bottom */
+  }
+}

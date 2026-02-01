@@ -13,11 +13,12 @@ import { MyRecipesListComponent } from './my-recipes-list/my-recipes-list';
   imports: [
     CommonModule,
     RouterModule,
-    DatePipe,
+
     MyRecipesGridComponent,
     MyRecipesListComponent,
     BackButtonSmallComponent,
   ],
+  providers: [DatePipe],
   templateUrl: './my-recipes.html',
   styleUrls: ['./my-recipes.scss'],
 })

@@ -98,4 +98,11 @@ export class RecipeService {
       this.recipes$.next(this.recipes);
     }
   }
+  // ===== NUEVO: quitar favorito explícitamente =====
+  removeFavorite(id: number) {
+    if (!this.favorites.includes(id)) return; // si no está, no hace nada
+    this.favorites = this.favorites.filter((f) => f !== id);
+    localStorage.setItem('favorites', JSON.stringify(this.favorites));
+    this.favorites$.next(this.favorites); // avisar suscriptores
+  }
 }

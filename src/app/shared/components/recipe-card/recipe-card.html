@@ -28,7 +28,7 @@
       <span class="count">{{ likesCount }}</span>
     </button>
 
-    <!-- Share -->
+    <!-- SHARE -->
     <div class="bottom-buttons">
       <button
         *ngIf="showShareButton"
@@ -39,27 +39,50 @@
         <img src="assets/images/share.png" alt="Compartir" />
       </button>
 
-      <!-- Mensaje de copia -->
       <span class="copy-msg" *ngIf="copied">¡Link copiado!</span>
     </div>
   </div>
 
   <!-- CONTENIDO -->
   <div class="card-content">
-    <h2 class="title">
+    <h1 class="title" [ngClass]="{ 'large-title': titleSize === 'large' }">
       {{ recipe.title }}
-      <span class="star gold-gradient">★★★★★</span>
-    </h2>
+    </h1>
 
-    <p class="card-text">{{ shortText }}<span *ngIf="showEllipsis">...</span></p>
+    <p class="card-text">{{ shortText }}<span *ngIf="showEllipsis">…</span></p>
+
+    <!-- Ingredientes -->
+    <section class="ingredients" *ngIf="showIngredients && recipe.ingredients.length">
+      <h3>Ingredientes</h3>
+      <ul>
+        <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient }}</li>
+      </ul>
+    </section>
+    <!-- Preparación -->
+    <section class="long-description" *ngIf="showLongDescription && recipe.longDescription">
+      <h3>Preparación</h3>
+      <p>{{ recipe.longDescription }}</p>
+    </section>
 
     <!-- Autor -->
     <div class="author">
+      <!--   <img
+        [src]="recipe.author?.avatar || 'assets/images/profile.jpg'"
+        alt="Autor"
+        class="avatar"
+      />-->
       <img [src]="'assets/images/yo.jpg'" alt="Autor" class="avatar" />
+
       <div class="author-info">
         <span class="author-name">{{ recipe.author?.name }}</span>
-        <a class="author-link" [routerLink]="['/perfil', recipe.author?.id]"> Ver sus recetas </a>
+        <a class="author-link" [routerLink]="['/perfil', recipe.author?.id]">Ver sus recetas</a>
       </div>
     </div>
+  </div>
+  <!-- Botón quitar favoritos -->
+  <div class="recipe-actions" *ngIf="showRemoveFavorite">
+    <button type="button" (click)="removeFavorite()" class="remove-btn">
+      ❌ Quitar de favoritos
+    </button>
   </div>
 </article>

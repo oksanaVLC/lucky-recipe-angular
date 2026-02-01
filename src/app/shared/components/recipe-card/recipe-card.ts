@@ -13,22 +13,34 @@ import { RecipeService } from '../../services/recipe.service';
 })
 export class RecipeCardComponent implements OnInit {
   @Input({ required: true }) recipe!: Recipe;
+
+  // Opciones visuales
   @Input() showLikeButton: boolean = true;
   @Input() showShareButton: boolean = true;
-  @Input() showRemoveFavorite: boolean = false;
+  @Input() showLongDescription: boolean = false;
+  @Input() showIngredients: boolean = false;
+  @Input() titleSize: 'small' | 'large' = 'small';
+
+  // Control truncado descripción corta
+  @Input() truncateShortDescription: boolean = true;
+  @Input() shortDescriptionLength: number = 20;
 
   @Output() open = new EventEmitter<number>();
+  @Input() showRemoveFavorite: boolean = false;
 
+  // Estado interno
   currentImageIndex = 0;
-  likesCount = 0;
+  likesCount = 0; // futuro back-end
+  copied = false;
 
   constructor(private recipeService: RecipeService) {}
 
   ngOnInit() {
-    this.likesCount = this.isFavorite ? 1 : 0;
+    // Inicializamos likes desde la receta (para back-end real) + favoritos locales
+    this.likesCount = this.recipe.likesCount ?? (this.isFavorite ? 1 : 0);
   }
 
-  // ===== IMÁGENES =====
+  // ================== SLIDER ==================
   get images(): string[] {
     return this.recipe?.images || [];
   }
@@ -47,15 +59,12 @@ export class RecipeCardComponent implements OnInit {
     this.currentImageIndex = (this.currentImageIndex - 1 + this.images.length) % this.images.length;
   }
 
-  // ===== FAVORITOS + LIKES =====
+  // ================== FAVORITOS ==================
   toggleLike(event: Event) {
     event.stopPropagation();
-
     if (!this.recipe?.id) return;
 
     this.recipeService.toggleFavorite(this.recipe.id);
-
-    // sincroniza el contador con el estado FINAL
     this.likesCount = this.isFavorite ? 1 : 0;
   }
 
@@ -63,29 +72,35 @@ export class RecipeCardComponent implements OnInit {
     return this.recipe?.id ? this.recipeService.isFavorite(this.recipe.id) : false;
   }
 
-  // ===== ABRIR DETALLE =====
-  openRecipe() {
-    this.open.emit(this.recipe.id);
+  removeFavorite() {
+    if (!this.recipe?.id) return;
+    this.recipeService.removeFavorite(this.recipe.id);
+    this.likesCount = 0;
   }
 
-  // ===== DESCRIPCIÓN BREVE =====
-  get shortText(): string {
-    return this.recipe?.shortDescription?.slice(0, 100) || '';
-  }
-
-  get showEllipsis(): boolean {
-    return !!this.recipe?.shortDescription && this.recipe.shortDescription.length > 100;
-  }
-  copied = false;
-
+  // ================== COMPARTIR ==================
   copyLink() {
     const url = `${window.location.origin}/recipe/${this.recipe.id}`;
     navigator.clipboard.writeText(url).then(() => {
       this.copied = true;
-
-      setTimeout(() => {
-        this.copied = false;
-      }, 1500); // desaparece después de 1.5s
+      setTimeout(() => (this.copied = false), 1500);
     });
+  }
+
+  // ================== DESCRIPCIÓN CORTA ==================
+  get shortText(): string {
+    if (!this.recipe?.shortDescription) return '';
+    if (this.truncateShortDescription) {
+      return this.recipe.shortDescription.slice(0, this.shortDescriptionLength);
+    }
+    return this.recipe.shortDescription;
+  }
+
+  get showEllipsis(): boolean {
+    return (
+      this.truncateShortDescription &&
+      !!this.recipe?.shortDescription &&
+      this.recipe.shortDescription.length > this.shortDescriptionLength
+    );
   }
 }

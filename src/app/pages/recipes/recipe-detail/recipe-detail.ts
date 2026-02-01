@@ -1,91 +1,59 @@
 import { CommonModule, Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { BackButtonSmallComponent } from '../../../shared/components/back-button-small/back-button-small';
 import { BackButtonComponent } from '../../../shared/components/back-button/back-button';
+import { RecipeCardComponent } from '../../../shared/components/recipe-card/recipe-card';
 import { Recipe } from '../../../shared/models/recipe.model';
 import { RecipeService } from '../../../shared/services/recipe.service';
 
 @Component({
   selector: 'app-recipe-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule, BackButtonComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    RecipeCardComponent,
+    BackButtonSmallComponent,
+    BackButtonComponent,
+  ],
   templateUrl: './recipe-detail.html',
   styleUrls: ['./recipe-detail.scss'],
 })
-export class RecipeDetailComponent {
+export class RecipeDetailComponent implements OnInit {
   recipe?: Recipe;
-  stars = [1, 2, 3, 4, 5];
-  likesCount = 0;
-  currentImageIndex = 0;
 
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
     private location: Location,
-  ) {
+  ) {}
+
+  ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.recipe = this.recipeService.getRecipeById(id);
+    const found = this.recipeService.getRecipeById(id);
 
-    if (this.recipe) {
-      // Asegurar que siempre haya imágenes
-      this.recipe.images =
-        this.recipe.images && this.recipe.images.length
-          ? this.recipe.images
-          : ['assets/images/logo.webp'];
+    if (found) {
+      // asegurar que siempre haya imágenes
+      found.images = found.images?.length ? found.images : ['assets/images/logo.webp'];
 
-      // Autor por defecto si no hay
-      this.recipe.author = this.recipe.author || {
+      // autor por defecto si no hay
+      found.author = found.author || {
         id: 1,
         name: 'Oksana',
         avatar: 'assets/images/profile.jpg',
       };
 
-      // Likes iniciales
-      this.likesCount = this.recipeService.isFavorite(this.recipe.id) ? 1 : 0;
+      // likesCount inicial (futuro back-end)
+      found.likesCount = found.likesCount ?? (this.recipeService.isFavorite(found.id) ? 1 : 0);
+
+      this.recipe = found;
+    } else {
+      this.location.back();
     }
   }
 
-  // ================= IMÁGENES =================
-  get displayImage(): string {
-    return this.recipe?.images[this.currentImageIndex] || 'assets/images/logo.webp';
-  }
-
-  nextImage() {
-    if (!this.recipe?.images.length) return;
-    this.currentImageIndex = (this.currentImageIndex + 1) % this.recipe.images.length;
-  }
-
-  prevImage() {
-    if (!this.recipe?.images.length) return;
-    this.currentImageIndex =
-      (this.currentImageIndex - 1 + this.recipe.images.length) % this.recipe.images.length;
-  }
-
-  // ================= FAVORITOS =================
-  toggleFavorite() {
-    if (!this.recipe?.id) return;
-
-    // Alternar favorito en el servicio
-    this.recipeService.toggleFavorite(this.recipe.id);
-
-    // Actualizar likesCount según el estado real
-    this.likesCount = this.recipeService.isFavorite(this.recipe.id) ? 1 : 0;
-  }
-
-  get isFavorite(): boolean {
-    return this.recipe?.id ? this.recipeService.isFavorite(this.recipe.id) : false;
-  }
-
-  // ================= COMPARTIR =================
-  shareRecipe() {
-    if (!this.recipe) return;
-    const url = window.location.href;
-    navigator.clipboard.writeText(`${this.recipe.title} - Mira esta receta saludable: ${url}`);
-    alert('¡Enlace copiado para compartir!');
-  }
-
-  // ================= VOLVER =================
   goBack() {
-    this.location.back(); // vuelve a la página anterior
+    this.location.back();
   }
 }

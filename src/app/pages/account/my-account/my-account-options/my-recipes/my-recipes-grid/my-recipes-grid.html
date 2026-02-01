@@ -13,7 +13,7 @@
           {{ r.category && r.category.trim() ? r.category : 'Sin categoría' }}
         </p>
         <p class="recipe-ingredients">{{ r.ingredients.length }} ingredientes</p>
-        <p class="recipe-date">Creada: {{ r.id | date: 'short' }}</p>
+        <p class="recipe-date">Creada: {{ r.createdAt | date: 'dd/MM/yyyy' }}</p>
       </div>
 
       <!-- Fila 3: botones -->

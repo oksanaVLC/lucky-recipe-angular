@@ -1,22 +1,17 @@
 .create-recipe-container {
   max-width: 720px;
-  margin: 100px auto 2rem;
+  margin-left: auto;
+  margin-right: auto;
   padding: 0 1rem;
   font-family: 'Playfair Display', serif;
   color: #2e2e2e;
 
   .title-row {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: center;
     gap: 1.5rem;
     position: relative;
-    margin: 1rem;
-    h1 {
-      margin: 0;
-      font-size: 2rem;
-      line-height: 1.2; // evita que el texto empuje el botón
-    }
   }
 
   .form-layout {

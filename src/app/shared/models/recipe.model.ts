@@ -13,7 +13,7 @@ export interface Recipe {
   ingredients: string[]; // lista simple de ingredientes
   category: string;
   rating?: number;
-  likes?: number;
+  likesCount?: number;
   author?: Author;
 
   createdAt?: string | Date; // <-- nuevo campo para la fecha de creación

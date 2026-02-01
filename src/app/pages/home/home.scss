@@ -457,26 +457,21 @@ Otra interesante
   }
 }
 
-/* Imagen decorativa bottom-left */
 .hero-bottom-left {
-  position: absolute;
-  bottom: 0; // esquina inferior
-  left: 0; // esquina izquierda
-  width: 120px; // ajusta tamaño según necesites
-  height: auto;
-  z-index: 2; // encima de la hero image pero debajo del contenido si quieres
-  pointer-events: none; // para que no bloquee clicks
+  display: none;
 }
 
-/* Imagen decorativa bottom-left */
-.hero-bottom-left {
-  position: absolute;
-  bottom: 0; // esquina inferior
-  left: 0; // esquina izquierda
-  width: 120px; // ajusta tamaño según necesites
-  height: auto;
-  z-index: 2; // encima de la hero image pero debajo del contenido si quieres
-  pointer-events: none; // para que no bloquee clicks
+@media (max-width: 600px) {
+  /* Imagen decorativa bottom-left */
+  .hero-bottom-left {
+    position: absolute;
+    bottom: 0; // esquina inferior
+    left: 0; // esquina izquierda
+    width: 120px; // ajusta tamaño según necesites
+    height: auto;
+    z-index: 2;
+    pointer-events: none; // para que no bloquee clicks
+  }
 }
 
 .gold-gradient-suerte {

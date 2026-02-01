@@ -1,19 +1,9 @@
-.my-account {
-  margin-top: 87px;
-  margin-bottom: 87px;
-  padding: 1rem;
-
-  h1 {
-    margin-bottom: 1.5rem;
-    font-size: 2rem;
-  }
-}
-
 .account-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
-  margin: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
   justify-items: center; // centra las cards
 
   @media (min-width: 600px) {
@@ -74,44 +64,10 @@
   }
 }
 
-.title-wrapper {
+.title-row {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
   gap: 1.5rem;
   position: relative;
-  h1 {
-    margin: 0;
-    font-size: 2rem;
-    line-height: 1.2; // evita que el texto empuje el botón
-  }
-}
-
-.back-button {
-  background: none;
-  border: none;
-  padding: 0.25rem;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  color: inherit;
-  transition:
-    transform 0.2s ease,
-    opacity 0.2s ease,
-    background-color 0.2s ease;
-
-  svg {
-    display: block;
-  }
-
-  &:hover {
-    background: rgba(191, 161, 74, 0.15);
-
-    opacity: 0.85;
-  }
-
-  &:active {
-    transform: translateX(-1px);
-  }
 }
