@@ -96,10 +96,22 @@
 <div class="draft-modal" *ngIf="showDraftModal">
   <div class="modal-content">
     <h3>¿Tienes cambios sin guardar?</h3>
-    <p>¿Quieres guardar en borrador o salir sin guardar?</p>
+
+    <p>
+      {{
+        isEdit
+          ? '¿Quieres guardar los cambios o salir sin guardar?'
+          : '¿Quieres guardar en borrador o salir sin guardar?'
+      }}
+    </p>
+
     <div class="modal-actions">
       <button class="btn-cancel" (click)="cancelDraft()">Cancelar</button>
-      <button class="btn-confirm" (click)="saveDraft()">Guardar</button>
+
+      <button class="btn-confirm" (click)="saveDraft()">
+        {{ isEdit ? 'Guardar cambios' : 'Guardar' }}
+      </button>
+
       <button class="btn-discard" (click)="discardDraft()">Salir</button>
     </div>
   </div>

@@ -45,15 +45,15 @@ export class CreateNewRecipeComponent implements OnInit {
 
   files: File[] = [];
   images: string[] = [];
-  showDraftModal = false;
-  private _resolveDeactivate!: (value: boolean) => void;
-  private _isSaving = false;
 
+  showDraftModal = false;
   showSavedMessage = false;
   savedMessage = '';
 
-  // NUEVO: saber si estamos editando
-  isEdit: boolean = false;
+  private _resolveDeactivate!: (value: boolean) => void;
+  private _isSaving = false;
+
+  isEdit = false;
 
   constructor(
     private router: Router,
@@ -63,8 +63,10 @@ export class CreateNewRecipeComponent implements OnInit {
     private location: Location,
   ) {}
 
+  /* ================= INIT ================= */
+
   ngOnInit() {
-    // 1️⃣ Cargar borrador si existe
+    // 1️⃣ cargar borrador si existe
     const draft = this.draftService.getCurrentDraft();
     if (draft) {
       this.recipe = { ...draft.recipe };
@@ -73,33 +75,52 @@ export class CreateNewRecipeComponent implements OnInit {
       return;
     }
 
-    // 2️⃣ Cargar receta existente si hay id en ruta
+    // 2️⃣ modo edición si hay id
     const recipeId = this.route.snapshot.paramMap.get('id');
     if (recipeId) {
-      const existingRecipe = this.recipeService.getRecipeById(+recipeId);
-      if (existingRecipe) {
-        this.isEdit = true; // <-- indicamos modo edición
-        this.recipe = {
-          id: existingRecipe.id,
-          title: existingRecipe.title,
-          shortDescription: existingRecipe.shortDescription,
-          longDescription: existingRecipe.longDescription,
-          category: existingRecipe.category,
-          ingredients: existingRecipe.ingredients.map((i) => {
-            const [quantity, ...nameParts] = i.split(' ');
-            return { quantity, name: nameParts.join(' ') };
-          }),
-          images: existingRecipe.images || [],
-        };
-        this.images = [...existingRecipe.images];
-      } else {
-        // Si el id no existe, volvemos a la lista de recetas
+      const existing = this.recipeService.getRecipeById(+recipeId);
+      if (!existing) {
         this.router.navigate(['/mi-cuenta/mis-recetas']);
+        return;
       }
+
+      this.isEdit = true;
+      this.recipe = {
+        id: existing.id,
+        title: existing.title,
+        shortDescription: existing.shortDescription,
+        longDescription: existing.longDescription,
+        category: existing.category,
+        ingredients: existing.ingredients.map((i) => {
+          const [quantity, ...nameParts] = i.split(' ');
+          return { quantity, name: nameParts.join(' ') };
+        }),
+        images: existing.images || [],
+      };
+
+      this.images = [...existing.images];
     }
   }
 
-  /** Ingredientes */
+  /* ================= HELPERS ================= */
+
+  private capitalizeTitle(text: string): string {
+    if (!text) return '';
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  }
+
+  hasUnsavedChanges(): boolean {
+    return !!(
+      this.recipe.title ||
+      this.recipe.shortDescription ||
+      this.recipe.longDescription ||
+      this.recipe.ingredients.length > 1 ||
+      this.images.length
+    );
+  }
+
+  /* ================= INGREDIENTES ================= */
+
   addIngredient(index: number) {
     this.recipe.ingredients.splice(index + 1, 0, { quantity: '', name: '' });
   }
@@ -110,7 +131,8 @@ export class CreateNewRecipeComponent implements OnInit {
     }
   }
 
-  /** Manejo de imágenes */
+  /* ================= IMÁGENES ================= */
+
   onImagesSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (!input.files) return;
@@ -151,21 +173,16 @@ export class CreateNewRecipeComponent implements OnInit {
     this.images.splice(index, 1);
   }
 
-  /** Crear o actualizar receta */
-  createRecipe() {
-    if (this.showDraftModal && this._resolveDeactivate) {
-      this._resolveDeactivate(true);
-      this._resolveDeactivate = undefined!;
-      this.showDraftModal = false;
-    }
+  /* ================= GUARDAR ================= */
 
+  createRecipe() {
     this._isSaving = true;
 
     const existing = this.recipeService.getRecipeById(this.recipe.id);
 
     const recipeData: Recipe = {
       id: this.recipe.id,
-      title: this.recipe.title,
+      title: this.capitalizeTitle(this.recipe.title.trim()),
       shortDescription: this.recipe.shortDescription,
       longDescription: this.recipe.longDescription,
       category: this.recipe.category,
@@ -179,10 +196,10 @@ export class CreateNewRecipeComponent implements OnInit {
 
     if (existing) {
       this.recipeService.updateRecipe(recipeData);
-      this.savedMessage = 'Receta actualizada con éxito!';
+      this.savedMessage = 'Receta actualizada con éxito';
     } else {
       this.recipeService.addRecipe(recipeData);
-      this.savedMessage = 'Receta creada con éxito!';
+      this.savedMessage = 'Receta creada con éxito';
     }
 
     this.showSavedMessage = true;
@@ -193,27 +210,7 @@ export class CreateNewRecipeComponent implements OnInit {
     }, 2000);
   }
 
-  /** Archivos subidos */
-  get uploadedFileNames(): string {
-    return this.files.length
-      ? this.files.map((f) => f.name).join(', ')
-      : 'No se ha seleccionado ningún archivo';
-  }
-
-  get imageCount(): string {
-    return `${this.files.length} / 10`;
-  }
-
-  /** CanDeactivate */
-  hasUnsavedChanges(): boolean {
-    return !!(
-      this.recipe.title ||
-      this.recipe.shortDescription ||
-      this.recipe.longDescription ||
-      this.recipe.ingredients.length > 1 ||
-      this.images.length
-    );
-  }
+  /* ================= CAN DEACTIVATE ================= */
 
   canDeactivate(): Promise<boolean> {
     if (this._isSaving) return Promise.resolve(true);
@@ -228,40 +225,52 @@ export class CreateNewRecipeComponent implements OnInit {
     return Promise.resolve(true);
   }
 
-  /** Modal borrador */
+  /* ================= MODAL ================= */
+
   saveDraft() {
-    const now = new Date();
+    // ✨ edición → guardar cambios reales
+    if (this.isEdit) {
+      this.showDraftModal = false;
+      this.createRecipe();
+      return;
+    }
+
+    // 📝 creación → guardar borrador
     const draft = {
       id: this.recipe.id,
       title: this.recipe.title || 'Sin título',
-      updatedAt: now.toISOString(),
+      updatedAt: new Date().toISOString(),
       recipe: { ...this.recipe },
     };
+
     this.draftService.saveDraft(draft);
     this.showDraftModal = false;
 
-    if (this._resolveDeactivate) {
-      this._resolveDeactivate(true);
-      this._resolveDeactivate = undefined!;
-    }
+    this._resolveDeactivate?.(true);
+    this._resolveDeactivate = undefined!;
   }
 
   discardDraft() {
     this.showDraftModal = false;
-    if (this._resolveDeactivate) {
-      this._resolveDeactivate(true);
-      this._resolveDeactivate = undefined!;
-    }
+    this._resolveDeactivate?.(true);
+    this._resolveDeactivate = undefined!;
   }
 
   cancelDraft() {
     this.showDraftModal = false;
-    if (this._resolveDeactivate) {
-      this._resolveDeactivate(false);
-      this._resolveDeactivate = undefined!;
-    }
+    this._resolveDeactivate?.(false);
+    this._resolveDeactivate = undefined!;
   }
+
+  /* ================= BACK ================= */
+
   goBack() {
     this.location.back();
+  }
+
+  /* ================= GETTERS ================= */
+
+  get imageCount(): string {
+    return `${this.files.length} / 10`;
   }
 }

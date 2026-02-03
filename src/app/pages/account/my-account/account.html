@@ -4,74 +4,58 @@
 </div>
 
 <div class="account-grid">
-  <a
-    class="account-card"
-    routerLink="edit-profile"
-    [style.backgroundImage]="'url(assets/images/profile.jpg)'"
-  >
+  <!-- Card: Editar perfil -->
+  <a class="account-card" routerLink="edit-profile">
+    <img src="assets/images/profile.jpg" alt="Editar perfil" />
     <div class="overlay"></div>
     <span>Editar mi perfil</span>
   </a>
 
-  <a
-    class="account-card"
-    routerLink="favoritas"
-    [style.backgroundImage]="'url(assets/images/heart.png)'"
-  >
+  <!-- Card: Recetas favoritas -->
+  <a class="account-card" routerLink="favoritas">
+    <img src="assets/images/heart.png" alt="Mis recetas favoritas" />
     <div class="overlay"></div>
     <span>Mis recetas favoritas ({{ favoriteCount() }})</span>
   </a>
 
-  <a
-    class="account-card"
-    routerLink="crear-receta"
-    [style.backgroundImage]="'url(assets/images/new-recipe.png)'"
-  >
+  <!-- Card: Crear nueva receta -->
+  <a class="account-card" routerLink="crear-receta">
+    <img src="assets/images/new-recipe.png" alt="Crear nueva receta" />
     <div class="overlay"></div>
     <span>Crear nueva receta</span>
   </a>
 
-  <a
-    class="account-card"
-    routerLink="mis-recetas"
-    [style.backgroundImage]="'url(assets/images/cookbook.png)'"
-  >
+  <!-- Card: Mis recetas creadas -->
+  <a class="account-card" routerLink="mis-recetas">
+    <img src="assets/images/cookbook.png" alt="Mis recetas creadas" />
     <div class="overlay"></div>
     <span>Mis recetas creadas ({{ recipeCount() }})</span>
   </a>
 
-  <a
-    class="account-card"
-    routerLink="borradores"
-    [style.backgroundImage]="'url(assets/images/plan.jpg)'"
-  >
+  <!-- Card: Borradores -->
+  <a class="account-card" routerLink="borradores">
+    <img src="assets/images/plan.jpg" alt="Borradores de recetas" />
     <div class="overlay"></div>
     <span>Borradores de mis recetas ({{ draftService.getDrafts().length }})</span>
   </a>
 
-  <a
-    class="account-card"
-    routerLink="lista-compra"
-    [style.backgroundImage]="'url(assets/images/notepad.png)'"
-  >
+  <!-- Card: Lista de la compra -->
+  <a class="account-card" routerLink="lista-compra">
+    <img src="assets/images/notepad.png" alt="Lista de la compra" />
     <div class="overlay"></div>
     <span>Lista de la compra (0)</span>
   </a>
 
-  <a
-    class="account-card"
-    routerLink="dietas"
-    [style.backgroundImage]="'url(assets/images/diet.png)'"
-  >
+  <!-- Card: Dietas -->
+  <a class="account-card" routerLink="dietas">
+    <img src="assets/images/diet.png" alt="Calorías / Dietas" />
     <div class="overlay"></div>
     <span>Calorías / Dietas (0)</span>
   </a>
 
-  <a
-    class="account-card"
-    routerLink="menu-semanal"
-    [style.backgroundImage]="'url(assets/images/weeklymenu.jpg)'"
-  >
+  <!-- Card: Menú semanal -->
+  <a class="account-card" routerLink="menu-semanal">
+    <img src="assets/images/weeklymenu.jpg" alt="Menú de la semana" />
     <div class="overlay"></div>
     <span>Menú de la semana</span>
   </a>
