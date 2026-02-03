@@ -25,6 +25,9 @@ export class RecipeCardComponent implements OnInit {
   @Input() truncateShortDescription: boolean = true;
   @Input() shortDescriptionLength: number = 20;
 
+  /** NUEVO: título extra solo para detail view */
+  @Input() detailTitle?: string;
+
   @Output() open = new EventEmitter<number>();
   @Input() showRemoveFavorite: boolean = false;
 

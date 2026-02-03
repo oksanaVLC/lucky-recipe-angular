@@ -6,6 +6,11 @@
   flex-direction: column;
   justify-content: flex-end;
   margin-top: 0; /* pega al final del wrapper */
+
+  @media (min-width: 1655px) {
+    padding-left: 10rem;
+    padding-right: 10rem;
+  }
 }
 
 .footer-main {

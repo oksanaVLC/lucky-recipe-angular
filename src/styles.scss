@@ -27,7 +27,7 @@ body {
   //font-family: 'Pompiere', sans-serif;
   font-weight: 400;
   font-style: normal;
-  padding-bottom: 60px;
+
   background-color: #fff9e4;
   font-family: 'Playfair Display', serif;
 }
@@ -78,18 +78,32 @@ a {
   }
 }
 
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 .app-page {
-  margin-top: 87px; /* deja espacio mínimo para la navbar */
+  flex: 1; //para el sticky footer
+  padding-top: 78px; /* compensa navbar fixed */
   margin-bottom: 2rem;
-  h1 {
-    margin: 0 0 2rem;
-    font-size: clamp(1.6rem, 4vw, 2.2rem);
-    line-height: 1.2;
-    text-align: center;
+  .title-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 1.5rem;
+    position: relative;
+
+    h1 {
+      margin: 0.8rem 0 1.5rem;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      line-height: 1.2;
+      text-align: center;
+    }
   }
 
   @media (min-width: 1655px) {
     max-width: 80%;
-    margin: 87px auto 2rem auto; /* top, horizontal, bottom */
+    margin: 0 auto 2rem auto;
   }
 }

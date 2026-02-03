@@ -45,13 +45,15 @@ export class CreateNewRecipeComponent implements OnInit {
 
   files: File[] = [];
   images: string[] = [];
-
   showDraftModal = false;
   private _resolveDeactivate!: (value: boolean) => void;
   private _isSaving = false;
 
   showSavedMessage = false;
   savedMessage = '';
+
+  // NUEVO: saber si estamos editando
+  isEdit: boolean = false;
 
   constructor(
     private router: Router,
@@ -76,6 +78,7 @@ export class CreateNewRecipeComponent implements OnInit {
     if (recipeId) {
       const existingRecipe = this.recipeService.getRecipeById(+recipeId);
       if (existingRecipe) {
+        this.isEdit = true; // <-- indicamos modo edición
         this.recipe = {
           id: existingRecipe.id,
           title: existingRecipe.title,
@@ -150,7 +153,6 @@ export class CreateNewRecipeComponent implements OnInit {
 
   /** Crear o actualizar receta */
   createRecipe() {
-    // Cerrar modal de borrador si estaba abierto
     if (this.showDraftModal && this._resolveDeactivate) {
       this._resolveDeactivate(true);
       this._resolveDeactivate = undefined!;
@@ -159,7 +161,6 @@ export class CreateNewRecipeComponent implements OnInit {
 
     this._isSaving = true;
 
-    //  Mover existing aquí
     const existing = this.recipeService.getRecipeById(this.recipe.id);
 
     const recipeData: Recipe = {
@@ -173,7 +174,7 @@ export class CreateNewRecipeComponent implements OnInit {
       rating: 0,
       likesCount: 0,
       author: this.currentUser,
-      createdAt: existing ? existing.createdAt : new Date(), // <-- usar existing aquí
+      createdAt: existing ? existing.createdAt : new Date(),
     };
 
     if (existing) {

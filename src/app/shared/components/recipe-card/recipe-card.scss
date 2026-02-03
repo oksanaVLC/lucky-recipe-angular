@@ -181,17 +181,24 @@
     white-space: nowrap; // evita que el texto haga wrap
     overflow: hidden; // recorta el exceso
     text-overflow: ellipsis; // añade "…"
+    &::first-letter {
+      text-transform: uppercase;
+    }
 
     &.large-title {
       font-size: clamp(1.6rem, 4vw, 2.2rem);
-      text-transform: uppercase;
+      white-space: normal; // permite saltos de línea
+      overflow: visible; // no recortar
+      text-overflow: unset; // quita el "…"
+      word-break: break-word; // fuerza wrap si la palabra es muy larga
     }
   }
 
   .card-text {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: #555;
     margin-bottom: 0.6rem;
+    font-style: italic;
   }
 
   .long-description {
@@ -261,4 +268,16 @@
   margin-bottom: 0.6rem;
   min-height: 1.2em; /* reserva altura para 1 línea */
   line-height: 1.2em;
+}
+
+.detail-title {
+  background-color: #fff;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  word-break: break-word;
+  margin-bottom: 0.5rem;
+  border-radius: 8px; /* opcional, se ve más bonito */
 }

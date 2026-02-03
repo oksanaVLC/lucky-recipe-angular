@@ -1,4 +1,8 @@
 <article class="recipe-card" *ngIf="recipe">
+  <!-- TÍTULO DETALLE ENCIMA DE LA IMAGEN -->
+  <div *ngIf="detailTitle" class="detail-title">
+    {{ detailTitle }}
+  </div>
   <!-- IMAGEN / SLIDER -->
   <div class="image-slider">
     <!-- Botón anterior -->
@@ -45,7 +49,7 @@
 
   <!-- CONTENIDO -->
   <div class="card-content">
-    <h1 class="title" [ngClass]="{ 'large-title': titleSize === 'large' }">
+    <h1 *ngIf="!detailTitle" class="title" [ngClass]="{ 'large-title': titleSize === 'large' }">
       {{ recipe.title }}
     </h1>
 

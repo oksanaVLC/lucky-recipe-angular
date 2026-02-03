@@ -1,1 +1,85 @@
-<p>edit-profile works!</p>
+<div class="edit-profile-container">
+  <div class="card">
+    <h2 class="gold-gradient">Editar perfil</h2>
+
+    <form (ngSubmit)="saveProfile()">
+      <!-- Avatar -->
+      <div class="form-group">
+        <label for="avatar">Avatar</label>
+        <input id="avatar" type="file" (change)="onAvatarChange($event)" />
+        <img *ngIf="avatar" [src]="avatar" alt="Avatar actual" class="avatar-preview" />
+      </div>
+
+      <!-- Nombre -->
+      <div class="form-group">
+        <label for="name">Nombre</label>
+        <input
+          id="name"
+          type="text"
+          placeholder="Introduzca su nombre"
+          [(ngModel)]="name"
+          name="name"
+          required
+        />
+      </div>
+
+      <!-- Email (solo lectura) -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" [(ngModel)]="email" name="email" readonly />
+      </div>
+
+      <!-- Contraseña actual -->
+      <div class="form-group">
+        <label for="currentPassword">Contraseña actual</label>
+        <input
+          id="currentPassword"
+          type="password"
+          placeholder="Contraseña actual"
+          [(ngModel)]="currentPassword"
+          name="currentPassword"
+        />
+      </div>
+
+      <!-- Nueva contraseña -->
+      <div class="form-group">
+        <label for="newPassword">Nueva contraseña</label>
+        <input
+          id="newPassword"
+          type="password"
+          placeholder="Nueva contraseña"
+          [(ngModel)]="newPassword"
+          name="newPassword"
+        />
+      </div>
+
+      <!-- Repetir nueva contraseña -->
+      <div class="form-group">
+        <label for="repeatNewPassword">Repetir nueva contraseña</label>
+        <input
+          id="repeatNewPassword"
+          type="password"
+          placeholder="Repetir nueva contraseña"
+          [(ngModel)]="repeatNewPassword"
+          name="repeatNewPassword"
+        />
+      </div>
+
+      <!-- Botón de actualizar -->
+      <button type="submit">Guardar cambios</button>
+    </form>
+
+    <!-- Mensaje de éxito -->
+    <p class="success-message" *ngIf="successMessage">
+      {{ successMessage }}
+    </p>
+
+    <!-- Mensaje de error -->
+    <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <!-- Link para volver -->
+    <p class="back-text">
+      <a routerLink="/mi-cuenta">← Volver a mi cuenta</a>
+    </p>
+  </div>
+</div>

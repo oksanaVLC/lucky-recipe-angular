@@ -1,5 +1,8 @@
 <div class="drafts-container">
-  <h1>Borradores guardados</h1>
+  <div class="title-row">
+    <app-back-button-small></app-back-button-small>
+    <h1 class="gold-gradient">Borradores guardados</h1>
+  </div>
 
   <ol class="draft-list">
     <li *ngFor="let draft of drafts; let i = index" class="draft-item">

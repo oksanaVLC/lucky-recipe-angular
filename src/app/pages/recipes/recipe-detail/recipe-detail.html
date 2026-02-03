@@ -3,7 +3,7 @@
     <app-back-button-small></app-back-button-small>
     <h1 class="gold-gradient">Tu desafío de hoy</h1>
   </div>
-  <h1>{{ r.title }}</h1>
+
   <!-- REUTILIZAMOS RECIPE-CARD -->
   <app-recipe-card
     [recipe]="r"
@@ -13,9 +13,11 @@
     [truncateShortDescription]="false"
     [showIngredients]="true"
     [titleSize]="'large'"
+    [detailTitle]="r.title"
   ></app-recipe-card>
-
-  <!-- BACK BUTTON AL FINAL -->
+</div>
+<!-- BACK BUTTON AL FINAL -->
+<div class="back-button-wrapper">
   <app-back-button [fallbackRoute]="'/inicio'"></app-back-button>
 </div>
 

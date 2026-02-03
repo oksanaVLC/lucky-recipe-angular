@@ -1,7 +1,7 @@
 <div class="create-recipe-container">
   <div class="title-row">
     <app-back-button-small></app-back-button-small>
-    <h1 class="gold-gradient">Crear Nueva Receta</h1>
+    <h1 class="gold-gradient">{{ isEdit ? 'Editar Receta' : 'Crear Nueva Receta' }}</h1>
   </div>
 
   <div class="form-layout">
@@ -85,7 +85,9 @@
     <!-- BOTONES -->
     <div class="form-actions">
       <app-back-button fallbackRoute="/mi-cuenta"></app-back-button>
-      <button type="button" class="submit-button" (click)="createRecipe()">Crear Receta</button>
+      <button type="button" class="submit-button" (click)="createRecipe()">
+        {{ isEdit ? 'Guardar cambios' : 'Crear Receta' }}
+      </button>
     </div>
   </div>
 </div>

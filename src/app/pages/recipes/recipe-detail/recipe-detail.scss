@@ -7,14 +7,6 @@
   display: flex;
   flex-direction: column;
 
-  .title-row {
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: 1.5rem;
-    position: relative;
-  }
-
   .celebration {
     font-size: 1.1rem;
     color: green;
@@ -22,6 +14,8 @@
   }
 }
 
-.recipe-detail app-back-button {
-  margin-top: 2rem; /* separa del recipe-card */
+.back-button-wrapper {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
 }
