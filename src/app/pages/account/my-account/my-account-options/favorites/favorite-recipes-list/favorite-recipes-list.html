@@ -4,7 +4,7 @@
       <th>#</th>
       <th>Título</th>
       <th class="category-col">Categoría</th>
-      <th>Ingredientes</th>
+
       <th>Acciones</th>
     </tr>
   </thead>
@@ -22,8 +22,6 @@
       <td class="category-col">
         {{ r.category && r.category.trim() ? r.category : 'Sin categoría' }}
       </td>
-
-      <td>{{ r.ingredients.length }}</td>
 
       <td class="actions">
         <!-- Quitar -->
