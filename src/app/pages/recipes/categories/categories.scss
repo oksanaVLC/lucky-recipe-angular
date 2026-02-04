@@ -1,43 +1,74 @@
 .categories-wrapper {
-  padding: 1.5rem 1rem;
+  padding: 0 1rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Título principal */
-h1 {
-  text-align: center;
-  margin-bottom: 2.5rem;
-  font-size: 2rem;
-}
-
 /* Cada grupo */
 .category-group {
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 }
 
-/* Título de cada grupo */
+/* Header del grupo */
+.group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #fff9e4;
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  cursor: pointer;
+
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 9px 18px rgba(0, 0, 0, 0.18);
+  }
+}
+
+/* Título grupo */
 .group-title {
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin-bottom: 1.2rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
   color: var(--negro);
-  padding-left: 0.4rem;
-  border-left: 5px solid var(--verde);
+}
+
+/* Flecha: triángulo negro relleno */
+.arrow {
+  width: 0;
+  height: 0;
+
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-top: 12px solid #000;
+
+  transition: transform 0.25s ease;
+}
+
+/* Rotación al abrir */
+.arrow.open {
+  transform: rotate(180deg);
 }
 
 /* GRID RESPONSIVE */
 .category-list {
+  margin-top: 1.2rem;
+
   display: grid;
   gap: 1rem;
 
-  /* no estirar tarjetas: tamaño fijo por celda */
+  /* no estirar tarjetas */
   grid-template-columns: repeat(auto-fit, minmax(170px, 170px));
   justify-content: center;
 
   @media (max-width: 600px) {
-    /* máximo 3 tarjetas por fila en móvil */
-    grid-template-columns: repeat(3, minmax(100px, 1fr));
+    grid-template-columns: repeat(3, minmax(110px, 1fr));
   }
 
   @media (max-width: 430px) {
@@ -45,14 +76,15 @@ h1 {
   }
 }
 
-/* Tarjeta */
+/* Tarjeta categoría */
 .category-card {
   background: #fff9e4;
   border-radius: 12px;
   padding: 1rem 0.8rem;
   text-align: center;
   cursor: pointer;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
   transition: all 0.2s ease;
   border: 1px solid rgba(0, 0, 0, 0.05);
 
@@ -69,19 +101,18 @@ h1 {
 
 /* Icono */
 .category-icon {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   object-fit: contain;
 }
 
 /* Texto */
 .category-name {
   font-size: 0.95rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--negro);
   line-height: 1.2;
 
-  /* recorte bonito */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -1,12 +1,20 @@
 <div class="categories-wrapper">
-  <h1 class="gold-gradient">Categorías</h1>
+  <div class="title-row">
+    <app-back-button-small></app-back-button-small>
+    <h1 class="gold-gradient">Categorías</h1>
+  </div>
 
   <div *ngFor="let group of categoryGroups" class="category-group">
-    <h2 class="group-title">{{ group.name }}</h2>
+    <div class="group-header" (click)="toggleGroup(group)">
+      <h2 class="group-title">{{ group.name }}</h2>
 
-    <div class="category-grid">
+      <span class="arrow" [class.open]="group.open"></span>
+    </div>
+
+    <div class="category-list" *ngIf="group.open">
       <div *ngFor="let cat of group.categories" class="category-card" (click)="selectCategory(cat)">
-        <img class="category-icon" [src]="getIcon(cat)" alt="icono" />
+        <img class="category-icon" [src]="getIconPath(cat.icon)" [alt]="cat.name" />
+
         <span class="category-name">{{ cat.name }}</span>
       </div>
     </div>
