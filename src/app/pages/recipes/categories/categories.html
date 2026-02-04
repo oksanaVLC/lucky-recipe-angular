@@ -1,1 +1,14 @@
-<p>categories works!</p>
+<div class="categories-wrapper">
+  <h1 class="gold-gradient">Categorías</h1>
+
+  <div *ngFor="let group of categoryGroups" class="category-group">
+    <h2 class="group-title">{{ group.name }}</h2>
+
+    <div class="category-grid">
+      <div *ngFor="let cat of group.categories" class="category-card" (click)="selectCategory(cat)">
+        <img class="category-icon" [src]="getIcon(cat)" alt="icono" />
+        <span class="category-name">{{ cat.name }}</span>
+      </div>
+    </div>
+  </div>
+</div>

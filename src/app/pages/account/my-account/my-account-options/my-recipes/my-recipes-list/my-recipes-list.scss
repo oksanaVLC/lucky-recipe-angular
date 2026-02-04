@@ -3,7 +3,7 @@
   width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
-  font-size: 1.1rem;
+  font-size: 1rem;
 
   th,
   td {
@@ -32,7 +32,7 @@
       background: transparent;
       cursor: pointer;
       padding: 4px;
-      font-size: 1.2rem;
+      font-size: 1rem;
       border-radius: 6px;
       transition: background 0.2s;
 
@@ -76,7 +76,7 @@ p {
 /* Mejor estilo móvil */
 @media (max-width: 413px) {
   .recipe-table {
-    font-size: 1rem;
+    font-size: 0.8rem;
 
     th,
     td {

@@ -44,6 +44,9 @@
   h3 {
     font-size: 1.1rem;
     margin: 0;
+    white-space: nowrap; // evita salto de línea
+    overflow: hidden; // recorta el exceso
+    text-overflow: ellipsis; // muestra "…"
   }
 
   p {
