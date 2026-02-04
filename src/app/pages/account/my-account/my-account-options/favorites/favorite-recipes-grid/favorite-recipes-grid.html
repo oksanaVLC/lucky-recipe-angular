@@ -1,0 +1,22 @@
+<div class="recipes-grid">
+  <div *ngFor="let r of recipes" class="recipe-card">
+    <!-- Imagen clicable -->
+    <div class="card-image" (click)="view.emit(r.id)">
+      <img [src]="r.images[0] || 'assets/images/logo.webp'" [alt]="r.title" />
+    </div>
+
+    <!-- Info -->
+    <div class="recipe-info">
+      <h3 class="recipe-title">{{ r.title }}</h3>
+      <p class="recipe-category">{{ r.category || 'Sin categoría' }}</p>
+      <p class="recipe-ingredients">{{ r.ingredients.length }} ingredientes</p>
+    </div>
+
+    <!-- Botón quitar -->
+    <div class="recipe-actions">
+      <button type="button" (click)="remove.emit(r)" class="remove-btn">
+        ❌ Quitar de favoritos
+      </button>
+    </div>
+  </div>
+</div>

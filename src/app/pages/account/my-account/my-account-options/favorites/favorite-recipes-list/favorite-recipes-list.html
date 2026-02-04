@@ -1,0 +1,36 @@
+<table class="recipe-table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Título</th>
+      <th class="category-col">Categoría</th>
+      <th>Ingredientes</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let r of recipes; let i = index" (click)="view.emit(r.id)" class="clickable-row">
+      <td>{{ i + 1 }}</td>
+
+      <td>
+        <strong>
+          {{ r.title.length > 20 ? (r.title | slice: 0 : 20) + '…' : r.title }}
+        </strong>
+      </td>
+
+      <td class="category-col">
+        {{ r.category && r.category.trim() ? r.category : 'Sin categoría' }}
+      </td>
+
+      <td>{{ r.ingredients.length }}</td>
+
+      <td class="actions">
+        <!-- Quitar -->
+        <button (click)="remove.emit(r); $event.stopPropagation()" title="Quitar de favoritos">
+          ❌
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

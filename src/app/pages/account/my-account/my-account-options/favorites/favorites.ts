@@ -1,19 +1,31 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+
 import { BackButtonSmallComponent } from '../../../../../shared/components/back-button-small/back-button-small';
 import { Recipe } from '../../../../../shared/models/recipe.model';
 import { RecipeService } from '../../../../../shared/services/recipe.service';
 
+import { FavoriteRecipesGridComponent } from './favorite-recipes-grid/favorite-recipes-grid';
+import { FavoriteRecipesListComponent } from './favorite-recipes-list/favorite-recipes-list';
+
 @Component({
   selector: 'app-favorites',
   standalone: true,
-  imports: [CommonModule, RouterModule, BackButtonSmallComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    BackButtonSmallComponent,
+    FavoriteRecipesGridComponent,
+    FavoriteRecipesListComponent,
+  ],
   templateUrl: './favorites.html',
   styleUrls: ['./favorites.scss'],
 })
 export class FavoritesComponent implements OnInit {
   favoriteRecipes: Recipe[] = [];
+
+  viewMode: 'grid' | 'list' = 'grid';
 
   showConfirm = false;
   confirmMessage = '';
@@ -32,7 +44,6 @@ export class FavoritesComponent implements OnInit {
   }
 
   viewRecipe(id: number) {
-    // Ruta absoluta para salir del módulo 'mi-cuenta'
     this.router.navigateByUrl(`/recipe/${id}`);
   }
 
@@ -46,6 +57,7 @@ export class FavoritesComponent implements OnInit {
     if (!this.recipeToRemove) return;
 
     this.recipeService.toggleFavorite(this.recipeToRemove.id);
+
     this.favoriteRecipes = this.favoriteRecipes.filter((r) => r.id !== this.recipeToRemove!.id);
 
     this.closeModal();
@@ -60,6 +72,7 @@ export class FavoritesComponent implements OnInit {
     this.recipeToRemove = undefined;
     this.confirmMessage = '';
   }
+
   goBack() {
     this.location.back();
   }

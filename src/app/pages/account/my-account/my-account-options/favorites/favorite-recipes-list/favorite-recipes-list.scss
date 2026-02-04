@@ -1,0 +1,83 @@
+.recipe-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+
+  th,
+  td {
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    font-weight: 600;
+    color: #333;
+  }
+
+  td {
+    color: #555;
+    vertical-align: middle;
+  }
+
+  /* Botones de acción */
+  .actions {
+    display: flex;
+    gap: 0.4rem;
+
+    button {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      padding: 4px;
+      font-size: 1.2rem;
+      border-radius: 6px;
+      transition: background 0.2s;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
+
+  /* Ocultar categoría en pantallas pequeñas */
+  .category-col {
+    @media (max-width: 500px) {
+      display: none;
+    }
+  }
+}
+
+/* Mejor estilo móvil */
+@media (max-width: 413px) {
+  .recipe-table {
+    font-size: 1rem;
+
+    th,
+    td {
+      padding: 0.4rem 0.3rem;
+    }
+
+    .actions {
+      gap: 0.2rem;
+
+      button {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+.clickable-row {
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.03);
+  }
+}
