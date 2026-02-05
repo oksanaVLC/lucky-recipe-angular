@@ -6,7 +6,7 @@
 <div class="restaurants-container">
   <!-- Barra de filtros -->
   <div class="filters-bar">
-    <span>Filtrar por ciudad:</span>
+    <span>Elige la ciudad:</span>
     <div class="filter-select">
       <select [(ngModel)]="selectedCity" (change)="changePage(1)">
         <option value="">Todas</option>
@@ -24,6 +24,7 @@
       [image]="r.image"
       [phone]="r.phone"
       [email]="r.email"
+      [web]="r.web"
       [catering]="r.catering"
     ></app-restaurant-card>
   </div>

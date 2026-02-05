@@ -16,7 +16,7 @@
     padding: 0.6rem 1rem;
     border-radius: 8px;
     margin-bottom: 1.5rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    font-size: 1.5rem;
 
     span {
       font-weight: 500;
@@ -31,9 +31,10 @@
         cursor: pointer;
         font-weight: 500;
         transition: 0.2s;
+        font-size: 1.3rem;
 
         &:hover {
-          border-color: #007bff;
+          border-color: var(--verde);
         }
       }
     }
@@ -45,7 +46,7 @@
     justify-content: center; // centra las cards
     gap: 1.5rem;
     width: 100%;
-    max-width: 1000px;
+    max-width: 900px;
   }
 
   .pagination {

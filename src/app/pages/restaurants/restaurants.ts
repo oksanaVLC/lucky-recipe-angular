@@ -10,7 +10,7 @@ interface Restaurant {
   phone: string;
   email: string;
   web: string;
-  catering: boolean;
+  catering: string;
 }
 
 @Component({
@@ -31,8 +31,8 @@ export class RestaurantsComponent {
       image: 'assets/images/laslunas.png',
       phone: '+34 695 192 336',
       email: 'eric1313vlc@gmail.com',
-      web: 'https://laslunassoulkitchen.com/es/',
-      catering: true,
+      web: 'https://www.laslunassoulkitchen.com/es/',
+      catering: 'Sí',
     },
   ];
 

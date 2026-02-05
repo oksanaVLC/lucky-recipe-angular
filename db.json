@@ -1,7 +1,7 @@
 {
   "recipes": [
     {
-      "id": 1,
+      "id": 1001,
       "title": "Tarta de manzana",
       "category": "Postres",
       "shortDescription": "Una tarta clásica con manzanas caramelizadas",
@@ -23,7 +23,7 @@
       "createdAt": "2026-02-05T10:00:00Z"
     },
     {
-      "id": 2,
+      "id": 1002,
       "title": "Ensalada César",
       "category": "Ensaladas",
       "shortDescription": "Fresca y ligera, con pollo y croutons",
@@ -45,7 +45,7 @@
       "createdAt": "2026-02-04T14:30:00Z"
     },
     {
-      "id": 3,
+      "id": 1003,
       "title": "Lemos Cheesecake",
       "category": "Postres",
       "shortDescription": "Delicioso cheesecake con base crujiente",

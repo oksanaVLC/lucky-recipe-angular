@@ -14,5 +14,6 @@ export class RestaurantCardComponent {
   @Input() image!: string;
   @Input() phone!: string;
   @Input() email!: string;
-  @Input() catering: boolean = false;
+  @Input() web!: string;
+  @Input() catering!: string;
 }
