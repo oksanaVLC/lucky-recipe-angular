@@ -9,12 +9,14 @@
   td {
     padding: 0.6rem 0.8rem;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #b0afaf;
+    vertical-align: middle;
   }
 
   th {
     font-weight: 600;
-    color: #333;
+    color: #fff;
+    background: #111;
   }
 
   td {
@@ -25,9 +27,14 @@
   /* Botones de acción */
   .actions {
     display: flex;
+    align-items: center; // centra verticalmente dentro de la celda
+    justify-content: center; // centra horizontalmente (debajo del encabezado)
     gap: 0.4rem;
 
     button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       border: none;
       background: transparent;
       cursor: pointer;
@@ -54,7 +61,7 @@
 
   /* Columnas opcionales para responsive */
   .category-col {
-    @media (max-width: 500px) {
+    @media (max-width: 650px) {
       display: none;
     }
   }

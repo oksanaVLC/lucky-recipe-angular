@@ -1,1 +1,45 @@
-<p>restaurants works!</p>
+<div class="title-row">
+  <app-back-button-small></app-back-button-small>
+  <h1 class="gold-gradient">Restaurantes</h1>
+</div>
+
+<div class="restaurants-container">
+  <!-- Barra de filtros -->
+  <div class="filters-bar">
+    <span>Filtrar por ciudad:</span>
+    <div class="filter-select">
+      <select [(ngModel)]="selectedCity" (change)="changePage(1)">
+        <option value="">Todas</option>
+        <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Lista de restaurantes -->
+  <div class="restaurant-list">
+    <app-restaurant-card
+      *ngFor="let r of paginatedRestaurants"
+      [name]="r.name"
+      [city]="r.city"
+      [image]="r.image"
+      [phone]="r.phone"
+      [email]="r.email"
+      [catering]="r.catering"
+    ></app-restaurant-card>
+  </div>
+
+  <!-- Paginación -->
+  <div class="pagination">
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">◀</button>
+
+    <button
+      *ngFor="let p of [].constructor(totalPages); let i = index"
+      (click)="changePage(i + 1)"
+      [class.active]="currentPage === i + 1"
+    >
+      {{ i + 1 }}
+    </button>
+
+    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">▶</button>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+{
+  "recipes": [
+    {
+      "id": 1,
+      "title": "Tarta de manzana",
+      "category": "Postres",
+      "shortDescription": "Una tarta clásica con manzanas caramelizadas",
+      "longDescription": "1. Precalentar el horno a 180°C. 2. Preparar la masa... 3. Colocar las manzanas...",
+      "ingredients": [
+        { "quantity": "2", "name": "manzanas" },
+        { "quantity": "200g", "name": "azúcar" },
+        { "quantity": "100g", "name": "mantequilla" },
+        { "quantity": "1", "name": "masa quebrada" }
+      ],
+      "images": ["tarta.jpg", "tarta1.jpg"],
+      "rating": 4.5,
+      "likesCount": 12,
+      "author": {
+        "id": 1,
+        "name": "Oksana",
+        "avatar": "yo.jpg"
+      },
+      "createdAt": "2026-02-05T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "title": "Ensalada César",
+      "category": "Ensaladas",
+      "shortDescription": "Fresca y ligera, con pollo y croutons",
+      "longDescription": "1. Lavar y cortar la lechuga... 2. Preparar el aderezo...",
+      "ingredients": [
+        { "quantity": "1", "name": "lechuga romana" },
+        { "quantity": "100g", "name": "pollo" },
+        { "quantity": "50g", "name": "croutons" },
+        { "quantity": "30ml", "name": "aderezo César" }
+      ],
+      "images": ["cesar.jpg", "cesar1.jpg"],
+      "rating": 4.0,
+      "likesCount": 8,
+      "author": {
+        "id": 1,
+        "name": "Oksana",
+        "avatar": "yo.jpg"
+      },
+      "createdAt": "2026-02-04T14:30:00Z"
+    },
+    {
+      "id": 3,
+      "title": "Lemos Cheesecake",
+      "category": "Postres",
+      "shortDescription": "Delicioso cheesecake con base crujiente",
+      "longDescription": "1. Preparar la base de galleta. 2. Mezclar el queso con azúcar y huevos... 3. Hornear hasta dorar ligeramente...",
+      "ingredients": [
+        { "quantity": "200g", "name": "queso crema" },
+        { "quantity": "100g", "name": "azúcar" },
+        { "quantity": "2", "name": "huevos" },
+        { "quantity": "100g", "name": "galletas" }
+      ],
+      "images": ["cheesecake.jpg", "cheesecake1.jpg"],
+      "rating": 4.8,
+      "likesCount": 20,
+      "author": {
+        "id": 1,
+        "name": "Oksana",
+        "avatar": "yo.jpg"
+      },
+      "createdAt": "2026-02-03T16:00:00Z"
+    }
+  ]
+}

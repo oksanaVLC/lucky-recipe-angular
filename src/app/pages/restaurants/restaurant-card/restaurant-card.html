@@ -1,0 +1,10 @@
+<div class="restaurant-card">
+  <img [src]="image" [alt]="name" class="restaurant-image" />
+  <div class="restaurant-info">
+    <h3>{{ name }}</h3>
+    <p><strong>Ciudad:</strong> {{ city }}</p>
+    <p><strong>Teléfono:</strong> {{ phone }}</p>
+    <p><strong>Email:</strong> {{ email }}</p>
+    <p *ngIf="catering"><strong>Servicios:</strong> Catering</p>
+  </div>
+</div>

@@ -1,29 +1,37 @@
+/* Tabla principal */
 .recipe-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
-  font-size: 1.1rem;
+  font-size: 1rem;
 
   th,
   td {
     padding: 0.6rem 0.8rem;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #b0afaf;
+    vertical-align: middle; /* importante para alinear bordes */
   }
 
   th {
     font-weight: 600;
-    color: #333;
+    color: #fff;
+    background: #111;
+
+    &:last-child {
+      text-align: center;
+    }
   }
 
   td {
     color: #555;
-    vertical-align: middle;
   }
 
-  /* Botones de acción */
+  /* Botón de quitar */
   .actions {
     display: flex;
+    align-items: center; /* centra verticalmente */
+    justify-content: center;
     gap: 0.4rem;
 
     button {
@@ -31,7 +39,7 @@
       background: transparent;
       cursor: pointer;
       padding: 4px;
-      font-size: 1.2rem;
+      font-size: 1rem;
       border-radius: 6px;
       transition: background 0.2s;
 
@@ -45,39 +53,37 @@
     }
   }
 
-  /* Ocultar categoría en pantallas pequeñas */
+  /* Columnas opcionales para responsive */
   .category-col {
-    @media (max-width: 500px) {
+    @media (max-width: 650px) {
       display: none;
     }
   }
 }
 
-/* Mejor estilo móvil */
+/* Filas clicables */
+.clickable-row {
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.03); /* ligero resaltado */
+  }
+}
+
+/* Ajuste móvil */
 @media (max-width: 413px) {
   .recipe-table {
-    font-size: 1rem;
+    font-size: 0.8rem;
 
     th,
     td {
       padding: 0.4rem 0.3rem;
     }
 
-    .actions {
-      gap: 0.2rem;
-
-      button {
-        font-size: 1rem;
-      }
+    .actions button {
+      font-size: 0.9rem;
+      padding: 3px;
     }
-  }
-}
-
-.clickable-row {
-  cursor: pointer;
-  transition: background 0.2s;
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.03);
   }
 }

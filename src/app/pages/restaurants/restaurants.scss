@@ -1,0 +1,82 @@
+.restaurants-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+
+  .filters-bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; // se adapta en pantallas pequeñas
+    justify-content: center; // centra horizontalmente
+    gap: 0.8rem;
+    background: #fff8e1;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+    span {
+      font-weight: 500;
+    }
+
+    .filter-select {
+      select {
+        padding: 0.4rem 0.8rem;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        background: #fff;
+        cursor: pointer;
+        font-weight: 500;
+        transition: 0.2s;
+
+        &:hover {
+          border-color: #007bff;
+        }
+      }
+    }
+  }
+
+  .restaurant-list {
+    display: flex;
+    flex-wrap: wrap; // permite varias columnas
+    justify-content: center; // centra las cards
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1000px;
+  }
+
+  .pagination {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center; // CENTRA LOS BOTONES
+    gap: 0.4rem;
+    flex-wrap: wrap; // se adapta en pantallas pequeñas
+
+    button {
+      padding: 0.45rem 0.9rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background: #fff;
+      cursor: pointer;
+      transition: 0.2s;
+
+      &.active {
+        background: var(--verde);
+
+        color: #fff;
+        font-weight: bold;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+      }
+
+      &:hover:not(:disabled) {
+        background: var(--verde-oscuro);
+      }
+    }
+  }
+}
