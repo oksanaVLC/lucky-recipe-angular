@@ -63,10 +63,8 @@ export class CreateNewRecipeComponent implements OnInit {
     private location: Location,
   ) {}
 
-  /* ================= INIT ================= */
-
   ngOnInit() {
-    // 1️⃣ cargar borrador si existe
+    // Cargar borrador si existe
     const draft = this.draftService.getCurrentDraft();
     if (draft) {
       this.recipe = { ...draft.recipe };
@@ -75,7 +73,7 @@ export class CreateNewRecipeComponent implements OnInit {
       return;
     }
 
-    // 2️⃣ modo edición si hay id
+    // Modo edición si hay id
     const recipeId = this.route.snapshot.paramMap.get('id');
     if (recipeId) {
       const existing = this.recipeService.getRecipeById(+recipeId);
@@ -85,16 +83,15 @@ export class CreateNewRecipeComponent implements OnInit {
       }
 
       this.isEdit = true;
+
+      // Ya no hacemos split, usamos directamente el array de objetos
       this.recipe = {
         id: existing.id,
         title: existing.title,
         shortDescription: existing.shortDescription,
         longDescription: existing.longDescription,
         category: existing.category,
-        ingredients: existing.ingredients.map((i) => {
-          const [quantity, ...nameParts] = i.split(' ');
-          return { quantity, name: nameParts.join(' ') };
-        }),
+        ingredients: existing.ingredients || [{ quantity: '', name: '' }],
         images: existing.images || [],
       };
 
@@ -186,7 +183,10 @@ export class CreateNewRecipeComponent implements OnInit {
       shortDescription: this.recipe.shortDescription,
       longDescription: this.recipe.longDescription,
       category: this.recipe.category,
-      ingredients: this.recipe.ingredients.map((ing) => `${ing.quantity} ${ing.name}`.trim()),
+      ingredients: this.recipe.ingredients.map((i) => ({
+        quantity: i.quantity,
+        name: i.name,
+      })), // <-- ahora objetos
       images: this.images.length ? [...this.images] : ['assets/images/logo.webp'],
       rating: 0,
       likesCount: 0,
@@ -228,14 +228,12 @@ export class CreateNewRecipeComponent implements OnInit {
   /* ================= MODAL ================= */
 
   saveDraft() {
-    // ✨ edición → guardar cambios reales
     if (this.isEdit) {
       this.showDraftModal = false;
       this.createRecipe();
       return;
     }
 
-    // 📝 creación → guardar borrador
     const draft = {
       id: this.recipe.id,
       title: this.recipe.title || 'Sin título',

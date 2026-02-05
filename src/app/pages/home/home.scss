@@ -462,3 +462,39 @@ Otra interesante
   color: transparent;
   animation: slidingGradient 3s linear infinite;
 }
+
+/* =========================
+   Paginación
+========================= */
+.pagination {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center; /* centra los botones */
+  gap: 0.4rem;
+  flex-wrap: wrap;
+
+  button {
+    padding: 0.45rem 0.9rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &.active {
+      background: var(--verde);
+      color: #fff;
+      font-weight: bold;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    &:hover:not(:disabled) {
+      background: var(--verde-oscuro);
+      color: #fff;
+    }
+  }
+}

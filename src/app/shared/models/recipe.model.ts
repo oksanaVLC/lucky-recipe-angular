@@ -10,7 +10,7 @@ export interface Recipe {
   images: string[];
   shortDescription: string; // descripción breve para destacar
   longDescription: string; // descripción paso a paso
-  ingredients: string[]; // lista simple de ingredientes
+  ingredients: { quantity: string; name: string }[];
   category: string;
   rating?: number;
   likesCount?: number;

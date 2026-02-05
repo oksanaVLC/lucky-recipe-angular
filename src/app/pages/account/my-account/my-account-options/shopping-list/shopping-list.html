@@ -1,1 +1,24 @@
-<p>shopping-list works!</p>
+<div class="title-row">
+  <app-back-button-small></app-back-button-small>
+  <h1 class="gold-gradient">Lista de Compras</h1>
+</div>
+<div class="shopping-list-container">
+  <h2>¿Qué necesito?</h2>
+
+  <div class="input-wrapper">
+    <input
+      type="text"
+      [(ngModel)]="newItem"
+      placeholder="Añadir producto..."
+      (keyup.enter)="addItem()"
+    />
+    <button (click)="addItem()">+</button>
+  </div>
+
+  <ol>
+    <li *ngFor="let item of items; let i = index">
+      <span>{{ item }}</span>
+      <button class="remove-btn" (click)="removeItem(i)">×</button>
+    </li>
+  </ol>
+</div>

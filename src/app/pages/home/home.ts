@@ -31,17 +31,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   private searchSub: Subscription | null = null;
   private recipesSub: Subscription | null = null;
 
-  isLoading = true; // true mientras cargan las recetas
-  categories: string[] = [
-    'Destacados',
-    'Fáciles',
-    'Desayuno',
-    'Repostería',
-    'Últimas',
-    'Más populares',
-    'Veganos',
-    'Para niños',
-  ];
+  isLoading = true;
+
+  // PAGINACIÓN
+  currentPage = 1;
+  pageSize = 8; // recetas por página
+  totalPages = 1;
 
   constructor(
     private searchService: SearchService,
@@ -51,13 +46,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    // Suscribirse al search term
-    this.searchSub = this.searchService.searchTerm$.subscribe((term) => (this.searchTerm = term));
+    this.searchSub = this.searchService.searchTerm$.subscribe((term) => {
+      this.searchTerm = term;
+      this.currentPage = 1; // reset page on search
+      this.updatePagination();
+    });
 
-    // Obtener últimas 6 recetas
     this.recipesSub = this.recipeService.getAll().subscribe((allRecipes) => {
-      this.recipes = [...allRecipes].sort((a, b) => b.id - a.id).slice(0, 6);
-      this.isLoading = false; // ya cargó
+      this.recipes = [...allRecipes].sort((a, b) => b.id - a.id);
+      this.updatePagination();
+      this.isLoading = false;
     });
   }
 
@@ -73,31 +71,35 @@ export class HomeComponent implements OnInit, OnDestroy {
       : this.recipes.filter(
           (r) =>
             r.title.toLowerCase().includes(term) ||
-            r.ingredients.some((i) => i.toLowerCase().includes(term)),
+            r.ingredients.some((i) => i.name.toLowerCase().includes(term)),
         );
   }
 
+  get paginatedRecipes() {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.filteredRecipes.slice(start, start + this.pageSize);
+  }
+
+  updatePagination() {
+    this.totalPages = Math.ceil(this.filteredRecipes.length / this.pageSize);
+  }
+
+  changePage(page: number) {
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+  }
+
   chooseRandomRecipe() {
-    this.isLoading = true;
-
-    setTimeout(() => {
-      const source = this.filteredRecipes;
-      if (!source.length) {
-        this.isLoading = false;
-        return;
-      }
-
-      const randomIndex = Math.floor(Math.random() * source.length);
-      const recipe = source[randomIndex];
-
-      this.router.navigate(['/recipe', recipe.id]);
-      this.isLoading = false;
-    }, 2000);
+    const source = this.filteredRecipes;
+    if (!source.length) return;
+    const randomIndex = Math.floor(Math.random() * source.length);
+    this.router.navigate(['/recipe', source[randomIndex].id]);
   }
 
   trackByRecipeId(_: number, recipe: Recipe) {
     return recipe.id;
   }
+
   goToRecipe(recipeId: number) {
     this.navService.setLastUrl(this.router.url, window.scrollY);
     this.router.navigate(['/recipe', recipeId]);
