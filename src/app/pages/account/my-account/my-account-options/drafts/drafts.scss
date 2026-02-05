@@ -148,3 +148,12 @@
   justify-content: center;
   margin: 1rem 0;
 }
+
+.draft-title {
+  font-weight: 500;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

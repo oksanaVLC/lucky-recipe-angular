@@ -40,7 +40,7 @@
         aria-label="Compartir"
         (click)="copyLink()"
       >
-        <img src="assets/images/share.png" alt="Compartir" />
+        <img src="assets/images/share.webp" alt="Compartir" />
       </button>
 
       <span class="copy-msg" *ngIf="copied">¡Link copiado!</span>
@@ -71,11 +71,11 @@
     <!-- Autor -->
     <div class="author">
       <!--   <img
-        [src]="recipe.author?.avatar || 'assets/images/profile.jpg'"
+        [src]="recipe.author?.avatar || 'assets/images/profile.webp'"
         alt="Autor"
         class="avatar"
       />-->
-      <img [src]="'assets/images/yo.jpg'" alt="Autor" class="avatar" />
+      <img [src]="'assets/images/yo.webp'" alt="Autor" class="avatar" />
 
       <div class="author-info">
         <span class="author-name">{{ recipe.author?.name }}</span>

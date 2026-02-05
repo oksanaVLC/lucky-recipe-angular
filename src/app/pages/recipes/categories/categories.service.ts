@@ -30,14 +30,14 @@ export class CategoriesService {
     { id: 14, name: 'Fiestas', type: 'momento', icon: 'pizza.png' },
 
     // Ingrediente / estilo
-    { id: 20, name: 'Vegano', type: 'ingrediente', icon: 'vegetables.png' },
-    { id: 21, name: 'Para niños', type: 'ingrediente', icon: 'cake.png' },
-    { id: 22, name: 'Saludable', type: 'ingrediente', icon: 'salad.png' },
-    { id: 23, name: 'Sin gluten', type: 'ingrediente', icon: 'rice.png' },
+    { id: 20, name: 'Vegano', type: 'ingrediente', icon: 'vegano.png' },
+    { id: 21, name: 'Para niños', type: 'ingrediente', icon: 'bebe.png' },
+    { id: 22, name: 'Saludable', type: 'ingrediente', icon: 'saludable1.png' },
+    { id: 23, name: 'Sin gluten', type: 'ingrediente', icon: 'sin-gluten.png' },
 
     // Geografía
-    { id: 30, name: 'Recetas del mundo', type: 'geografia', icon: 'pizza.png' },
-    { id: 31, name: 'Locales / Regionales', type: 'geografia', icon: 'soup.png' },
+    { id: 30, name: 'Recetas del mundo', type: 'geografia', icon: 'internacional.png' },
+    { id: 31, name: 'Locales / Regionales', type: 'geografia', icon: 'local1.png' },
   ];
 
   getCategories(): Observable<Category[]> {
