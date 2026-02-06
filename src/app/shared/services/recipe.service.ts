@@ -1,9 +1,13 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Recipe } from '../models/recipe.model';
 
 @Injectable({ providedIn: 'root' })
 export class RecipeService {
+  private http = inject(HttpClient); // Angular 20+
+  private jsonUrl = 'assets/db.json'; // mi bd.json
+
   private recipes: Recipe[] = [];
   private recipes$ = new BehaviorSubject<Recipe[]>([]);
 
@@ -12,20 +16,13 @@ export class RecipeService {
   private favorites$ = new BehaviorSubject<number[]>([]);
 
   constructor() {
-    // Cargar recetas del localStorage
-    const stored = localStorage.getItem('recipes');
-    if (stored) {
-      try {
-        const parsed: Recipe[] = JSON.parse(stored);
-        // Filtrar solo recetas válidas
-        this.recipes = parsed.filter((r) => r && r.id && r.title);
-        this.recipes$.next(this.recipes);
-      } catch {
-        // Si hay error al parsear, limpiamos localStorage y usamos array vacío
-        this.recipes = [];
-        localStorage.removeItem('recipes');
-      }
-    }
+    // ⚡ Cargar siempre desde db.json
+    this.http.get<{ recipes: Recipe[] }>(this.jsonUrl).subscribe((data) => {
+      this.recipes = data.recipes;
+      this.recipes$.next(this.recipes);
+      // localStorage opcional si quieres demo persistente
+      localStorage.setItem('recipes', JSON.stringify(this.recipes));
+    });
 
     // ===== NUEVO: cargar favoritos del localStorage =====
     const storedFavs = localStorage.getItem('favorites');

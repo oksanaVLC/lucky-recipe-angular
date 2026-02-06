@@ -39,17 +39,23 @@ export class RecipeCardComponent implements OnInit {
   constructor(private recipeService: RecipeService) {}
 
   ngOnInit() {
-    // Inicializamos likes desde la receta (para back-end real) + favoritos locales
-    this.likesCount = this.recipe.likesCount ?? (this.isFavorite ? 1 : 0);
+    // Inicializamos likes visualmente: recipe?.likesCount por si acaso
+    this.likesCount = (this.recipe?.likesCount ?? 0) + (this.isFavorite ? 1 : 0);
   }
 
   // ================== SLIDER ==================
   get images(): string[] {
-    return this.recipe?.images || [];
+    // Prepend 'assets/' a todas las rutas para que Angular las encuentre
+    return this.recipe?.images.map((img) => `assets/${img}`) || [];
   }
 
   get displayImage(): string {
     return this.images[this.currentImageIndex] || 'assets/images/logo.webp';
+  }
+  get authorAvatar(): string {
+    return this.recipe?.author?.avatar
+      ? `assets/${this.recipe.author.avatar}`
+      : 'assets/images/logo.webp';
   }
 
   nextImage() {
@@ -68,7 +74,9 @@ export class RecipeCardComponent implements OnInit {
     if (!this.recipe?.id) return;
 
     this.recipeService.toggleFavorite(this.recipe.id);
-    this.likesCount = this.isFavorite ? 1 : 0;
+
+    // Sumar/restar 1 al valor original de la receta
+    this.likesCount = (this.recipe?.likesCount ?? 0) + (this.isFavorite ? 1 : 0);
   }
 
   get isFavorite(): boolean {

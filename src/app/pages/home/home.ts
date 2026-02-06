@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -24,6 +25,22 @@ import { RecipeService } from '../../shared/services/recipe.service';
   ],
   templateUrl: './home.html',
   styleUrls: ['./home.scss'],
+
+  animations: [
+    //Para Recetas del mundo 2
+    trigger('slideIn', [
+      state('left', style({ opacity: 1, transform: 'translateX(0)' })),
+      state('right', style({ opacity: 1, transform: 'translateX(0)' })),
+      transition('void => left', [
+        style({ opacity: 0, transform: 'translateX(-50px)' }),
+        animate('600ms ease-out'),
+      ]),
+      transition('void => right', [
+        style({ opacity: 0, transform: 'translateX(50px)' }),
+        animate('600ms ease-out'),
+      ]),
+    ]),
+  ],
 })
 export class HomeComponent implements OnInit, OnDestroy {
   recipes: Recipe[] = [];
@@ -37,6 +54,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   currentPage = 1;
   pageSize = 8; // recetas por página
   totalPages = 1;
+
+  //Para Recetas del mundo 2
+  countries = [
+    { name: 'Greece', img: 'assets/images/greece.webp' },
+    { name: 'Russia', img: 'assets/images/russia.webp' },
+    { name: 'Turkey', img: 'assets/images/turkey.webp' },
+    { name: 'Spain', img: 'assets/images/spain.webp' },
+    { name: 'France', img: 'assets/images/france.webp' },
+    { name: 'Japan', img: 'assets/images/japan.webp' },
+  ];
 
   constructor(
     private searchService: SearchService,

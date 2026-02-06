@@ -66,6 +66,50 @@
     </app-recipe-card>
   </div>
 
+  <!-- Recetas del Mundo -->
+  <h1 class="decorated-title">Recetas del mundo</h1>
+  <div class="country-cards-grid">
+    <a href="#" class="country-card">
+      <img src="assets/images/greece.webp" alt="Greece" />
+      <div class="country-name">Greece</div>
+    </a>
+    <a href="#" class="country-card">
+      <img src="assets/images/russia.webp" alt="Russia" />
+      <div class="country-name">Russia</div>
+    </a>
+    <a href="#" class="country-card">
+      <img src="assets/images/turkey.webp" alt="Turkey" />
+      <div class="country-name">Turkey</div>
+    </a>
+    <a href="#" class="country-card">
+      <img src="assets/images/spain.webp" alt="Spain" />
+      <div class="country-name">Spain</div>
+    </a>
+    <a href="#" class="country-card">
+      <img src="assets/images/france.webp" alt="France" />
+      <div class="country-name">France</div>
+    </a>
+    <a href="#" class="country-card">
+      <img src="assets/images/japan.webp" alt="Japan" />
+      <div class="country-name">Japan</div>
+    </a>
+  </div>
+
+  <!-- Recetas del Mundo 2 -->
+  <h1 class="decorated-title">Recetas del mundo 2</h1>
+
+  <div class="country-cards-grid">
+    <a
+      *ngFor="let country of countries; let i = index"
+      href="#"
+      class="country-card"
+      [@slideIn]="i % 2 === 0 ? 'left' : 'right'"
+    >
+      <img [src]="country.img" [alt]="country.name" loading="lazy" />
+      <div class="country-name">{{ country.name }}</div>
+    </a>
+  </div>
+
   <!-- Paginación -->
   <div class="pagination" *ngIf="totalPages > 1">
     <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">◀</button>

@@ -12,14 +12,10 @@
         { "quantity": "100g", "name": "mantequilla" },
         { "quantity": "1", "name": "masa quebrada" }
       ],
-      "images": ["tarta.jpg", "tarta1.jpg"],
+      "images": ["images/tarta.webp", "images/tarta1.webp"],
       "rating": 4.5,
       "likesCount": 12,
-      "author": {
-        "id": 1,
-        "name": "Oksana",
-        "avatar": "yo.jpg"
-      },
+      "author": { "id": 1, "name": "Oksana", "avatar": "images/yo.webp" },
       "createdAt": "2026-02-05T10:00:00Z"
     },
     {
@@ -34,14 +30,10 @@
         { "quantity": "50g", "name": "croutons" },
         { "quantity": "30ml", "name": "aderezo César" }
       ],
-      "images": ["cesar.jpg", "cesar1.jpg"],
+      "images": ["images/cesar.webp", "images/cesar1.webp"],
       "rating": 4.0,
       "likesCount": 8,
-      "author": {
-        "id": 1,
-        "name": "Oksana",
-        "avatar": "yo.jpg"
-      },
+      "author": { "id": 1, "name": "Oksana", "avatar": "images/yo.webp" },
       "createdAt": "2026-02-04T14:30:00Z"
     },
     {
@@ -56,15 +48,69 @@
         { "quantity": "2", "name": "huevos" },
         { "quantity": "100g", "name": "galletas" }
       ],
-      "images": ["cheesecake.jpg", "cheesecake1.jpg"],
+      "images": ["images/cheesecake.webp", "images/cheesecake1.webp"],
       "rating": 4.8,
       "likesCount": 20,
-      "author": {
-        "id": 1,
-        "name": "Oksana",
-        "avatar": "yo.jpg"
-      },
+      "author": { "id": 1, "name": "Oksana", "avatar": "images/yo.webp" },
       "createdAt": "2026-02-03T16:00:00Z"
+    },
+    {
+      "id": 1004,
+      "title": "Gazpacho Andaluz",
+      "category": "Sopas",
+      "shortDescription": "Sopa fría de tomate, fresca y saludable",
+      "longDescription": "1. Lavar y pelar los tomates... 2. Triturar con pepino, pimiento y ajo... 3. Añadir aceite de oliva y vinagre al gusto...",
+      "ingredients": [
+        { "quantity": "500g", "name": "tomates maduros" },
+        { "quantity": "1", "name": "pepino" },
+        { "quantity": "1", "name": "pimiento verde" },
+        { "quantity": "2 dientes", "name": "ajo" },
+        { "quantity": "50ml", "name": "aceite de oliva" },
+        { "quantity": "20ml", "name": "vinagre" }
+      ],
+      "images": ["images/gazpacho.webp", "images/gazpacho1.webp"],
+      "rating": 4.3,
+      "likesCount": 5,
+      "author": { "id": 2, "name": "Oksana", "avatar": "images/avatar2.webp" },
+      "createdAt": "2026-02-06T09:00:00Z"
+    },
+    {
+      "id": 1005,
+      "title": "Pasta al Pesto",
+      "category": "Platos principales",
+      "shortDescription": "Pasta con salsa de pesto casera y piñones",
+      "longDescription": "1. Cocer la pasta al dente... 2. Triturar albahaca, ajo, piñones y aceite de oliva... 3. Mezclar la pasta con la salsa...",
+      "ingredients": [
+        { "quantity": "200g", "name": "pasta" },
+        { "quantity": "50g", "name": "albahaca fresca" },
+        { "quantity": "1 diente", "name": "ajo" },
+        { "quantity": "30g", "name": "piñones" },
+        { "quantity": "50ml", "name": "aceite de oliva" }
+      ],
+      "images": ["images/pasta_pesto.webp", "images/pasta_pesto1.webp"],
+      "rating": 4.6,
+      "likesCount": 10,
+      "author": { "id": 3, "name": "Oksana", "avatar": "images/avatar3.webp" },
+      "createdAt": "2026-02-05T12:30:00Z"
+    },
+    {
+      "id": 1006,
+      "title": "Brownie de Chocolate",
+      "category": "Postres",
+      "shortDescription": "Brownie húmedo y chocolatoso con nueces",
+      "longDescription": "1. Precalentar el horno a 180°C. 2. Mezclar mantequilla, chocolate y azúcar... 3. Hornear 25 min...",
+      "ingredients": [
+        { "quantity": "150g", "name": "chocolate negro" },
+        { "quantity": "100g", "name": "mantequilla" },
+        { "quantity": "150g", "name": "azúcar" },
+        { "quantity": "2", "name": "huevos" },
+        { "quantity": "50g", "name": "nueces" }
+      ],
+      "images": ["images/brownie.webp", "images/brownie1.webp"],
+      "rating": 4.7,
+      "likesCount": 15,
+      "author": { "id": 4, "name": "Oksana", "avatar": "images/avatar4.webp" },
+      "createdAt": "2026-02-05T15:00:00Z"
     }
   ]
 }
