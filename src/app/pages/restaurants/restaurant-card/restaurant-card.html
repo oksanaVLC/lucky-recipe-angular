@@ -4,8 +4,16 @@
     <h3>{{ name }}</h3>
     <p><strong>Ciudad:</strong> {{ city }}</p>
     <p><strong>Teléfono:</strong> {{ phone }}</p>
-    <p><strong>Email:</strong> {{ email }}</p>
-    <p><strong>Web:</strong> {{ web }}</p>
+    <p>
+      <strong>Email:</strong>
+      <button (click)="copyEmail()" class="copy-btn">Copiar email</button>
+    </p>
+
     <p *ngIf="catering"><strong>Catering:</strong> {{ catering }}</p>
+    <p>
+      <a *ngIf="web" [href]="web" target="_blank" rel="noopener noreferrer" class="web-link">
+        Visitar web
+      </a>
+    </p>
   </div>
 </div>

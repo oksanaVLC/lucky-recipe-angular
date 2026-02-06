@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private searchSub: Subscription | null = null;
   private recipesSub: Subscription | null = null;
 
-  isLoading = true;
+  isLoading = false;
 
   // PAGINACIÓN
   currentPage = 1;
@@ -92,8 +92,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   chooseRandomRecipe() {
     const source = this.filteredRecipes;
     if (!source.length) return;
+
+    this.isLoading = true; //  mostrar loader
+
     const randomIndex = Math.floor(Math.random() * source.length);
-    this.router.navigate(['/recipe', source[randomIndex].id]);
+
+    setTimeout(() => {
+      this.router.navigate(['/recipe', source[randomIndex].id]);
+    }, 1500);
   }
 
   trackByRecipeId(_: number, recipe: Recipe) {

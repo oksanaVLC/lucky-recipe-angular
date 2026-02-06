@@ -20,7 +20,23 @@
   /* Dos animaciones independientes */
   animation:
     dice-bounce 2s cubic-bezier(0.5, 0, 0.2, 1) forwards,
-    dice-rotate 2s linear forwards;
+    dice-rotate 2s linear infinite;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
 }
 
 /* Rebote vertical natural */

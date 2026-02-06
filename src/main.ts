@@ -1,11 +1,4 @@
-/* Antes
-import { bootstrapApplication } from '@angular/platform-browser';
-import { AppComponent } from './app/app';
-import { appConfig } from './app/app.config';
-
-bootstrapApplication(AppComponent, appConfig).catch((err) => console.error(err));
-*/
-
+import { provideHttpClient } from '@angular/common/http'; // <-- añadir
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { AppComponent } from './app/app';
@@ -20,5 +13,6 @@ bootstrapApplication(AppComponent, {
       routes,
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' }),
     ),
+    provideHttpClient(), // <-- aquí
   ],
 }).catch((err) => console.error(err));
