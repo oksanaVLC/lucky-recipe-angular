@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -42,7 +42,7 @@ import { RecipeService } from '../../shared/services/recipe.service';
     ]),
   ],
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   recipes: Recipe[] = [];
   searchTerm: string = '';
   private searchSub: Subscription | null = null;
@@ -91,6 +91,37 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.recipesSub?.unsubscribe();
   }
 
+  ngAfterViewInit(): void {
+    const elements = document.querySelectorAll('.scroll-animate');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0,
+        rootMargin: '0px 0px -120px 0px',
+      },
+    );
+
+    elements.forEach((el) => observer.observe(el));
+
+    //  FIX PRO: si ya está visible al cargar, lo activamos sin scroll
+    setTimeout(() => {
+      elements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('visible');
+          observer.unobserve(el);
+        }
+      });
+    }, 50);
+  }
   get filteredRecipes() {
     const term = this.searchTerm.toLowerCase();
     return !term

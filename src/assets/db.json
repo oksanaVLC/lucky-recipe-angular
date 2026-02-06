@@ -20,24 +20,6 @@
     },
     {
       "id": 1002,
-      "title": "Ensalada César",
-      "category": "Ensaladas",
-      "shortDescription": "Fresca y ligera, con pollo y croutons",
-      "longDescription": "1. Lavar y cortar la lechuga... 2. Preparar el aderezo...",
-      "ingredients": [
-        { "quantity": "1", "name": "lechuga romana" },
-        { "quantity": "100g", "name": "pollo" },
-        { "quantity": "50g", "name": "croutons" },
-        { "quantity": "30ml", "name": "aderezo César" }
-      ],
-      "images": ["images/cesar.webp", "images/cesar1.webp"],
-      "rating": 4.0,
-      "likesCount": 8,
-      "author": { "id": 1, "name": "Oksana", "avatar": "images/yo.webp" },
-      "createdAt": "2026-02-04T14:30:00Z"
-    },
-    {
-      "id": 1003,
       "title": "Lemos Cheesecake",
       "category": "Postres",
       "shortDescription": "Delicioso cheesecake con base crujiente",
@@ -55,41 +37,63 @@
       "createdAt": "2026-02-03T16:00:00Z"
     },
     {
-      "id": 1004,
-      "title": "Gazpacho Andaluz",
-      "category": "Sopas",
-      "shortDescription": "Sopa fría de tomate, fresca y saludable",
-      "longDescription": "1. Lavar y pelar los tomates... 2. Triturar con pepino, pimiento y ajo... 3. Añadir aceite de oliva y vinagre al gusto...",
+      "id": 1003,
+      "title": "Ensalada César",
+      "category": "Ensaladas",
+      "shortDescription": "Fresca y ligera, con pollo y croutons",
+      "longDescription": "1. Lavar y cortar la lechuga... 2. Preparar el aderezo...",
       "ingredients": [
-        { "quantity": "500g", "name": "tomates maduros" },
-        { "quantity": "1", "name": "pepino" },
-        { "quantity": "1", "name": "pimiento verde" },
-        { "quantity": "2 dientes", "name": "ajo" },
-        { "quantity": "50ml", "name": "aceite de oliva" },
-        { "quantity": "20ml", "name": "vinagre" }
+        { "quantity": "1", "name": "lechuga romana" },
+        { "quantity": "100g", "name": "pollo" },
+        { "quantity": "50g", "name": "croutons" },
+        { "quantity": "30ml", "name": "aderezo César" }
       ],
-      "images": ["images/gazpacho.webp", "images/gazpacho1.webp"],
-      "rating": 4.3,
-      "likesCount": 5,
+      "images": ["images/cesar.webp", "images/cesar1.webp"],
+      "rating": 4.0,
+      "likesCount": 8,
+      "author": { "id": 1, "name": "Oksana", "avatar": "images/yo.webp" },
+      "createdAt": "2026-02-04T14:30:00Z"
+    },
+
+    {
+      "id": 1004,
+      "title": "Ensalada Mediterránea",
+      "category": "Ensaladas",
+      "shortDescription": "Ensalada fresca con tomate, pepino, aceitunas y queso feta",
+      "longDescription": "1. Cortar el tomate, pepino y cebolla. 2. Añadir aceitunas y queso feta. 3. Aliñar con aceite de oliva, limón y orégano.",
+      "ingredients": [
+        { "quantity": "2", "name": "tomates" },
+        { "quantity": "1", "name": "pepino" },
+        { "quantity": "1/2", "name": "cebolla morada" },
+        { "quantity": "80g", "name": "queso feta" },
+        { "quantity": "50g", "name": "aceitunas negras" },
+        { "quantity": "30ml", "name": "aceite de oliva" },
+        { "quantity": "1 cdita", "name": "orégano" }
+      ],
+      "images": ["images/ensalada-mediterranea.webp", "images/ensalada-mediterranea1.webp"],
+      "rating": 4.4,
+      "likesCount": 6,
       "author": { "id": 2, "name": "Oksana", "avatar": "images/avatar2.webp" },
       "createdAt": "2026-02-06T09:00:00Z"
     },
+
     {
       "id": 1005,
-      "title": "Pasta al Pesto",
+      "title": "Lasaña Casera",
       "category": "Platos principales",
-      "shortDescription": "Pasta con salsa de pesto casera y piñones",
-      "longDescription": "1. Cocer la pasta al dente... 2. Triturar albahaca, ajo, piñones y aceite de oliva... 3. Mezclar la pasta con la salsa...",
+      "shortDescription": "Lasaña tradicional con carne, bechamel y queso gratinado",
+      "longDescription": "1. Preparar la salsa boloñesa. 2. Preparar la bechamel. 3. Montar capas de pasta, carne y bechamel. 4. Hornear 30-35 minutos.",
       "ingredients": [
-        { "quantity": "200g", "name": "pasta" },
-        { "quantity": "50g", "name": "albahaca fresca" },
-        { "quantity": "1 diente", "name": "ajo" },
-        { "quantity": "30g", "name": "piñones" },
-        { "quantity": "50ml", "name": "aceite de oliva" }
+        { "quantity": "250g", "name": "carne picada" },
+        { "quantity": "1", "name": "cebolla" },
+        { "quantity": "400g", "name": "tomate triturado" },
+        { "quantity": "9", "name": "láminas de lasaña" },
+        { "quantity": "200ml", "name": "bechamel" },
+        { "quantity": "150g", "name": "queso rallado" }
       ],
-      "images": ["images/pasta_pesto.webp", "images/pasta_pesto1.webp"],
-      "rating": 4.6,
-      "likesCount": 10,
+      "images": ["images/lasagna.webp", "images/lasagna1.webp"],
+      "rating": 4.7,
+      "likesCount": 11,
       "author": { "id": 3, "name": "Oksana", "avatar": "images/avatar3.webp" },
       "createdAt": "2026-02-05T12:30:00Z"
     },

@@ -495,31 +495,6 @@ Otra interesante
   }
 }
 
-.decorated-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  font-style: italic;
-
-  margin: 40px 0 25px;
-  text-align: center;
-  color: #222;
-}
-
-.decorated-title::before,
-.decorated-title::after {
-  content: '';
-  flex: 1;
-  height: 2px;
-  background: linear-gradient(to right, transparent, #d4af37);
-  border-radius: 10px;
-}
-
-.decorated-title::after {
-  background: linear-gradient(to left, transparent, #d4af37);
-}
-
 .country-cards-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2 por fila en móviles pequeños */
@@ -585,4 +560,48 @@ Otra interesante
   .country-cards-grid {
     grid-template-columns: repeat(6, 1fr); /* 6 por fila en pantallas grandes */
   }
+}
+
+.decorated-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-style: italic;
+  margin: 40px 0 25px;
+  text-align: center;
+  color: #222;
+
+  opacity: 0;
+  transform: translateY(30px);
+  filter: blur(6px);
+  transition: all 0.9s ease;
+}
+
+.decorated-title::before,
+.decorated-title::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #d4af37);
+  border-radius: 10px;
+
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 1s ease;
+}
+
+.decorated-title::after {
+  background: linear-gradient(to left, transparent, #d4af37);
+}
+
+.decorated-title.visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.decorated-title.visible::before,
+.decorated-title.visible::after {
+  transform: scaleX(1);
 }
