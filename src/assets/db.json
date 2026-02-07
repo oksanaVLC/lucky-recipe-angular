@@ -5,7 +5,7 @@
       "title": "Tarta de manzana",
       "category": "Postres",
       "shortDescription": "Una tarta clásica con manzanas caramelizadas",
-      "longDescription": "1. Precalentar el horno a 180°C. 2. Preparar la masa... 3. Colocar las manzanas...",
+      "longDescription": "1. Precalentar el horno a 180°C.\n2. Preparar la masa...\n3. Colocar las manzanas...",
       "ingredients": [
         { "quantity": "2", "name": "manzanas" },
         { "quantity": "200g", "name": "azúcar" },
@@ -23,7 +23,7 @@
       "title": "Lemos Cheesecake",
       "category": "Postres",
       "shortDescription": "Delicioso cheesecake con base crujiente",
-      "longDescription": "1. Preparar la base de galleta. 2. Mezclar el queso con azúcar y huevos... 3. Hornear hasta dorar ligeramente...",
+      "longDescription": "1. Preparar la base de galleta.\n2. Mezclar el queso con azúcar y huevos...\n3. Hornear hasta dorar ligeramente...",
       "ingredients": [
         { "quantity": "200g", "name": "queso crema" },
         { "quantity": "100g", "name": "azúcar" },
@@ -41,7 +41,7 @@
       "title": "Ensalada César",
       "category": "Ensaladas",
       "shortDescription": "Fresca y ligera, con pollo y croutons",
-      "longDescription": "1. Lavar y cortar la lechuga... 2. Preparar el aderezo...",
+      "longDescription": "1. Lavar y cortar la lechuga...\n2. Preparar el aderezo...",
       "ingredients": [
         { "quantity": "1", "name": "lechuga romana" },
         { "quantity": "100g", "name": "pollo" },
@@ -54,13 +54,12 @@
       "author": { "id": 1, "name": "Oksana", "avatar": "images/yo.webp" },
       "createdAt": "2026-02-04T14:30:00Z"
     },
-
     {
       "id": 1004,
       "title": "Ensalada Mediterránea",
       "category": "Ensaladas",
       "shortDescription": "Ensalada fresca con tomate, pepino, aceitunas y queso feta",
-      "longDescription": "1. Cortar el tomate, pepino y cebolla. 2. Añadir aceitunas y queso feta. 3. Aliñar con aceite de oliva, limón y orégano.",
+      "longDescription": "1. Cortar el tomate, pepino y cebolla.\n2. Añadir aceitunas y queso feta.\n3. Aliñar con aceite de oliva, limón y orégano.",
       "ingredients": [
         { "quantity": "2", "name": "tomates" },
         { "quantity": "1", "name": "pepino" },
@@ -76,13 +75,12 @@
       "author": { "id": 2, "name": "Oksana", "avatar": "images/avatar2.webp" },
       "createdAt": "2026-02-06T09:00:00Z"
     },
-
     {
       "id": 1005,
       "title": "Lasaña Casera",
       "category": "Platos principales",
       "shortDescription": "Lasaña tradicional con carne, bechamel y queso gratinado",
-      "longDescription": "1. Preparar la salsa boloñesa. 2. Preparar la bechamel. 3. Montar capas de pasta, carne y bechamel. 4. Hornear 30-35 minutos.",
+      "longDescription": "1. Preparar la salsa boloñesa.\n2. Preparar la bechamel.\n3. Montar capas de pasta, carne y bechamel.\n4. Hornear 30-35 minutos.",
       "ingredients": [
         { "quantity": "250g", "name": "carne picada" },
         { "quantity": "1", "name": "cebolla" },
@@ -102,7 +100,7 @@
       "title": "Brownie de Chocolate",
       "category": "Postres",
       "shortDescription": "Brownie sabroso y chocolatoso con nueces",
-      "longDescription": "1. Precalentar el horno a 180°C. 2. Mezclar mantequilla, chocolate y azúcar... 3. Hornear 25 min...",
+      "longDescription": "1. Precalentar el horno a 180°C.\n2. Mezclar mantequilla, chocolate y azúcar...\n3. Hornear 25 min...",
       "ingredients": [
         { "quantity": "150g", "name": "chocolate negro" },
         { "quantity": "100g", "name": "mantequilla" },

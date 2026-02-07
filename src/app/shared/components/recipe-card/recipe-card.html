@@ -59,13 +59,15 @@
     <section class="ingredients" *ngIf="showIngredients && recipe.ingredients.length">
       <h3>Ingredientes</h3>
       <ul>
-        <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient }}</li>
+        <li *ngFor="let ingredient of recipe.ingredients">
+          {{ ingredient.quantity ? ingredient.quantity + ' ' : '' }}{{ ingredient.name }}
+        </li>
       </ul>
     </section>
     <!-- Preparación -->
     <section class="long-description" *ngIf="showLongDescription && recipe.longDescription">
       <h3>Preparación</h3>
-      <p>{{ recipe.longDescription }}</p>
+      <p style="white-space: pre-line">{{ recipe.longDescription }}</p>
     </section>
 
     <!-- Autor -->
