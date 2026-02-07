@@ -620,3 +620,11 @@ Otra interesante
     transform: translateY(0);
   }
 }
+
+.placeholder {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: transparent;
+  height: 250px; // mantiene espacio
+}
