@@ -44,12 +44,18 @@
 
   <!-- Vista según modo -->
   <ng-container *ngIf="favoriteRecipes.length; else emptyList">
-    <app-favorite-recipes-grid
-      *ngIf="viewMode === 'grid'"
-      [recipes]="favoriteRecipes"
-      (view)="viewRecipe($event)"
-      (remove)="confirmRemove($event)"
-    ></app-favorite-recipes-grid>
+    @defer (on viewport) {
+      <app-favorite-recipes-grid
+        *ngIf="viewMode === 'grid'"
+        [recipes]="favoriteRecipes"
+        (view)="viewRecipe($event)"
+        (remove)="confirmRemove($event)"
+        [@gridAnimation]
+      >
+      </app-favorite-recipes-grid>
+    } @placeholder {
+      <div class="recipe-card placeholder">Cargando favoritos...</div>
+    }
 
     <app-favorite-recipes-list
       *ngIf="viewMode === 'list'"

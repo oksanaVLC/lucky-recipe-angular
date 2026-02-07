@@ -16,7 +16,7 @@ export class RecipeService {
   private favorites$ = new BehaviorSubject<number[]>([]);
 
   constructor() {
-    // ⚡ Cargar siempre desde db.json
+    //  Cargar siempre desde db.json
     this.http.get<{ recipes: Recipe[] }>(this.jsonUrl).subscribe((data) => {
       this.recipes = data.recipes;
       this.recipes$.next(this.recipes);

@@ -46,13 +46,18 @@
 
     <!-- Mostrar componente hijo según vista -->
     <ng-container *ngIf="recipes.length; else emptyList">
-      <app-my-recipes-grid
-        *ngIf="viewMode === 'grid'"
-        [recipes]="recipes"
-        (view)="viewRecipe($event)"
-        (edit)="editRecipe($event)"
-        (delete)="deleteRecipe($event)"
-      ></app-my-recipes-grid>
+      @defer (on viewport) {
+        <app-my-recipes-grid
+          *ngIf="viewMode === 'grid'"
+          [recipes]="recipes"
+          (view)="viewRecipe($event)"
+          (edit)="editRecipe($event)"
+          (delete)="deleteRecipe($event)"
+          [@gridAnimation]
+        ></app-my-recipes-grid>
+      } @placeholder {
+        <div class="recipe-card placeholder">Cargando recetas...</div>
+      }
 
       <app-my-recipes-list
         *ngIf="viewMode === 'list'"

@@ -1,3 +1,4 @@
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
@@ -21,6 +22,18 @@ import { MyRecipesListComponent } from './my-recipes-list/my-recipes-list';
   providers: [DatePipe],
   templateUrl: './my-recipes.html',
   styleUrls: ['./my-recipes.scss'],
+  animations: [
+    trigger('gridAnimation', [
+      transition(':enter', [
+        query('.recipe-card', [
+          style({ opacity: 0, transform: 'translateY(20px)' }),
+          stagger(100, [
+            animate('400ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
+          ]),
+        ]),
+      ]),
+    ]),
+  ],
 })
 export class MyRecipesComponent implements OnInit {
   recipes: Recipe[] = [];

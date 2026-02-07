@@ -2,7 +2,7 @@
   <div *ngFor="let r of recipes" class="recipe-card">
     <!-- Imagen clicable -->
     <div class="card-image" (click)="view.emit(r.id)">
-      <img [src]="r.images[0] || 'assets/images/logo.webp'" [alt]="r.title" />
+      <img [src]="'assets/' + r.images[0] || 'assets/images/logo.webp'" [alt]="r.title" />
     </div>
 
     <!-- Info -->

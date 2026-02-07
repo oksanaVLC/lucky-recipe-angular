@@ -4,10 +4,13 @@
     <h3>{{ name }}</h3>
     <p><strong>Ciudad:</strong> {{ city }}</p>
     <p><strong>Teléfono:</strong> {{ phone }}</p>
-    <p>
-      <strong>Email:</strong>
-      <button (click)="copyEmail()" class="copy-btn">Copiar email</button>
-    </p>
+    <div class="contact-row">
+      <span class="label">Email:</span>
+
+      <span class="email-chip" (click)="showEmail = !showEmail">
+        {{ showEmail ? email : (email | slice: 0 : 2) + '***@***.com' }}
+      </span>
+    </div>
 
     <p *ngIf="catering"><strong>Catering:</strong> {{ catering }}</p>
     <p>

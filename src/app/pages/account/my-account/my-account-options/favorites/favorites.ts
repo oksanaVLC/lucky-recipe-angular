@@ -6,6 +6,7 @@ import { BackButtonSmallComponent } from '../../../../../shared/components/back-
 import { Recipe } from '../../../../../shared/models/recipe.model';
 import { RecipeService } from '../../../../../shared/services/recipe.service';
 
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { FavoriteRecipesGridComponent } from './favorite-recipes-grid/favorite-recipes-grid';
 import { FavoriteRecipesListComponent } from './favorite-recipes-list/favorite-recipes-list';
 
@@ -21,6 +22,18 @@ import { FavoriteRecipesListComponent } from './favorite-recipes-list/favorite-r
   ],
   templateUrl: './favorites.html',
   styleUrls: ['./favorites.scss'],
+  animations: [
+    trigger('gridAnimation', [
+      transition(':enter', [
+        query('.recipe-card', [
+          style({ opacity: 0, transform: 'translateY(20px)' }),
+          stagger(100, [
+            animate('400ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
+          ]),
+        ]),
+      ]),
+    ]),
+  ],
 })
 export class FavoritesComponent implements OnInit {
   favoriteRecipes: Recipe[] = [];

@@ -17,6 +17,8 @@ export class RestaurantCardComponent {
   @Input() web!: string;
   @Input() catering!: string;
 
+  showEmail = false;
+
   copyEmail() {
     navigator.clipboard.writeText(this.email);
     alert('Email copiado al portapapeles');
