@@ -12,7 +12,7 @@
 .image-slider {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1; /* fuerza proporción cuadrada */
+  aspect-ratio: 4 / 3;
   overflow: hidden;
 
   .slider-image {
@@ -261,6 +261,24 @@
   align-items: flex-start;
 }
 
-/* =========================
-   SLIDER - FLECHAS
-========================= */
+.view-recipe-full {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  background: linear-gradient(90deg, #d4af37, #f7e7a9);
+  color: #111;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+
+  transition: 0.2s ease;
+}
+
+.view-recipe-full:hover {
+  filter: brightness(1.05);
+}

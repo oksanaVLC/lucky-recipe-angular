@@ -1,8 +1,6 @@
 <article class="recipe-card" *ngIf="recipe">
   <!-- TÍTULO DETALLE ENCIMA DE LA IMAGEN -->
-  <div *ngIf="detailTitle" class="detail-title">
-    {{ detailTitle }}
-  </div>
+
   <!-- IMAGEN / SLIDER -->
   <div class="image-slider">
     <!-- Swiper -->
@@ -18,9 +16,7 @@
       "
     >
       <swiper-slide *ngFor="let img of images">
-        <a [routerLink]="['/recipe', recipe.id]" aria-label="Ver detalle de la receta">
-          <img [src]="img" [alt]="recipe.title" class="slider-image" />
-        </a>
+        <img [src]="img" [alt]="recipe.title" class="slider-image" />
       </swiper-slide>
     </swiper-container>
 
@@ -53,7 +49,7 @@
 
   <!-- CONTENIDO -->
   <div class="card-content">
-    <h1 *ngIf="!detailTitle" class="title" [ngClass]="{ 'large-title': titleSize === 'large' }">
+    <h1 class="title" [ngClass]="{ 'large-title': titleSize === 'large' }">
       {{ recipe.title }}
     </h1>
 
@@ -95,4 +91,6 @@
       ❌ Quitar de favoritos
     </button>
   </div>
+
+  <a class="view-recipe-full" [routerLink]="['/recipe', recipe.id]"> VER RECETA </a>
 </article>

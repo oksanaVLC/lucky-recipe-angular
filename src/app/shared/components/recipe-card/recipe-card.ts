@@ -1,12 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  CUSTOM_ELEMENTS_SCHEMA,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Recipe } from '../../models/recipe.model';
 import { RecipeService } from '../../services/recipe.service';
@@ -36,10 +29,6 @@ export class RecipeCardComponent implements OnInit {
   @Input() truncateShortDescription: boolean = true;
   @Input() shortDescriptionLength: number = 20;
 
-  /** NUEVO: título extra solo para detail view */
-  @Input() detailTitle?: string;
-
-  @Output() open = new EventEmitter<number>();
   @Input() showRemoveFavorite: boolean = false;
 
   // Estado interno
