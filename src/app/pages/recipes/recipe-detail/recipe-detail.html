@@ -1,80 +1,89 @@
 <div *ngIf="recipe as r; else notFound" class="recipe-detail">
-  <!-- TITULO ARRIBA -->
+  <!-- TÍTULO Y BACK BUTTON ARRIBA -->
   <div class="title-row">
     <app-back-button-small></app-back-button-small>
     <h1 class="detail-title">{{ r.title }}</h1>
   </div>
 
   <!-- SLIDER -->
-  <article class="recipe-card">
-    <div class="image-slider" *ngIf="images.length > 0">
-      <swiper-container
-        navigation="true"
-        pagination="true"
-        loop="true"
-        class="detail"
-        observer="true"
-        observe-parents="true"
-        allow-touch-move="true"
-        grab-cursor="true"
-        simulate-touch="true"
-      >
-        <swiper-slide *ngFor="let img of images">
-          <img [src]="img" [alt]="r.title" class="slider-image" />
-        </swiper-slide>
-      </swiper-container>
+  <div class="image-slider" *ngIf="images.length > 0">
+    <swiper-container
+      navigation="true"
+      pagination="true"
+      loop="true"
+      class="image-slider detail"
+      observer="true"
+      observe-parents="true"
+      allow-touch-move="true"
+      grab-cursor="true"
+      simulate-touch="true"
+    >
+      <swiper-slide *ngFor="let img of images">
+        <img [src]="img" [alt]="r.title" class="slider-image" />
+      </swiper-slide>
+    </swiper-container>
 
-      <!-- LIKE -->
-      <button
-        *ngIf="showLikeButton"
-        class="like-btn like-counter"
-        [class.active]="isFavorite"
-        (click)="toggleLike($event)"
-      >
-        <span class="heart">♥</span>
-        <span class="count">{{ likesCount }}</span>
+    <!-- LIKE -->
+    <button
+      *ngIf="showLikeButton"
+      class="like-btn like-counter"
+      [class.active]="isFavorite"
+      (click)="toggleLike($event)"
+      aria-label="Me gusta"
+    >
+      <span class="heart">♥</span>
+      <span class="count">{{ likesCount }}</span>
+    </button>
+
+    <!-- SHARE -->
+    <div class="bottom-buttons" *ngIf="showShareButton">
+      <button class="share-icon" aria-label="Compartir" (click)="copyLink()">
+        <img src="assets/images/share.webp" alt="Compartir" />
       </button>
+      <span class="copy-msg" *ngIf="copied">¡Link copiado!</span>
+    </div>
+  </div>
 
-      <!-- SHARE -->
-      <div class="bottom-buttons" *ngIf="showShareButton">
-        <button class="share-icon" aria-label="Compartir" (click)="copyLink()">
-          <img src="assets/images/share.webp" alt="Compartir" />
-        </button>
-        <span class="copy-msg" *ngIf="copied">¡Link copiado!</span>
+  <!-- CONTENIDO DE LA RECETA -->
+  <div class="card-content">
+    <!-- DESCRIPCIÓN CORTA -->
+    <p class="card-text">{{ r.shortDescription }}</p>
+
+    <!-- Ingredientes -->
+    <section class="ingredients" *ngIf="r.ingredients.length">
+      <h3>Ingredientes</h3>
+      <ul>
+        <li *ngFor="let ingredient of r.ingredients">
+          {{ ingredient.quantity ? ingredient.quantity + ' ' : '' }}{{ ingredient.name }}
+        </li>
+      </ul>
+    </section>
+
+    <!-- Preparación -->
+    <section class="long-description" *ngIf="r.longDescription">
+      <h3>Preparación</h3>
+      <p style="white-space: pre-line">{{ r.longDescription }}</p>
+    </section>
+
+    <!-- Autor -->
+    <div class="author">
+      <img [src]="'assets/images/yo.webp'" alt="Autor" class="avatar" />
+      <div class="author-info">
+        <span class="author-name">{{ r.author?.name }}</span>
+        <a class="author-link" [routerLink]="['/perfil', r.author?.id]">Ver sus recetas</a>
       </div>
     </div>
+  </div>
 
-    <!-- CONTENIDO -->
-    <div class="card-content">
-      <p class="card-text">{{ r.shortDescription }}</p>
-
-      <section class="ingredients" *ngIf="r.ingredients.length">
-        <h3>Ingredientes</h3>
-        <ul>
-          <li *ngFor="let ingredient of r.ingredients">
-            {{ ingredient.quantity ? ingredient.quantity + ' ' : '' }}{{ ingredient.name }}
-          </li>
-        </ul>
-      </section>
-
-      <section class="long-description" *ngIf="r.longDescription">
-        <h3>Preparación</h3>
-        <p style="white-space: pre-line">{{ r.longDescription }}</p>
-      </section>
-
-      <!-- Autor -->
-      <div class="author">
-        <img [src]="'assets/images/yo.webp'" alt="Autor" class="avatar" />
-        <div class="author-info">
-          <span class="author-name">{{ r.author?.name }}</span>
-          <a class="author-link" [routerLink]="['/perfil', r.author?.id]">Ver sus recetas</a>
-        </div>
-      </div>
-    </div>
-  </article>
+  <!-- Botón quitar favoritos -->
+  <div class="recipe-actions" *ngIf="showRemoveFavorite">
+    <button type="button" (click)="removeFavorite()" class="remove-btn">
+      ❌ Quitar de favoritos
+    </button>
+  </div>
 </div>
 
-<!-- BACK BUTTON FINAL -->
+<!-- BACK BUTTON AL FINAL -->
 <div class="back-button-wrapper">
   <app-back-button [fallbackRoute]="'/inicio'"></app-back-button>
 </div>

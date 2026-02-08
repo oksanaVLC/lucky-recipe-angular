@@ -81,4 +81,9 @@ export class RecipeDetailComponent implements OnInit {
   goBack() {
     this.location.back();
   }
+  removeFavorite() {
+    if (!this.recipe?.id) return;
+    this.recipeService.removeFavorite(this.recipe.id);
+    this.likesCount = 0;
+  }
 }
