@@ -164,8 +164,28 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     return recipe.id;
   }
 
-  goToRecipe(recipeId: number) {
-    this.navService.setLastUrl(this.router.url, window.scrollY);
-    this.router.navigate(['/recipe', recipeId]);
+  goToPage(page: number) {
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+    this.scrollToTopOfRecipes();
+  }
+
+  goToNextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.scrollToTopOfRecipes();
+    }
+  }
+
+  goToPreviousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.scrollToTopOfRecipes();
+    }
+  }
+
+  private scrollToTopOfRecipes() {
+    const title = document.querySelector<HTMLHeadingElement>('h1.decorated-title.scroll-animate');
+    title?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }

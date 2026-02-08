@@ -1,24 +1,18 @@
 <div *ngIf="recipe as r; else notFound" class="recipe-detail">
-  <!-- TITULO Y BACK BUTTON ARRIBA -->
+  <!-- TITULO ARRIBA -->
   <div class="title-row">
     <app-back-button-small></app-back-button-small>
-    <h1 class="gold-gradient">Tu desafío de hoy</h1>
+    <h1 class="detail-title">{{ r.title }}</h1>
   </div>
 
-  <!-- DETALLE COMPLETO DE LA RECETA -->
+  <!-- SLIDER -->
   <article class="recipe-card">
-    <!-- TÍTULO DETALLE ENCIMA DE LA IMAGEN -->
-    <div *ngIf="r.title" class="detail-title">
-      {{ r.title }}
-    </div>
-
-    <!-- IMAGEN / SLIDER -->
     <div class="image-slider" *ngIf="images.length > 0">
       <swiper-container
         navigation="true"
         pagination="true"
         loop="true"
-        class="image-slider detail"
+        class="detail"
         observer="true"
         observe-parents="true"
         allow-touch-move="true"
@@ -26,7 +20,7 @@
         simulate-touch="true"
       >
         <swiper-slide *ngFor="let img of images">
-          <img [src]="img" [alt]="recipe?.title" class="slider-image" />
+          <img [src]="img" [alt]="r.title" class="slider-image" />
         </swiper-slide>
       </swiper-container>
 
@@ -36,7 +30,6 @@
         class="like-btn like-counter"
         [class.active]="isFavorite"
         (click)="toggleLike($event)"
-        aria-label="Me gusta"
       >
         <span class="heart">♥</span>
         <span class="count">{{ likesCount }}</span>
@@ -47,7 +40,6 @@
         <button class="share-icon" aria-label="Compartir" (click)="copyLink()">
           <img src="assets/images/share.webp" alt="Compartir" />
         </button>
-
         <span class="copy-msg" *ngIf="copied">¡Link copiado!</span>
       </div>
     </div>
@@ -56,7 +48,6 @@
     <div class="card-content">
       <p class="card-text">{{ r.shortDescription }}</p>
 
-      <!-- Ingredientes -->
       <section class="ingredients" *ngIf="r.ingredients.length">
         <h3>Ingredientes</h3>
         <ul>
@@ -66,7 +57,6 @@
         </ul>
       </section>
 
-      <!-- Preparación -->
       <section class="long-description" *ngIf="r.longDescription">
         <h3>Preparación</h3>
         <p style="white-space: pre-line">{{ r.longDescription }}</p>
@@ -75,24 +65,16 @@
       <!-- Autor -->
       <div class="author">
         <img [src]="'assets/images/yo.webp'" alt="Autor" class="avatar" />
-
         <div class="author-info">
           <span class="author-name">{{ r.author?.name }}</span>
           <a class="author-link" [routerLink]="['/perfil', r.author?.id]">Ver sus recetas</a>
         </div>
       </div>
     </div>
-
-    <!-- Botón quitar favoritos -->
-    <div class="recipe-actions" *ngIf="showRemoveFavorite">
-      <button type="button" (click)="removeFavorite()" class="remove-btn">
-        ❌ Quitar de favoritos
-      </button>
-    </div>
   </article>
 </div>
 
-<!-- BACK BUTTON AL FINAL -->
+<!-- BACK BUTTON FINAL -->
 <div class="back-button-wrapper">
   <app-back-button [fallbackRoute]="'/inicio'"></app-back-button>
 </div>

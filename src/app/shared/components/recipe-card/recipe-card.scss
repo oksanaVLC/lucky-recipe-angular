@@ -282,3 +282,18 @@
 .view-recipe-full:hover {
   filter: brightness(1.05);
 }
+
+swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+swiper-slide {
+  height: 100%;
+}
+
+swiper-container::part(button-prev),
+swiper-container::part(button-next) {
+  opacity: 1 !important;
+  display: flex !important;
+}
