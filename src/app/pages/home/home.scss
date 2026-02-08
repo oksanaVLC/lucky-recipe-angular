@@ -254,95 +254,6 @@ app-search-bar {
     left: 60%;
   }
 }
-/* Animación dorada del fondo del botón
-.arrow-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 25px;
-  font-size: 1.4rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  color: var(--blanco);
-  background-color: var(--verde);
-  background-image: repeating-linear-gradient(
-    120deg,
-    transparent 0%,
-    transparent 40%,
-    #fff9e4 50%,
-  transparent 60%,
-    transparent 100%
-  );
-  background-size: 200% 200%;
-  animation: slidingGradient 2.5s linear infinite;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.arrow-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(255, 249, 228, 0.2);
-}
-
-@keyframes slidingGradient {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
-
-
-Otra interesante
-::after
-.arrow-button {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 25px;
-  font-size: 1.4rem;
-  color: var(--blanco);
-  background-color: var(--verde);
-  border-radius: 25px;
-  cursor: pointer;
-  overflow: hidden;
-  z-index: 0;
-}
-
-.arrow-button::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 25px;
-  padding: 2px;
-  background: linear-gradient(90deg, transparent, #fff9e4, transparent);
-  background-size: 200% 200%;
-  
- 
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-
-  z-index: 1;
-  animation: borderMove 1s linear infinite;
-}
-
-@keyframes borderMove {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 200% 0%; }
-}
-
-*/
 
 .arrow-button {
   position: relative;
@@ -573,9 +484,11 @@ Otra interesante
   color: #222;
 
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(20px); /* más cercano al movimiento de las cards */
   filter: blur(6px);
-  transition: all 0.9s ease;
+
+  animation: fadeInUp 0.6s forwards ease-out; /* animación de entrada */
+  animation-delay: 0ms; /* aparece primero */
 }
 
 .decorated-title::before,
@@ -604,6 +517,17 @@ Otra interesante
 .decorated-title.visible::before,
 .decorated-title.visible::after {
   transform: scaleX(1);
+}
+
+/* =========================
+   Reutilizamos fadeInUp para stagger
+========================= */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
 }
 
 /****animación escalonada por fila***/

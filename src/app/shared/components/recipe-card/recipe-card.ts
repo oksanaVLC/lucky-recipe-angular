@@ -1,8 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Recipe } from '../../models/recipe.model';
 import { RecipeService } from '../../services/recipe.service';
+
+import { register } from 'swiper/element/bundle';
+register(); // registra los elementos <swiper-container> y <swiper-slide>
 
 @Component({
   selector: 'app-recipe-card',
@@ -10,6 +20,7 @@ import { RecipeService } from '../../services/recipe.service';
   imports: [CommonModule, RouterModule],
   templateUrl: './recipe-card.html',
   styleUrls: ['./recipe-card.scss'],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], //para Swiper
 })
 export class RecipeCardComponent implements OnInit {
   @Input({ required: true }) recipe!: Recipe;
@@ -32,7 +43,7 @@ export class RecipeCardComponent implements OnInit {
   @Input() showRemoveFavorite: boolean = false;
 
   // Estado interno
-  currentImageIndex = 0;
+
   likesCount = 0; // futuro back-end
   copied = false;
 
@@ -45,27 +56,16 @@ export class RecipeCardComponent implements OnInit {
 
   // ================== SLIDER ==================
   get images(): string[] {
-    // Prepend 'assets/' a todas las rutas para que Angular las encuentre
-    return this.recipe?.images.map((img) => `assets/${img}`) || [];
+    if (!this.recipe?.images?.length) return [];
+
+    return this.recipe.images.map((img) => (img.startsWith('assets/') ? img : `assets/${img}`));
   }
 
-  get displayImage(): string {
-    return this.images[this.currentImageIndex] || 'assets/images/logo.webp';
-  }
   get authorAvatar(): string {
-    return this.recipe?.author?.avatar
-      ? `assets/${this.recipe.author.avatar}`
-      : 'assets/images/logo.webp';
-  }
+    const avatar = this.recipe?.author?.avatar;
+    if (!avatar) return 'assets/images/logo.webp';
 
-  nextImage() {
-    if (!this.images.length) return;
-    this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
-  }
-
-  prevImage() {
-    if (!this.images.length) return;
-    this.currentImageIndex = (this.currentImageIndex - 1 + this.images.length) % this.images.length;
+    return avatar.startsWith('assets/') ? avatar : `assets/${avatar}`;
   }
 
   // ================== FAVORITOS ==================

@@ -1,3 +1,6 @@
+@use 'swiper/css';
+@use 'swiper/css/navigation';
+@use 'swiper/css/pagination';
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Aclonica&display=swap');
@@ -98,4 +101,13 @@ a {
   @media (min-width: 1655px) {
     margin: 0 10rem;
   }
+}
+
+/*para no ver los rectangulos grisse mientas se cargan las cards*/
+.placeholder {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: transparent;
+  height: 250px; // mantiene espacio
 }

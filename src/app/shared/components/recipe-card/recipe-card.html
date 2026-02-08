@@ -5,20 +5,24 @@
   </div>
   <!-- IMAGEN / SLIDER -->
   <div class="image-slider">
-    <!-- Botón anterior -->
-    <button *ngIf="images.length > 1" class="prev-btn" (click)="prevImage()">◀</button>
-
-    <!-- Imagen principal -->
-    <a
-      class="image-link"
-      [routerLink]="['/recipe', recipe.id]"
-      aria-label="Ver detalle de la receta"
+    <!-- Swiper -->
+    <swiper-container
+      navigation="true"
+      pagination="true"
+      loop="true"
+      class="image-slider detail"
+      style="
+        --swiper-navigation-color: #d4af37;
+        --swiper-navigation-size: 20px;
+        --swiper-pagination-color: #d4af37;
+      "
     >
-      <img [src]="displayImage" [alt]="recipe.title" class="slider-image" />
-    </a>
-
-    <!-- Botón siguiente -->
-    <button *ngIf="images.length > 1" class="next-btn" (click)="nextImage()">▶</button>
+      <swiper-slide *ngFor="let img of images">
+        <a [routerLink]="['/recipe', recipe.id]" aria-label="Ver detalle de la receta">
+          <img [src]="img" [alt]="recipe.title" class="slider-image" />
+        </a>
+      </swiper-slide>
+    </swiper-container>
 
     <!-- LIKE -->
     <button
