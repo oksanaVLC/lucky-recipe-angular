@@ -21,11 +21,9 @@
         class="image-slider detail"
         observer="true"
         observe-parents="true"
-        style="
-          --swiper-navigation-color: #d4af37;
-          --swiper-navigation-size: 20px;
-          --swiper-pagination-color: #d4af37;
-        "
+        allow-touch-move="true"
+        grab-cursor="true"
+        simulate-touch="true"
       >
         <swiper-slide *ngFor="let img of images">
           <img [src]="img" [alt]="recipe?.title" class="slider-image" />

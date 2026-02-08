@@ -257,3 +257,16 @@ swiper-container::part(button-next) {
   opacity: 1 !important;
   display: flex !important;
 }
+
+.image-slider.detail {
+  /* Variables CSS de Swiper */
+  --swiper-navigation-color: #d4af37;
+  --swiper-navigation-size: 20px;
+  --swiper-pagination-color: #d4af37;
+
+  width: 100%;
+  height: 300px;
+}
+swiper-slide {
+  height: 100%;
+}
