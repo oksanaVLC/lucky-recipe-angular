@@ -1,7 +1,7 @@
 {
   "recipes": [
     {
-      "id": 1001,
+      "id": 1,
       "title": "Tarta de manzana",
       "category": "Postres",
       "shortDescription": "Una tarta clásica con manzanas caramelizadas",
@@ -19,7 +19,7 @@
       "createdAt": "2026-02-05T10:00:00Z"
     },
     {
-      "id": 1002,
+      "id": 2,
       "title": "Lemos Cheesecake",
       "category": "Postres",
       "shortDescription": "Delicioso cheesecake con base crujiente",
@@ -37,7 +37,7 @@
       "createdAt": "2026-02-03T16:00:00Z"
     },
     {
-      "id": 1003,
+      "id": 3,
       "title": "Ensalada César",
       "category": "Ensaladas",
       "shortDescription": "Fresca y ligera, con pollo y croutons",
@@ -55,7 +55,7 @@
       "createdAt": "2026-02-04T14:30:00Z"
     },
     {
-      "id": 1004,
+      "id": 4,
       "title": "Ensalada Mediterránea",
       "category": "Ensaladas",
       "shortDescription": "Ensalada fresca con tomate, pepino, aceitunas y queso feta",
@@ -76,7 +76,7 @@
       "createdAt": "2026-02-06T09:00:00Z"
     },
     {
-      "id": 1005,
+      "id": 5,
       "title": "Lasaña Casera",
       "category": "Platos principales",
       "shortDescription": "Lasaña tradicional con carne, bechamel y queso gratinado",
@@ -96,7 +96,7 @@
       "createdAt": "2026-02-05T12:30:00Z"
     },
     {
-      "id": 1006,
+      "id": 6,
       "title": "Brownie de Chocolate",
       "category": "Postres",
       "shortDescription": "Brownie sabroso y chocolatoso con nueces",
