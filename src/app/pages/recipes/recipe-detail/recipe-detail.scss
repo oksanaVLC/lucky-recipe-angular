@@ -1,480 +1,216 @@
+.recipe-card-wrapper {
+  border-radius: 22px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
 /* ===================== CONTENEDOR PRINCIPAL ===================== */
+
 .recipe-detail {
   max-width: 720px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 1rem 2rem;
   display: flex;
   flex-direction: column;
   text-align: center;
-
-  .celebration {
-    font-size: 1.1rem;
-    color: green;
-    margin-bottom: 1rem;
-  }
-
-  /* ===================== CARD ===================== */
-  .recipe-card {
-    background: #ffffff;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-bottom: 2rem;
-  }
-
-  /* Like button */
-  .like-btn {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    z-index: 3;
-    border: none;
-    cursor: pointer;
-
-    &.like-counter {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 10px;
-      border-radius: 14px;
-      background: #fff;
-      color: #666;
-      font-size: 0.75rem;
-      font-weight: 600;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-      transition: all 0.25s ease;
-
-      .heart {
-        font-size: 0.9rem;
-        line-height: 1;
-      }
-
-      &:hover {
-        transform: scale(1.05);
-      }
-
-      &.active {
-        background: #ff4d4f;
-        color: #fff;
-
-        .heart {
-          animation: pop 0.3s ease;
-        }
-      }
-    }
-  }
-
-  @keyframes pop {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.4);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-
-  /* Share button */
-  .bottom-buttons {
-    position: absolute;
-    right: 8px;
-    bottom: 8px;
-
-    .share-icon {
-      border: none;
-      padding: 0.5rem;
-      background: #fff;
-      border-radius: 50%;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-
-      img {
-        display: block;
-        width: 20px;
-        height: 20px;
-        object-fit: contain;
-      }
-
-      &:hover {
-        transform: scale(1.05);
-      }
-    }
-
-    .copy-msg {
-      position: absolute;
-      bottom: 100%;
-      right: 0;
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      font-size: 0.7rem;
-      padding: 2px 6px;
-      border-radius: 4px;
-      white-space: nowrap;
-      opacity: 0;
-      animation: fadeInOut 1.5s forwards;
-    }
-  }
-
-  @keyframes fadeInOut {
-    0% {
-      opacity: 0;
-      transform: translateY(5px);
-    }
-    10% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    90% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(-5px);
-    }
-  }
 }
 
-/* ===================== Contenido ===================== */
+/* ===================== HEADER ===================== */
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1rem 0 1.2rem;
+}
+
+.detail-title {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0;
+  text-align: left;
+  flex: 1;
+}
+
+/* ===================== CARD ===================== */
 .card-content {
-  padding: 0.75rem;
-  background-color: white;
-  .title,
-  .detail-title {
-    font-size: clamp(1.6rem, 4vw, 2.2rem);
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 0.5rem;
-    word-break: break-word;
-    text-align: center;
-  }
+  background: #fff;
 
-  .card-text {
-    font-size: 0.9rem;
-    color: #555;
-    margin-bottom: 0.6rem;
-    font-style: italic;
-    min-height: 1.2em;
-    line-height: 1.2em;
-  }
+  padding: 1.2rem 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 
-  .long-description,
-  .ingredients {
-    text-align: left;
-    margin-bottom: 1rem;
-
-    h3 {
-      font-weight: 700;
-      margin-bottom: 0.3rem;
-      text-align: center;
-    }
-
-    p,
-    ul {
-      margin: 0 0 0.8rem 0;
-      padding-left: 1rem;
-    }
-  }
+  overflow: hidden;
 }
 
-/* ===================== Autor ===================== */
+/* ===================== DESCRIPCIÓN CORTA ===================== */
+.card-text {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #222;
+  margin-bottom: 1.4rem;
+  padding: 0.8rem 1rem;
+  background: #fff7e0;
+  border-left: 4px solid #d4af37;
+  text-align: left;
+  font-style: italic;
+}
+
+/* Añadir las comillas directamente en el HTML */
+
+/* ===================== SECCIONES ===================== */
+.ingredients,
+.long-description {
+  margin-top: 1.8rem;
+}
+
+.ingredients h3,
+.long-description h3 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-bottom: 0.8rem;
+  text-align: center;
+  color: #111;
+}
+
+/* ===================== INGREDIENTES ===================== */
+.ingredients ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.ingredients li {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111;
+  padding: 0.6rem 0.8rem;
+  border-radius: 14px;
+  background: #f7f7f7;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* cantidad en verde */
+.ingredients li strong,
+.ingredients li span.quantity {
+  color: #1c8c3a;
+  font-weight: 800;
+}
+
+/* ===================== PREPARACIÓN ===================== */
+.long-description p {
+  text-align: left;
+  line-height: 1.6;
+  font-size: 1rem;
+  color: #222;
+  margin: 0;
+  white-space: pre-line;
+}
+
+/* ===================== PASOS CON CÍRCULOS ===================== */
+.recipe-steps {
+  counter-reset: step;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.recipe-steps li {
+  counter-increment: step;
+
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #222;
+}
+
+.recipe-steps li::before {
+  content: counter(step);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #fff;
+  background: linear-gradient(180deg, #fff3c4, #d4af37, #a67c00);
+  box-shadow: 0 3px 6px rgba(212, 175, 55, 0.45);
+  flex-shrink: 0;
+  padding-bottom: 4px;
+}
+
+/* ===================== AUTOR ===================== */
 .author {
   display: grid;
-  grid-template-columns: 48px 1fr;
-  gap: 0.5rem;
+  grid-template-columns: 60px 1fr;
+  gap: 0.8rem;
   align-items: center;
-  margin-top: 1rem;
-
-  .avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-
-  .author-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: left;
-    align-items: flex-start;
-
-    .author-name {
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-
-    .author-link {
-      font-size: 0.7rem;
-      color: green;
-      text-decoration: none;
-    }
-  }
+  margin-top: 2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-/* ===================== Back Button ===================== */
-.back-button-wrapper {
-  margin: 2rem 0;
-  display: flex;
-  justify-content: center;
+.author .avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #d4af37;
 }
 
-/* Swiper global */
-/* ===================== CONTENEDOR PRINCIPAL ===================== */
-.recipe-detail {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 0 1rem;
+.author-info {
   display: flex;
   flex-direction: column;
-  text-align: center;
-
-  .celebration {
-    font-size: 1.1rem;
-    color: green;
-    margin-bottom: 1rem;
-  }
-
-  /* ===================== CARD ===================== */
-  .recipe-card {
-    background: #ffffff;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-bottom: 2rem;
-  }
-
-  /* ===================== Imagen / Slider ===================== */
-  .image-slider {
-    position: relative;
-    width: 100%;
-    height: 300px; // altura fija coherente
-    overflow: visible;
-
-    .slider-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* Like button */
-    .like-btn {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      z-index: 3;
-      border: none;
-      cursor: pointer;
-
-      &.like-counter {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        padding: 6px 10px;
-        border-radius: 14px;
-        background: #fff;
-        color: #666;
-        font-size: 0.75rem;
-        font-weight: 600;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-        transition: all 0.25s ease;
-
-        .heart {
-          font-size: 0.9rem;
-          line-height: 1;
-        }
-
-        &:hover {
-          transform: scale(1.05);
-        }
-
-        &.active {
-          background: #ff4d4f;
-          color: #fff;
-
-          .heart {
-            animation: pop 0.3s ease;
-          }
-        }
-      }
-    }
-
-    @keyframes pop {
-      0% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.4);
-      }
-      100% {
-        transform: scale(1);
-      }
-    }
-
-    /* Share button */
-    .bottom-buttons {
-      position: absolute;
-      right: 8px;
-      bottom: 8px;
-      z-index: 10;
-
-      .share-icon {
-        border: none;
-        padding: 0.5rem;
-        background: #fff;
-        border-radius: 50%;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-
-        img {
-          display: block;
-          width: 20px;
-          height: 20px;
-          object-fit: contain;
-        }
-
-        &:hover {
-          transform: scale(1.05);
-        }
-      }
-
-      .copy-msg {
-        position: absolute;
-        bottom: 100%;
-        right: 0;
-        background: rgba(0, 0, 0, 0.8);
-        color: #fff;
-        font-size: 0.7rem;
-        padding: 2px 6px;
-        border-radius: 4px;
-        white-space: nowrap;
-        opacity: 0;
-        animation: fadeInOut 1.5s forwards;
-      }
-    }
-
-    @keyframes fadeInOut {
-      0% {
-        opacity: 0;
-        transform: translateY(5px);
-      }
-      10% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      90% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      100% {
-        opacity: 0;
-        transform: translateY(-5px);
-      }
-    }
-  }
-
-  /* ===================== Contenido ===================== */
-  .card-content {
-    padding: 0.75rem;
-
-    .title,
-    .detail-title {
-      font-size: clamp(1.6rem, 4vw, 2.2rem);
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 0.5rem;
-      word-break: break-word;
-      text-align: center;
-    }
-
-    .card-text {
-      font-size: 0.9rem;
-      color: #555;
-      margin-bottom: 0.6rem;
-      font-style: italic;
-      min-height: 1.2em;
-      line-height: 1.2em;
-    }
-
-    .long-description,
-    .ingredients {
-      text-align: left;
-      margin-bottom: 1rem;
-
-      h3 {
-        font-weight: 700;
-        margin-bottom: 0.3rem;
-        text-align: center;
-      }
-
-      p,
-      ul {
-        margin: 0 0 0.8rem 0;
-        padding-left: 1rem;
-      }
-    }
-  }
-
-  /* ===================== Autor ===================== */
-  .author {
-    display: grid;
-    grid-template-columns: 48px 1fr;
-    gap: 0.5rem;
-    align-items: center;
-    margin-top: 1rem;
-
-    .avatar {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    .author-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: left;
-      align-items: flex-start;
-
-      .author-name {
-        font-size: 0.8rem;
-        font-weight: 600;
-      }
-
-      .author-link {
-        font-size: 0.7rem;
-        color: green;
-        text-decoration: none;
-      }
-    }
-  }
+  text-align: left;
 }
 
-/* ===================== Back Button ===================== */
-.back-button-wrapper {
-  margin: 2rem 0;
-  display: flex;
-  justify-content: center;
+.author-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #111;
 }
 
-/* ===================== Swiper===================== */
+.author-link {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1c8c3a;
+  text-decoration: none;
+}
 
+.author-link:hover {
+  text-decoration: underline;
+}
+
+/* ===================== SLIDER ===================== */
+.image-slider {
+  position: relative;
+  width: 100%;
+  height: 320px;
+
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Swiper flechas visibles */
 swiper-container::part(button-prev),
 swiper-container::part(button-next) {
   display: flex !important;
@@ -484,6 +220,111 @@ swiper-container::part(button-next) {
 
 .image-slider.detail {
   --swiper-navigation-color: #d4af37;
-  --swiper-navigation-size: 20px;
+  --swiper-navigation-size: 22px;
   --swiper-pagination-color: #d4af37;
+}
+
+/* ===================== LIKE BUTTON ===================== */
+.like-btn.like-counter {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.92);
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 800;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.like-btn.like-counter:hover {
+  transform: scale(1.06);
+}
+
+.like-btn.like-counter.active {
+  background: #ff4d4f;
+  color: #fff;
+}
+
+.like-btn .heart {
+  font-size: 1rem;
+}
+
+/* ===================== SHARE BUTTON ===================== */
+.bottom-buttons {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 20;
+}
+
+.share-icon {
+  border: none;
+  padding: 0.55rem;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.share-icon:hover {
+  transform: scale(1.06);
+}
+
+.share-icon img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.copy-msg {
+  position: absolute;
+  bottom: 110%;
+  right: 0;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  animation: fadeInOut 1.5s forwards;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  85% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+/* ===================== BOTÓN BACK FINAL ===================== */
+.back-button-wrapper {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
 }

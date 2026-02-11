@@ -107,4 +107,12 @@ export class RecipeDetailComponent implements OnInit, AfterViewInit {
     this.recipeService.removeFavorite(this.recipe.id);
     this.likesCount = 0;
   }
+  get longSteps(): string[] {
+    if (!this.recipe?.longDescription) return [];
+
+    return this.recipe.longDescription
+      .split('\n')
+      .map((step) => step.trim().replace(/^\d+\.\s*/, '')) // quita "1. "
+      .filter((step) => step.length > 0);
+  }
 }
