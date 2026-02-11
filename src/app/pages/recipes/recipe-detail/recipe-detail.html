@@ -2,17 +2,19 @@
   <!-- TÍTULO Y BACK BUTTON ARRIBA -->
   <div class="title-row">
     <app-back-button-small></app-back-button-small>
-    <h1 class="detail-title">{{ r.title }}</h1>
+    <h1 class="detail-title gold-gradient">{{ r.title }}</h1>
   </div>
 
-  <!-- SLIDER -->
   <div class="image-slider" *ngIf="images.length > 0">
     <swiper-container
+      #swiperRef
       class="image-slider detail"
       loop="true"
       grab-cursor="true"
       allow-touch-move="true"
-      navigation='{"enabled": true}'
+      effect="fade"
+      fade-effect='{"crossFade": true}'
+      navigation="true"
       pagination='{"clickable": true}'
       observer="true"
       observe-parents="true"

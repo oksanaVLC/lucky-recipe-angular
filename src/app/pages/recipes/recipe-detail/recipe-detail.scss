@@ -472,7 +472,7 @@
   justify-content: center;
 }
 
-/* Swiper */
+/* ===================== Swiper===================== 
 swiper-container {
   width: 100%;
   height: 100%;
@@ -482,7 +482,7 @@ swiper-slide {
   height: 100%;
 }
 
-/* Flechas siempre visibles */
+
 swiper-container::part(button-prev),
 swiper-container::part(button-next) {
   display: flex !important;
@@ -490,9 +490,46 @@ swiper-container::part(button-next) {
   z-index: 10;
 }
 
-/* Variables de Swiper */
+
 .image-slider.detail {
   --swiper-navigation-color: #d4af37;
   --swiper-navigation-size: 20px;
   --swiper-pagination-color: #d4af37;
+}
+*/
+.image-slider {
+  position: relative;
+  width: 100%;
+  height: 600px; // ajusta según tu diseño
+  overflow: hidden;
+
+  .slider-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Flechas de navegación doradas */
+  ::ng-deep swiper-container .swiper-button-next,
+  ::ng-deep swiper-container .swiper-button-prev {
+    color: #d4af37; // dorado
+    font-size: 2rem;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+  }
+
+  ::ng-deep swiper-container .swiper-button-next:hover,
+  ::ng-deep swiper-container .swiper-button-prev:hover {
+    opacity: 1;
+  }
+
+  /* Paginación dorada */
+  ::ng-deep swiper-container .swiper-pagination-bullet {
+    background-color: #d4af37;
+    opacity: 0.7;
+  }
+
+  ::ng-deep swiper-container .swiper-pagination-bullet-active {
+    opacity: 1;
+  }
 }

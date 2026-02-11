@@ -1,13 +1,11 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { register } from 'swiper/element/bundle';
+
 import { BackButtonSmallComponent } from '../../../shared/components/back-button-small/back-button-small';
 import { BackButtonComponent } from '../../../shared/components/back-button/back-button';
 import { Recipe } from '../../../shared/models/recipe.model';
 import { RecipeService } from '../../../shared/services/recipe.service';
-
-register(); // para <swiper-container> y <swiper-slide>
 
 @Component({
   selector: 'app-recipe-detail',
