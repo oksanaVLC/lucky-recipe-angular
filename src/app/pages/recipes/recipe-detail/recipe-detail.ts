@@ -1,5 +1,12 @@
 import { CommonModule, Location } from '@angular/common';
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 
 import { BackButtonSmallComponent } from '../../../shared/components/back-button-small/back-button-small';
@@ -15,7 +22,9 @@ import { RecipeService } from '../../../shared/services/recipe.service';
   styleUrls: ['./recipe-detail.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class RecipeDetailComponent implements OnInit {
+export class RecipeDetailComponent implements OnInit, AfterViewInit {
+  @ViewChild('swiperRef', { static: false }) swiperRef!: ElementRef;
+
   recipe?: Recipe;
 
   likesCount = 0;
@@ -51,6 +60,19 @@ export class RecipeDetailComponent implements OnInit {
     }
   }
 
+  ngAfterViewInit() {
+    const swiperEl = this.swiperRef?.nativeElement;
+
+    if (!swiperEl) return;
+
+    // Fuerza recalculo al renderizar
+    swiperEl.swiper?.update();
+
+    // Recalculo cuando cambie tamaño o orientación
+    window.addEventListener('resize', () => swiperEl.swiper?.update());
+    window.addEventListener('orientationchange', () => swiperEl.swiper?.update());
+  }
+
   get images(): string[] {
     if (!this.recipe?.images?.length) return [];
     return this.recipe.images.map((img) => (img.startsWith('assets/') ? img : `assets/${img}`));
@@ -79,6 +101,7 @@ export class RecipeDetailComponent implements OnInit {
   goBack() {
     this.location.back();
   }
+
   removeFavorite() {
     if (!this.recipe?.id) return;
     this.recipeService.removeFavorite(this.recipe.id);
