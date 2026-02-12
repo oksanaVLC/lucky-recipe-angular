@@ -1,4 +1,3 @@
-<!-- ================= RECIPE DETAIL ================= -->
 <div *ngIf="recipe as r; else notFound" class="recipe-detail">
   <!-- TÍTULO Y BACK BUTTON ARRIBA -->
   <div class="title-row">
@@ -6,6 +5,7 @@
     <h1 class="detail-title gold-gradient">{{ r.title }}</h1>
   </div>
 
+  <!-- CARD -->
   <div class="recipe-card-wrapper">
     <!-- SLIDER DE IMÁGENES -->
     <div class="image-slider" *ngIf="images.length > 0">
@@ -50,10 +50,8 @@
 
     <!-- CONTENIDO DE LA RECETA -->
     <div class="card-content">
-      <!-- DESCRIPCIÓN CORTA -->
       <p class="card-text">"{{ r.shortDescription }}"</p>
 
-      <!-- INGREDIENTES -->
       <section class="ingredients" *ngIf="r.ingredients.length">
         <h3>Ingredientes</h3>
         <ul>
@@ -63,7 +61,6 @@
         </ul>
       </section>
 
-      <!-- PREPARACIÓN -->
       <section class="long-description" *ngIf="r.longDescription">
         <h3>Preparación</h3>
         <ol class="recipe-steps">
@@ -73,7 +70,6 @@
         </ol>
       </section>
 
-      <!-- AUTOR -->
       <div class="author">
         <img [src]="'assets/images/yo.webp'" alt="Autor" class="avatar" />
         <div class="author-info">
@@ -85,7 +81,6 @@
       </div>
     </div>
 
-    <!-- BOTÓN QUITAR FAVORITOS -->
     <div class="recipe-actions" *ngIf="showRemoveFavorite">
       <button type="button" (click)="removeFavorite()" class="remove-btn">
         ❌ Quitar de favoritos
@@ -93,12 +88,11 @@
     </div>
   </div>
 </div>
-<!-- BACK BUTTON AL FINAL -->
+
 <div class="back-button-wrapper">
   <app-back-button [fallbackRoute]="'/inicio'"></app-back-button>
 </div>
 
-<!-- ================= NOT FOUND TEMPLATE ================= -->
 <ng-template #notFound>
   <div class="recipe-not-found">
     <p>Esta receta no existe o ya no está disponible.</p>
