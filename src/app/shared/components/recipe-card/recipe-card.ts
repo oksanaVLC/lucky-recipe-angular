@@ -1,11 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { register } from 'swiper/element/bundle';
 import { Recipe } from '../../models/recipe.model';
 import { RecipeService } from '../../services/recipe.service';
 
-import { register } from 'swiper/element/bundle';
-register(); // registra los elementos <swiper-container> y <swiper-slide>
+register(); // registra <swiper-container> y <swiper-slide>
 
 @Component({
   selector: 'app-recipe-card',
@@ -13,60 +21,50 @@ register(); // registra los elementos <swiper-container> y <swiper-slide>
   imports: [CommonModule, RouterModule],
   templateUrl: './recipe-card.html',
   styleUrls: ['./recipe-card.scss'],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA], //para Swiper
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class RecipeCardComponent implements OnInit {
+export class RecipeCardComponent implements OnInit, AfterViewInit {
   @Input({ required: true }) recipe!: Recipe;
 
-  // Opciones visuales
   @Input() showLikeButton: boolean = true;
   @Input() showShareButton: boolean = true;
   @Input() showLongDescription: boolean = false;
   @Input() showIngredients: boolean = false;
   @Input() titleSize: 'small' | 'large' = 'small';
-
-  // Control truncado descripción corta
   @Input() truncateShortDescription: boolean = true;
   @Input() shortDescriptionLength: number = 20;
-
   @Input() showRemoveFavorite: boolean = false;
-
   @Input() showActions = true;
 
-  // Estado interno
-
-  likesCount = 0; // futuro back-end
+  likesCount = 0;
   copied = false;
+
+  @ViewChild('swiperRef', { static: false }) swiperRef!: ElementRef;
 
   constructor(private recipeService: RecipeService) {}
 
   ngOnInit() {
-    // Inicializamos likes visualmente: recipe?.likesCount por si acaso
     this.likesCount = (this.recipe?.likesCount ?? 0) + (this.isFavorite ? 1 : 0);
   }
 
-  // ================== SLIDER ==================
+  ngAfterViewInit() {
+    const swiperEl = this.swiperRef?.nativeElement;
+    if (!swiperEl) return;
+
+    swiperEl.swiper?.update();
+    window.addEventListener('resize', () => swiperEl.swiper?.update());
+    window.addEventListener('orientationchange', () => swiperEl.swiper?.update());
+  }
+
   get images(): string[] {
     if (!this.recipe?.images?.length) return [];
-
     return this.recipe.images.map((img) => (img.startsWith('assets/') ? img : `assets/${img}`));
   }
 
-  get authorAvatar(): string {
-    const avatar = this.recipe?.author?.avatar;
-    if (!avatar) return 'assets/images/logo.webp';
-
-    return avatar.startsWith('assets/') ? avatar : `assets/${avatar}`;
-  }
-
-  // ================== FAVORITOS ==================
   toggleLike(event: Event) {
     event.stopPropagation();
     if (!this.recipe?.id) return;
-
     this.recipeService.toggleFavorite(this.recipe.id);
-
-    // Sumar/restar 1 al valor original de la receta
     this.likesCount = (this.recipe?.likesCount ?? 0) + (this.isFavorite ? 1 : 0);
   }
 
@@ -80,8 +78,8 @@ export class RecipeCardComponent implements OnInit {
     this.likesCount = 0;
   }
 
-  // ================== COMPARTIR ==================
   copyLink() {
+    if (!this.recipe?.id) return;
     const url = `${window.location.origin}/recipe/${this.recipe.id}`;
     navigator.clipboard.writeText(url).then(() => {
       this.copied = true;
@@ -89,13 +87,11 @@ export class RecipeCardComponent implements OnInit {
     });
   }
 
-  // ================== DESCRIPCIÓN CORTA ==================
   get shortText(): string {
     if (!this.recipe?.shortDescription) return '';
-    if (this.truncateShortDescription) {
-      return this.recipe.shortDescription.slice(0, this.shortDescriptionLength);
-    }
-    return this.recipe.shortDescription;
+    return this.truncateShortDescription
+      ? this.recipe.shortDescription.slice(0, this.shortDescriptionLength)
+      : this.recipe.shortDescription;
   }
 
   get showEllipsis(): boolean {

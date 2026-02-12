@@ -1,26 +1,23 @@
 <article class="recipe-card" *ngIf="recipe">
-  <!-- TÍTULO DETALLE ENCIMA DE LA IMAGEN -->
-
-  <!-- IMAGEN / SLIDER -->
   <div class="image-slider">
-    <!-- Swiper -->
     <swiper-container
-      navigation="true"
-      pagination="true"
-      loop="true"
+      #swiperRef
       class="image-slider detail"
-      style="
-        --swiper-navigation-color: #d4af37;
-        --swiper-navigation-size: 20px;
-        --swiper-pagination-color: #d4af37;
-      "
+      loop="true"
+      grab-cursor="true"
+      allow-touch-move="true"
+      effect="fade"
+      fade-effect='{"crossFade": true}'
+      navigation="true"
+      pagination='{"clickable": true}'
+      observer="true"
+      observe-parents="true"
     >
       <swiper-slide *ngFor="let img of images">
         <img [src]="img" [alt]="recipe.title" class="slider-image" />
       </swiper-slide>
     </swiper-container>
 
-    <!-- LIKE -->
     <button
       *ngIf="showLikeButton"
       class="like-btn like-counter"
@@ -32,65 +29,51 @@
       <span class="count">{{ likesCount }}</span>
     </button>
 
-    <!-- SHARE -->
-    <div class="bottom-buttons">
-      <button
-        *ngIf="showShareButton"
-        class="share-icon"
-        aria-label="Compartir"
-        (click)="copyLink()"
-      >
+    <div class="bottom-buttons" *ngIf="showShareButton">
+      <button class="share-icon" aria-label="Compartir" (click)="copyLink()">
         <img src="assets/images/share.webp" alt="Compartir" />
       </button>
-
       <span class="copy-msg" *ngIf="copied">¡Link copiado!</span>
     </div>
   </div>
 
-  <!-- CONTENIDO -->
   <div class="card-content">
     <h1 class="title" [ngClass]="{ 'large-title': titleSize === 'large' }">
       {{ recipe.title }}
     </h1>
+    <p class="card-text">
+      <span class="star-text">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="#FFD700"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.54 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"
+          />
+        </svg>
+        {{ shortText }}<span *ngIf="showEllipsis">…</span>
+      </span>
+    </p>
 
-    <p class="card-text">{{ shortText }}<span *ngIf="showEllipsis">…</span></p>
-
-    <!-- Ingredientes -->
-    <section class="ingredients" *ngIf="showIngredients && recipe.ingredients.length">
-      <h3>Ingredientes</h3>
-      <ul>
-        <li *ngFor="let ingredient of recipe.ingredients">
-          {{ ingredient.quantity ? ingredient.quantity + ' ' : '' }}{{ ingredient.name }}
-        </li>
-      </ul>
-    </section>
-    <!-- Preparación -->
-    <section class="long-description" *ngIf="showLongDescription && recipe.longDescription">
-      <h3>Preparación</h3>
-      <p style="white-space: pre-line">{{ recipe.longDescription }}</p>
-    </section>
-
-    <!-- Autor -->
     <div class="author">
-      <!--   <img
-        [src]="recipe.author?.avatar || 'assets/images/profile.webp'"
-        alt="Autor"
-        class="avatar"
-      />-->
       <img [src]="'assets/images/yo.webp'" alt="Autor" class="avatar" />
-
       <div class="author-info">
         <span class="author-name">{{ recipe.author?.name }}</span>
-        <a class="author-link" [routerLink]="['/perfil', recipe.author?.id]">Ver sus recetas</a>
+        <a class="author-link" [routerLink]="['/author-recipes', recipe.author?.id]"
+          >Ver sus recetas</a
+        >
       </div>
     </div>
   </div>
-  <!-- Botón quitar favoritos -->
+
   <div class="recipe-actions" *ngIf="showRemoveFavorite">
     <button type="button" (click)="removeFavorite()" class="remove-btn">
       ❌ Quitar de favoritos
     </button>
   </div>
 
-  <a class="view-recipe-full" [routerLink]="['/recipe', recipe.id]"> Ver receta</a>
+  <a class="view-recipe-full" [routerLink]="['/recipe', recipe.id]">Ver receta</a>
 </article>
