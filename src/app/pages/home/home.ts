@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -25,6 +25,7 @@ import { RecipeService } from '../../shared/services/recipe.service';
   ],
   templateUrl: './home.html',
   styleUrls: ['./home.scss'],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 
   animations: [
     //Para Recetas del mundo 2
@@ -47,6 +48,17 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   searchTerm: string = '';
   private searchSub: Subscription | null = null;
   private recipesSub: Subscription | null = null;
+
+  logos: string[] = Array(10).fill('assets/images/patrocinador1.png');
+
+  sponsorLogos: string[] = [
+    'assets/images/logos/logo1.webp',
+    'assets/images/logos/logo2.webp',
+    'assets/images/logos/logo3.webp',
+    'assets/images/logos/logo4.webp',
+    'assets/images/logos/logo5.webp',
+    'assets/images/logos/logo6.webp',
+  ];
 
   isLoading = false;
 

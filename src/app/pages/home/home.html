@@ -107,4 +107,23 @@
   </div>
 
   <h1 class="decorated-title scroll-animate">Descubre más</h1>
+
+  <h1 class="decorated-title scroll-animate">Patrocinadores</h1>
+  <div class="sponsors-slider">
+    <swiper-container
+      class="sponsor-swiper"
+      loop="true"
+      slides-per-view="auto"
+      space-between="30"
+      speed="6000"
+      autoplay-delay="0"
+      autoplay-disable-on-interaction="false"
+      free-mode="true"
+      free-mode-momentum="false"
+    >
+      <swiper-slide *ngFor="let logo of logos" class="sponsor-slide">
+        <img [src]="logo" alt="Patrocinador" />
+      </swiper-slide>
+    </swiper-container>
+  </div>
 </div>

@@ -552,3 +552,27 @@ app-search-bar {
   color: transparent;
   height: 250px; // mantiene espacio
 }
+
+.sponsor-swiper {
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.sponsor-slide {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sponsor-slide img {
+  height: 50px;
+  width: auto;
+  opacity: 0.8;
+  transition: transform 0.2s ease;
+}
+
+.sponsor-slide img:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
