@@ -1,11 +1,13 @@
-<div class="recipe-card-wrapper">
-  <div *ngIf="recipe as r; else notFound" class="recipe-detail">
-    <!-- TÍTULO Y BACK BUTTON ARRIBA -->
-    <div class="title-row">
-      <app-back-button-small></app-back-button-small>
-      <h1 class="detail-title gold-gradient">{{ r.title }}</h1>
-    </div>
+<!-- ================= RECIPE DETAIL ================= -->
+<div *ngIf="recipe as r; else notFound" class="recipe-detail">
+  <!-- TÍTULO Y BACK BUTTON ARRIBA -->
+  <div class="title-row">
+    <app-back-button-small></app-back-button-small>
+    <h1 class="detail-title gold-gradient">{{ r.title }}</h1>
+  </div>
 
+  <div class="recipe-card-wrapper">
+    <!-- SLIDER DE IMÁGENES -->
     <div class="image-slider" *ngIf="images.length > 0">
       <swiper-container
         #swiperRef
@@ -25,7 +27,7 @@
         </swiper-slide>
       </swiper-container>
 
-      <!-- LIKE -->
+      <!-- LIKE BUTTON -->
       <button
         *ngIf="showLikeButton"
         class="like-btn like-counter"
@@ -37,7 +39,7 @@
         <span class="count">{{ likesCount }}</span>
       </button>
 
-      <!-- SHARE -->
+      <!-- SHARE BUTTON -->
       <div class="bottom-buttons" *ngIf="showShareButton">
         <button class="share-icon" aria-label="Compartir" (click)="copyLink()">
           <img src="assets/images/share.webp" alt="Compartir" />
@@ -51,7 +53,7 @@
       <!-- DESCRIPCIÓN CORTA -->
       <p class="card-text">"{{ r.shortDescription }}"</p>
 
-      <!-- Ingredientes -->
+      <!-- INGREDIENTES -->
       <section class="ingredients" *ngIf="r.ingredients.length">
         <h3>Ingredientes</h3>
         <ul>
@@ -61,43 +63,45 @@
         </ul>
       </section>
 
-      <!-- Preparación -->
+      <!-- PREPARACIÓN -->
       <section class="long-description" *ngIf="r.longDescription">
         <h3>Preparación</h3>
         <ol class="recipe-steps">
           <li *ngFor="let step of longSteps">
-            {{ step }}
+            <span class="step-text">{{ step }}</span>
           </li>
         </ol>
       </section>
 
-      <!-- Autor -->
+      <!-- AUTOR -->
       <div class="author">
         <img [src]="'assets/images/yo.webp'" alt="Autor" class="avatar" />
         <div class="author-info">
           <span class="author-name">{{ r.author?.name }}</span>
-          <a class="author-link" [routerLink]="['/perfil', r.author?.id]">Ver sus recetas</a>
+          <a class="author-link" [routerLink]="['/author-recipes', r.author?.id]">
+            Ver sus recetas
+          </a>
         </div>
       </div>
     </div>
 
-    <!-- Botón quitar favoritos -->
+    <!-- BOTÓN QUITAR FAVORITOS -->
     <div class="recipe-actions" *ngIf="showRemoveFavorite">
       <button type="button" (click)="removeFavorite()" class="remove-btn">
         ❌ Quitar de favoritos
       </button>
     </div>
   </div>
-
-  <!-- BACK BUTTON AL FINAL -->
-  <div class="back-button-wrapper">
-    <app-back-button [fallbackRoute]="'/inicio'"></app-back-button>
-  </div>
-
-  <ng-template #notFound>
-    <div class="recipe-not-found">
-      <p>Esta receta no existe o ya no está disponible.</p>
-      <button class="back-button" routerLink="/inicio">← Volver al inicio</button>
-    </div>
-  </ng-template>
 </div>
+<!-- BACK BUTTON AL FINAL -->
+<div class="back-button-wrapper">
+  <app-back-button [fallbackRoute]="'/inicio'"></app-back-button>
+</div>
+
+<!-- ================= NOT FOUND TEMPLATE ================= -->
+<ng-template #notFound>
+  <div class="recipe-not-found">
+    <p>Esta receta no existe o ya no está disponible.</p>
+    <button class="back-button" routerLink="/inicio">← Volver al inicio</button>
+  </div>
+</ng-template>

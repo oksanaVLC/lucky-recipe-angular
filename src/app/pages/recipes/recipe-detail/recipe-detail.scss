@@ -1,6 +1,7 @@
 .recipe-card-wrapper {
   border-radius: 22px;
-
+  overflow: hidden;
+  background: #fff;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
@@ -35,11 +36,7 @@
 /* ===================== CARD ===================== */
 .card-content {
   background: #fff;
-
   padding: 1.2rem 1rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-
-  overflow: hidden;
 }
 
 /* ===================== DESCRIPCIÓN CORTA ===================== */
@@ -125,11 +122,10 @@
 
 .recipe-steps li {
   counter-increment: step;
-
-  padding-left: 10px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
+
   font-size: 1rem;
   line-height: 1.5;
   color: #222;
@@ -137,19 +133,30 @@
 
 .recipe-steps li::before {
   content: counter(step);
+
   width: 28px;
   height: 28px;
+
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #fff;
+
   background: linear-gradient(180deg, #fff3c4, #d4af37, #a67c00);
   box-shadow: 0 3px 6px rgba(212, 175, 55, 0.45);
+
   flex-shrink: 0;
   padding-bottom: 4px;
+}
+
+.recipe-steps .step-text {
+  flex: 1; // 🔥 ocupa todo el espacio restante
+  display: block; // 🔥 asegura wrap correcto
+  text-align: left;
 }
 
 /* ===================== AUTOR ===================== */

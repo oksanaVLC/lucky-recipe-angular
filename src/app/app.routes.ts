@@ -47,6 +47,11 @@ export const routes: Routes = [
   },
 
   {
+    path: 'author-recipes/:id',
+    loadComponent: () =>
+      import('./pages/author-recipes/author-recipes').then((m) => m.AuthorRecipesComponent),
+  },
+  {
     path: '**',
     redirectTo: 'inicio',
   },

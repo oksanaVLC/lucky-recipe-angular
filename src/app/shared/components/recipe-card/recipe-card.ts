@@ -31,6 +31,8 @@ export class RecipeCardComponent implements OnInit {
 
   @Input() showRemoveFavorite: boolean = false;
 
+  @Input() showActions = true;
+
   // Estado interno
 
   likesCount = 0; // futuro back-end

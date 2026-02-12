@@ -72,7 +72,7 @@
       "images": ["images/ensalada-mediterranea.webp", "images/ensalada-mediterranea1.webp"],
       "rating": 4.4,
       "likesCount": 6,
-      "author": { "id": 2, "name": "Oksana", "avatar": "images/avatar2.webp" },
+      "author": { "id": 1, "name": "Oksana", "avatar": "images/avatar2.webp" },
       "createdAt": "2026-02-06T09:00:00Z"
     },
     {
@@ -92,7 +92,7 @@
       "images": ["images/lasagna.webp", "images/lasagna1.webp"],
       "rating": 4.7,
       "likesCount": 11,
-      "author": { "id": 3, "name": "Oksana", "avatar": "images/avatar3.webp" },
+      "author": { "id": 1, "name": "Oksana", "avatar": "images/avatar3.webp" },
       "createdAt": "2026-02-05T12:30:00Z"
     },
     {
@@ -111,7 +111,7 @@
       "images": ["images/brownie.webp", "images/brownie1.webp"],
       "rating": 4.7,
       "likesCount": 15,
-      "author": { "id": 4, "name": "Oksana", "avatar": "images/avatar4.webp" },
+      "author": { "id": 1, "name": "Oksana", "avatar": "images/avatar4.webp" },
       "createdAt": "2026-02-05T15:00:00Z"
     }
   ]

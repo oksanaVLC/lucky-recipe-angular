@@ -1,0 +1,31 @@
+.author-recipes-page {
+  padding: 1.5rem 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 260px));
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: start;
+  }
+
+  app-recipe-card {
+    width: 100%;
+  }
+
+  .no-recipes-msg {
+    text-align: center;
+    font-size: 1rem;
+    color: #555;
+    margin-top: 2rem;
+  }
+}

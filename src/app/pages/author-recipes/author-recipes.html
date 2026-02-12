@@ -1,1 +1,19 @@
-<p>author-recipes works!</p>
+<div class="title-row">
+  <app-back-button-small></app-back-button-small>
+  <h1 class="detail-title gold-gradient">Recetas de {{ authorName }}</h1>
+</div>
+<div class="author-recipes-page">
+  <ng-container *ngIf="recipes.length > 0; else noRecipes">
+    <div class="recipes-grid">
+      <app-recipe-card
+        *ngFor="let r of recipes; trackBy: trackById"
+        [recipe]="r"
+        [showActions]="false"
+      ></app-recipe-card>
+    </div>
+  </ng-container>
+
+  <ng-template #noRecipes>
+    <p class="no-recipes-msg">No recipes found for this author.</p>
+  </ng-template>
+</div>
