@@ -39,6 +39,8 @@ export class RecipeCardComponent implements OnInit, AfterViewInit {
   likesCount = 0;
   copied = false;
 
+  stars = Array(5); // genera 5 elementos para el *ngFor
+
   @ViewChild('swiperRef', { static: false }) swiperRef!: ElementRef;
 
   constructor(private recipeService: RecipeService) {}

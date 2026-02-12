@@ -34,6 +34,8 @@ export class RecipeDetailComponent implements OnInit, AfterViewInit {
   showShareButton = true;
   titleSize: 'small' | 'large' = 'large';
 
+  stars = Array(5); // genera 5 elementos para el *ngFor
+
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,

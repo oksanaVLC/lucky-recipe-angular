@@ -41,30 +41,28 @@
     <h1 class="title" [ngClass]="{ 'large-title': titleSize === 'large' }">
       {{ recipe.title }}
     </h1>
-    <p class="card-text">
-      <span class="star-text">
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="#FFD700"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.54 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"
-          />
-        </svg>
-        {{ shortText }}<span *ngIf="showEllipsis">…</span>
-      </span>
-    </p>
+    <div class="stars">
+      <svg
+        *ngFor="let star of stars"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="#FFD700"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.54 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"
+        />
+      </svg>
+    </div>
+
+    <p class="card-text">"{{ shortText }}<span *ngIf="showEllipsis">…</span>"</p>
 
     <div class="author">
       <img [src]="'assets/images/yo.webp'" alt="Autor" class="avatar" />
       <div class="author-info">
         <span class="author-name">{{ recipe.author?.name }}</span>
-        <a class="author-link" [routerLink]="['/author-recipes', recipe.author?.id]"
-          >Ver sus recetas</a
-        >
+        <a class="author-link" [routerLink]="['/author-recipes', recipe.author?.id]">Ver recetas</a>
       </div>
     </div>
   </div>

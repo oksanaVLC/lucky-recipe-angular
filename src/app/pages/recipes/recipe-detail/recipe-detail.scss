@@ -16,6 +16,15 @@
   text-align: center;
 }
 
+.stars {
+  position: absolute;
+  top: 12px; // distancia desde arriba
+  left: 12px; // distancia desde la izquierda
+  display: flex; // en línea
+  gap: 4px; // espacio entre estrellas
+  z-index: 15; // encima de la imagen
+}
+
 /* ===================== CARD ===================== */
 .card-content {
   background: #fff;
@@ -127,10 +136,11 @@
 
   font-weight: bold;
   font-size: 1rem;
-  color: #fff;
+  color: var(--verde-oscuro);
 
-  background: linear-gradient(180deg, #fff3c4, #d4af37, #a67c00);
-  box-shadow: 0 3px 6px rgba(212, 175, 55, 0.45);
+  // background: linear-gradient(180deg, #fff3c4, #d4af37, #a67c00);
+  background: linear-gradient(90deg, #70eea4, #fdf4d0);
+  // box-shadow: 0 3px 6px rgba(212, 175, 55, 0.45);
 
   flex-shrink: 0;
   padding-bottom: 4px;
@@ -176,7 +186,7 @@
 .author-link {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #1c8c3a;
+  color: var(--verde-oscuro);
   text-decoration: none;
 }
 
@@ -229,7 +239,7 @@ swiper-container::part(button-next) {
   border: none;
   cursor: pointer;
   font-size: 0.85rem;
-  font-weight: 800;
+  font-weight: 600;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
   transition: transform 0.2s ease;
 }
