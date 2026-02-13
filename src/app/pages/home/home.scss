@@ -482,10 +482,9 @@ app-search-bar {
   margin: 40px 0 25px;
   text-align: center;
   color: #222;
-
+  will-change: opacity, transform, filter;
   opacity: 0;
   transform: translateY(20px); /* más cercano al movimiento de las cards */
-  filter: blur(6px);
 
   animation: fadeInUp 0.6s forwards ease-out; /* animación de entrada */
   animation-delay: 0ms; /* aparece primero */
@@ -520,7 +519,7 @@ app-search-bar {
 }
 
 /* =========================
-   Reutilizamos fadeInUp para stagger
+    fadeInUp para stagger
 ========================= */
 @keyframes fadeInUp {
   to {
@@ -555,7 +554,9 @@ app-search-bar {
 
 .sponsor-swiper {
   width: 100%;
+  max-width: 900px;
   padding: 1rem 0;
+  margin: 0 auto;
 }
 
 .sponsor-slide {
@@ -566,7 +567,7 @@ app-search-bar {
 }
 
 .sponsor-slide img {
-  height: 50px;
+  height: 78px;
   width: auto;
   opacity: 0.8;
   transition: transform 0.2s ease;
@@ -575,4 +576,10 @@ app-search-bar {
 .sponsor-slide img:hover {
   transform: scale(1.05);
   opacity: 1;
+}
+
+@media (min-width: 1200px) {
+  .sponsor-slide img {
+    height: 100px;
+  }
 }

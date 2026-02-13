@@ -3,6 +3,7 @@ import { Component, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DraftService } from '../../../core/services/draft.service';
 import { BackButtonSmallComponent } from '../../../shared/components/back-button-small/back-button-small';
+import { Recipe } from '../../../shared/models/recipe.model'; // ✅ Import necesario
 import { RecipeService } from '../../../shared/services/recipe.service';
 
 @Component({
@@ -13,8 +14,9 @@ import { RecipeService } from '../../../shared/services/recipe.service';
   styleUrls: ['./account.scss'],
 })
 export class AccountComponent {
+  // Señales
   recipeCount = signal(0);
-  favoriteCount = signal(0); // ✅ favoritos
+  favoriteRecipes: Recipe[] = [];
 
   constructor(
     public draftService: DraftService,
@@ -27,10 +29,11 @@ export class AccountComponent {
     });
 
     // Recetas favoritas
-    this.recipeService.getFavorites().subscribe((favs: number[]) => {
-      this.favoriteCount.set(favs.length);
+    this.recipeService.getFavorites().subscribe((favIds: number[]) => {
+      this.favoriteRecipes = this.recipeService.getAllValue().filter((r) => favIds.includes(r.id));
     });
   }
+
   goBack() {
     this.location.back();
   }

@@ -2,14 +2,18 @@
   <app-back-button-small></app-back-button-small>
   <h1 class="gold-gradient">Lista de Compras</h1>
 </div>
+
 <div class="shopping-list-container">
-  <h2>¿Qué necesito?</h2>
+  <h2>Instrucciones</h2>
+  <p>
+    Añade productos a la lista, guárdalos automáticamente y, si quieres, imprímelos o descárgalos.
+  </p>
 
   <div class="input-wrapper">
     <input
       type="text"
       [(ngModel)]="newItem"
-      placeholder="Añadir producto..."
+      placeholder="Escribe un producto y pulsa +"
       (keyup.enter)="addItem()"
     />
     <button (click)="addItem()">+</button>
@@ -21,4 +25,11 @@
       <button class="remove-btn" (click)="removeItem(i)">×</button>
     </li>
   </ol>
+
+  <p>Total productos: {{ items.length }}</p>
+
+  <div class="actions">
+    <button (click)="downloadList()">Guardar como archivo</button>
+    <button (click)="printList()">Imprimir</button>
+  </div>
 </div>

@@ -10,7 +10,8 @@
       <span class="draft-title" role="button" (click)="editDraft(draft)">
         {{ draft.title || 'Sin título' }}
       </span>
-      <span class="draft-date">{{ draft.updatedAt | date: 'short' }}</span>
+      <span class="draft-date">{{ draft.updatedAt | date: 'dd/MM/yyyy, HH:mm' }}</span>
+
       <button class="btn-delete" (click)="confirmDelete(draft)">🗑️</button>
     </li>
   </ol>

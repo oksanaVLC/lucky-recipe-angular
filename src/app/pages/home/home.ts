@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   private searchSub: Subscription | null = null;
   private recipesSub: Subscription | null = null;
 
-  logos: string[] = Array(10).fill('assets/images/patrocinador1.png');
+  logos: string[] = Array(10).fill('assets/images/logolunas.png');
 
   sponsorLogos: string[] = [
     'assets/images/logos/logo1.webp',

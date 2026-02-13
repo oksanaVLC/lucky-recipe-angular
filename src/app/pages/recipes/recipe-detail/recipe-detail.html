@@ -1,106 +1,106 @@
 <div *ngIf="recipe as r; else notFound" class="recipe-detail">
-  <!-- TÍTULO Y BACK BUTTON ARRIBA -->
+  <!-- TÍTULO Y BACK BUTTON -->
   <div class="title-row">
     <app-back-button-small></app-back-button-small>
     <h1 class="detail-title gold-gradient">{{ r.title }}</h1>
   </div>
 
-  <!-- CARD -->
-  <div class="recipe-card-wrapper">
-    <!-- SLIDER DE IMÁGENES -->
-    <div class="image-slider" *ngIf="images.length > 0">
-      <swiper-container
-        #swiperRef
-        class="image-slider detail"
-        loop="true"
-        grab-cursor="true"
-        allow-touch-move="true"
-        effect="fade"
-        fade-effect='{"crossFade": true}'
-        navigation="true"
-        pagination='{"clickable": true}'
-        observer="true"
-        observe-parents="true"
+  <!-- SLIDER DE IMÁGENES -->
+  <div class="image-slider" *ngIf="images.length > 0">
+    <swiper-container
+      #swiperRef
+      class="image-slider detail"
+      loop="true"
+      grab-cursor="true"
+      allow-touch-move="true"
+      effect="fade"
+      fade-effect='{"crossFade": true}'
+      navigation="true"
+      pagination='{"clickable": true}'
+      observer="true"
+      observe-parents="true"
+    >
+      <swiper-slide *ngFor="let img of images">
+        <img [src]="img" [alt]="r.title" class="slider-image" />
+      </swiper-slide>
+    </swiper-container>
+
+    <!-- Después del slider o del título -->
+    <div class="stars">
+      <svg
+        *ngFor="let star of stars"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="#FFD700"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <swiper-slide *ngFor="let img of images">
-          <img [src]="img" [alt]="r.title" class="slider-image" />
-        </swiper-slide>
-      </swiper-container>
+        <path
+          d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.54 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"
+        />
+      </svg>
+    </div>
 
-      <div class="stars">
-        <svg
-          *ngFor="let star of stars"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="#FFD700"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.54 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"
-          />
-        </svg>
-      </div>
+    <!-- LIKE BUTTON -->
+    <button
+      *ngIf="showLikeButton"
+      class="like-btn like-counter"
+      [class.active]="isFavorite"
+      (click)="toggleLike($event)"
+      aria-label="Me gusta"
+    >
+      <span class="heart">♥</span>
+      <span class="count">{{ likesCount }}</span>
+    </button>
 
-      <!-- LIKE BUTTON -->
-      <button
-        *ngIf="showLikeButton"
-        class="like-btn like-counter"
-        [class.active]="isFavorite"
-        (click)="toggleLike($event)"
-        aria-label="Me gusta"
-      >
-        <span class="heart">♥</span>
-        <span class="count">{{ likesCount }}</span>
+    <!-- SHARE BUTTON -->
+    <div class="bottom-buttons" *ngIf="showShareButton">
+      <button class="share-icon" aria-label="Compartir" (click)="copyLink()">
+        <img src="assets/images/share.webp" alt="Compartir" />
       </button>
+      <span class="copy-msg" *ngIf="copied">¡Link copiado!</span>
+    </div>
+  </div>
 
-      <!-- SHARE BUTTON -->
-      <div class="bottom-buttons" *ngIf="showShareButton">
-        <button class="share-icon" aria-label="Compartir" (click)="copyLink()">
-          <img src="assets/images/share.webp" alt="Compartir" />
-        </button>
-        <span class="copy-msg" *ngIf="copied">¡Link copiado!</span>
+  <!-- CONTENIDO -->
+  <div class="card-content">
+    <p class="card-text">"{{ r.shortDescription }}"</p>
+
+    <section class="ingredients" *ngIf="r.ingredients.length">
+      <h3>Ingredientes</h3>
+      <ul>
+        <li *ngFor="let ingredient of r.ingredients">
+          {{ ingredient.quantity ? ingredient.quantity + ' ' : '' }}{{ ingredient.name }}
+        </li>
+      </ul>
+    </section>
+
+    <section class="long-description" *ngIf="r.longDescription">
+      <h3>Preparación</h3>
+      <ol class="recipe-steps">
+        <li *ngFor="let step of longSteps">
+          <span class="step-text">{{ step }}</span>
+        </li>
+      </ol>
+    </section>
+
+    <!-- AUTOR -->
+    <div class="author">
+      <img [src]="'assets/images/yo.webp'" alt="Autor" class="avatar" />
+      <div class="author-info">
+        <span class="author-name">{{ r.author?.name }}</span>
+        <a class="author-link" [routerLink]="['/author-recipes', r.author?.id]">
+          Ver sus recetas
+        </a>
       </div>
     </div>
+  </div>
 
-    <!-- CONTENIDO DE LA RECETA -->
-    <div class="card-content">
-      <p class="card-text">"{{ r.shortDescription }}"</p>
-
-      <section class="ingredients" *ngIf="r.ingredients.length">
-        <h3>Ingredientes</h3>
-        <ul>
-          <li *ngFor="let ingredient of r.ingredients">
-            {{ ingredient.quantity ? ingredient.quantity + ' ' : '' }}{{ ingredient.name }}
-          </li>
-        </ul>
-      </section>
-
-      <section class="long-description" *ngIf="r.longDescription">
-        <h3>Preparación</h3>
-        <ol class="recipe-steps">
-          <li *ngFor="let step of longSteps">
-            <span class="step-text">{{ step }}</span>
-          </li>
-        </ol>
-      </section>
-
-      <div class="author">
-        <img [src]="'assets/images/yo.webp'" alt="Autor" class="avatar" />
-        <div class="author-info">
-          <span class="author-name">{{ r.author?.name }}</span>
-          <a class="author-link" [routerLink]="['/author-recipes', r.author?.id]">
-            Ver sus recetas
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="recipe-actions" *ngIf="showRemoveFavorite">
-      <button type="button" (click)="removeFavorite()" class="remove-btn">
-        ❌ Quitar de favoritos
-      </button>
-    </div>
+  <!-- REMOVE FAVORITE -->
+  <div class="recipe-actions" *ngIf="showRemoveFavorite">
+    <button type="button" (click)="removeFavorite()" class="remove-btn">
+      ❌ Quitar de favoritos
+    </button>
   </div>
 </div>
 

@@ -40,9 +40,19 @@
   margin-bottom: 1.4rem;
   padding: 0.8rem 1rem;
   background: #fff7e0;
-  border-left: 4px solid #d4af37;
   text-align: left;
   font-style: italic;
+  position: relative; /* necesario para ::before */
+}
+
+.card-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px; /* grosor de la línea */
+  height: 100%;
+  background: linear-gradient(to bottom, #fdf4d0, #70eea4);
 }
 
 /* Añadir las comillas directamente en el HTML */
@@ -147,8 +157,8 @@
 }
 
 .recipe-steps .step-text {
-  flex: 1; // 🔥 ocupa todo el espacio restante
-  display: block; // 🔥 asegura wrap correcto
+  flex: 1; // ocupa todo el espacio restante
+  display: block; // asegura wrap correcto
   text-align: left;
 }
 
@@ -168,7 +178,9 @@
   height: 60px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #d4af37;
+  border-radius: 50%; /* redondeo */
+  padding: 3px; /* ancho del borde */
+  background: linear-gradient(90deg, #70eea4, #fdf4d0); /* el "borde" */
 }
 
 .author-info {
