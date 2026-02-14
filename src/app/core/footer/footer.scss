@@ -1,15 +1,28 @@
 .footer {
+  position: relative;
   background-color: var(--negro);
   color: var(--blanco);
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  margin-top: 0; /* pega al final del wrapper */
+  margin-top: 0;
+  overflow: hidden; /* evita que las estrellas se salgan */
+  min-height: 250px;
 
   @media (min-width: 1655px) {
     padding-left: 10rem;
     padding-right: 10rem;
+  }
+
+  .footer-stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
   }
 }
 
@@ -18,7 +31,27 @@
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 3rem 2rem;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center; /* centra todas las columnas */
+    text-align: center;
+    gap: 2rem; /* mismo espacio entre columnas */
+  }
+}
+.footer-inner {
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
   gap: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .footer-col {
@@ -46,6 +79,10 @@
         }
       }
     }
+
+    @media (max-width: 768px) {
+      text-align: center; /* links centrados en móvil */
+    }
   }
 
   p {
@@ -57,10 +94,14 @@
     gap: 1rem;
     margin-top: 0.5rem;
 
+    @media (max-width: 768px) {
+      justify-content: center; /* centra iconos en móvil */
+    }
+
     img {
       width: 32px;
       height: 32px;
-      filter: invert(1); // invertir color para fondo negro
+      filter: invert(1);
       transition: transform 0.3s;
 
       &:hover {
@@ -74,17 +115,21 @@
     align-items: center;
     margin-bottom: 1rem;
 
+    @media (max-width: 768px) {
+      justify-content: center; /* centra logo en móvil */
+    }
+
     span {
       font-weight: bold;
       font-size: 1.5rem;
       margin-left: 0.5rem;
-      color: #fff;
+      color: var(--blanco);
     }
 
     .footer-dice {
       width: 40px;
       height: 40px;
-      filter: invert(1); // invertir color del dice
+      filter: invert(1);
     }
   }
 }
@@ -94,17 +139,6 @@
   padding: 1rem 0;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   font-size: 0.9rem;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .footer-main {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .footer-col {
-    margin-bottom: 2rem;
-  }
+  position: relative;
+  z-index: 1;
 }

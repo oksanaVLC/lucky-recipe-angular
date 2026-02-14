@@ -12,10 +12,11 @@ bootstrapApplication(AppComponent, {
   ...appConfig,
   providers: [
     ...(appConfig.providers || []),
+
     provideRouter(
       routes,
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' }),
     ),
-    provideHttpClient(), // <-- aquí
+    provideHttpClient(),
   ],
 }).catch((err) => console.error(err));

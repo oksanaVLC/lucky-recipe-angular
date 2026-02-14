@@ -1,0 +1,19 @@
+.menu-container {
+  position: relative;
+  width: 100%;
+  height: 300px; // ajusta según tu diseño
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+
+  text-align: center;
+
+  @media (min-width: 1200px) {
+    font-size: 4rem; // más grande en pantallas grandes
+  }
+}

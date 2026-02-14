@@ -1,9 +1,11 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { combineLatest } from 'rxjs';
+
 import { DraftService } from '../../../core/services/draft.service';
 import { BackButtonSmallComponent } from '../../../shared/components/back-button-small/back-button-small';
-import { Recipe } from '../../../shared/models/recipe.model'; // ✅ Import necesario
+import { Recipe } from '../../../shared/models/recipe.model';
 import { RecipeService } from '../../../shared/services/recipe.service';
 
 @Component({
@@ -14,7 +16,6 @@ import { RecipeService } from '../../../shared/services/recipe.service';
   styleUrls: ['./account.scss'],
 })
 export class AccountComponent {
-  // Señales
   recipeCount = signal(0);
   favoriteRecipes: Recipe[] = [];
 
@@ -28,10 +29,12 @@ export class AccountComponent {
       this.recipeCount.set(recipes.length);
     });
 
-    // Recetas favoritas
-    this.recipeService.getFavorites().subscribe((favIds: number[]) => {
-      this.favoriteRecipes = this.recipeService.getAllValue().filter((r) => favIds.includes(r.id));
-    });
+    // Favoritos (combinando recetas + ids favoritos)
+    combineLatest([this.recipeService.getAll(), this.recipeService.getFavorites()]).subscribe(
+      ([recipes, favIds]) => {
+        this.favoriteRecipes = recipes.filter((r) => favIds.includes(r.id));
+      },
+    );
   }
 
   goBack() {

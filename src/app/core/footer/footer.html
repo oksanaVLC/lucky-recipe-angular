@@ -1,45 +1,52 @@
 <footer class="footer">
+  <!-- Estrellas de fondo -->
+  <ngx-particles id="footerStars" [options]="particlesOptions" class="footer-stars"></ngx-particles>
   <div class="footer-main">
-    <!-- Columna 1 -->
-    <div class="footer-col">
-      <div class="footer-logo">
-        <a routerLink="/inicio">
-          <img src="assets/images/dice.webp" alt="Lucky Recipe" class="footer-dice" />
-          <span>Lucky Recipe</span>
-        </a>
+    <div class="footer-inner">
+      <!-- Columna 1 -->
+      <div class="footer-col">
+        <div class="footer-logo">
+          <a routerLink="/inicio">
+            <img src="assets/images/dice.webp" alt="Lucky Recipe" class="footer-dice" />
+            <span>Lucky Recipe</span>
+          </a>
+        </div>
+        <ul class="footer-links">
+          <li><a routerLink="/categorias">Categorías</a></li>
+          <li><a routerLink="/filtros">Filtros</a></li>
+          <li><a routerLink="/menus">Menús</a></li>
+          <li><a routerLink="/destacados">Destacados</a></li>
+        </ul>
       </div>
-      <ul class="footer-links">
-        <li><a routerLink="/categorias">Categorías</a></li>
-        <li><a routerLink="/filtros">Filtros</a></li>
-        <li><a routerLink="/menus">Menús</a></li>
-        <li><a routerLink="/destacados">Destacados</a></li>
-      </ul>
-    </div>
 
-    <!-- Columna 2 -->
-    <div class="footer-col">
-      <h4>Información</h4>
-      <ul class="footer-links">
-        <li><a routerLink="/aviso-legal">Aviso Legal</a></li>
-        <li><a routerLink="/privacidad">Privacidad</a></li>
-        <li><a routerLink="/cookies">Cookies</a></li>
-      </ul>
-    </div>
+      <!-- Columna 2 -->
+      <div class="footer-col">
+        <h4>Información</h4>
+        <ul class="footer-links">
+          <li><a routerLink="/aviso-legal">Aviso Legal</a></li>
+          <li><a routerLink="/privacidad">Privacidad</a></li>
+          <li><a routerLink="/cookies">Cookies</a></li>
+        </ul>
+      </div>
 
-    <!-- Columna 3 -->
-    <div class="footer-col">
-      <h4>Contacto</h4>
-      <p>Email: info@luckyrecipy.com</p>
-      <p>Tel: +34 123 456 789</p>
-      <div class="footer-social">
-        <a href="#" aria-label="Instagram"
-          ><img src="assets/images/instagram.webp" alt="Instagram"
-        /></a>
-        <a href="#" aria-label="YouTube"><img src="assets/images/youtube.webp" alt="YouTube" /></a>
+      <!-- Columna 3 -->
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul class="footer-links">
+          <li>Email: info@luckyrecipy.com</li>
+          <li>Tel: +34 123 456 789</li>
+          <li class="footer-social">
+            <a href="#" aria-label="Instagram">
+              <img src="assets/images/instagram.webp" alt="Instagram" />
+            </a>
+            <a href="#" aria-label="YouTube">
+              <img src="assets/images/youtube.webp" alt="YouTube" />
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
-
   <!-- Copyright centrado abajo -->
   <div class="footer-bottom">
     &copy; {{ currentYear }} Lucky Recipe. Todos los derechos reservados.

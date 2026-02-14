@@ -6,7 +6,7 @@
 <div class="shopping-list-container">
   <h2>Instrucciones</h2>
   <p>
-    Añade productos a la lista, guárdalos automáticamente y, si quieres, imprímelos o descárgalos.
+    Cuando crees tu lista de la compra, podrás guardarla en la app, en tu dispositivo o imprimirla.
   </p>
 
   <div class="input-wrapper">
@@ -29,7 +29,44 @@
   <p>Total productos: {{ items.length }}</p>
 
   <div class="actions">
+    <button (click)="saveInApp()">Guardar en la app</button>
     <button (click)="downloadList()">Guardar como archivo</button>
     <button (click)="printList()">Imprimir</button>
   </div>
+
+  <!-- Mensaje de guardado -->
+  <div class="saved-overlay" *ngIf="showSavedMessage">
+    <div class="saved-toast">
+      <h3>¡Listo!</h3>
+      <p>{{ savedMessage }}</p>
+    </div>
+  </div>
+
+  <h2 class="saved-title">Listas guardadas</h2>
+
+  <div class="saved-list" *ngFor="let list of savedLists; let i = index">
+    <div class="list-header">
+      <strong class="list-name">{{ list.name }}</strong>
+      <span class="list-date">{{ list.date | date: 'short' }}</span>
+    </div>
+
+    <div class="list-actions">
+      <button (click)="toggleList(i)">
+        {{ list.expanded ? 'Cerrar' : 'Ver' }}
+      </button>
+      <button (click)="editList(i)">✏️ Editar</button>
+      <button (click)="deleteList(i)">🗑 Borrar</button>
+    </div>
+
+    <!-- Contenido expandido -->
+    <div class="list-content" *ngIf="list.expanded">
+      <ul>
+        <li *ngFor="let item of list.items">{{ item }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <ng-template #noLists>
+    <p class="empty-text">Todavía no has guardado ninguna lista.</p>
+  </ng-template>
 </div>

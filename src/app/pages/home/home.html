@@ -114,10 +114,9 @@
       slides-per-view="auto"
       space-between="30"
       speed="6000"
-      autoplay-delay="0"
-      autoplay-disable-on-interaction="false"
+      autoplay='{"delay": 0, "disableOnInteraction": false}'
       free-mode="true"
-      free-mode-momentum="false"
+      free-mode-momentum="true"
     >
       <swiper-slide *ngFor="let logo of logos" class="sponsor-slide">
         <img [src]="logo" alt="Patrocinador" />

@@ -123,7 +123,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
     elements.forEach((el) => observer.observe(el));
 
-    //  FIX PRO: si ya está visible al cargar, lo activamos sin scroll
+    //   si ya está visible al cargar, lo activamos sin scroll
     setTimeout(() => {
       elements.forEach((el) => {
         const rect = el.getBoundingClientRect();

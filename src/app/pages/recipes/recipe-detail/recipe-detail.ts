@@ -9,6 +9,8 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 
+import { filter, take } from 'rxjs';
+
 import { register } from 'swiper/element/bundle';
 import { BackButtonSmallComponent } from '../../../shared/components/back-button-small/back-button-small';
 import { BackButtonComponent } from '../../../shared/components/back-button/back-button';
@@ -47,21 +49,31 @@ export class RecipeDetailComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    const found = this.recipeService.getRecipeById(id);
 
-    if (found) {
-      // Asegura que haya imágenes
-      found.images = found.images?.length ? found.images : ['assets/images/logo.webp'];
-      // Asegura que haya autor
-      found.author = found.author || { id: 1, name: 'Oksana', avatar: 'assets/images/profile.jpg' };
+    this.recipeService
+      .getAll()
+      .pipe(
+        filter((recipes: Recipe[]) => recipes.length > 0),
+        take(1),
+      )
+      .subscribe((recipes: Recipe[]) => {
+        const found = recipes.find((r: Recipe) => r.id === id);
 
-      this.recipe = found;
+        if (found) {
+          found.images = found.images?.length ? found.images : ['assets/images/logo.webp'];
+          found.author = found.author || {
+            id: 1,
+            name: 'Oksana',
+            avatar: 'assets/images/profile.jpg',
+          };
 
-      // Inicializa likes dinámicamente
-      this.likesCount = (this.recipe.likesCount ?? 0) + (this.isFavorite ? 1 : 0);
-    } else {
-      this.location.back();
-    }
+          this.recipe = found;
+
+          this.likesCount = (this.recipe?.likesCount ?? 0) + (this.isFavorite ? 1 : 0);
+        } else {
+          this.location.back();
+        }
+      });
   }
 
   ngAfterViewInit() {

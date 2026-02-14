@@ -1,9 +1,26 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AfterViewInit, Component } from '@angular/core';
 
 @Component({
   selector: 'app-weekly-menu',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './weekly-menu.html',
-  styleUrl: './weekly-menu.scss',
+  styleUrls: ['./weekly-menu.scss'],
 })
-export class WeeklyMenuComponent {}
+export class WeeklyMenuComponent implements AfterViewInit {
+  showText = false;
+
+  ngAfterViewInit(): void {
+    // Mostrar el texto con Animate.css
+    this.showText = true;
+
+    // Subir el scroll hasta el título si vienes de otra página
+    this.scrollToTopOfTitle();
+  }
+
+  private scrollToTopOfTitle() {
+    const title = document.querySelector<HTMLHeadingElement>('h1.title');
+    title?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
