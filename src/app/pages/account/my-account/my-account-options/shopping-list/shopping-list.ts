@@ -3,13 +3,11 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BackButtonSmallComponent } from '../../../../../shared/components/back-button-small/back-button-small';
 
-// Interfaz para las listas guardadas
 interface SavedList {
   date: Date;
   name: string;
   items: string[];
-  editing?: boolean; // para controlar si se está editando el nombre
-  expanded?: boolean; // controla si la lista se muestra
+  expanded?: boolean;
 }
 
 @Component({
@@ -23,44 +21,64 @@ export class ShoppingListComponent {
   items: string[] = [];
   newItem: string = '';
 
+  savedLists: SavedList[] = [];
   showSavedMessage = false;
   savedMessage = '';
-  savedLists: SavedList[] = [];
+
+  editingList?: SavedList;
+  editingIndex?: number;
+  showEditModal = false;
 
   constructor() {
-    // Cargar lista actual
+    // Lista actual
     const saved = localStorage.getItem('shoppingList');
-    if (saved) {
-      this.items = JSON.parse(saved);
-    }
+    if (saved) this.items = JSON.parse(saved);
 
-    // Cargar listas guardadas
-    const storedLists = localStorage.getItem('savedLists');
-    if (storedLists) {
-      this.savedLists = JSON.parse(storedLists);
-    }
+    // Listas guardadas
+    const stored = localStorage.getItem('savedLists');
+    if (stored) this.savedLists = JSON.parse(stored);
   }
 
-  // --------------------- ITEMS ---------------------
+  // ------------------- ITEMS -------------------
   addItem() {
     const trimmed = this.newItem.trim();
     if (!trimmed) return;
-
     this.items.push(trimmed);
     this.newItem = '';
-    this.saveList();
+    this.saveCurrentList();
   }
 
-  removeItem(index: number) {
-    this.items.splice(index, 1);
-    this.saveList();
+  removeItem(i: number) {
+    this.items.splice(i, 1);
+    this.saveCurrentList();
   }
 
-  saveList() {
+  saveCurrentList() {
     localStorage.setItem('shoppingList', JSON.stringify(this.items));
   }
 
-  // --------------------- ACCIONES ---------------------
+  // ------------------- ACCIONES -------------------
+  saveInApp() {
+    if (!this.items.length) return;
+
+    let name = prompt('Nombre de tu lista:', `Lista ${this.savedLists.length + 1}`);
+    if (name === null) return;
+    name = name.trim() || `Lista ${this.savedLists.length + 1}`;
+
+    const newList: SavedList = {
+      date: new Date(),
+      name,
+      items: [...this.items],
+    };
+
+    this.savedLists.unshift(newList);
+    localStorage.setItem('savedLists', JSON.stringify(this.savedLists));
+
+    this.savedMessage = '¡Tu lista se ha guardado con éxito!';
+    this.showSavedMessage = true;
+    setTimeout(() => (this.showSavedMessage = false), 2500);
+  }
+
   downloadList() {
     const blob = new Blob([this.items.join('\n')], { type: 'text/plain' });
     const url = window.URL.createObjectURL(blob);
@@ -72,73 +90,57 @@ export class ShoppingListComponent {
   }
 
   printList() {
-    const printContent = this.items.join('<br>');
-    const newWindow = window.open('', '', 'width=400,height=600');
-    newWindow!.document.write(`<h2>Mi Lista de Compras</h2>${printContent}`);
-    newWindow!.document.close();
-    newWindow!.print();
+    const content = this.items.join('<br>');
+    const win = window.open('', '', 'width=400,height=600');
+    win?.document.write(`<h2>Mi Lista de Compras</h2>${content}`);
+    win?.document.close();
+    win?.print();
   }
 
-  saveInApp() {
-    if (!this.items.length) return;
-
-    let listName = prompt('Nombre de tu lista:', `Lista ${this.savedLists.length + 1}`);
-    if (listName === null) return; // canceló
-    listName = listName.trim() || `Lista ${this.savedLists.length + 1}`;
-
-    const newSavedList: SavedList = {
-      date: new Date(),
-      name: listName,
-      items: [...this.items],
-    };
-
-    this.savedLists.unshift(newSavedList);
-    localStorage.setItem('savedLists', JSON.stringify(this.savedLists));
-
-    this.savedMessage = '¡Tu lista se ha guardado con éxito!';
-    this.showSavedMessage = true;
-    setTimeout(() => (this.showSavedMessage = false), 2500);
-
-    // Opcional: limpiar lista actual
-    // this.items = [];
-    // this.saveList();
+  // ------------------- LISTAS GUARDADAS -------------------
+  toggleList(i: number) {
+    this.savedLists[i].expanded = !this.savedLists[i].expanded;
   }
 
-  // --------------------- EDITAR NOMBRE ---------------------
-  editListName(index: number) {
-    this.savedLists[index].editing = true;
+  editList(i: number) {
+    this.editingList = { ...this.savedLists[i], items: [...this.savedLists[i].items] };
+    this.editingIndex = i;
+    this.showEditModal = true;
   }
 
-  saveListName(index: number) {
-    this.savedLists[index].editing = false;
-    localStorage.setItem('savedLists', JSON.stringify(this.savedLists));
-  }
-
-  viewList(index: number) {
-    const list = this.savedLists[index];
-    alert('Lista:\n' + list.items.join('\n')); // temporal, luego reemplazamos por modal
-  }
-
-  editList(index: number) {
-    const list = this.savedLists[index];
-    const editedItems = prompt('Edita tu lista, separando items por coma:', list.items.join(', '));
-    if (editedItems !== null) {
-      list.items = editedItems
-        .split(',')
-        .map((i) => i.trim())
-        .filter((i) => i);
-      localStorage.setItem('savedLists', JSON.stringify(this.savedLists));
-    }
-  }
-
-  deleteList(index: number) {
+  deleteList(i: number) {
     const confirmed = confirm('¿Quieres borrar esta lista?');
     if (confirmed) {
-      this.savedLists.splice(index, 1);
+      this.savedLists.splice(i, 1);
       localStorage.setItem('savedLists', JSON.stringify(this.savedLists));
     }
   }
-  toggleList(index: number) {
-    this.savedLists[index].expanded = !this.savedLists[index].expanded;
+
+  // ------------------- MODAL EDIT -------------------
+  addItemToEditingList() {
+    this.editingList?.items.push('');
+  }
+
+  removeItemFromEditingList(i: number) {
+    this.editingList?.items.splice(i, 1);
+  }
+
+  saveEditedList() {
+    if (!this.editingList || this.editingIndex === undefined) return;
+
+    this.savedLists[this.editingIndex] = { ...this.editingList };
+    localStorage.setItem('savedLists', JSON.stringify(this.savedLists));
+    this.showEditModal = false;
+
+    this.savedMessage = '¡Lista actualizada con éxito!';
+    this.showSavedMessage = true;
+    setTimeout(() => (this.showSavedMessage = false), 2500);
+  }
+
+  closeEditModal() {
+    this.showEditModal = false;
+  }
+  trackByIndex(index: number, item: string) {
+    return index; // Angular mantiene la referencia por índice
   }
 }

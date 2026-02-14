@@ -51,14 +51,11 @@
     </div>
 
     <div class="list-actions">
-      <button (click)="toggleList(i)">
-        {{ list.expanded ? 'Cerrar' : 'Ver' }}
-      </button>
+      <button (click)="toggleList(i)">{{ list.expanded ? 'Cerrar' : 'Ver' }}</button>
       <button (click)="editList(i)">✏️ Editar</button>
       <button (click)="deleteList(i)">🗑 Borrar</button>
     </div>
 
-    <!-- Contenido expandido -->
     <div class="list-content" *ngIf="list.expanded">
       <ul>
         <li *ngFor="let item of list.items">{{ item }}</li>
@@ -69,4 +66,25 @@
   <ng-template #noLists>
     <p class="empty-text">Todavía no has guardado ninguna lista.</p>
   </ng-template>
+</div>
+
+<!-- MODAL EDIT -->
+<div class="modal-overlay" *ngIf="showEditModal">
+  <div class="modal-content">
+    <h3>Editar Lista: {{ editingList?.name }}</h3>
+
+    <ul>
+      <li *ngFor="let item of editingList?.items; let i = index; trackBy: trackByIndex">
+        <input [(ngModel)]="editingList.items[i]" />
+        <button class="remove-btn" (click)="removeItemFromEditingList(i)">×</button>
+      </li>
+    </ul>
+
+    <button class="add-item-btn" (click)="addItemToEditingList()">+ Añadir producto</button>
+
+    <div class="modal-actions">
+      <button (click)="saveEditedList()">Guardar</button>
+      <button (click)="closeEditModal()">Cancelar</button>
+    </div>
+  </div>
 </div>

@@ -5,7 +5,6 @@
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-
   color: #333;
 
   h2 {
@@ -14,7 +13,6 @@
     color: #27ae60;
     font-weight: 600;
   }
-
   p {
     text-align: center;
     margin: 1.5rem 0.5rem;
@@ -32,12 +30,10 @@
     input {
       flex: 1 1 0;
       min-width: 0;
-      max-width: calc(100% - 50px - 0.5rem);
       padding: 0.6rem 1rem;
       border-radius: 8px;
       border: 1px solid #ccc;
       font-size: 1rem;
-      transition: all 0.3s;
       font-style: italic;
 
       &:focus {
@@ -53,29 +49,13 @@
       border-radius: 8px;
       font-size: 1.4rem;
       background-color: #27ae60;
-      color: white;
+      color: #fff;
       border: none;
       cursor: pointer;
       transition: all 0.3s;
 
       &:hover {
         background-color: #2ecc71;
-      }
-    }
-    @media (max-width: 360px) {
-      .input-wrapper {
-        flex-direction: column; /* apila input y botón */
-        gap: 0.5rem;
-
-        input {
-          width: 100%; /* ocupa toda la card */
-          max-width: 100%;
-        }
-
-        button {
-          width: 100%; /* ocupa toda la card */
-          flex: none; /* elimina el flex fijo */
-        }
       }
     }
   }
@@ -95,7 +75,6 @@
       background: #f1f1f1;
       border-radius: 8px;
       position: relative;
-      transition: all 0.3s;
 
       &:before {
         content: counter(item) '.';
@@ -107,9 +86,9 @@
 
       span {
         margin-left: 2rem;
-        overflow-wrap: break-word; /* permite que las palabras largas bajen de línea */
-        word-break: break-word; /* compatibilidad con navegadores antiguos */
-        max-width: calc(100% - 50px - 2rem); /* espacio para botón y número */
+        overflow-wrap: break-word;
+        word-break: break-word;
+        max-width: calc(100% - 50px - 2rem);
       }
 
       .remove-btn {
@@ -118,8 +97,6 @@
         font-size: 1.2rem;
         color: #e74c3c;
         cursor: pointer;
-        transition: all 0.3s;
-
         &:hover {
           transform: scale(1.2);
         }
@@ -138,12 +115,10 @@
       padding: 0.5rem 1rem;
       border-radius: 8px;
       border: none;
-      background-color: var(--verde);
+      background-color: #27ae60;
       color: #fff;
-
       font-weight: bold;
       cursor: pointer;
-      transition: all 0.3s;
 
       &:hover {
         background-color: #2ecc71;
@@ -151,205 +126,116 @@
     }
   }
 
-  @media (max-width: 400px) {
-    margin: 1rem;
+  .saved-list {
+    border-top: 1px solid #ddd;
+    padding: 0.5rem 0;
 
-    .input-wrapper {
-      flex-direction: row; /* mantener input y botón en fila */
-
-      input {
-        flex: 1 1 auto;
-        max-width: calc(100% - 50px); /* espacio para el botón */
-      }
-
-      button {
-        flex: 0 0 50px;
-        width: 50px; /* fijo */
-      }
-    }
-
-    .actions {
-      flex-direction: column;
-
-      button {
-        width: 100%;
-      }
-    }
-  }
-}
-
-.saved-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1001;
-  animation: fadeIn 0.2s ease;
-}
-
-.saved-toast {
-  background: #fff;
-  padding: 1.5rem 2rem;
-  border-radius: 16px;
-  text-align: center;
-  min-width: 280px;
-  max-width: 90%;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-  animation: scaleIn 0.25s ease;
-
-  h3 {
-    margin: 0 0 0.5rem;
-    font-size: 1.3rem;
-    color: #bfa14a; // dorado suave
-  }
-
-  p {
-    margin: 0;
-    font-size: 1rem;
-    color: #333;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    transform: scale(0.9);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-
-.saved-list {
-  background: #f9f9f9;
-  border-radius: 8px;
-  padding: 0.8rem;
-  margin-bottom: 0.8rem;
-
-  .list-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .list-name {
+    .list-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       font-weight: bold;
-      font-size: 1.1rem;
+    }
+    .list-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin: 0.5rem 0;
     }
 
-    .list-date {
-      font-size: 0.9rem;
-      color: #777;
-    }
-  }
-
-  .list-actions {
-    margin-top: 0.5rem;
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.5rem;
-
-    button {
-      padding: 0.3rem 0.6rem;
-      border: none;
+    .list-actions button {
+      flex: 1;
+      padding: 0.3rem 0.5rem;
       border-radius: 6px;
+      border: none;
       cursor: pointer;
       background-color: #27ae60;
-      color: white;
+      color: #fff;
       font-size: 0.9rem;
       transition: all 0.3s;
-
       &:hover {
         background-color: #2ecc71;
       }
     }
+
+    .list-content {
+      padding-left: 1rem;
+      ul {
+        margin: 0;
+        padding-left: 1rem;
+      }
+    }
   }
 }
+
+/* MODAL */
 .modal-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.35);
   display: flex;
-  align-items: center;
   justify-content: center;
-  z-index: 1002;
+  align-items: center;
+  z-index: 1000;
 }
 
 .modal-content {
   background: #fff;
-  padding: 1.5rem 2rem;
+  padding: 1.5rem;
   border-radius: 12px;
   width: 90%;
   max-width: 400px;
-  max-height: 90%;
-  overflow-y: auto;
-  text-align: center;
-
-  h3 {
-    color: #27ae60;
-    margin-bottom: 1rem;
-  }
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 
   ul {
-    padding-left: 0;
+    padding: 0;
+    margin: 1rem 0;
     list-style: none;
+  }
+  li {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  input {
+    flex: 1;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  .remove-btn {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .add-item-btn {
+    background: #27ae60;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: bold;
     margin-bottom: 1rem;
-
-    li {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 0.5rem;
-
-      input {
-        flex: 1;
-        padding: 0.4rem 0.6rem;
-        border-radius: 6px;
-        border: 1px solid #ccc;
-      }
-
-      button {
-        background: #e74c3c;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        padding: 0 0.6rem;
-        cursor: pointer;
-
-        &:hover {
-          background: #c0392b;
-        }
-      }
+    &:hover {
+      background-color: #2ecc71;
     }
   }
 
   .modal-actions {
     display: flex;
+    justify-content: flex-end;
     gap: 0.5rem;
-    justify-content: center;
-
-    button {
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-
-      &:first-child {
-        background: #27ae60;
-        color: white;
-      }
-      &:last-child {
-        background: #ccc;
-      }
-    }
+  }
+  .modal-actions button {
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
   }
 }
