@@ -69,12 +69,12 @@
 </div>
 
 <!-- MODAL EDIT -->
-<div class="modal-overlay" *ngIf="showEditModal">
+<div class="modal-overlay" *ngIf="showEditModal && editingList">
   <div class="modal-content">
-    <h3>Editar Lista: {{ editingList?.name }}</h3>
+    <h3>Editar Lista: {{ editingList.name }}</h3>
 
     <ul>
-      <li *ngFor="let item of editingList?.items; let i = index; trackBy: trackByIndex">
+      <li *ngFor="let item of editingList.items; let i = index; trackBy: trackByIndex">
         <input [(ngModel)]="editingList.items[i]" />
         <button class="remove-btn" (click)="removeItemFromEditingList(i)">×</button>
       </li>
