@@ -51,9 +51,9 @@
     </div>
 
     <div class="list-actions">
-      <button (click)="toggleList(i)">{{ list.expanded ? 'Cerrar' : 'Ver' }}</button>
-      <button (click)="editList(i)">✏️ Editar</button>
-      <button (click)="deleteList(i)">🗑 Borrar</button>
+      <button class="open" (click)="toggleList(i)">{{ list.expanded ? 'Cerrar' : 'Ver' }}</button>
+      <button class="edit" (click)="editList(i)">✏️ Editar</button>
+      <button class="remove" (click)="deleteList(i)">🗑 Borrar</button>
     </div>
 
     <div class="list-content" *ngIf="list.expanded">

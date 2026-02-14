@@ -152,6 +152,33 @@
       color: #fff;
       font-size: 0.9rem;
       transition: all 0.3s;
+
+      // color por defecto (Ver / Cerrar)
+      &.open {
+        background-color: #27ae60; // verde
+        &:hover {
+          background-color: #2ecc71;
+        }
+      }
+
+      // Editar
+      &.edit {
+        background-color: orange;
+        color: white;
+        &:hover {
+          background-color: darkorange;
+        }
+      }
+
+      // Borrar
+      &.remove {
+        background-color: red;
+        color: white;
+        &:hover {
+          background-color: darkred;
+        }
+      }
+
       &:hover {
         background-color: #2ecc71;
       }
