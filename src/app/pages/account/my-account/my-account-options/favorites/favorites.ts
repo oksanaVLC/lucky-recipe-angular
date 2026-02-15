@@ -1,6 +1,7 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { combineLatest } from 'rxjs';
 
 import { BackButtonSmallComponent } from '../../../../../shared/components/back-button-small/back-button-small';
 import { Recipe } from '../../../../../shared/models/recipe.model';
@@ -51,9 +52,11 @@ export class FavoritesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.recipeService.getFavorites().subscribe((favIds: number[]) => {
-      this.favoriteRecipes = this.recipeService.getAllValue().filter((r) => favIds.includes(r.id));
-    });
+    combineLatest([this.recipeService.getFavorites(), this.recipeService.getAll()]).subscribe(
+      ([favIds, recipes]) => {
+        this.favoriteRecipes = recipes.filter((r) => favIds.includes(r.id));
+      },
+    );
   }
 
   viewRecipe(id: number) {

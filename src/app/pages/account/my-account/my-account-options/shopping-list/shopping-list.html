@@ -2,70 +2,87 @@
   <app-back-button-small></app-back-button-small>
   <h1 class="gold-gradient">Lista de Compras</h1>
 </div>
+<div class="shopping-wrapper">
+  <div class="shopping-list-container">
+    <h2>Instrucciones</h2>
+    <p>
+      Cuando crees tu lista de la compra, podrás guardarla en la app, en tu dispositivo o
+      imprimirla.
+    </p>
 
-<div class="shopping-list-container">
-  <h2>Instrucciones</h2>
-  <p>
-    Cuando crees tu lista de la compra, podrás guardarla en la app, en tu dispositivo o imprimirla.
-  </p>
-
-  <div class="input-wrapper">
-    <input
-      type="text"
-      [(ngModel)]="newItem"
-      placeholder="Escribe un producto y pulsa +"
-      (keyup.enter)="addItem()"
-    />
-    <button (click)="addItem()">+</button>
-  </div>
-
-  <ol>
-    <li *ngFor="let item of items; let i = index">
-      <span>{{ item }}</span>
-      <button class="remove-btn" (click)="removeItem(i)">×</button>
-    </li>
-  </ol>
-
-  <p>Total productos: {{ items.length }}</p>
-
-  <div class="actions">
-    <button (click)="saveInApp()">Guardar en la app</button>
-    <button (click)="downloadList()">Guardar como archivo</button>
-    <button (click)="printList()">Imprimir</button>
-  </div>
-
-  <!-- Mensaje de guardado -->
-  <div class="saved-overlay" *ngIf="showSavedMessage">
-    <div class="saved-toast">
-      <h3>¡Listo!</h3>
-      <p>{{ savedMessage }}</p>
-    </div>
-  </div>
-
-  <h2 class="saved-title">Listas guardadas</h2>
-
-  <div class="saved-list" *ngFor="let list of savedLists; let i = index">
-    <div class="list-header">
-      <strong class="list-name">{{ list.name }}</strong>
-      <span class="list-date">{{ list.date | date: 'short' }}</span>
+    <div class="input-wrapper">
+      <input
+        type="text"
+        [(ngModel)]="newItem"
+        placeholder="Escribe un producto y pulsa +"
+        (keyup.enter)="addItem()"
+      />
+      <button (click)="addItem()">+</button>
     </div>
 
-    <div class="list-actions">
-      <button class="open" (click)="toggleList(i)">{{ list.expanded ? 'Cerrar' : 'Ver' }}</button>
-      <button class="edit" (click)="editList(i)">✏️ Editar</button>
-      <button class="remove" (click)="deleteList(i)">🗑 Borrar</button>
+    <ol>
+      <li *ngFor="let item of items; let i = index">
+        <span>{{ item }}</span>
+        <button class="remove-btn" (click)="removeItem(i)">×</button>
+      </li>
+    </ol>
+
+    <p>Total productos: {{ items.length }}</p>
+    <div class="actions">
+      <button class="action-btn" (click)="saveInApp()">
+        <i class="bi bi-save icon"></i>
+        <span class="label">En la app</span>
+      </button>
+
+      <button class="action-btn" (click)="downloadList()">
+        <i class="bi bi-file-earmark-arrow-down icon"></i>
+        <span class="label">Archivo</span>
+      </button>
+
+      <button class="action-btn" (click)="printList()">
+        <i class="bi bi-printer icon"></i>
+        <span class="label">Imprimir</span>
+      </button>
     </div>
 
-    <div class="list-content" *ngIf="list.expanded">
-      <ul>
-        <li *ngFor="let item of list.items">{{ item }}</li>
-      </ul>
+    <!-- Mensaje de guardado -->
+    <div class="saved-overlay" *ngIf="showSavedMessage">
+      <div class="saved-toast">
+        <h3>¡Listo!</h3>
+        <p>{{ savedMessage }}</p>
+      </div>
     </div>
+
+    <h2 class="title">Listas guardadas ({{ savedLists.length }})</h2>
+
+    <div class="saved-list" *ngFor="let list of savedLists; let i = index">
+      <div class="list-header">
+        <strong class="list-name">{{ list.name }}</strong>
+        <span class="list-date">{{ list.date | date: 'short' }}</span>
+      </div>
+
+      <div class="list-actions">
+        <button class="open" (click)="toggleList(i)">
+          <i class="bi" [ngClass]="list.expanded ? 'bi-eye-slash' : 'bi-eye'"></i>
+          {{ list.expanded ? 'Cerrar' : 'Ver' }}
+        </button>
+
+        <button class="edit" (click)="editList(i)"><i class="bi bi-pencil"></i> Editar</button>
+
+        <button class="remove" (click)="deleteList(i)"><i class="bi bi-trash"></i> Borrar</button>
+      </div>
+
+      <div class="list-content" *ngIf="list.expanded">
+        <ul>
+          <li *ngFor="let item of list.items">{{ item }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <ng-template #noLists>
+      <p class="empty-text">Todavía no has guardado ninguna lista.</p>
+    </ng-template>
   </div>
-
-  <ng-template #noLists>
-    <p class="empty-text">Todavía no has guardado ninguna lista.</p>
-  </ng-template>
 </div>
 
 <!-- MODAL EDIT -->

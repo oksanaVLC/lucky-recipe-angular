@@ -43,7 +43,7 @@
   <a class="account-card" routerLink="lista-compra">
     <img src="assets/images/notepad.webp" alt="Lista de la compra" />
     <div class="overlay"></div>
-    <span>Lista de la compra (0)</span>
+    <span>Lista de la compra ({{ shoppingListService.savedLists().length }})</span>
   </a>
 
   <!-- Card: Dietas -->

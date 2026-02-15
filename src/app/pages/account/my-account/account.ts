@@ -7,6 +7,7 @@ import { DraftService } from '../../../core/services/draft.service';
 import { BackButtonSmallComponent } from '../../../shared/components/back-button-small/back-button-small';
 import { Recipe } from '../../../shared/models/recipe.model';
 import { RecipeService } from '../../../shared/services/recipe.service';
+import { ShoppingListService } from '../../../shared/services/shopping-list.service';
 
 @Component({
   selector: 'app-account',
@@ -17,12 +18,14 @@ import { RecipeService } from '../../../shared/services/recipe.service';
 })
 export class AccountComponent {
   recipeCount = signal(0);
+  savedListsCount = signal(0);
   favoriteRecipes: Recipe[] = [];
 
   constructor(
     public draftService: DraftService,
     public recipeService: RecipeService,
     private location: Location,
+    public shoppingListService: ShoppingListService,
   ) {
     // Recetas creadas
     this.recipeService.getAll().subscribe((recipes) => {
@@ -39,5 +42,9 @@ export class AccountComponent {
 
   goBack() {
     this.location.back();
+  }
+  updateSavedListsCount() {
+    const saved = localStorage.getItem('savedLists');
+    this.savedListsCount.set(saved ? JSON.parse(saved).length : 0);
   }
 }
