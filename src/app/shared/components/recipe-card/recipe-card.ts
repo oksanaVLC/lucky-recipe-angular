@@ -32,7 +32,7 @@ export class RecipeCardComponent implements OnInit, AfterViewInit {
   @Input() showIngredients: boolean = false;
   @Input() titleSize: 'small' | 'large' = 'small';
   @Input() truncateShortDescription: boolean = true;
-  @Input() shortDescriptionLength: number = 20;
+  @Input() shortDescriptionLength: number = 35;
   @Input() showRemoveFavorite: boolean = false;
   @Input() showActions = true;
 
