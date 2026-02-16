@@ -32,19 +32,3 @@
     <span style="--i: 29">.</span>
   </h2>
 </div>
-
-<div class="puzzle-slider">
-  <div class="grid">
-    <div
-      class="tile"
-      *ngFor="let tile of tiles"
-      [ngStyle]="{
-        'background-image': 'url(' + tile.current + ')',
-        'background-position': tile.bgPos,
-        transform: tile.transform,
-      }"
-    ></div>
-  </div>
-
-  <button class="next-btn" (click)="nextImage()">Siguiente</button>
-</div>
