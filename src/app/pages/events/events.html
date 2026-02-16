@@ -33,25 +33,20 @@
   </h2>
 </div>
 
-<div class="image-slider">
+<div class="image-slider" *ngIf="images.length > 0">
   <swiper-container
+    #swiperRef
     loop="true"
     grab-cursor="true"
     centered-slides="true"
     slides-per-view="1.4"
     space-between="10"
-    pagination="true"
+    pagination='{"clickable": true}'
+    observer="true"
+    observe-parents="true"
   >
-    <swiper-slide>
-      <img src="assets/images/event.webp" alt="Foto 1" />
-    </swiper-slide>
-
-    <swiper-slide>
-      <img src="assets/images/event1.webp" alt="Foto 2" />
-    </swiper-slide>
-
-    <swiper-slide>
-      <img src="assets/images/turkey.webp" alt="Foto 3" />
+    <swiper-slide *ngFor="let img of images">
+      <img [src]="img" [alt]="img" />
     </swiper-slide>
   </swiper-container>
 </div>
