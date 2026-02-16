@@ -214,6 +214,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private scrollToTopOfRecipes() {
     const title = document.querySelector<HTMLHeadingElement>('h1.decorated-title.scroll-animate');
-    title?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (title) {
+      // Offset en píxeles, ajusta según quieras
+      const offset = 100; // por ejemplo 200px desde el top
+      const topPos = title.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top: topPos, behavior: 'smooth' });
+    }
   }
 }

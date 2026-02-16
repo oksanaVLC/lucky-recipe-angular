@@ -2,42 +2,26 @@
   "recipes": [
     {
       "id": 1,
-      "title": "Tarta de manzana",
-      "category": "Postres",
-      "shortDescription": "Una tarta clásica con manzanas caramelizadas",
-      "longDescription": "1. Precalentar el horno a 180°C.\n2. Preparar la masa...\n3. Colocar las manzanas...",
+      "title": "Borsch - Sopa de Remolacha",
+      "category": "Sopas",
+      "shortDescription": "Sopa tradicional de remolacha con un toque de crema",
+      "longDescription": "1. Cocer remolacha, zanahoria y patata.\n2. Añadir repollo y caldo.\n3. Cocinar 20-25 minutos.\n4. Servir con crema agria y eneldo fresco.",
       "ingredients": [
-        { "quantity": "2", "name": "manzanas" },
-        { "quantity": "200g", "name": "azúcar" },
-        { "quantity": "100g", "name": "mantequilla" },
-        { "quantity": "1", "name": "masa quebrada" }
+        { "quantity": "2", "name": "remolachas" },
+        { "quantity": "1", "name": "zanahoria" },
+        { "quantity": "1", "name": "patata" },
+        { "quantity": "50g", "name": "repollo" },
+        { "quantity": "30ml", "name": "crema agria" }
       ],
-      "images": ["images/tarta.webp", "images/tarta1.webp"],
-      "rating": 4.5,
-      "likesCount": 12,
+      "images": ["images/borsh.webp", "images/borsh1.webp"],
+      "rating": 4.8,
+      "likesCount": 14,
       "author": { "id": 1, "name": "Oksana", "avatar": "images/yo3.png" },
-      "createdAt": "2026-02-05T10:00:00Z"
+      "createdAt": "2026-02-07T09:45:00Z"
     },
+
     {
       "id": 2,
-      "title": "Lemos Cheesecake",
-      "category": "Postres",
-      "shortDescription": "Delicioso cheesecake con base crujiente",
-      "longDescription": "1. Preparar la base de galleta.\n2. Mezclar el queso con azúcar y huevos...\n3. Hornear hasta dorar ligeramente...",
-      "ingredients": [
-        { "quantity": "200g", "name": "queso crema" },
-        { "quantity": "100g", "name": "azúcar" },
-        { "quantity": "2", "name": "huevos" },
-        { "quantity": "100g", "name": "galletas" }
-      ],
-      "images": ["images/cheesecake.webp", "images/cheesecake1.webp"],
-      "rating": 4.8,
-      "likesCount": 20,
-      "author": { "id": 1, "name": "Oksana", "avatar": "images/yo3.png" },
-      "createdAt": "2026-02-03T16:00:00Z"
-    },
-    {
-      "id": 3,
       "title": "Ensalada César",
       "category": "Ensaladas",
       "shortDescription": "Fresca y ligera, con pollo y croutons",
@@ -55,7 +39,7 @@
       "createdAt": "2026-02-04T14:30:00Z"
     },
     {
-      "id": 4,
+      "id": 3,
       "title": "Ensalada Mediterránea",
       "category": "Ensaladas",
       "shortDescription": "Ensalada fresca con tomate, pepino, aceitunas y queso feta",
@@ -76,7 +60,7 @@
       "createdAt": "2026-02-06T09:00:00Z"
     },
     {
-      "id": 5,
+      "id": 4,
       "title": "Lasaña Casera",
       "category": "Platos principales",
       "shortDescription": "Lasaña tradicional con carne, bechamel y queso gratinado",
@@ -95,8 +79,63 @@
       "author": { "id": 1, "name": "Oksana", "avatar": "images/avatar3.webp" },
       "createdAt": "2026-02-05T12:30:00Z"
     },
+
+    {
+      "id": 5,
+      "title": "Ravioli con Trufas",
+      "category": "Platos principales",
+      "shortDescription": "Ravioli rellenos de ricotta con un toque de trufa",
+      "longDescription": "1. Preparar la masa de ravioli.\n2. Mezclar ricotta con aceite de trufa y sal.\n3. Rellenar los ravioli y cocer 3-4 minutos.\n4. Servir con mantequilla derretida y lascas de trufa.",
+      "ingredients": [
+        { "quantity": "200g", "name": "harina" },
+        { "quantity": "100g", "name": "ricotta" },
+        { "quantity": "10g", "name": "aceite de trufa" },
+        { "quantity": "1", "name": "huevo" }
+      ],
+      "images": ["images/ravioli.webp", "images/ravioli1.webp"],
+      "rating": 4.9,
+      "likesCount": 18,
+      "author": { "id": 1, "name": "Oksana", "avatar": "images/yo3.png" },
+      "createdAt": "2026-02-07T10:00:00Z"
+    },
     {
       "id": 6,
+      "title": "Papilla de Avena con Frutos Rojos",
+      "category": "Desayunos",
+      "shortDescription": "Papilla nutritiva y dulce con avena y frutos rojos",
+      "longDescription": "1. Cocer la avena en leche o agua.\n2. Añadir frutos rojos frescos o congelados.\n3. Endulzar al gusto con miel o azúcar.\n4. Servir caliente.",
+      "ingredients": [
+        { "quantity": "50g", "name": "avena" },
+        { "quantity": "200ml", "name": "leche" },
+        { "quantity": "50g", "name": "frutos rojos" },
+        { "quantity": "1 cdita", "name": "miel" }
+      ],
+      "images": ["images/porridge.webp", "images/porridge1.webp"],
+      "rating": 4.6,
+      "likesCount": 10,
+      "author": { "id": 1, "name": "Oksana", "avatar": "images/yo3.png" },
+      "createdAt": "2026-02-07T08:30:00Z"
+    },
+    {
+      "id": 7,
+      "title": "Tarta de manzana",
+      "category": "Postres",
+      "shortDescription": "Una tarta clásica con manzanas caramelizadas",
+      "longDescription": "1. Precalentar el horno a 180°C.\n2. Preparar la masa...\n3. Colocar las manzanas...",
+      "ingredients": [
+        { "quantity": "2", "name": "manzanas" },
+        { "quantity": "200g", "name": "azúcar" },
+        { "quantity": "100g", "name": "mantequilla" },
+        { "quantity": "1", "name": "masa quebrada" }
+      ],
+      "images": ["images/tarta.webp", "images/tarta1.webp"],
+      "rating": 4.5,
+      "likesCount": 12,
+      "author": { "id": 1, "name": "Oksana", "avatar": "images/yo3.png" },
+      "createdAt": "2026-02-05T10:00:00Z"
+    },
+    {
+      "id": 8,
       "title": "Brownie de Chocolate",
       "category": "Postres",
       "shortDescription": "Brownie sabroso y chocolatoso con nueces",
@@ -113,6 +152,24 @@
       "likesCount": 15,
       "author": { "id": 1, "name": "Oksana", "avatar": "images/avatar4.webp" },
       "createdAt": "2026-02-05T15:00:00Z"
+    },
+    {
+      "id": 9,
+      "title": "Lemos Cheesecake",
+      "category": "Postres",
+      "shortDescription": "Delicioso cheesecake con base crujiente",
+      "longDescription": "1. Preparar la base de galleta.\n2. Mezclar el queso con azúcar y huevos...\n3. Hornear hasta dorar ligeramente...",
+      "ingredients": [
+        { "quantity": "200g", "name": "queso crema" },
+        { "quantity": "100g", "name": "azúcar" },
+        { "quantity": "2", "name": "huevos" },
+        { "quantity": "100g", "name": "galletas" }
+      ],
+      "images": ["images/cheesecake.webp", "images/cheesecake1.webp"],
+      "rating": 4.8,
+      "likesCount": 20,
+      "author": { "id": 1, "name": "Oksana", "avatar": "images/yo3.png" },
+      "createdAt": "2026-02-03T16:00:00Z"
     }
   ]
 }

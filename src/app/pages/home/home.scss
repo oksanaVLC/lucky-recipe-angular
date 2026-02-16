@@ -382,26 +382,35 @@ app-search-bar {
   flex-wrap: wrap;
 
   button {
-    padding: 0.45rem 0.9rem;
+    width: 2.3rem; // tamaño fijo
+    height: 2.3rem; // tamaño fijo
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 6px;
     border: 1px solid #ccc;
     background: #fff;
     cursor: pointer;
     transition: 0.2s;
 
-    &.active {
-      background: var(--verde);
-
+    &:hover:not(:disabled) {
+      background: var(--verde-oscuro);
       color: #fff;
-      font-weight: bold;
     }
 
     &:disabled {
       opacity: 0.5;
     }
 
-    &:hover:not(:disabled) {
-      background: var(--verde-oscuro);
+    &.active {
+      background: var(--verde);
+      border: none;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .page-number {
+      font-size: 1.4rem; // solo el número
     }
   }
 }
