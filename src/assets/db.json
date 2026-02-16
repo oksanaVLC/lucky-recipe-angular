@@ -13,7 +13,7 @@
         { "quantity": "50g", "name": "repollo" },
         { "quantity": "30ml", "name": "crema agria" }
       ],
-      "images": ["images/borsh.webp", "images/borsh1.webp"],
+      "images": ["images/borsch.webp", "images/borsch1.webp"],
       "rating": 4.8,
       "likesCount": 14,
       "author": { "id": 1, "name": "Oksana", "avatar": "images/yo3.png" },
