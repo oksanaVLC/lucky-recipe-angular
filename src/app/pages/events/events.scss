@@ -1,29 +1,14 @@
-/* brillo decorativo 
-.poster::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -30%;
-  width: 160%;
-  height: 160%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.35), transparent 60%);
-  transform: rotate(25deg);
-}
-*/
-
 .events-wrapper {
-  min-height: 70vh;
+  min-height: 20vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-
   font-style: italic;
 }
 
 .fall-text {
-  font-size: 2.1rem;
-
+  font-size: 2rem;
   color: #111;
   letter-spacing: 1px;
   margin: 0;
@@ -50,4 +35,44 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.puzzle-slider {
+  perspective: 1000px;
+  margin: 2rem auto;
+  max-width: 90vw;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+  gap: 0; /* sin líneas blancas */
+  width: 100%;
+  aspect-ratio: 3/2; /* ajustar según tus imágenes */
+}
+
+.tile {
+  width: 100%;
+  height: 100%;
+  background-size: 2000% 2000%; /* cols x rows */
+  background-repeat: no-repeat;
+  backface-visibility: hidden;
+  transition: transform 0.6s;
+}
+
+.next-btn {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  border: none;
+  background: #1c8c3a;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.next-btn:hover {
+  background: #166b2b;
 }
