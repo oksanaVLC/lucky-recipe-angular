@@ -110,6 +110,51 @@
       </button>
     </div>
   </div>
+
+  <div class="comments-section">
+    <button class="toggle-comments-btn" (click)="toggleComments()">
+      {{ showComments ? 'Ocultar comentarios' : 'Ver comentarios' }}
+    </button>
+
+    <div class="comments-panel" *ngIf="showComments">
+      <div class="comment" *ngFor="let c of paginatedComments">
+        <span class="author">{{ c.author }}:</span>
+        <span class="content">{{ c.content }}</span>
+        <span class="date">{{ c.createdAt | date: 'short' }}</span>
+      </div>
+
+      <div class="comments-pagination" *ngIf="totalCommentsPages > 1">
+        <button
+          (click)="goToCommentsPage(currentCommentsPage - 1)"
+          [disabled]="currentCommentsPage === 1"
+        >
+          ◀
+        </button>
+        <button
+          *ngFor="let p of [].constructor(totalCommentsPages); let i = index"
+          (click)="goToCommentsPage(i + 1)"
+          [class.active]="currentCommentsPage === i + 1"
+        >
+          {{ i + 1 }}
+        </button>
+        <button
+          (click)="goToCommentsPage(currentCommentsPage + 1)"
+          [disabled]="currentCommentsPage === totalCommentsPages"
+        >
+          ▶
+        </button>
+      </div>
+
+      <div class="add-comment">
+        <textarea
+          [(ngModel)]="newComment"
+          placeholder="Escribe tu comentario..."
+          rows="3"
+        ></textarea>
+        <button (click)="addComment()">Enviar</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="back-button-wrapper">

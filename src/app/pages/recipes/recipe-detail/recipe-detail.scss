@@ -26,7 +26,9 @@
 
   padding: 6px 10px;
   border-radius: 14px;
-  backdrop-filter: blur(6px);
+
+  background: #f7f7f7;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
 
   i {
     color: #f5c542;
@@ -353,4 +355,131 @@ swiper-container::part(button-next) {
   margin: 2rem 0;
   display: flex;
   justify-content: center;
+}
+
+/******************COMENTARIOS************************/
+
+.comments-section {
+  margin-top: 2rem;
+  text-align: left;
+
+  .toggle-comments-btn {
+    background: var(--verde);
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-style: italic;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    transition: 0.2s;
+
+    &:hover {
+      background: var(--verde-oscuro);
+    }
+  }
+
+  .comments-panel {
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 1rem;
+    background: #f9f9f9;
+
+    .comment {
+      background: #fff;
+      border-radius: 12px;
+      padding: 0.6rem 1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+
+      .author {
+        font-weight: 700;
+        color: var(--verde-oscuro);
+      }
+
+      .content {
+        font-size: 0.95rem;
+        overflow-wrap: break-word; // <-- evita que el texto largo desborde
+        word-break: break-word; // <-- soporte extra
+      }
+
+      .date {
+        font-size: 0.75rem;
+        color: #666;
+        align-self: flex-end;
+      }
+    }
+
+    .add-comment {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+
+      input {
+        flex: 1;
+        padding: 0.6rem 0.8rem;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+      }
+
+      button {
+        padding: 0.6rem 1rem;
+        border-radius: 8px;
+        border: none;
+        background: var(--verde);
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s;
+
+        &:hover {
+          background: var(--verde-oscuro);
+        }
+      }
+    }
+
+    .comments-pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.4rem;
+      margin: 1rem 0;
+
+      button {
+        padding: 0.35rem 0.6rem;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        background: #fff;
+        cursor: pointer;
+
+        &.active {
+          background: var(--verde);
+          border: none;
+          color: #fff;
+          font-weight: bold;
+        }
+
+        &:disabled {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+
+  // ------------------ Media Query para móviles pequeños ------------------
+  @media (max-width: 400px) {
+    .comments-panel {
+      .add-comment {
+        flex-direction: column; // El botón pasa debajo del input
+        gap: 0.5rem;
+
+        button {
+          width: 100%; // Se ajusta al ancho del contenedor
+          padding: 0.5rem; // Reduce un poco el padding
+        }
+      }
+    }
+  }
 }

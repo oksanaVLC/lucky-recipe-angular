@@ -17,9 +17,28 @@
       "rating": 4.8,
       "likesCount": 14,
       "author": { "id": 1, "name": "Oksana", "avatar": "images/yo3.png" },
-      "createdAt": "2026-02-07T09:45:00Z"
+      "createdAt": "2026-02-07T09:45:00Z",
+      "comments": [
+        {
+          "id": 1,
+          "author": "Ana",
+          "content": "¡Delicioso y fácil de hacer!",
+          "createdAt": "2026-02-08T10:00:00Z"
+        },
+        {
+          "id": 2,
+          "author": "Luis",
+          "content": "Mi familia lo adoró.",
+          "createdAt": "2026-02-08T12:30:00Z"
+        },
+        {
+          "id": 3,
+          "author": "Marta",
+          "content": "Perfecto para el invierno.",
+          "createdAt": "2026-02-09T09:15:00Z"
+        }
+      ]
     },
-
     {
       "id": 2,
       "title": "Ensalada César",
@@ -36,7 +55,21 @@
       "rating": 4.0,
       "likesCount": 8,
       "author": { "id": 1, "name": "Oksana", "avatar": "images/yo3.png" },
-      "createdAt": "2026-02-04T14:30:00Z"
+      "createdAt": "2026-02-04T14:30:00Z",
+      "comments": [
+        {
+          "id": 1,
+          "author": "Clara",
+          "content": "Muy fresca y sabrosa.",
+          "createdAt": "2026-02-05T11:00:00Z"
+        },
+        {
+          "id": 2,
+          "author": "Pedro",
+          "content": "El pollo estaba en su punto.",
+          "createdAt": "2026-02-05T12:45:00Z"
+        }
+      ]
     },
     {
       "id": 3,
@@ -57,7 +90,21 @@
       "rating": 4.4,
       "likesCount": 6,
       "author": { "id": 1, "name": "Oksana", "avatar": "images/avatar2.webp" },
-      "createdAt": "2026-02-06T09:00:00Z"
+      "createdAt": "2026-02-06T09:00:00Z",
+      "comments": [
+        {
+          "id": 1,
+          "author": "Sofía",
+          "content": "Me encanta la combinación de sabores.",
+          "createdAt": "2026-02-06T10:00:00Z"
+        },
+        {
+          "id": 2,
+          "author": "Javier",
+          "content": "Muy fresca para el verano.",
+          "createdAt": "2026-02-06T12:00:00Z"
+        }
+      ]
     },
     {
       "id": 4,
@@ -77,9 +124,22 @@
       "rating": 4.7,
       "likesCount": 11,
       "author": { "id": 1, "name": "Oksana", "avatar": "images/avatar3.webp" },
-      "createdAt": "2026-02-05T12:30:00Z"
+      "createdAt": "2026-02-05T12:30:00Z",
+      "comments": [
+        {
+          "id": 1,
+          "author": "Carlos",
+          "content": "¡Me salió perfecta!",
+          "createdAt": "2026-02-06T09:00:00Z"
+        },
+        {
+          "id": 2,
+          "author": "Lucía",
+          "content": "Se deshace en la boca.",
+          "createdAt": "2026-02-06T11:20:00Z"
+        }
+      ]
     },
-
     {
       "id": 5,
       "title": "Ravioli con Trufas",
@@ -96,7 +156,15 @@
       "rating": 4.9,
       "likesCount": 18,
       "author": { "id": 1, "name": "Oksana", "avatar": "images/yo3.png" },
-      "createdAt": "2026-02-07T10:00:00Z"
+      "createdAt": "2026-02-07T10:00:00Z",
+      "comments": [
+        {
+          "id": 1,
+          "author": "Elena",
+          "content": "Exquisito, el mejor que he probado.",
+          "createdAt": "2026-02-08T08:00:00Z"
+        }
+      ]
     },
     {
       "id": 6,
@@ -114,7 +182,21 @@
       "rating": 4.6,
       "likesCount": 10,
       "author": { "id": 1, "name": "Oksana", "avatar": "images/yo3.png" },
-      "createdAt": "2026-02-07T08:30:00Z"
+      "createdAt": "2026-02-07T08:30:00Z",
+      "comments": [
+        {
+          "id": 1,
+          "author": "Nuria",
+          "content": "Ideal para el desayuno.",
+          "createdAt": "2026-02-07T09:00:00Z"
+        },
+        {
+          "id": 2,
+          "author": "Raúl",
+          "content": "Rápido y nutritivo.",
+          "createdAt": "2026-02-07T09:30:00Z"
+        }
+      ]
     },
     {
       "id": 7,
@@ -132,7 +214,15 @@
       "rating": 4.5,
       "likesCount": 12,
       "author": { "id": 1, "name": "Oksana", "avatar": "images/yo3.png" },
-      "createdAt": "2026-02-05T10:00:00Z"
+      "createdAt": "2026-02-05T10:00:00Z",
+      "comments": [
+        {
+          "id": 1,
+          "author": "Patricia",
+          "content": "Me recordó a la de mi abuela.",
+          "createdAt": "2026-02-05T11:15:00Z"
+        }
+      ]
     },
     {
       "id": 8,
@@ -151,7 +241,21 @@
       "rating": 4.7,
       "likesCount": 15,
       "author": { "id": 1, "name": "Oksana", "avatar": "images/avatar4.webp" },
-      "createdAt": "2026-02-05T15:00:00Z"
+      "createdAt": "2026-02-05T15:00:00Z",
+      "comments": [
+        {
+          "id": 1,
+          "author": "Isabel",
+          "content": "Muy chocolateado, delicioso.",
+          "createdAt": "2026-02-05T16:00:00Z"
+        },
+        {
+          "id": 2,
+          "author": "Miguel",
+          "content": "Perfecto para merendar.",
+          "createdAt": "2026-02-05T16:30:00Z"
+        }
+      ]
     },
     {
       "id": 9,
@@ -169,7 +273,21 @@
       "rating": 4.8,
       "likesCount": 20,
       "author": { "id": 1, "name": "Oksana", "avatar": "images/yo3.png" },
-      "createdAt": "2026-02-03T16:00:00Z"
+      "createdAt": "2026-02-03T16:00:00Z",
+      "comments": [
+        {
+          "id": 1,
+          "author": "Lorena",
+          "content": "Suave y cremosa, increíble.",
+          "createdAt": "2026-02-04T09:00:00Z"
+        },
+        {
+          "id": 2,
+          "author": "Diego",
+          "content": "La base de galleta estaba perfecta.",
+          "createdAt": "2026-02-04T10:30:00Z"
+        }
+      ]
     }
   ]
 }

@@ -15,6 +15,7 @@ export interface Recipe {
   rating?: number;
   likesCount?: number;
   author?: Author;
+  comments?: { id: number; author: string; content: string; createdAt: string }[];
 
   createdAt?: string | Date; // <-- nuevo campo para la fecha de creación
 }
