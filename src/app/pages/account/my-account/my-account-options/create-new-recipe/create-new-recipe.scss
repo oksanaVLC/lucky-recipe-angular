@@ -1,15 +1,14 @@
 .create-recipe-container {
   max-width: 720px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   padding: 0 1rem;
   font-family: 'Playfair Display', serif;
   color: #2e2e2e;
-  /* Esto asegura que el contenedor ocupe al menos toda la altura visible */
-  min-height: calc(100vh - 78px - 2rem - 60px); // vh - navbar - margen bottom - footer aprox
+
+  min-height: calc(100vh - 78px - 2rem - 60px);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; // mantiene el contenido arriba
+  justify-content: flex-start;
 
   .title-row {
     display: flex;
@@ -29,10 +28,12 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+
     label {
       font-weight: 700;
       font-size: 1.05rem;
     }
+
     input,
     select,
     textarea {
@@ -40,6 +41,7 @@
       font-size: 1rem;
       border-radius: 8px;
       border: 1px solid #ccc;
+
       &:focus {
         border-color: var(--verde);
         outline: none;
@@ -47,30 +49,38 @@
     }
   }
 
+  /* ==========================
+     INGREDIENTS
+  ========================== */
   .ingredients-section {
     h2 {
       font-size: 1.1rem;
       font-weight: 700;
     }
+
     .ingredients-list {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
+
     .ingredient-row {
       display: grid;
       grid-template-columns: 90px 1fr auto;
       gap: 10px;
       align-items: center;
+
       input {
         padding: 10px;
         border-radius: 8px;
         border: 1px solid #ddd;
         background: #f7f7f7;
       }
+
       .actions {
         display: flex;
         gap: 6px;
+
         .add-btn,
         .remove-btn {
           width: 32px;
@@ -82,6 +92,7 @@
           background-color: var(--verde);
           color: var(--blanco);
           cursor: pointer;
+
           &:hover {
             background-color: var(--verde-oscuro);
           }
@@ -90,15 +101,19 @@
     }
   }
 
+  /* ==========================
+     IMAGE UPLOAD
+  ========================== */
   .image-upload {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 6px; /* 🔥 menos espacio */
     border: 2px dashed #ccc;
     padding: 15px;
     border-radius: 12px;
     position: relative;
     transition: border-color 0.2s;
+
     &:hover {
       border-color: var(--verde);
     }
@@ -107,89 +122,108 @@
       font-weight: 700;
     }
 
+    /* fila botón + texto */
     .upload-row {
       display: flex;
+      align-items: stretch; /* 🔥 clave */
+      gap: 10px;
+      width: 100%;
+    }
+
+    input[type='file'] {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .custom-file-btn {
+      display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 12px;
 
-      input[type='file'] {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        opacity: 0;
-      }
+      height: 38px; /* 🔥 misma altura */
+      padding: 0 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background: #fff;
+      cursor: pointer;
+      flex-shrink: 0;
 
-      .custom-file-btn {
-        padding: 8px 16px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        background: #fff;
-        cursor: pointer;
-        &:hover {
-          background: #f5f5f5;
-        }
-      }
-
-      .placeholder {
-        font-size: 0.85rem;
-        color: #555;
-        background: #f9f9f9;
-        padding: 6px 10px;
-        border-radius: 8px;
-      }
-
-      .image-counter {
-        margin-left: auto;
-        font-weight: bold;
-        font-size: 0.85rem;
+      &:hover {
+        background: #f5f5f5;
       }
     }
 
+    .placeholder {
+      display: flex;
+      align-items: center;
+
+      height: 38px; /* 🔥 misma altura */
+      flex: 1;
+      font-size: 0.85rem;
+      color: #555;
+      background: #f9f9f9;
+      padding: 0 12px;
+      border-radius: 8px;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* GRID IMÁGENES */
     .image-preview {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 10px;
+      margin-top: 6px; /* 🔥 pegadito */
+    }
 
-      .image-card {
-        position: relative;
-        width: 100px;
-        height: 100px;
-        border-radius: 12px;
-        overflow: hidden;
-        border: 1px solid #ccc;
+    .image-card {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #ccc;
 
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
 
-        .remove-image {
-          position: absolute;
-          top: 4px;
-          left: 4px;
-          width: 24px;
-          height: 24px;
-          border-radius: 50%;
-          border: none;
-          background: rgba(0, 0, 0, 0.8);
-          color: white;
-          font-size: 16px;
-          font-weight: bold;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          cursor: pointer;
-          transition: all 0.2s;
-          &:hover {
-            background: #d9534f;
-          }
+      .remove-image {
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: 0.2s;
+
+        &:hover {
+          background: #d9534f;
         }
       }
     }
   }
 
+  /* ==========================
+     BOTÓN SUBMIT
+  ========================== */
   .submit-button {
     align-self: center;
     padding: 10px 20px;
@@ -199,6 +233,7 @@
     background-color: var(--verde);
     color: var(--blanco);
     cursor: pointer;
+
     &:hover {
       background-color: var(--verde-oscuro);
       transform: scale(1.05);
@@ -206,13 +241,22 @@
   }
 }
 
-/* MODAL BORRADOR */
+/* ==========================
+   FORM ACTIONS
+========================== */
+.form-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* ==========================
+   MODAL BORRADOR
+========================== */
 .draft-modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   backdrop-filter: blur(4px);
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
@@ -233,6 +277,7 @@
       font-size: 1.4rem;
       color: var(--negro);
     }
+
     p {
       margin-bottom: 1.5rem;
       font-size: 1rem;
@@ -250,11 +295,12 @@
         border: none;
         font-weight: 600;
         cursor: pointer;
-        transition: all 0.2s;
+        transition: 0.2s;
 
         &.btn-cancel {
           background-color: #ddd;
           color: #000;
+
           &:hover {
             background-color: #fefefe;
           }
@@ -263,6 +309,7 @@
         &.btn-confirm {
           background-color: var(--verde);
           color: #fff;
+
           &:hover {
             background-color: #b7e3b0;
             color: #000;
@@ -272,6 +319,7 @@
         &.btn-discard {
           background-color: #fce065;
           color: #111;
+
           &:hover {
             background-color: #fefefe;
             color: #000;
@@ -282,31 +330,9 @@
   }
 }
 
-.form-actions {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 1rem;
-}
-
-@media (max-width: 480px) {
-  .ingredient-row {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-
-    input {
-      width: 100%;
-    }
-
-    .actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-    }
-  }
-}
-
+/* ==========================
+   MENSAJE GUARDADO
+========================== */
 .saved-overlay {
   position: fixed;
   inset: 0;
@@ -331,7 +357,7 @@
   h3 {
     margin: 0 0 0.5rem;
     font-size: 1.3rem;
-    color: #bfa14a; // dorado suave
+    color: #bfa14a;
   }
 
   p {
@@ -356,5 +382,45 @@
   }
   to {
     transform: scale(1);
+  }
+}
+
+/* ==========================
+   MOBILE FIXES
+========================== */
+@media (max-width: 480px) {
+  .ingredient-row {
+    display: flex !important;
+    flex-direction: column;
+    gap: 8px;
+
+    input {
+      width: 100%;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+  }
+
+  .image-upload {
+    .upload-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .custom-file-btn {
+      width: 100%;
+    }
+
+    .placeholder {
+      width: 100%;
+      height: auto;
+      padding: 10px;
+      white-space: normal;
+      text-align: center;
+    }
   }
 }

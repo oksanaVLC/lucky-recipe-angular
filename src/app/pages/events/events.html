@@ -44,6 +44,10 @@
     pagination='{"clickable": true}'
     observer="true"
     observe-parents="true"
+    breakpoints='{
+    "768": { "slidesPerView": 2, "spaceBetween": 5 },
+    "1024": { "slidesPerView": 3, "spaceBetween": 5 }
+  }'
   >
     <swiper-slide *ngFor="let img of images">
       <img [src]="img" [alt]="img" />
