@@ -1,10 +1,10 @@
 .shopping-wrapper {
-  padding: 0.4rem;
+  padding: 0 0.4rem;
 }
 
 .shopping-list-container {
   max-width: 400px;
-  margin: 1.5rem auto;
+  margin: 1rem auto;
   padding: 1rem;
   background: #fff;
   border-radius: 12px;
@@ -14,16 +14,17 @@
   h2 {
     text-align: center;
     padding-top: 1rem;
-    color: #27ae60;
+
     font-weight: 600;
   }
   p {
     text-align: center;
-    margin: 1.5rem 0.5rem;
-    color: #555;
+    margin: 0 0.5rem 1rem;
+    color: var(--verde-oscuro);
     font-style: italic;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 1.2rem;
+    text-align: center;
   }
 
   .input-wrapper {
