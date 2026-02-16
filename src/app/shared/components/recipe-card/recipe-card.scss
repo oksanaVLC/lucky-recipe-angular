@@ -170,6 +170,7 @@
     color: #555;
     margin-bottom: 0.6rem;
     font-style: italic;
+    min-height: 2.5em;
   }
 
   .long-description {
@@ -265,13 +266,15 @@
   width: 100%;
   text-align: center;
   padding: 0.9rem;
-  font-weight: 600;
+
   letter-spacing: 1px;
-  text-transform: uppercase;
+  //text-transform: uppercase;
+  font-size: 1.4rem;
   text-decoration: none;
 
-  background: linear-gradient(90deg, #70eea4, #fdf4d0);
-  color: #111;
+  //background: linear-gradient(90deg, #70eea4, #fdf4d0);
+  background-color: var(--verde);
+  color: #fff;
 
   border-top: 1px solid rgba(0, 0, 0, 0.08);
 
@@ -316,4 +319,11 @@ swiper-container::part(button-next) {
   align-items: center; /* centra verticalmente */
   gap: 4px; /* separación entre estrellas */
   margin: 0.5rem auto;
+
+  i {
+    color: #f5c542;
+    font-size: 18px;
+
+    font-size: 18px;
+  }
 }

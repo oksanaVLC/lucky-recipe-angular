@@ -15,7 +15,7 @@
       "images": ["images/tarta.webp", "images/tarta1.webp"],
       "rating": 4.5,
       "likesCount": 12,
-      "author": { "id": 1, "name": "Oksana", "avatar": "images/yo.webp" },
+      "author": { "id": 1, "name": "Oksana", "avatar": "images/yo3.png" },
       "createdAt": "2026-02-05T10:00:00Z"
     },
     {
@@ -33,7 +33,7 @@
       "images": ["images/cheesecake.webp", "images/cheesecake1.webp"],
       "rating": 4.8,
       "likesCount": 20,
-      "author": { "id": 1, "name": "Oksana", "avatar": "images/yo.webp" },
+      "author": { "id": 1, "name": "Oksana", "avatar": "images/yo3.png" },
       "createdAt": "2026-02-03T16:00:00Z"
     },
     {
@@ -51,7 +51,7 @@
       "images": ["images/cesar.webp", "images/cesar1.webp"],
       "rating": 4.0,
       "likesCount": 8,
-      "author": { "id": 1, "name": "Oksana", "avatar": "images/yo.webp" },
+      "author": { "id": 1, "name": "Oksana", "avatar": "images/yo3.png" },
       "createdAt": "2026-02-04T14:30:00Z"
     },
     {

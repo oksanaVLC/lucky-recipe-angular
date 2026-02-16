@@ -33,6 +33,7 @@ export class RecipeDetailComponent implements OnInit, AfterViewInit {
   recipe?: Recipe;
 
   likesCount = 0;
+
   copied = false;
   showRemoveFavorite = false;
   showLikeButton = true;
@@ -139,5 +140,20 @@ export class RecipeDetailComponent implements OnInit, AfterViewInit {
 
   goBack() {
     this.location.back();
+  }
+  getStars(rating: number): ('full' | 'half' | 'empty')[] {
+    const stars: ('full' | 'half' | 'empty')[] = [];
+
+    for (let i = 1; i <= 5; i++) {
+      if (rating >= i) {
+        stars.push('full');
+      } else if (rating >= i - 0.5) {
+        stars.push('half');
+      } else {
+        stars.push('empty');
+      }
+    }
+
+    return stars;
   }
 }

@@ -28,18 +28,24 @@
 
       <!-- Después del slider o del título -->
       <div class="stars">
-        <svg
-          *ngFor="let star of stars"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="#FFD700"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.54 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"
-          />
-        </svg>
+        <ng-container *ngIf="r.rating !== undefined; else noRating">
+          <i
+            *ngFor="let star of getStars(r.rating)"
+            class="bi"
+            [ngClass]="{
+              'bi-star-fill': star === 'full',
+              'bi-star-half': star === 'half',
+              'bi-star': star === 'empty',
+            }"
+          ></i>
+
+          <span class="rating-number">{{ r.rating | number: '1.1-1' }}</span>
+        </ng-container>
+
+        <ng-template #noRating>
+          <i *ngFor="let star of [1, 2, 3, 4, 5]" class="bi bi-star"></i>
+          <span class="rating-number">Sin valoración</span>
+        </ng-template>
       </div>
 
       <!-- LIKE BUTTON -->
@@ -87,7 +93,7 @@
 
       <!-- AUTOR -->
       <div class="author">
-        <img [src]="'assets/images/yo.webp'" alt="Autor" class="avatar" />
+        <img [src]="'assets/images/yo3.png'" alt="Autor" class="avatar" />
         <div class="author-info">
           <span class="author-name">{{ r.author?.name }}</span>
           <a class="author-link" [routerLink]="['/author-recipes', r.author?.id]">

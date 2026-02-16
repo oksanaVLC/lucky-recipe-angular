@@ -28,6 +28,6 @@ export interface RecipeForm {
   category: string;
   ingredients: { quantity: string; name: string }[];
   images: string[]; // permite hasta 10 imágenes
-
+  rating?: number;
   createdAt?: string | Date; // opcional si se asigna automáticamente al crear
 }

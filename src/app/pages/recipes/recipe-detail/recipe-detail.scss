@@ -18,11 +18,22 @@
 
 .stars {
   position: absolute;
-  top: 12px; // distancia desde arriba
-  left: 12px; // distancia desde la izquierda
-  display: flex; // en línea
-  gap: 4px; // espacio entre estrellas
-  z-index: 15; // encima de la imagen
+  top: 12px;
+  left: 12px;
+  display: flex;
+  gap: 4px;
+  z-index: 15;
+
+  padding: 6px 10px;
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+
+  i {
+    color: #f5c542;
+    font-size: 18px;
+
+    font-size: 18px;
+  }
 }
 
 /* ===================== CARD ===================== */
@@ -52,7 +63,8 @@
   left: 0;
   width: 5px; /* grosor de la línea */
   height: 100%;
-  background: linear-gradient(to bottom, #fdf4d0, #70eea4);
+  // background: linear-gradient(to bottom, #fdf4d0, #70eea4);
+  background-color: var(--verde);
 }
 
 /* Añadir las comillas directamente en el HTML */
@@ -149,9 +161,10 @@
   color: var(--verde-oscuro);
 
   // background: linear-gradient(180deg, #fff3c4, #d4af37, #a67c00);
-  background: linear-gradient(90deg, #70eea4, #fdf4d0);
+  //  background: linear-gradient(90deg, #70eea4, #fdf4d0);
   // box-shadow: 0 3px 6px rgba(212, 175, 55, 0.45);
-
+  background-color: var(--verde);
+  color: #fff;
   flex-shrink: 0;
   padding-bottom: 4px;
 }
@@ -180,7 +193,8 @@
   object-fit: cover;
   border-radius: 50%; /* redondeo */
   padding: 3px; /* ancho del borde */
-  background: linear-gradient(90deg, #70eea4, #fdf4d0); /* el "borde" */
+  // background: linear-gradient(90deg, #70eea4, #fdf4d0);
+  background-color: var(--verde);
 }
 
 .author-info {

@@ -583,3 +583,54 @@ app-search-bar {
     height: 100px;
   }
 }
+
+.hero-title {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.2;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+  overflow: hidden;
+
+  span {
+    display: block;
+    opacity: 0; /* empieza invisible */
+  }
+
+  .line1 {
+    transform: translateX(100%); /* desde la derecha */
+    animation: line1FadeIn 1.5s ease forwards;
+    animation-delay: 0.3s;
+  }
+
+  .line2 {
+    transform: translateX(-100%); /* desde la izquierda */
+    animation: line2FadeIn 1.5s ease forwards;
+    animation-delay: 0.5s;
+  }
+}
+
+@keyframes line1FadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes line2FadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
