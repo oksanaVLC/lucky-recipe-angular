@@ -1,6 +1,14 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, CUSTOM_ELEMENTS_SCHEMA, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -44,6 +52,8 @@ import { RecipeService } from '../../shared/services/recipe.service';
   ],
 })
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('sponsorSwiper', { static: false }) sponsorSwiper!: ElementRef;
+
   recipes: Recipe[] = [];
   searchTerm: string = '';
   private searchSub: Subscription | null = null;
@@ -104,6 +114,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    // Esperamos un tick para asegurarnos de que Angular ha renderizado los slides
+    setTimeout(() => {
+      const swiperEl = this.sponsorSwiper.nativeElement as any;
+      swiperEl.swiper?.autoplay.start();
+    }, 50);
+
     const elements = document.querySelectorAll('.scroll-animate');
 
     const observer = new IntersectionObserver(
