@@ -69,3 +69,14 @@
 .email-chip:active {
   transform: scale(0.97);
 }
+
+.web-link {
+  color: var(--verde);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.web-link:hover {
+  color: var(--verde-oscuro);
+  text-decoration: underline;
+}

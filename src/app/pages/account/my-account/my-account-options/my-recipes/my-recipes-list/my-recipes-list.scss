@@ -22,6 +22,12 @@
   td {
     color: #555;
     vertical-align: middle;
+    /* Forzar títulos sin wrap */
+    strong {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   /* Botones de acción */

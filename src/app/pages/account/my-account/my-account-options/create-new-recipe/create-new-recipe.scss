@@ -143,7 +143,7 @@
       justify-content: center;
       align-items: center;
 
-      height: 38px; /* 🔥 misma altura */
+      height: 38px; /*  misma altura */
       padding: 0 16px;
       border-radius: 8px;
       border: 1px solid #ccc;
@@ -160,7 +160,7 @@
       display: flex;
       align-items: center;
 
-      height: 38px; /* 🔥 misma altura */
+      height: 38px; /*  misma altura */
       flex: 1;
       font-size: 0.85rem;
       color: #555;
@@ -168,8 +168,8 @@
       padding: 0 12px;
       border-radius: 8px;
 
-      white-space: nowrap;
-      overflow: hidden;
+      white-space: wrap;
+
       text-overflow: ellipsis;
     }
 
@@ -178,7 +178,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 6px; /* 🔥 pegadito */
+      margin-top: 6px; /* pegadito */
     }
 
     .image-card {
@@ -386,7 +386,7 @@
 }
 
 /* ==========================
-   MOBILE FIXES
+   MOBILE 
 ========================== */
 @media (max-width: 480px) {
   .ingredient-row {
@@ -409,6 +409,7 @@
     .upload-row {
       flex-direction: column;
       align-items: stretch;
+      padding-top: 10px;
     }
 
     .custom-file-btn {
