@@ -28,7 +28,7 @@ export class RestaurantsComponent {
     {
       name: 'Las Lunas Soul Kitchen',
       city: 'Valencia',
-      image: 'assets/images/laslunas.png',
+      image: 'assets/images/laslunas.webp',
       phone: '+34 695 192 336',
       email: 'eric1313vlc@gmail.com',
       web: 'https://www.laslunassoulkitchen.com/es/',

@@ -2,9 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 0 1rem;
 
   .filters-bar {
     display: flex;
@@ -12,10 +12,10 @@
     flex-wrap: wrap; // se adapta en pantallas pequeñas
     justify-content: center; // centra horizontalmente
     gap: 0.8rem;
+    padding-bottom: 0.8rem;
 
-    padding: 0.6rem 1rem;
     border-radius: 8px;
-    margin-bottom: 1.5rem;
+
     font-size: 1.4rem;
 
     span {
@@ -44,7 +44,7 @@
     display: flex;
     flex-wrap: wrap; // permite varias columnas
     justify-content: center; // centra las cards
-    gap: 1.5rem;
+    gap: 1rem;
     width: 100%;
     max-width: 900px;
   }
