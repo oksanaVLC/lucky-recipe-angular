@@ -18,7 +18,14 @@ import {
 export class EventsComponent implements AfterViewInit {
   @ViewChild('swiperRef', { static: false }) swiperRef!: ElementRef;
 
-  images = ['assets/images/event.webp', 'assets/images/event1.webp', 'assets/images/turkey.webp'];
+  images = [
+    'assets/images/event.webp',
+    'assets/images/event1.webp',
+    'assets/images/event2.webp',
+    'assets/images/event3.webp',
+    'assets/images/event4.webp',
+    'assets/images/event5.webp',
+  ];
 
   ngAfterViewInit(): void {
     if (this.swiperRef) {

@@ -1,14 +1,10 @@
-/* Contenedor del grid */
 .recipe-grid {
   display: grid;
   gap: 1rem;
-  text-align: center;
-  width: 100%;
-  padding: 0 1rem;
-
-  /* Grid responsive: tantas columnas como quepan, mínimo 220px por card */
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  justify-content: center; /* centra las cards si no llenan toda la fila */
+  width: 100%;
+  max-width: 1200px; /* ancho máximo para el grid */
+  margin: 0 auto; /* centra horizontalmente */
 }
 
 /* Cada card de receta */

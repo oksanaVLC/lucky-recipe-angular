@@ -3,7 +3,6 @@
   justify-content: center;
   align-items: flex-start;
   min-height: calc(100vh - 80px);
-  background-color: var(--main);
 
   .card {
     background-color: var(--blanco);
@@ -115,4 +114,131 @@
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 
   animation: fadeInUp 0.35s ease-out;
+}
+
+.avatar-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+
+  .upload-row {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  input[type='file'] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .custom-file-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 16px;
+    height: 38px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+
+    &:hover {
+      background: #f5f5f5;
+    }
+  }
+
+  .placeholder {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    padding: 0 12px;
+    height: 38px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: #555;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .avatar-preview {
+    margin-top: 6px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+
+.avatar-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+
+  .upload-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+  }
+
+  input[type='file'] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .custom-file-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 16px;
+    height: 38px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: #e0e0e0; /* gris */
+    color: #333;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+
+    &:hover {
+      background: #d5d5d5;
+    }
+  }
+
+  .placeholder {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    height: 38px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: #555;
+    text-align: left;
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .avatar-preview {
+    margin-top: 6px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
 }
