@@ -30,16 +30,9 @@ body {
   font-weight: 400;
   font-style: normal;
 
-  background-image: url('/assets/images/bg-yellow.webp');
+  background-image: url('/assets/images/bg-yellow.jpg');
   background-repeat: repeat;
-  background-size: auto;
   background-position: top left;
-
-  /* SOLO MÓVIL */
-  @media (max-width: 2000px) {
-    background-size: 2000px;
-    background-position: center;
-  }
 }
 
 :root {
