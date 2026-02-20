@@ -1,7 +1,9 @@
 <div class="register-container">
   <div class="card">
     <h2 class="gold-gradient">Registrarse</h2>
-    <form (ngSubmit)="register()">
+
+    <form #registerForm="ngForm" (ngSubmit)="register(registerForm, $event)">
+      <!-- Nombre -->
       <div class="form-group">
         <label for="name">Nombre</label>
         <input
@@ -10,10 +12,21 @@
           placeholder="Introduzca su nombre"
           [(ngModel)]="name"
           name="name"
+          #nameRef="ngModel"
           required
+          minlength="2"
+          [class.invalid]="nameRef.invalid && nameRef.touched"
         />
+        <small class="helper" [class.error-text]="nameRef.invalid && nameRef.touched">
+          {{
+            nameRef.invalid && nameRef.touched
+              ? 'El nombre debe tener al menos 2 letras.'
+              : 'Introduzca su nombre completo.'
+          }}
+        </small>
       </div>
 
+      <!-- Apellido -->
       <div class="form-group">
         <label for="lastName">Apellido</label>
         <input
@@ -22,10 +35,21 @@
           placeholder="Introduzca su apellido"
           [(ngModel)]="lastName"
           name="lastName"
+          #lastNameRef="ngModel"
           required
+          minlength="2"
+          [class.invalid]="lastNameRef.invalid && lastNameRef.touched"
         />
+        <small class="helper" [class.error-text]="lastNameRef.invalid && lastNameRef.touched">
+          {{
+            lastNameRef.invalid && lastNameRef.touched
+              ? 'El apellido debe tener al menos 2 letras.'
+              : 'Introduzca su apellido completo.'
+          }}
+        </small>
       </div>
 
+      <!-- Email -->
       <div class="form-group">
         <label for="email">Email</label>
         <input
@@ -34,10 +58,29 @@
           placeholder="Email"
           [(ngModel)]="email"
           name="email"
+          #emailRef="ngModel"
           required
+          email
+          [class.invalid]="emailExists"
+          [class.exists]="emailExists"
+          (ngModelChange)="emailExists = false"
         />
+
+        <small
+          class="helper"
+          [class.error-text]="(emailRef.invalid && emailRef.touched) || emailExists"
+        >
+          {{
+            emailExists
+              ? 'Este email ya está registrado.'
+              : emailRef.invalid && emailRef.touched
+                ? 'Debe introducir un email válido.'
+                : 'Ejemplo: nombre@email.com'
+          }}
+        </small>
       </div>
 
+      <!-- Contraseña -->
       <div class="form-group">
         <label for="password">Contraseña</label>
         <input
@@ -46,10 +89,20 @@
           placeholder="Contraseña"
           [(ngModel)]="password"
           name="password"
+          #passwordRef="ngModel"
           required
+          [class.invalid]="passwordRef.invalid && passwordRef.touched"
         />
+        <small class="helper" [class.error-text]="passwordRef.invalid && passwordRef.touched">
+          {{
+            passwordRef.invalid && passwordRef.touched
+              ? 'La contraseña es obligatoria.'
+              : 'Elija una contraseña segura.'
+          }}
+        </small>
       </div>
 
+      <!-- Repetir contraseña -->
       <div class="form-group">
         <label for="repeatPassword">Repetir contraseña</label>
         <input
@@ -58,17 +111,45 @@
           placeholder="Repetir contraseña"
           [(ngModel)]="repeatPassword"
           name="repeatPassword"
+          #repeatPasswordRef="ngModel"
           required
+          [class.invalid]="
+            (repeatPasswordRef.invalid && repeatPasswordRef.touched) ||
+            (repeatPasswordRef.touched && password !== repeatPassword)
+          "
         />
+        <small
+          class="helper"
+          [class.error-text]="repeatPasswordRef.touched && password !== repeatPassword"
+        >
+          {{
+            repeatPasswordRef.touched && password !== repeatPassword
+              ? 'Las contraseñas deben coincidir.'
+              : 'Repita la contraseña.'
+          }}
+        </small>
       </div>
 
-      <button type="submit">Registrarse</button>
+      <button type="submit" [disabled]="registerForm.invalid || password !== repeatPassword">
+        Registrarse
+      </button>
+
+      <small class="error-global" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </small>
     </form>
 
-    <!-- Link a login -->
     <p class="register-text">
       ¿Ya tienes cuenta?
       <a routerLink="/login">Inicia sesión</a>
     </p>
+  </div>
+</div>
+
+<!-- Modal de registro exitoso -->
+<div class="saved-overlay" *ngIf="showSavedMessage">
+  <div class="saved-toast">
+    <h3>¡Listo!</h3>
+    <p>{{ savedMessage }}</p>
   </div>
 </div>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService, User } from '../../../core/services/auth';
 
@@ -17,14 +17,27 @@ export class RegisterComponent {
   password = '';
   repeatPassword = '';
   errorMessage = '';
+  showSavedMessage = false;
+  savedMessage = '';
+
+  emailExists = false;
 
   constructor(
     private authService: AuthService,
     private router: Router,
   ) {}
 
-  register() {
+  register(form: NgForm, event: Event) {
+    event.preventDefault(); // evita que el navegador haga submit
+
     this.errorMessage = '';
+    this.emailExists = false;
+
+    if (!form.valid) {
+      form.control.markAllAsTouched();
+      this.errorMessage = 'Por favor, rellene todos los campos correctamente.';
+      return;
+    }
 
     if (this.password !== this.repeatPassword) {
       this.errorMessage = 'Las contraseñas no coinciden';
@@ -39,11 +52,18 @@ export class RegisterComponent {
 
     const success = this.authService.register(user);
 
-    if (success) {
-      // Registro exitoso, redirige a inicio
-      this.router.navigate(['/inicio']);
-    } else {
-      this.errorMessage = 'El usuario ya existe';
+    if (!success) {
+      this.emailExists = true;
+      return;
     }
+
+    this.savedMessage = 'Te has registrado con éxito.';
+    this.showSavedMessage = true;
+
+    setTimeout(() => {
+      this.authService.login(user.email, user.password);
+      this.showSavedMessage = false;
+      this.router.navigate(['/mi-cuenta']);
+    }, 1500);
   }
 }

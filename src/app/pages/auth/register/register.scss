@@ -1,7 +1,10 @@
 .register-container {
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* empuja la card hacia abajo */
+  align-items: flex-start;
+  position: relative;
+  min-height: 100vh;
+  padding-top: 2rem;
 }
 
 .card {
@@ -12,67 +15,92 @@
   width: 350px;
   display: flex;
   flex-direction: column;
-  gap: 1rem; /* espacio entre card elementos (h2, form, texto) */
-  text-align: center; /* h2 y botón centrados */
-}
+  gap: 1rem;
+  text-align: center;
 
-.card h2 {
-  margin-bottom: 1rem;
-  color: var(--negro);
+  h2 {
+    margin-bottom: 1rem;
+    color: var(--negro);
+  }
+
+  input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: all 0.3s;
+
+    &:focus {
+      border-color: var(--verde);
+      box-shadow: 0 0 5px var(--verde);
+    }
+
+    &.invalid,
+    &.ng-invalid.ng-touched {
+      border-color: #e74c3c;
+      box-shadow: 0 0 5px rgba(231, 76, 60, 0.4);
+    }
+
+    &.ng-valid.ng-touched {
+      border-color: var(--verde);
+    }
+  }
+
+  button {
+    margin-top: 1rem;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--verde);
+    color: var(--blanco);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover:not(:disabled) {
+      background-color: var(--verde-oscuro);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    &:disabled {
+      background-color: #ccc;
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* labels a la izquierda */
-  gap: 0.7rem; /* espacio entre label e input */
-  margin-bottom: 1rem; /* espacio entre cada grupo */
+  align-items: flex-start;
+  gap: 0.3rem;
   width: 100%;
-}
 
-.form-group label {
-  font-weight: 600;
-  color: var(--negro);
-  text-align: left;
-}
+  label {
+    font-weight: 600;
+    color: var(--negro);
+    text-align: left;
+  }
 
-.card input {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  outline: none;
-  transition: all 0.3s;
-  margin: 0; /* eliminar margen extra */
-}
+  .helper {
+    min-height: 18px;
+    font-size: 0.75rem;
+    color: #777;
+    transition: color 0.2s ease;
+  }
 
-.card input:focus {
-  border-color: var(--verde);
-  box-shadow: 0 0 5px var(--verde);
-}
-
-.card button {
-  margin-top: 1rem;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  background-color: var(--verde);
-  color: var(--blanco);
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.card button:hover {
-  background-color: var(--verde-oscuro);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  .helper.error-text {
+    color: #e74c3c;
+    font-weight: 500;
+  }
 }
 
 .register-text {
   margin-top: 1rem;
   font-size: 0.9rem;
   color: var(--negro);
-  text-align: center;
 
   a {
     color: var(--verde);
@@ -94,7 +122,7 @@
     90deg,
     #3d3d3d,
     #3d3d3d 40%,
-    /* #f1b05c 50%,*/ #fff9e4 50%,
+    #fff9e4 50%,
     #3d3d3d 60%,
     #3d3d3d
   );
@@ -102,7 +130,6 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: transparent;
   animation: slidingGradient 3s linear infinite;
 }
 
@@ -113,4 +140,71 @@
   100% {
     background-position: -200% 0;
   }
+}
+
+.error-global {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #e74c3c;
+  box-shadow: 0 0 5px rgba(231, 76, 60, 0.4);
+}
+
+/* Overlay registro exitoso */
+.saved-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  animation: fadeIn 0.2s ease;
+}
+
+.saved-toast {
+  background: #fff;
+  padding: 1.5rem 2rem;
+  border-radius: 16px;
+  text-align: center;
+  min-width: 280px;
+  max-width: 90%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  animation: scaleIn 0.25s ease;
+
+  h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.3rem;
+    color: #bfa14a;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+input.exists {
+  border-color: #e74c3c !important;
+  box-shadow: 0 0 5px rgba(231, 76, 60, 0.4) !important;
 }
