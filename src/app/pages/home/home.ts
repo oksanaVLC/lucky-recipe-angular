@@ -224,12 +224,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private scrollToTop(selector: string) {
-    const el = document.querySelector<HTMLElement>(selector);
-    if (el) {
-      const offset = 90;
-      const top = el.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
+    setTimeout(() => {
+      const el = document.querySelector<HTMLElement>(selector);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 50);
   }
 
   chooseRandomRecipe() {
