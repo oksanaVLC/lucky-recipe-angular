@@ -66,9 +66,28 @@
 
     .ingredient-row {
       display: grid;
-      grid-template-columns: 90px 1fr auto;
-      gap: 10px;
+      grid-template-columns: 80px 1fr auto;
+      gap: 5px;
       align-items: center;
+
+      @media (max-width: 380px) {
+        .ingredient-row {
+          grid-template-columns: 60px 1fr auto;
+          gap: 6px;
+        }
+
+        .ingredient-row input {
+          font-size: 0.9rem;
+          padding: 8px;
+        }
+
+        .ingredient-row .actions .add-btn,
+        .ingredient-row .actions .remove-btn {
+          width: 28px;
+          height: 28px;
+          font-size: 1.2rem;
+        }
+      }
 
       input {
         padding: 10px;
@@ -390,10 +409,6 @@
 ========================== */
 @media (max-width: 480px) {
   .ingredient-row {
-    display: flex !important;
-    flex-direction: column;
-    gap: 8px;
-
     input {
       width: 100%;
     }
