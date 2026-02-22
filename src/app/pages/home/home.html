@@ -1,13 +1,11 @@
 <div class="wrapper">
-  <!-- Barra de búsqueda reutilizable -->
+  <!-- Barra de búsqueda -->
   <app-search-bar (search)="searchTerm = $event"></app-search-bar>
 
-  <!-- Scrollable bar de categorías -->
+  <!-- Scroll categories -->
   <div class="scrollmenu">
     <a (click)="goToDestacados()">Destacados</a>
-
     <a (click)="goToFaciles()">Fáciles</a>
-
     <a href="#">Desayuno</a>
     <a href="#">Repostería</a>
     <a href="#">Últimas</a>
@@ -16,7 +14,7 @@
     <a href="#">Para niños</a>
   </div>
 
-  <!-- Hero image -->
+  <!-- Hero -->
   <div class="hero-image">
     <img
       src="assets/images/hero-image.webp"
@@ -24,7 +22,6 @@
       class="hero-picture responsive-image"
     />
 
-    <!-- SMOKE -->
     <div class="smoke-container">
       <div class="smoke-wrap">
         <img class="smoke" src="assets/images/vapor.webp" alt="smoke" />
@@ -37,7 +34,6 @@
       </div>
     </div>
 
-    <!-- CONTENIDO -->
     <div class="content-container">
       <div class="hero-text">
         <h1 class="hero-title">
@@ -53,15 +49,15 @@
     </div>
   </div>
 
-  <!-- Overlay Loader -->
   <app-loader *ngIf="isLoading"></app-loader>
 
-  <!-- Grid de recetas -->
-
+  <!-- Destacados -->
   <h1 id="destacados" class="decorated-title scroll-animate">Recetas destacadas</h1>
 
   <div class="recipe-grid">
-    <ng-container *ngFor="let recipe of paginatedRecipes; let i = index; trackBy: trackByRecipeId">
+    <ng-container
+      *ngFor="let recipe of paginatedDestacados; let i = index; trackBy: trackByRecipeId"
+    >
       @defer (on viewport) {
         <app-recipe-card
           [recipe]="recipe"
@@ -76,27 +72,32 @@
     </ng-container>
   </div>
 
-  <!-- Paginación -->
-  <div class="recipes-pagination" *ngIf="totalPages > 1">
-    <button (click)="goToPreviousPage()" [disabled]="currentPage === 1">◀</button>
-
-    <button
-      *ngFor="let p of [].constructor(totalPages); let i = index"
-      (click)="goToPage(i + 1)"
-      [class.active]="currentPage === i + 1"
-    >
-      <span class="page-number">{{ i + 1 }}</span>
+  <div class="recipes-pagination" *ngIf="totalPagesDestacados > 1">
+    <button (click)="goToPreviousPageDestacados()" [disabled]="currentPageDestacados === 1">
+      ◀
     </button>
 
-    <button (click)="goToNextPage()" [disabled]="currentPage === totalPages">▶</button>
+    <button
+      *ngFor="let p of [].constructor(totalPagesDestacados); let i = index"
+      (click)="goToPageDestacados(i + 1)"
+      [class.active]="currentPageDestacados === i + 1"
+    >
+      {{ i + 1 }}
+    </button>
+
+    <button
+      (click)="goToNextPageDestacados()"
+      [disabled]="currentPageDestacados === totalPagesDestacados"
+    >
+      ▶
+    </button>
   </div>
 
-  <!-- Recetas fáciles -->
-
+  <!-- Fáciles -->
   <h1 id="faciles" class="decorated-title scroll-animate">Recetas fáciles</h1>
 
   <div class="recipe-grid">
-    <ng-container *ngFor="let recipe of paginatedRecipes; let i = index; trackBy: trackByRecipeId">
+    <ng-container *ngFor="let recipe of paginatedFaciles; let i = index; trackBy: trackByRecipeId">
       @defer (on viewport) {
         <app-recipe-card
           [recipe]="recipe"
@@ -111,22 +112,23 @@
     </ng-container>
   </div>
 
-  <!-- Paginación -->
-  <div class="recipes-pagination" *ngIf="totalPages > 1">
-    <button (click)="goToPreviousPage()" [disabled]="currentPage === 1">◀</button>
+  <div class="recipes-pagination" *ngIf="totalPagesFaciles > 1">
+    <button (click)="goToPreviousPageFaciles()" [disabled]="currentPageFaciles === 1">◀</button>
 
     <button
-      *ngFor="let p of [].constructor(totalPages); let i = index"
-      (click)="goToPage(i + 1)"
-      [class.active]="currentPage === i + 1"
+      *ngFor="let p of [].constructor(totalPagesFaciles); let i = index"
+      (click)="goToPageFaciles(i + 1)"
+      [class.active]="currentPageFaciles === i + 1"
     >
-      <span class="page-number">{{ i + 1 }}</span>
+      {{ i + 1 }}
     </button>
 
-    <button (click)="goToNextPage()" [disabled]="currentPage === totalPages">▶</button>
+    <button (click)="goToNextPageFaciles()" [disabled]="currentPageFaciles === totalPagesFaciles">
+      ▶
+    </button>
   </div>
 
-  <!-- Recetas del Mundo -->
+  <!-- Mundo -->
   <h1 class="decorated-title scroll-animate">Recetas del mundo</h1>
 
   <div class="country-cards-grid">

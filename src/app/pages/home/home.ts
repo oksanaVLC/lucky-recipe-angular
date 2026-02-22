@@ -36,7 +36,6 @@ import { RecipeService } from '../../shared/services/recipe.service';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 
   animations: [
-    //Para Recetas del mundo 2
     trigger('slideIn', [
       state('left', style({ opacity: 1, transform: 'translateX(0)' })),
       state('right', style({ opacity: 1, transform: 'translateX(0)' })),
@@ -55,7 +54,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('sponsorSwiper', { static: false }) sponsorSwiper!: ElementRef;
 
   recipes: Recipe[] = [];
-  searchTerm: string = '';
+  searchTerm = '';
   private searchSub: Subscription | null = null;
   private recipesSub: Subscription | null = null;
 
@@ -72,12 +71,16 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   isLoading = false;
 
-  // PAGINACIÓN
-  currentPage = 1;
-  pageSize = 8; // recetas por página
-  totalPages = 1;
+  // PAGINACIÓN DESTACADOS
+  currentPageDestacados = 1;
+  totalPagesDestacados = 1;
 
-  //Para Recetas del mundo 2
+  // PAGINACIÓN FÁCILES
+  currentPageFaciles = 1;
+  totalPagesFaciles = 1;
+
+  pageSize = 8;
+
   countries = [
     { name: 'Greece', img: 'assets/images/greece.webp' },
     { name: 'Russia', img: 'assets/images/russia.webp' },
@@ -97,7 +100,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     this.searchSub = this.searchService.searchTerm$.subscribe((term) => {
       this.searchTerm = term;
-      this.currentPage = 1; // reset page on search
+      this.currentPageDestacados = 1;
+      this.currentPageFaciles = 1;
       this.updatePagination();
     });
 
@@ -114,7 +118,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // Esperamos un tick para asegurarnos de que Angular ha renderizado los slides
     setTimeout(() => {
       const swiperEl = this.sponsorSwiper.nativeElement as any;
       swiperEl.swiper?.autoplay.start();
@@ -139,7 +142,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
     elements.forEach((el) => observer.observe(el));
 
-    //   si ya está visible al cargar, lo activamos sin scroll
     setTimeout(() => {
       elements.forEach((el) => {
         const rect = el.getBoundingClientRect();
@@ -150,6 +152,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       });
     }, 50);
   }
+
   get filteredRecipes() {
     const term = this.searchTerm.toLowerCase();
     return !term
@@ -161,25 +164,79 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         );
   }
 
-  get paginatedRecipes() {
-    const start = (this.currentPage - 1) * this.pageSize;
+  // DESTACADOS
+  get paginatedDestacados() {
+    const start = (this.currentPageDestacados - 1) * this.pageSize;
+    return this.filteredRecipes.slice(start, start + this.pageSize);
+  }
+
+  // FÁCILES
+  get paginatedFaciles() {
+    const start = (this.currentPageFaciles - 1) * this.pageSize;
     return this.filteredRecipes.slice(start, start + this.pageSize);
   }
 
   updatePagination() {
-    this.totalPages = Math.ceil(this.filteredRecipes.length / this.pageSize);
+    this.totalPagesDestacados = Math.ceil(this.filteredRecipes.length / this.pageSize);
+    this.totalPagesFaciles = this.totalPagesDestacados;
   }
 
-  changePage(page: number) {
-    if (page < 1 || page > this.totalPages) return;
-    this.currentPage = page;
+  // DESTACADOS PAGINACIÓN
+  goToPageDestacados(page: number) {
+    if (page < 1 || page > this.totalPagesDestacados) return;
+    this.currentPageDestacados = page;
+    this.scrollToTop('#destacados');
+  }
+
+  goToNextPageDestacados() {
+    if (this.currentPageDestacados < this.totalPagesDestacados) {
+      this.currentPageDestacados++;
+      this.scrollToTop('#destacados');
+    }
+  }
+
+  goToPreviousPageDestacados() {
+    if (this.currentPageDestacados > 1) {
+      this.currentPageDestacados--;
+      this.scrollToTop('#destacados');
+    }
+  }
+
+  // FÁCILES PAGINACIÓN
+  goToPageFaciles(page: number) {
+    if (page < 1 || page > this.totalPagesFaciles) return;
+    this.currentPageFaciles = page;
+    this.scrollToTop('#faciles');
+  }
+
+  goToNextPageFaciles() {
+    if (this.currentPageFaciles < this.totalPagesFaciles) {
+      this.currentPageFaciles++;
+      this.scrollToTop('#faciles');
+    }
+  }
+
+  goToPreviousPageFaciles() {
+    if (this.currentPageFaciles > 1) {
+      this.currentPageFaciles--;
+      this.scrollToTop('#faciles');
+    }
+  }
+
+  private scrollToTop(selector: string) {
+    const el = document.querySelector<HTMLElement>(selector);
+    if (el) {
+      const offset = 90;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
   }
 
   chooseRandomRecipe() {
     const source = this.filteredRecipes;
     if (!source.length) return;
 
-    this.isLoading = true; //  mostrar loader
+    this.isLoading = true;
 
     const randomIndex = Math.floor(Math.random() * source.length);
 
@@ -192,45 +249,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     return recipe.id;
   }
 
-  goToPage(page: number) {
-    if (page < 1 || page > this.totalPages) return;
-    this.currentPage = page;
-    this.scrollToTopOfRecipes();
-  }
-
-  goToNextPage() {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-      this.scrollToTopOfRecipes();
-    }
-  }
-
-  goToPreviousPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.scrollToTopOfRecipes();
-    }
-  }
-
-  private scrollToTopOfRecipes() {
-    const title = document.querySelector<HTMLHeadingElement>('h1.decorated-title.scroll-animate');
-    if (title) {
-      // Offset en píxeles, ajusta según quieras
-      const offset = 100; // desde el top
-      const topPos = title.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top: topPos, behavior: 'smooth' });
-    }
-  }
   goToDestacados() {
-    const el = document.getElementById('destacados');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    this.scrollToTop('#destacados');
   }
+
   goToFaciles() {
-    const el = document.getElementById('faciles');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+    this.scrollToTop('#faciles');
   }
 }
