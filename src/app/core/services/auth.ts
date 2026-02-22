@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
 export interface User {
   name: string;
@@ -7,24 +6,18 @@ export interface User {
   password: string;
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthService {
-  private loggedIn = false;
-  private currentUser: User | null = null;
-
-  constructor(private router: Router) {
-    const saved = localStorage.getItem('currentUser');
-    if (saved) {
-      this.currentUser = JSON.parse(saved);
-      this.loggedIn = true;
-    }
-  }
-
   register(user: User): boolean {
     const users = this.getAllUsers();
-    if (users.find((u) => u.email === user.email)) {
-      return false; // usuario ya existe
+
+    const exists = users.find((u) => u.email === user.email);
+    if (exists) {
+      return false;
     }
+
     users.push(user);
     localStorage.setItem('users', JSON.stringify(users));
     return true;
@@ -32,28 +25,26 @@ export class AuthService {
 
   login(email: string, password: string): boolean {
     const users = this.getAllUsers();
+
     const user = users.find((u) => u.email === email && u.password === password);
-    if (user) {
-      this.loggedIn = true;
-      this.currentUser = user;
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      return true;
-    }
-    return false;
+
+    if (!user) return false;
+
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    return true;
   }
 
-  logout() {
-    this.loggedIn = false;
-    this.currentUser = null;
+  logout(): void {
     localStorage.removeItem('currentUser');
   }
 
   isLoggedIn(): boolean {
-    return this.loggedIn;
+    return !!localStorage.getItem('currentUser');
   }
 
   getCurrentUser(): User | null {
-    return this.currentUser;
+    const saved = localStorage.getItem('currentUser');
+    return saved ? JSON.parse(saved) : null;
   }
 
   private getAllUsers(): User[] {

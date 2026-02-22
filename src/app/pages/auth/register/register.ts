@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -6,7 +7,7 @@ import { AuthService, User } from '../../../core/services/auth';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule, CommonModule],
   templateUrl: './register.html',
   styleUrls: ['./register.scss'],
 })
@@ -58,6 +59,9 @@ export class RegisterComponent {
     }
 
     this.savedMessage = 'Te has registrado con éxito.';
+
+    console.log('Registro exitoso');
+
     this.showSavedMessage = true;
 
     setTimeout(() => {

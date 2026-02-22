@@ -1,13 +1,5 @@
-// src/app/guards/auth.guard.ts
-import { inject, Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  CanActivateChild,
-  Router,
-  RouterStateSnapshot,
-  UrlTree,
-} from '@angular/router';
+import { Injectable, inject } from '@angular/core';
+import { CanActivate, CanActivateChild, Router, UrlTree } from '@angular/router';
 import { AuthService } from '../services/auth';
 
 @Injectable({
@@ -17,23 +9,19 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  canActivate(_route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
-    return this.checkLogin(state.url);
+  canActivate(): boolean | UrlTree {
+    return this.checkLogin();
   }
 
-  canActivateChild(
-    _childRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-  ): boolean | UrlTree {
-    return this.checkLogin(state.url);
+  canActivateChild(): boolean | UrlTree {
+    return this.checkLogin();
   }
 
-  private checkLogin(_url: string): boolean | UrlTree {
+  private checkLogin(): boolean | UrlTree {
     if (this.authService.isLoggedIn()) {
-      return true; // usuario logueado, puede entrar
-    } else {
-      // redirigir a login
-      return this.router.parseUrl('/login');
+      return true;
     }
+
+    return this.router.parseUrl('/login');
   }
 }

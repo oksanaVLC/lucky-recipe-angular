@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/services/auth';
 
 @Component({
@@ -15,16 +15,23 @@ export class LoginComponent {
   password = '';
   errorMessage = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) {}
 
   login() {
     this.errorMessage = '';
 
+    // llamamos a AuthService
     const success = this.authService.login(this.email, this.password);
 
     if (!success) {
       this.errorMessage = 'Email o contraseña incorrectos';
+      return;
     }
-    // Si es exitoso, AuthService ya redirige a /inicio
+
+    // Redirigimos a mi-cuenta
+    this.router.navigate(['/mi-cuenta']);
   }
 }
