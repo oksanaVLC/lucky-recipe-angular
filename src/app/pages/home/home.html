@@ -4,8 +4,10 @@
 
   <!-- Scrollable bar de categorías -->
   <div class="scrollmenu">
-    <a href="#">Destacados</a>
-    <a href="#">Fáciles</a>
+    <a (click)="goToDestacados()">Destacados</a>
+
+    <a (click)="goToFaciles()">Fáciles</a>
+
     <a href="#">Desayuno</a>
     <a href="#">Repostería</a>
     <a href="#">Últimas</a>
@@ -56,7 +58,42 @@
 
   <!-- Grid de recetas -->
 
-  <h1 class="decorated-title scroll-animate">Recetas destacadas</h1>
+  <h1 id="destacados" class="decorated-title scroll-animate">Recetas destacadas</h1>
+
+  <div class="recipe-grid">
+    <ng-container *ngFor="let recipe of paginatedRecipes; let i = index; trackBy: trackByRecipeId">
+      @defer (on viewport) {
+        <app-recipe-card
+          [recipe]="recipe"
+          [truncateShortDescription]="true"
+          class="stagger-card"
+          [style.animationDelay.ms]="i * 100"
+        >
+        </app-recipe-card>
+      } @placeholder {
+        <div class="recipe-card placeholder">Cargando…</div>
+      }
+    </ng-container>
+  </div>
+
+  <!-- Paginación -->
+  <div class="recipes-pagination" *ngIf="totalPages > 1">
+    <button (click)="goToPreviousPage()" [disabled]="currentPage === 1">◀</button>
+
+    <button
+      *ngFor="let p of [].constructor(totalPages); let i = index"
+      (click)="goToPage(i + 1)"
+      [class.active]="currentPage === i + 1"
+    >
+      <span class="page-number">{{ i + 1 }}</span>
+    </button>
+
+    <button (click)="goToNextPage()" [disabled]="currentPage === totalPages">▶</button>
+  </div>
+
+  <!-- Recetas fáciles -->
+
+  <h1 id="faciles" class="decorated-title scroll-animate">Recetas fáciles</h1>
 
   <div class="recipe-grid">
     <ng-container *ngFor="let recipe of paginatedRecipes; let i = index; trackBy: trackByRecipeId">

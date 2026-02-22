@@ -216,9 +216,21 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     const title = document.querySelector<HTMLHeadingElement>('h1.decorated-title.scroll-animate');
     if (title) {
       // Offset en píxeles, ajusta según quieras
-      const offset = 100; // por ejemplo 200px desde el top
+      const offset = 100; // desde el top
       const topPos = title.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top: topPos, behavior: 'smooth' });
+    }
+  }
+  goToDestacados() {
+    const el = document.getElementById('destacados');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+  goToFaciles() {
+    const el = document.getElementById('faciles');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
     }
   }
 }
