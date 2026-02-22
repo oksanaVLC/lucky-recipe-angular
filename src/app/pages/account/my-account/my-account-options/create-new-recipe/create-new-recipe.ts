@@ -1,6 +1,6 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DraftService } from '../../../../../core/services/draft.service';
 import { BackButtonSmallComponent } from '../../../../../shared/components/back-button-small/back-button-small';
@@ -64,7 +64,6 @@ export class CreateNewRecipeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Cargar borrador si existe
     const draft = this.draftService.getCurrentDraft();
     if (draft) {
       this.recipe = { ...draft.recipe };
@@ -73,7 +72,6 @@ export class CreateNewRecipeComponent implements OnInit {
       return;
     }
 
-    // Modo edición si hay id
     const recipeId = this.route.snapshot.paramMap.get('id');
     if (recipeId) {
       const existing = this.recipeService.getRecipeById(+recipeId);
@@ -83,8 +81,6 @@ export class CreateNewRecipeComponent implements OnInit {
       }
 
       this.isEdit = true;
-
-      // Ya no hacemos split, usamos directamente el array de objetos
       this.recipe = {
         id: existing.id,
         title: existing.title,
@@ -94,7 +90,6 @@ export class CreateNewRecipeComponent implements OnInit {
         ingredients: existing.ingredients || [{ quantity: '', name: '' }],
         images: existing.images || [],
       };
-
       this.images = [...existing.images];
     }
   }
@@ -172,9 +167,13 @@ export class CreateNewRecipeComponent implements OnInit {
 
   /* ================= GUARDAR ================= */
 
-  createRecipe() {
-    this._isSaving = true;
+  createRecipe(form?: NgForm) {
+    if (form?.invalid) {
+      form.control.markAllAsTouched();
+      return;
+    }
 
+    this._isSaving = true;
     const existing = this.recipeService.getRecipeById(this.recipe.id);
 
     const recipeData: Recipe = {
@@ -186,7 +185,7 @@ export class CreateNewRecipeComponent implements OnInit {
       ingredients: this.recipe.ingredients.map((i) => ({
         quantity: i.quantity,
         name: i.name,
-      })), // <-- ahora objetos
+      })),
       images: this.images.length ? [...this.images] : ['assets/images/logo.webp'],
       rating: 0,
       likesCount: 0,

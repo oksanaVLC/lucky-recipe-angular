@@ -425,3 +425,26 @@
     }
   }
 }
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: var(--verde);
+  box-shadow: 0 0 6px rgba(46, 204, 113, 0.25);
+}
+
+/* Cuando es inválido Y está tocado */
+.field input.ng-invalid.ng-touched,
+.field textarea.ng-invalid.ng-touched,
+.field select.ng-invalid.ng-touched {
+  border-color: #e74c3c;
+  box-shadow: 0 0 6px rgba(231, 76, 60, 0.35);
+}
+
+/* Cuando es inválido + focus → prioridad al rojo */
+.field input.ng-invalid.ng-touched:focus,
+.field textarea.ng-invalid.ng-touched:focus,
+.field select.ng-invalid.ng-touched:focus {
+  border-color: #e74c3c;
+  box-shadow: 0 0 6px rgba(231, 76, 60, 0.35);
+}

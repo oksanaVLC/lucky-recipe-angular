@@ -4,31 +4,63 @@
     <h1 class="gold-gradient">{{ isEdit ? 'Editar Receta' : 'Crear Nueva Receta' }}</h1>
   </div>
 
-  <div class="form-layout">
+  <form #form="ngForm" class="form-layout">
     <!-- TÍTULO -->
     <div class="field">
       <label for="title">Título</label>
-      <input id="title" type="text" [(ngModel)]="recipe.title" placeholder="Ej: Tarta de manzana" />
+      <input
+        id="title"
+        type="text"
+        [(ngModel)]="recipe.title"
+        name="title"
+        placeholder="Ej: Tarta de manzana"
+        #titleRef="ngModel"
+        required
+        minlength="3"
+        maxlength="100"
+        [class.invalid]="titleRef.invalid && titleRef.touched"
+      />
+      <small class="helper error-text" *ngIf="titleRef.invalid && titleRef.touched">
+        El título debe tener entre 3 y 100 caracteres.
+      </small>
     </div>
 
     <!-- CATEGORÍA -->
     <div class="field">
       <label for="category">Categoría</label>
-      <select id="category" [(ngModel)]="recipe.category">
+      <select
+        id="category"
+        [(ngModel)]="recipe.category"
+        name="category"
+        #catRef="ngModel"
+        required
+        [class.invalid]="catRef.invalid && catRef.touched"
+      >
         <option value="" disabled selected>Selecciona una categoría</option>
         <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
       </select>
+      <small class="helper error-text" *ngIf="catRef.invalid && catRef.touched">
+        Debes seleccionar una categoría.
+      </small>
     </div>
 
-    <!-- DESCRIPCIÓN -->
+    <!-- DESCRIPCIÓN CORTA -->
     <div class="field">
-      <label for="description">Descripción breve para destacar tu receta</label>
+      <label for="shortDescription">Descripción breve</label>
       <textarea
-        id="description"
+        id="shortDescription"
         rows="4"
         [(ngModel)]="recipe.shortDescription"
-        placeholder="Describe brevemente la receta"
+        name="shortDescription"
+        #shortRef="ngModel"
+        required
+        minlength="10"
+        maxlength="160"
+        [class.invalid]="shortRef.invalid && shortRef.touched"
       ></textarea>
+      <small class="helper error-text" *ngIf="shortRef.invalid && shortRef.touched">
+        Entre 10 y 160 caracteres.
+      </small>
     </div>
 
     <!-- INGREDIENTES -->
@@ -36,8 +68,19 @@
       <h2>Ingredientes</h2>
       <div class="ingredients-list">
         <div class="ingredient-row" *ngFor="let ing of recipe.ingredients; let i = index">
-          <input type="text" [(ngModel)]="ing.quantity" placeholder="Ej: 2" />
-          <input type="text" [(ngModel)]="ing.name" placeholder="Ej: huevos" />
+          <input
+            type="text"
+            [(ngModel)]="ing.quantity"
+            name="quantity{{ i }}"
+            placeholder="Ej: 2"
+          />
+          <input
+            type="text"
+            [(ngModel)]="ing.name"
+            name="ingredient{{ i }}"
+            placeholder="Ej: huevos"
+            required
+          />
           <div class="actions">
             <button type="button" class="add-btn" (click)="addIngredient(i)">+</button>
             <button type="button" class="remove-btn" (click)="removeIngredient(i)">×</button>
@@ -48,13 +91,19 @@
 
     <!-- DESCRIPCIÓN LARGA -->
     <div class="field">
-      <label for="description">Descripción paso a paso</label>
+      <label for="longDescription">Descripción paso a paso (opcional)</label>
       <textarea
-        id="description"
+        id="longDescription"
         rows="4"
         [(ngModel)]="recipe.longDescription"
-        placeholder="Describe los pasos"
+        name="longDescription"
+        #longRef="ngModel"
+        maxlength="2000"
+        [class.invalid]="longRef.invalid && longRef.touched"
       ></textarea>
+      <small class="helper" [class.error-text]="longRef.invalid && longRef.touched">
+        Máximo 2000 caracteres.
+      </small>
     </div>
 
     <!-- IMÁGENES -->
@@ -85,11 +134,16 @@
     <!-- BOTONES -->
     <div class="form-actions">
       <app-back-button fallbackRoute="/mi-cuenta"></app-back-button>
-      <button type="button" class="submit-button" (click)="createRecipe()">
+      <button
+        type="button"
+        class="submit-button"
+        (click)="createRecipe()"
+        [disabled]="form.invalid"
+      >
         {{ isEdit ? 'Guardar cambios' : 'Crear Receta' }}
       </button>
     </div>
-  </div>
+  </form>
 </div>
 
 <!-- Modal de confirmación de salida -->
