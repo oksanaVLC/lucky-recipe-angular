@@ -49,6 +49,7 @@ export class RecipeDetailComponent implements OnInit, AfterViewInit {
   titleSize: 'small' | 'large' = 'large';
 
   stars = Array(5); // Para el *ngFor de estrellas
+  userRating = 0;
 
   // -------------------- COMENTARIOS --------------------
   showComments: boolean = false; // controla el panel desplegable
@@ -196,5 +197,23 @@ export class RecipeDetailComponent implements OnInit, AfterViewInit {
     if (page < 1 || page > this.totalCommentsPages) return;
     this.currentCommentsPage = page;
     this.updatePaginatedComments();
+  }
+
+  setRating(value: number) {
+    if (!this.recipe?.id) return;
+
+    this.userRating = value;
+
+    const recipe = this.recipeService.getRecipeById(this.recipe.id);
+    if (!recipe) return;
+
+    const total = (recipe.rating || 0) * (recipe.ratingsCount || 0);
+    const newCount = (recipe.ratingsCount || 0) + 1;
+    const newRating = (total + value) / newCount;
+
+    recipe.rating = parseFloat(newRating.toFixed(1));
+    recipe.ratingsCount = newCount;
+
+    this.recipeService.updateRecipe(recipe);
   }
 }

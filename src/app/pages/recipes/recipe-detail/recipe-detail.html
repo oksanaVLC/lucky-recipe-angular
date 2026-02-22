@@ -28,24 +28,19 @@
 
       <!-- Después del slider o del título -->
       <div class="stars">
-        <ng-container *ngIf="r.rating !== undefined; else noRating">
-          <i
-            *ngFor="let star of getStars(r.rating)"
-            class="bi"
-            [ngClass]="{
-              'bi-star-fill': star === 'full',
-              'bi-star-half': star === 'half',
-              'bi-star': star === 'empty',
-            }"
-          ></i>
+        <i
+          *ngFor="let star of [1, 2, 3, 4, 5]"
+          class="bi"
+          [ngClass]="{
+            'bi-star-fill': userRating >= star,
+            'bi-star': userRating < star,
+          }"
+          (click)="setRating(star)"
+        ></i>
 
-          <span class="rating-number">{{ r.rating | number: '1.1-1' }}</span>
-        </ng-container>
-
-        <ng-template #noRating>
-          <i *ngFor="let star of [1, 2, 3, 4, 5]" class="bi bi-star"></i>
-          <span class="rating-number">Sin valoración</span>
-        </ng-template>
+        <span class="rating-number">
+          {{ recipe?.rating | number: '1.1-1' }}
+        </span>
       </div>
 
       <!-- LIKE BUTTON -->

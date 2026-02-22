@@ -18,6 +18,7 @@ export interface Recipe {
   comments?: { id: number; author: string; content: string; createdAt: string }[];
 
   createdAt?: string | Date; // <-- nuevo campo para la fecha de creación
+  ratingsCount?: number;
 }
 
 // Para creación y edición de recetas en el formulario
