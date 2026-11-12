@@ -1,6 +1,7 @@
 # RecetasAngular
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.6.
+You can see this project online on Netlify: [See project](https://lucky-recipe-angular.netlify.app/inicio)
 
 ## Development server
 
